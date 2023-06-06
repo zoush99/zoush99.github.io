@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="安装llvm-flang记录基于链接https:&#x2F;&#x2F;github.com&#x2F;llvm&#x2F;llvm-project&#x2F;tree&#x2F;release&#x2F;14.x&#x2F;flang，也就是说基于14版本。  一些常见需要的地址  文档目录地址：https:&#x2F;&#x2F;github.com&#x2F;llvm&#x2F;llvm-project&#x2F;blob&#x2F;release&#x2F;14.x&#x2F;flang&#x2F;docs 编译的命令： https:&#x2F;&#x2F;github.co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hello">
+<meta property="og:url" content="http://example.com/2023/06/06/hello/index.html">
+<meta property="og:site_name" content="zoush99">
+<meta property="og:description" content="安装llvm-flang记录基于链接https:&#x2F;&#x2F;github.com&#x2F;llvm&#x2F;llvm-project&#x2F;tree&#x2F;release&#x2F;14.x&#x2F;flang，也就是说基于14版本。  一些常见需要的地址  文档目录地址：https:&#x2F;&#x2F;github.com&#x2F;llvm&#x2F;llvm-project&#x2F;blob&#x2F;release&#x2F;14.x&#x2F;flang&#x2F;docs 编译的命令： https:&#x2F;&#x2F;github.co">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-06-06T11:14:08.000Z">
+<meta property="article:modified_time" content="2023-06-06T11:15:10.698Z">
+<meta property="article:author" content="zoush">
+<meta property="article:tag" content="hello">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>hello</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/zoush99">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/06/06/hello/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/06/06/hello/&text=hello"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/06/06/hello/&title=hello"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/06/06/hello/&is_video=false&description=hello"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=hello&body=Check out this article: http://example.com/2023/06/06/hello/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/06/06/hello/&title=hello"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/06/06/hello/&title=hello"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/06/06/hello/&title=hello"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/06/06/hello/&title=hello"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/06/06/hello/&name=hello&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/06/06/hello/&t=hello"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85llvm-flang"><span class="toc-number">1.</span> <span class="toc-text">安装llvm-flang</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E7%BC%96%E8%AF%91flang"><span class="toc-number">1.1.</span> <span class="toc-text">两种方法编译flang</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">第一种方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">第二种方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85classical-flang"><span class="toc-number">2.</span> <span class="toc-text">安装classical flang</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85clam-LLVM-front-end-for-Crab"><span class="toc-number">3.</span> <span class="toc-text">安装clam: LLVM front-end for Crab</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F"><span class="toc-number">4.</span> <span class="toc-text">安装成功</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flang%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="toc-number">5.</span> <span class="toc-text">flang的命令</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        hello
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">zoush</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-06-06T11:14:08.000Z" class="dt-published" itemprop="datePublished">2023-06-06</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/hello/" rel="tag">hello</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="安装llvm-flang"><a href="#安装llvm-flang" class="headerlink" title="安装llvm-flang"></a>安装llvm-flang</h2><p>记录基于链接<a target="_blank" rel="noopener" href="https://github.com/llvm/llvm-project/tree/release/14.x/flang%EF%BC%8C%E4%B9%9F%E5%B0%B1%E6%98%AF%E8%AF%B4%E5%9F%BA%E4%BA%8E14%E7%89%88%E6%9C%AC%E3%80%82">https://github.com/llvm/llvm-project/tree/release/14.x/flang，也就是说基于14版本。</a></p>
+<blockquote>
+<p>一些常见需要的地址</p>
+</blockquote>
+<p>文档目录地址：<a target="_blank" rel="noopener" href="https://github.com/llvm/llvm-project/blob/release/14.x/flang/docs">https://github.com/llvm/llvm-project/blob/release/14.x/flang/docs</a></p>
+<p>编译的命令：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/llvm/llvm-project/blob/release/14.x/flang/docs/Overview.md">https://github.com/llvm/llvm-project/blob/release/14.x/flang/docs/Overview.md</a></p>
+<h3 id="两种方法编译flang"><a href="#两种方法编译flang" class="headerlink" title="两种方法编译flang"></a>两种方法编译flang</h3><ol>
+<li><p>在编译它所依赖的项目的时同时编译。被称为building in tree。</p>
+</li>
+<li><p>首先编译它的所需要的所有的项目，然后仅仅编译flang的代码。单独编译的好处是既小又快。一旦创建了基础编译环境，可以创造很多单独的编译块。</p>
+</li>
+</ol>
+<p>编译的说明在：<a target="_blank" rel="noopener" href="https://llvm.org/docs/GettingStarted.html">https://llvm.org/docs/GettingStarted.html</a></p>
+<p>其中安装的llvm的时候，一些软件依赖需要被满足。</p>
+<p>我们应该先满足这些条件后，才继续下一步，如果版本的问题不满足我记得会有很多麻烦的问题。</p>
+<h3 id="第一种方法"><a href="#第一种方法" class="headerlink" title="第一种方法"></a>第一种方法</h3><p>贴下需要使用的指令。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/llvm/llvm-project.git my-project</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>需要注意的是，我需要下载的是llvm14版本，所以直接下载对应版本就可以，那么输入的命令是：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone -b llvmorg-14.0.6 --depth=1 https://github.com/llvm/llvm-project.git my-project</span><br></pre></td></tr></table></figure>
+
+<p>一旦下载完成，接下来的指令是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install build-essential</span><br><span class="line">sudo apt install gcc-multilib</span><br><span class="line">cd my-project</span><br><span class="line"></span><br><span class="line">rm -rf build</span><br><span class="line">mkdir -p build</span><br><span class="line"></span><br><span class="line">cd build</span><br><span class="line"></span><br><span class="line">cmake -DZLIB_LIBRARY=/usr/lib/x86_64-linux-gnu/libz.so -G Ninja ../llvm -DCMAKE_BUILD_TYPE=Release -DFLANG_ENABLE_WERROR=On -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_TARGETS_TO_BUILD=host -DCMAKE_INSTALL_PREFIX=$INSTALLDIR -DLLVM_LIT_ARGS=-v -DLLVM_ENABLE_PROJECTS=&quot;clang;mlir;flang&quot; -DLLVM_ENABLE_RUNTIMES=&quot;compiler-rt&quot; -DCOMPILER_RT_DEFAULT_TARGET_ARCH=&quot;x86_64&quot; -DCOMPILER_RT_DEFAULT_TARGET_ONLY=ON -DCMAKE_INSTALL_PREFIX=&quot;/usr/local/llvm&quot;</span><br><span class="line"></span><br><span class="line">ninja</span><br></pre></td></tr></table></figure>
+
+<p>为了测试flang是否安装成功，在build目录下执行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ninja check-flang</span><br></pre></td></tr></table></figure>
+
+<p>已经证明这样安装成功了！但是问题是版本太新，没什么功能，而且与clam不适配，所以我现在需要去安装老版本的flang，也就是classic flang。</p>
+<h3 id="第二种方法"><a href="#第二种方法" class="headerlink" title="第二种方法"></a>第二种方法</h3><p>第二种安装方式，这里贴需要的指令。但是第二种方法仍然依赖于第一种方法，即第一种方法安装的flang。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/llvm/llvm-project.git standalone</span><br></pre></td></tr></table></figure>
+
+<p>完成下载后，执行如下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">cd standalone</span><br><span class="line">base=&lt;directory that contains the in tree build&gt;</span><br><span class="line"></span><br><span class="line">cd flang</span><br><span class="line">rm -rf build</span><br><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line"></span><br><span class="line">cmake \</span><br><span class="line">  -G Ninja \</span><br><span class="line">  -DCMAKE_BUILD_TYPE=Release \</span><br><span class="line">  -DFLANG_ENABLE_WERROR=On \</span><br><span class="line">  -DLLVM_TARGETS_TO_BUILD=host \</span><br><span class="line">  -DLLVM_ENABLE_ASSERTIONS=On \</span><br><span class="line">  -DLLVM_BUILD_MAIN_SRC_DIR=$base/build/lib/cmake/llvm \</span><br><span class="line">  -DLLVM_LIT_ARGS=-v \</span><br><span class="line">  -DLLVM_DIR=$base/build/lib/cmake/llvm \</span><br><span class="line">  -DCLANG_DIR=$base/build/lib/cmake/clang \</span><br><span class="line">  -DMLIR_DIR=$base/build/lib/cmake/mlir \</span><br><span class="line">  ..</span><br><span class="line"></span><br><span class="line">ninja</span><br></pre></td></tr></table></figure>
+
+<p>如果需要检查flang是否正确执行，在flang&#x2F;build目录下执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ninja check-flang</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装classical-flang"><a href="#安装classical-flang" class="headerlink" title="安装classical flang"></a>安装classical flang</h2><p>安装这个相对容易，只要按照顺序执行脚本就可以了，最后再将flang加入环境变量就可以在任何位置执行。</p>
+<p><u>但是现在遇到一个问题，是我将原来的安装脚本的位置install改为了flang-install后，便在中间的某一步出错了。在链接上有相关回答，先尝试一下！如果没有问题就按照这样去做，否则按照原来的脚本去直接做。<a target="_blank" rel="noopener" href="https://github.com/flang-compiler/flang/issues/1338">解决错误链接</a></u>。</p>
+<p><strong>经过排查发现不是文件夹名的问题，是因为分支过于古老，导致的不兼容。现在尝试将较为活跃的版本clone下来，然后再安装到本机上。通过比较才发现不只是llvm可以尝试用新版本14，flang也可以用最新版本<a target="_blank" rel="noopener" href="https://github.com/flang-compiler/flang/tree/shivaram_1336">活跃版本</a>。</strong></p>
+<blockquote>
+<p>setup.sh</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSTALL_PREFIX=`<span class="built_in">pwd</span>`/install		<span class="comment">#原来的脚本是INSTALL_PREFIX=`pwd`/install</span></span><br><span class="line"><span class="comment"># Targets to build should be one of: X86 PowerPC AArch64</span></span><br><span class="line">CMAKE_OPTIONS=<span class="string">&quot;-DCMAKE_INSTALL_PREFIX=<span class="variable">$INSTALL_PREFIX</span> -DLLVM_CONFIG=<span class="variable">$INSTALL_PREFIX</span>/bin/llvm-config -DCMAKE_CXX_COMPILER=<span class="variable">$INSTALL_PREFIX</span>/bin/clang++ -DCMAKE_C_COMPILER=<span class="variable">$INSTALL_PREFIX</span>/bin/clang -DCMAKE_Fortran_COMPILER=<span class="variable">$INSTALL_PREFIX</span>/bin/flang -DCMAKE_Fortran_COMPILER_ID=Flang -DLLVM_TARGETS_TO_BUILD=X86&quot;</span> </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>build-llvm-project.sh</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">. setup.sh</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [[ ! -d classic-flang-llvm-project ]]; <span class="keyword">then</span></span><br><span class="line">    git <span class="built_in">clone</span> -b release_100x https://github.com/flang-compiler/classic-flang-llvm-project.git</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> classic-flang-llvm-project</span><br><span class="line"><span class="built_in">mkdir</span> -p build &amp;&amp; <span class="built_in">cd</span> build</span><br><span class="line">cmake <span class="variable">$CMAKE_OPTIONS</span> -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++ -DLLVM_ENABLE_CLASSIC_FLANG=ON -DLLVM_ENABLE_PROJECTS=<span class="string">&quot;clang;openmp&quot;</span> ../llvm</span><br><span class="line">make -j4</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+
+<p>切换不同版本更改的规则是改变分支，上面的脚本用的分支是release_100，如果改变可以是release_14x。下面build-flang可以选择clone -b legacy分支。为了防止以后版本更新或者其他原因，我个人认为，需要把源代码下载到本地或者pull到自己的github仓库中，防止之后没法使用。</p>
+<p>这里原来的readme中是release_100，但是这个是两年前的版本，所以需要更改到最新的版本（原来的版本会有不兼容等特点）。我尝试了一种新版本release_15x加master是没有问题的，但是因为需要和clam兼容，那么需要llvm14版本。<u>再用release_14x尝试一下。用release_14x发现也没问题，不过flang的版本需要用legacy。我们在实验环境需要的就是这种版本，所以安装成功。</u></p>
+<blockquote>
+<p>build-flang.sh</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">. setup.sh</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [[ ! -d flang ]]; <span class="keyword">then</span></span><br><span class="line">    git <span class="built_in">clone</span> https://github.com/flang-compiler/flang.git</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">(<span class="built_in">cd</span> flang/runtime/libpgmath</span><br><span class="line"> <span class="built_in">mkdir</span> -p build &amp;&amp; <span class="built_in">cd</span> build</span><br><span class="line"> cmake <span class="variable">$CMAKE_OPTIONS</span> ..</span><br><span class="line"> make -j4</span><br><span class="line"> sudo make install)</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> flang</span><br><span class="line"><span class="built_in">mkdir</span> -p build &amp;&amp; <span class="built_in">cd</span> build</span><br><span class="line">cmake <span class="variable">$CMAKE_OPTIONS</span> -DFLANG_LLVM_EXTENSIONS=ON ..</span><br><span class="line">make -j4</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装clam-LLVM-front-end-for-Crab"><a href="#安装clam-LLVM-front-end-for-Crab" class="headerlink" title="安装clam: LLVM front-end for Crab"></a>安装clam: LLVM front-end for Crab</h2><p>这个分支支持llvm14。Clam是一个基于抽象解释静态分析器，它可以基于Crab库为llvm字节码计算归纳不变式。因为之前预计的不能满足我的要求，所以将所有llvm版本设置到14的话，应该可以满足说明。</p>
+<p>在虚拟机上，可以通过一下命令安装环境依赖：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libboost-all-dev libboost-program-options-dev</span><br><span class="line">sudo apt-get install libgmp-dev</span><br><span class="line">sudo apt-get install libmpfr-dev	</span><br><span class="line">sudo apt-get install libflint-dev</span><br></pre></td></tr></table></figure>
+
+<p>解释架构依赖于很多Python包，可以通过安装一下包来实现目标。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip3 install lit</span><br><span class="line">pip3 install OutputCheck</span><br></pre></td></tr></table></figure>
+
+<p>基础的编译步是（需要将github上的文件下载到本地），然后进入到文件夹中。<strong>注意此步骤和下面编译步骤只用执行一个步骤就好了，而不是所有的都执行</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> build &amp;&amp; <span class="built_in">cd</span> build</span><br><span class="line">cmake -DCMAKE_INSTALL_PREFIX=<span class="variable">$DIR</span> ../</span><br><span class="line">cmake --build . --target crab &amp;&amp; cmake ..   </span><br><span class="line">cmake --build . --target extra &amp;&amp; cmake ..                  </span><br><span class="line">cmake --build . --target install </span><br></pre></td></tr></table></figure>
+
+<p>在第二行的命令将会在标准路径中找llvm14，如果没有把llvm14安装在标准路径，需要在第二行加上选项：-DLLVM_DIR&#x3D;$LLVM-14_INSTALL_DIR&#x2F;lib&#x2F;cmake&#x2F;llvm。第三行将要下载Crab并且编译。第四行Clam使用两个扩展部分并且安装扩展的目标。如下图所示：</p>
+<p>![](C:&#x2F;Users&#x2F;Admin&#x2F;Nutstore&#x2F;1&#x2F;研究生&#x2F;项目开发&#x2F;flang and seahorn&#x2F;安装&#x2F;扩展部分.png)</p>
+<p>里面也集成了一些抽象域：Boxes,Apron,Elina,PPlite。</p>
+<p>使用Boxes：-DCRAB_USE_LDD&#x3D;ON</p>
+<p>使用Apron：-DCRAB_USE_APRON&#x3D;ON</p>
+<p>使用Elina：-DCRAB_USE_ELINA&#x3D;ON</p>
+<p>使用PPlite：-DCRAB_USE_APRON&#x3D;ON -DCRAB_USE_PPLITE&#x3D;ON</p>
+<p>Apron和Elina是不兼容的，所以不能同时使用它们。</p>
+<p>安装Clam（包含Boxes和Apron）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. <span class="built_in">mkdir</span> build &amp;&amp; <span class="built_in">cd</span> build</span><br><span class="line">2. cmake -DCMAKE_INSTALL_PREFIX=<span class="variable">$DIR</span> -DCRAB_USE_LDD=ON -DCRAB_USE_APRON=ON ../</span><br><span class="line">3. cmake --build . --target crab &amp;&amp; cmake ..</span><br><span class="line">4. cmake --build . --target extra &amp;&amp; cmake ..                </span><br><span class="line">5. cmake --build . --target ldd &amp;&amp; cmake ..</span><br><span class="line">6. cmake --build . --target apron &amp;&amp; cmake ..             </span><br><span class="line">7. cmake --build . --target install </span><br></pre></td></tr></table></figure>
+
+
+<p>检查是否安装成功：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake --build . --target test-simple</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装成功"><a href="#安装成功" class="headerlink" title="安装成功"></a>安装成功</h2><p>在这里安装成功，安装使用的是llvm14.0.1版本加上flang legacy分支，clam使用的是dev14版本。在编译的过程中为了将llvm-lit加入到环境变量，而导致后面的步骤可能出错，即用flang生成可执行文件。那么只需要将llvm-lit的环境变量注释掉即可。中间需要将clang所在的那个文件夹bin的路径加入到环境变量中。</p>
+<h2 id="flang的命令"><a href="#flang的命令" class="headerlink" title="flang的命令"></a>flang的命令</h2><p>flang中除了原来的clang中支持的所有命令还有自己特殊的命令，作为fortran语言的前端部分。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">% flang -<span class="built_in">help</span></span><br><span class="line"></span><br><span class="line">-noFlangLibs          Do not <span class="built_in">link</span> against Flang libraries</span><br><span class="line">-mp                   Enable OpenMP and <span class="built_in">link</span> with with OpenMP library libomp</span><br><span class="line">-nomp                 Do not <span class="built_in">link</span> with OpenMP library libomp</span><br><span class="line">-Mbackslash           Treat backslash <span class="keyword">in</span> quoted strings like any other character</span><br><span class="line">-Mnobackslash         Treat backslash <span class="keyword">in</span> quoted strings like a C-style escape character (Default)</span><br><span class="line">-Mbyteswapio          Swap byte-order <span class="keyword">for</span> unformatted input/output</span><br><span class="line">-Mfixed               Assume fixed-format <span class="built_in">source</span></span><br><span class="line">-Mextend              Allow <span class="built_in">source</span> lines up to 132 characters</span><br><span class="line">-Mfreeform            Assume free-format <span class="built_in">source</span></span><br><span class="line">-Mpreprocess          Run preprocessor <span class="keyword">for</span> Fortran files</span><br><span class="line">-Mrecursive           Generate code to allow recursive subprograms</span><br><span class="line">-Mstandard            Check standard conformance</span><br><span class="line">-Msave                Assume all variables have SAVE attribute</span><br><span class="line">-module               path to module file (-I also works)</span><br><span class="line">-Mallocatable=95      Select Fortran 95 semantics <span class="keyword">for</span> assignments to allocatable objects</span><br><span class="line">-Mallocatable=03      Select Fortran 03 semantics <span class="keyword">for</span> assignments to allocatable objects (Default)</span><br><span class="line">-static-flang-libs    Link using static Flang libraries</span><br><span class="line">-M[no]daz             Treat denormalized numbers as zero</span><br><span class="line">-M[no]flushz          Set SSE to flush-to-zero mode</span><br><span class="line">-Mcache_align         Align large objects on cache-line boundaries</span><br><span class="line">-M[no]fprelaxed       This option is ignored</span><br><span class="line">-fdefault-integer-8   Treat INTEGER and LOGICAL as INTEGER*8 and LOGICAL*8</span><br><span class="line">-fdefault-real-8      Treat REAL as REAL*8</span><br><span class="line">-i8                   Treat INTEGER and LOGICAL as INTEGER*8 and LOGICAL*8</span><br><span class="line">-r8                   Treat REAL as REAL*8</span><br><span class="line">-fno-fortran-main     Don<span class="string">&#x27;t link in Fortran main</span></span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/zoush99">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85llvm-flang"><span class="toc-number">1.</span> <span class="toc-text">安装llvm-flang</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E7%BC%96%E8%AF%91flang"><span class="toc-number">1.1.</span> <span class="toc-text">两种方法编译flang</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">第一种方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">第二种方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85classical-flang"><span class="toc-number">2.</span> <span class="toc-text">安装classical flang</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85clam-LLVM-front-end-for-Crab"><span class="toc-number">3.</span> <span class="toc-text">安装clam: LLVM front-end for Crab</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F"><span class="toc-number">4.</span> <span class="toc-text">安装成功</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flang%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="toc-number">5.</span> <span class="toc-text">flang的命令</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/06/06/hello/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/06/06/hello/&text=hello"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/06/06/hello/&title=hello"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/06/06/hello/&is_video=false&description=hello"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=hello&body=Check out this article: http://example.com/2023/06/06/hello/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/06/06/hello/&title=hello"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/06/06/hello/&title=hello"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/06/06/hello/&title=hello"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/06/06/hello/&title=hello"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/06/06/hello/&name=hello&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/06/06/hello/&t=hello"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    zoush
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/zoush99">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
