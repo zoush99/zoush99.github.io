@@ -132,7 +132,7 @@
 <p>再提交。</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git push -f</span><br></pre></td></tr></table></figure>
 
-<p>也可以用<code>reveret</code>操作。但这里不打算介绍这种方法，看起来有些麻烦。</p>
+<p>也可以用<code>revert</code>操作。但这里不打算介绍这种方法，看起来有些麻烦。</p>
 ]]></content>
       <categories>
         <category>git</category>
@@ -185,6 +185,20 @@
 ]]></content>
       <tags>
         <tag>IKOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git pages发布页面和源代码同步脚本</title>
+    <url>/2023/06/26/git-pages%E5%8F%91%E5%B8%83%E9%A1%B5%E9%9D%A2%E5%92%8C%E6%BA%90%E4%BB%A3%E7%A0%81%E5%90%8C%E6%AD%A5%E8%84%9A%E6%9C%AC/</url>
+    <content><![CDATA[<h2 id="github-pages界面和源代码同步"><a href="#github-pages界面和源代码同步" class="headerlink" title="github pages界面和源代码同步"></a>github pages界面和源代码同步</h2><blockquote>
+<p> 为了便于自己记录并且保存自己的做项目或者生活中记录的重点事项，也为了多设备单账号协同发布。所以打算写一个脚本用来便于运行脚本分别发布并且同步源代码。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>blog</category>
+      </categories>
+      <tags>
+        <tag>blog</tag>
       </tags>
   </entry>
 </search>
