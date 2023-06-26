@@ -12,7 +12,7 @@ echo "Then upload to sourcecode branch"
 read -p "Enter submission notes:" notes
 echo "Determine if the local branch is a sourcecode branch, if so, upload directly, otherwise switch to sourcecode branch and upload again"
 echo "Current git branch is $curBranch"
-if ["$curBranch"="sourcecode"]
+if [${curBranch}="sourcecode"]
     then 
         echo "the branch is sourcecode, upload directly"
     else
