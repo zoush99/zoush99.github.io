@@ -63,9 +63,9 @@
   <entry>
     <title>git的使用</title>
     <url>/2023/06/13/git%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h2 id="主要介绍git的使用规则"><a href="#主要介绍git的使用规则" class="headerlink" title="主要介绍git的使用规则"></a>主要介绍git的使用规则</h2><p><img src="/git%E6%8C%87%E4%BB%A4/graph.jpg"></p>
-<span id="more"></span>
+    <content><![CDATA[<h2 id="主要介绍git的使用规则"><a href="#主要介绍git的使用规则" class="headerlink" title="主要介绍git的使用规则"></a>主要介绍git的使用规则</h2><span id="more"></span>
 
+<p><img src="/paper_source/git%E6%8C%87%E4%BB%A4/graph.jpg"></p>
 <p>一些信息查找命令。</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git branch</span><br><span class="line">git branch -al</span><br><span class="line">git branch -r</span><br></pre></td></tr></table></figure>
 
