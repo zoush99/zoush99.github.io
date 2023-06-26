@@ -4,7 +4,7 @@
 
 echo "the name of this scipt is publish"
 echo "First post on pages"
-# hexo g -d
+hexo g -d
 
 result=`git branch | grep "*"`
 curBranch=${result:2}
