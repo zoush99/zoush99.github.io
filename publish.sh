@@ -23,4 +23,4 @@ fi
 git pull origin sourcecode &&
 git add . &&
 git commit -m $notes && 
-git push origin source
+git push origin sourcecode
