@@ -1,8 +1,10 @@
 ---
 title: git的使用
 date: 2023-06-13 17:06:18
-tags: git
-categories: git
+tags: 
+- git
+categories: 
+- git
 typora-root-url: ./../
 ---
 

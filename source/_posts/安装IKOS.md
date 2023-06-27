@@ -1,7 +1,9 @@
 ---
 title: 安装IKOS
 date: 2023-06-13 21:48:52
-tags: IKOS
+tags: 
+- IKOS
+typora-root-url: ./../
 ---
 
 ## 安装IKOS
