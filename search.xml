@@ -190,15 +190,101 @@
   <entry>
     <title>git pages发布页面和源代码同步脚本</title>
     <url>/2023/06/26/git-pages%E5%8F%91%E5%B8%83%E9%A1%B5%E9%9D%A2%E5%92%8C%E6%BA%90%E4%BB%A3%E7%A0%81%E5%90%8C%E6%AD%A5%E8%84%9A%E6%9C%AC/</url>
-    <content><![CDATA[<h2 id="github-pages界面和源代码同步"><a href="#github-pages界面和源代码同步" class="headerlink" title="github pages界面和源代码同步"></a>github pages界面和源代码同步</h2><blockquote>
+    <content><![CDATA[<h2 id="github-pages界面和源代码同步"><a href="#github-pages界面和源代码同步" class="headerlink" title="github pages界面和源代码同步"></a>github pages界面和源代码同步</h2><span id="more"></span>
+
+<blockquote>
 <p> 为了便于自己记录并且保存自己的做项目或者生活中记录的重点事项，也为了多设备单账号协同发布。所以打算写一个脚本用来便于运行脚本分别发布并且同步源代码。</p>
 </blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">!</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">This simple script is designed to make it easier to publish my github pages and to be able to synchronize the <span class="built_in">source</span> code updates to the sourcecode branch.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">echo &quot;the name of this scipt is publish&quot;</span><br><span class="line">echo &quot;First post on pages&quot;</span><br><span class="line">hexo g -d</span><br><span class="line"></span><br><span class="line">result=`git branch | grep &quot;*&quot;`</span><br><span class="line">curBranch=$&#123;result:2&#125;</span><br><span class="line">echo &quot;Then upload to sourcecode branch&quot;</span><br><span class="line">read -p &quot;Enter submission notes:&quot; notes</span><br><span class="line">echo &quot;Determine if the local branch is a sourcecode branch, if so, upload directly, otherwise switch to sourcecode branch and upload again&quot;</span><br><span class="line">echo &quot;Current git branch is $curBranch&quot;</span><br><span class="line">if [ $&#123;curBranch&#125; == &quot;sourcecode&quot; ]</span><br><span class="line">    then </span><br><span class="line">        echo &quot;the branch is sourcecode, upload directly&quot;</span><br><span class="line">    else</span><br><span class="line">        echo &quot;Switch to the sourcecode branch, then upload&quot;</span><br><span class="line">        git checkout sourcecode </span><br><span class="line">fi </span><br><span class="line"></span><br><span class="line">git pull origin sourcecode &amp;&amp;</span><br><span class="line">git add . &amp;&amp;</span><br><span class="line">git commit -m $notes &amp;&amp; </span><br><span class="line">git push origin sourcecode</span><br></pre></td></tr></table></figure>
+
+<p>实现了简单的快捷上传操作。</p>
 ]]></content>
       <categories>
         <category>blog</category>
       </categories>
       <tags>
         <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Fortran语法学习</title>
+    <url>/2023/06/27/Fortran%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h2 id="Fortran语法学习备忘"><a href="#Fortran语法学习备忘" class="headerlink" title="Fortran语法学习备忘"></a>Fortran语法学习备忘</h2><span id="more"></span>
+
+<h3 id="Fortran程序设计基础"><a href="#Fortran程序设计基础" class="headerlink" title="Fortran程序设计基础"></a>Fortran程序设计基础</h3><ul>
+<li>字符集</li>
+<li>书面格式<ul>
+<li>固定格式</li>
+<li>自由格式</li>
+</ul>
+</li>
+<li>Fortran的数据类型<ul>
+<li>整数</li>
+<li>浮点数</li>
+<li>复数</li>
+<li>字符</li>
+<li>逻辑判断</li>
+</ul>
+</li>
+<li>Fortran的数学表达式<ul>
+<li>加</li>
+<li>减</li>
+<li>乘</li>
+<li>除</li>
+<li>乘幂</li>
+<li>括号</li>
+</ul>
+</li>
+</ul>
+<h3 id="输入输出及声明"><a href="#输入输出及声明" class="headerlink" title="输入输出及声明"></a>输入输出及声明</h3><ul>
+<li>输入输出命令<ul>
+<li>write</li>
+<li>print</li>
+<li>read</li>
+</ul>
+</li>
+<li>声明<ul>
+<li>原则</li>
+<li>整数类型</li>
+<li>浮点数<ul>
+<li>单精度</li>
+<li>双精度</li>
+</ul>
+</li>
+<li>复数<ul>
+<li>单精度</li>
+<li>双精度</li>
+</ul>
+</li>
+<li>字符及字符串<ul>
+<li>字符串合并</li>
+<li>改变字符串的某一部分</li>
+<li>字符串函数<ul>
+<li>char(num)</li>
+<li>ichar(char)</li>
+<li>len(string)</li>
+<li>len_trim(string)</li>
+<li>trim(string)</li>
+<li>index(string,key[,.true.])  !为.true.则从右开始 </li>
+<li>adjustl(string)</li>
+<li>adjustr(string)</li>
+</ul>
+</li>
+<li>逻辑变量</li>
+</ul>
+</li>
+<li>输入命令write</li>
+<li>格式化输入输出(format)</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Fortran</category>
+      </categories>
+      <tags>
+        <tag>Fortran</tag>
+        <tag>skills</tag>
       </tags>
   </entry>
 </search>
