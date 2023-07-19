@@ -92,12 +92,75 @@ sudo make install
 
 ## 使用Flang
 
-使用指令：
+使用命令：
 
 ` flang -help`
 
-来查找它所接受的命令，Flang本身支持所有的Clang的指令，而且支持针对Fortran特定的指令。
+来查找它所接受的命令，Flang本身支持所有的Clang的命令，而且支持针对Fortran特定的命令。
 
+```sh
+OVERVIEW: clang LLVM compiler
+
+USAGE: clang-14 [options] file...
+
+OPTIONS:
+  -###                    Print (but do not run) the commands to run for this compilation
+  -cpp                    Enable predefined and command line preprocessor macros
+  -c                      Only run preprocess, compile, and assemble steps
+  -D <macro>=<value>      Define <macro> to <value> (or 1 if <value> omitted)
+  -E                      Only run the preprocessor
+  -falternative-parameter-statement
+                          Enable the old style PARAMETER statement
+  -fbackslash             Specify that backslash in string introduces an escape character
+  -fcolor-diagnostics     Enable colors in diagnostics
+  -fdefault-double-8      Set the default double precision kind to an 8 byte wide type
+  -fdefault-integer-8     Set the default integer kind to an 8 byte wide type
+  -fdefault-real-8        Set the default real kind to an 8 byte wide type
+  -ffixed-form            Process source files in fixed form
+  -ffixed-line-length-<value>
+                          Set line length in fixed-form format Fortran, current supporting only 72 and 132 characters
+  -ffree-form             Process source files in free form
+  -finput-charset=<value> Specify the default character set for source files
+  -fintrinsic-modules-path <dir>
+                          Specify where to find the compiled intrinsic modules
+  -flarge-sizes           Use INTEGER(KIND=8) for the result type in size-related intrinsics
+  -fno-color-diagnostics  Disable colors in diagnostics
+  -fno-fixed-form         Disable fixed-form format for Fortran
+  -fno-free-form          Disable free-form format for Fortran
+  -fopenacc               Enable OpenACC
+  -fopenmp                Parse OpenMP pragmas and generate parallel code.
+  -help                   Display available options
+  -I <dir>                Add directory to the end of the list of include search paths
+  -module-dir <dir>       Put MODULE files in <dir>
+  -nocpp                  Disable predefined and command line preprocessor macros
+  -o <file>               Write output to <file>
+  -pedantic               Warn on language extensions
+  -P                      Disable linemarker output in -E mode
+  -std=<value>            Language standard to compile for
+  -U <macro>              Undefine macro <macro>
+  --version               Print version information
+  -W<warning>             Enable the specified warning
+  -Xflang <arg>           Pass <arg> to the flang compiler
 ```
+
+因为我们要用的只是将Fortran转成IR，而且不涉及并行程序（OpenMP），所以只用传统的一些命令行转化即可。
+
+下面列举出一些可以使用的组合命令，以及它们的功能。
+
+```sh
+flang -emit-llvm test.f90 -S -o test.ll
+# 传统的clang命令生成llvm IR，且是人可读版本.ll
+flang -emit-llvm test.f90 -c -o test.bc
+# 从源码转换成机器码.bc
+llvm-as test.ll -o test.bc
+# 将.ll转换成.bc
+llvm-dis test.bc -o test.ll
+# 将.bc转换成.ll
+lli test.bc
+# 直接执行.bc文件
+llvm-extract --func=foo test.bc -o test-func.bc	# 用test.ll也可以
+# 从位码文件中抽取函数名为foo的函数，除了抽取函数，还可以抽取别名和全局变量
+
+
 ```
 
