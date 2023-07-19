@@ -12,7 +12,7 @@ typora-root-url: ./../
 
 <!--more-->
 
-![](/paper_source//git指令/graph.jpg)
+![](/paper_source/git指令/graph.jpg)
 
 一些信息查找命令。
 
