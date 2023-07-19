@@ -148,10 +148,10 @@ OPTIONS:
 下面列举出一些可以使用的组合命令，以及它们的功能。
 
 ```sh
-flang -emit-llvm test.f90 -S -o test.ll
-# 传统的clang命令生成llvm IR，且是人可读版本.ll
+flang -emit-llvm test.f90 -S -c -o test.ll
+# 传统的clang命令生成llvm IR，且是可读版本.ll：汇编文件
 flang -emit-llvm test.f90 -c -o test.bc
-# 从源码转换成机器码.bc
+# 从源码转换成机器码.bc：位码文件
 llvm-as test.ll -o test.bc
 # 将.ll转换成.bc
 llvm-dis test.bc -o test.ll
@@ -160,7 +160,71 @@ lli test.bc
 # 直接执行.bc文件
 llvm-extract --func=foo test.bc -o test-func.bc	# 用test.ll也可以
 # 从位码文件中抽取函数名为foo的函数，除了抽取函数，还可以抽取别名和全局变量
+```
 
+一般来说，只用生成汇编文件或位码文件即可，汇编文件用来人为阅读，位码文件直接输入到IKOS中进行分析。
 
+## Flang转换成.ll的结果
+
+```sh
+source_filename = "/path/to/source.c"
+# 这里描述了源文件的名称和所在路径
+target datalayout = "layout specification"
+# 这里描述了目标机器中数据的内存布局方式，包括字节序、类型以及对齐方式
+# 这个参数对理解LLVM关系不大
+target triple = "ARCHITECTURE-VENDOR-OPERATIONG_SYSTEM"
+target triple = "ARCHITECTURE-VENDOR-OPERATING_SYSTEM-ENVIRONMENT"
+# 描述了目标机器是什么，从而指示后端生成相应的目标代码
+Identifiers
+# 标识符分为：全局标识符和局部标识符。全局标识符以@开头，如全局函数、全局变量。局部标识符以%开头，类似于汇编语言中的寄存器
+# 标识符有3种形式：
+## 有名称的值，表示带有前缀（@或%）的字符串。如：%Val, @name
+## 无名称的值，表示带前缀（@或%）的无符号数值。如%0, %1, @2
+## 常量
+Functions
+# define用于定义一个函数
+define [linkage] [PreemptionSpecifier] [visibility] [DLLStorageClass]
+       [cconv] [ret attrs]
+       <ResultType> @<FunctionName> ([argument list])
+       [(unnamed_addr|local_unnamed_addr)] [AddrSpace] [fn Attrs]
+       [section "name"] [comdat [($name)]] [align N] [gc] [prefix Constant]
+       [prologue Constant] [personality Constant] (!name !N)* { ... }
+# 示例
+define dso_local void @foo(i32 %x) #0 {
+  ; 省略 ...
+}
+# define void @foo(i32 %x) { ... }，表示定义一个函数。其函数名称为foo，返回值的数据类型为void，参数（用%x表示）的数据类型为 i32（占用4字节的整型）
+# #0，用于修饰函数时表示一组函数属性。这些属性定义在文件末尾
+  7 define weak dso_local void @foo(i32 %x) #0 {
+  8 entry:
+  9   %x.addr = alloca i32, align 4
+ 10   %y = alloca i32, align 4
+ 11   %z = alloca i32, align 4
+ 12   store i32 %x, i32* %x.addr, align 4
+ 13   %0 = load i32, i32* %x.addr, align 4
+ 14   %cmp = icmp eq i32 %0, 0
+ 15   br i1 %cmp, label %if.then, label %if.end
+ 16 
+ 17 if.then:                                          ; preds = %entry
+ 18   store i32 5, i32* %y, align 4
+ 19   br label %if.end
+ 20 
+ 21 if.end:                                           ; preds = %if.then, %entry
+ 22   %1 = load i32, i32* %x.addr, align 4
+ 23   %tobool = icmp ne i32 %1, 0
+ 24   br i1 %tobool, label %if.end2, label %if.then1
+ 25 
+ 26 if.then1:                                         ; preds = %if.end
+ 27   store i32 6, i32* %z, align 4
+ 28   br label %if.end2
+ 29 
+ 30 if.end2:                                          ; preds = %if.then1, %if.end
+ 31   ret void
+ 32 }
+# LLVM IR中，函数体是由基本块构成的。基本块是由一系列顺序执行的语句构成的，并（可选地）以标签作为起始。不同的标签代表不同的基本块
+# 基本块的特点如下：
+## 仅有一个入口，即基本块中的第一条指令
+## 仅有一个出口，即基本块中的最后一条指令（被称为terminator instruction）。该指令要么跳转到其他基本块（不包括入口基本块），要买从函数返回
+## 函数体中第一个出现的基本块，称为入口基本块（Entry Basic Block）。它是一个特殊的基本块，在进入函数时立即执行该基本块，并且不允许作为其他基本块的跳转目标（即不允许该基本块有前继结点）
 ```
 
