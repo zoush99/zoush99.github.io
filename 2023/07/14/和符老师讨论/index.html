@@ -21,26 +21,31 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zoush99.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Record some notes on work and study">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zoush99&#39;s blog">
-<meta property="og:url" content="https://zoush99.github.io/categories/learn/index.html">
+    <meta name="description" content="2023.8.22哪些地方可以做？ 陈：之前的想法：  陈：需要考虑哪些效果预期比现在效果更好？ 陈：利用已有前端IKOS（不变式生成能力比Clam好），先实现简单的例子，基于已有工作（博士论文，发在群里）、IC3（没听清楚）。 符：考虑现在比较好的方法，过程间结合图论的方法（不同的上下文调用到同一个图上，在图的算法上解决？已有很多工作做这个内容）。 陈：发文章需要带点新的内容，传统程序分析可能比">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Classic-Flang说明">
+<meta property="og:url" content="https://zoush99.github.io/2023/07/14/%E5%92%8C%E7%AC%A6%E8%80%81%E5%B8%88%E8%AE%A8%E8%AE%BA/index.html">
 <meta property="og:site_name" content="zoush99&#39;s blog">
-<meta property="og:description" content="Record some notes on work and study">
+<meta property="og:description" content="2023.8.22哪些地方可以做？ 陈：之前的想法：  陈：需要考虑哪些效果预期比现在效果更好？ 陈：利用已有前端IKOS（不变式生成能力比Clam好），先实现简单的例子，基于已有工作（博士论文，发在群里）、IC3（没听清楚）。 符：考虑现在比较好的方法，过程间结合图论的方法（不同的上下文调用到同一个图上，在图的算法上解决？已有很多工作做这个内容）。 陈：发文章需要带点新的内容，传统程序分析可能比">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="c:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20230822101758868.png">
+<meta property="og:image" content="c:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20230822101813289.png">
+<meta property="article:published_time" content="2023-07-14T02:38:24.000Z">
+<meta property="article:modified_time" content="2023-09-05T07:30:29.595Z">
 <meta property="article:author" content="zoush99">
-<meta property="article:tag" content="notes, student">
+<meta property="article:tag" content="chat">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20230822101758868.png">
 
 
-<link rel="canonical" href="https://zoush99.github.io/categories/learn/">
+<link rel="canonical" href="https://zoush99.github.io/2023/07/14/%E5%92%8C%E7%AC%A6%E8%80%81%E5%B8%88%E8%AE%A8%E8%AE%BA/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"","path":"categories/learn/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zoush99.github.io/2023/07/14/%E5%92%8C%E7%AC%A6%E8%80%81%E5%B8%88%E8%AE%A8%E8%AE%BA/","path":"2023/07/14/和符老师讨论/","title":"Classic-Flang说明"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Category: learn | zoush99's blog</title>
+<title>Classic-Flang说明 | zoush99's blog</title>
   
 
 
@@ -126,7 +131,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -139,6 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#2023-8-22"><span class="nav-number">1.</span> <span class="nav-text">2023.8.22</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -188,90 +194,144 @@
 
     </div>
 
-    <div class="main-inner category posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">learn
-          <small>Category</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://zoush99.github.io/2023/07/14/%E5%92%8C%E7%AC%A6%E8%80%81%E5%B8%88%E8%AE%A8%E8%AE%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="zoush99">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zoush99's blog">
+      <meta itemprop="description" content="Record some notes on work and study">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Classic-Flang说明 | zoush99's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Classic-Flang说明
         </h1>
-      </div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-07-14 10:38:24" itemprop="dateCreated datePublished" datetime="2023-07-14T10:38:24+08:00">2023-07-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-09-05 15:30:29" itemprop="dateModified" datetime="2023-09-05T15:30:29+08:00">2023-09-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/learn/" itemprop="url" rel="index"><span itemprop="name">learn</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>506</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>1 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h4 id="2023-8-22"><a href="#2023-8-22" class="headerlink" title="2023.8.22"></a>2023.8.22</h4><p>哪些地方可以做？</p>
+<p>陈：之前的想法：</p>
+<p><img src="C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20230822101758868.png" alt="image-20230822101758868"></p>
+<p>陈：需要考虑哪些效果预期比现在效果更好？</p>
+<p>陈：利用已有前端IKOS（不变式生成能力比Clam好），先实现简单的例子，基于已有工作（博士论文，发在群里）、IC3（没听清楚）。</p>
+<p>符：考虑现在比较好的方法，过程间结合图论的方法（不同的上下文调用到同一个图上，在图的算法上解决？已有很多工作做这个内容）。</p>
+<p>陈：发文章需要带点新的内容，传统程序分析可能比较难，如现在流行的部分程序分析（partial），&#x3D;&#x3D;增量式程序分析（代码演化、变更时，未变更部分不用重新分析，只分析已修改部分）&#x3D;&#x3D;。</p>
+<p>陈：过程间分析的瓶颈：代码量大需过程间时，在大规模和精度之间平衡？怎么找到平衡？韩国学者工作：selective上下文敏感。</p>
+<p><img src="C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20230822101813289.png" alt="image-20230822101813289"></p>
+<p>符：抽象解释解决嵌套循环问题困难，约束求解相对较好？</p>
+<p>陈：应用场景的结合：数组（约束求解做过相关工作，但比较初级）、浮点（未做过相关工作，有待考虑）、过程间？</p>
+<p>符：数组，自动分段，10年左右提出，进展较少。</p>
+<p>符：浮点，基于约束的方法，相比于数组创新力更强。</p>
+<p>陈：增量式程序分析：约束求解和抽象解释能否结合？（incremental）</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-09-05T15:29:16+08:00"
-              content="2023-09-05">
-          09-05
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/09/05/clion%E7%9A%84%E4%BD%BF%E7%94%A8/" itemprop="url">
-            <span itemprop="name">clion的使用</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/chat/" rel="tag"># chat</a>
+          </div>
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/06/26/git-pages%E5%8F%91%E5%B8%83%E9%A1%B5%E9%9D%A2%E5%92%8C%E6%BA%90%E4%BB%A3%E7%A0%81%E5%90%8C%E6%AD%A5%E8%84%9A%E6%9C%AC/" rel="prev" title="git pages发布页面和源代码同步脚本">
+                  <i class="fa fa-chevron-left"></i> git pages发布页面和源代码同步脚本
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/07/14/Classic-Flang%E8%AF%B4%E6%98%8E/" rel="next" title="Classic-Flang说明">
+                  Classic-Flang说明 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-07-14T10:38:24+08:00"
-              content="2023-07-14">
-          07-14
-        </time>
-      </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/07/14/Classic-Flang%E8%AF%B4%E6%98%8E/" itemprop="url">
-            <span itemprop="name">Classic-Flang说明</span>
-          </a>
-      </div>
 
-      
-    </header>
-  </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-07-14T10:38:24+08:00"
-              content="2023-07-14">
-          07-14
-        </time>
-      </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/07/14/%E5%92%8C%E7%AC%A6%E8%80%81%E5%B8%88%E8%AE%A8%E8%AE%BA/" itemprop="url">
-            <span itemprop="name">Classic-Flang说明</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-    </div>
-  </div>
-  
-  
-  
 
 </div>
   </main>

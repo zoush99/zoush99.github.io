@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zoush99.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="IKOS Analyzer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ikos的使用">
+<meta property="og:url" content="https://zoush99.github.io/2023/09/05/ikos%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="zoush99&#39;s blog">
+<meta property="og:description" content="IKOS Analyzer">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-09-05T14:07:53.000Z">
+<meta property="article:modified_time" content="2023-09-05T14:09:18.430Z">
+<meta property="article:author" content="zoush99">
+<meta property="article:tag" content="ikos">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://zoush99.github.io/2023/09/05/ikos%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zoush99.github.io/2023/09/05/ikos%E7%9A%84%E4%BD%BF%E7%94%A8/","path":"2023/09/05/ikos的使用/","title":"ikos的使用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ikos的使用 | zoush99's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">zoush99's blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IKOS-Analyzer"><span class="nav-number">1.</span> <span class="nav-text">IKOS Analyzer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Table-of-contents"><span class="nav-number">1.1.</span> <span class="nav-text">Table of contents</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.3.</span> <span class="nav-text">Installation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dependencies"><span class="nav-number">1.3.1.</span> <span class="nav-text">Dependencies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Build-and-Install"><span class="nav-number">1.3.2.</span> <span class="nav-text">Build and Install</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tests"><span class="nav-number">1.3.3.</span> <span class="nav-text">Tests</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Documentation"><span class="nav-number">1.3.4.</span> <span class="nav-text">Documentation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-run-IKOS"><span class="nav-number">1.4.</span> <span class="nav-text">How to run IKOS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analyze-a-whole-project-with-ikos-scan"><span class="nav-number">1.5.</span> <span class="nav-text">Analyze a whole project with ikos-scan</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Examine-a-report-with-ikos-view"><span class="nav-number">1.6.</span> <span class="nav-text">Examine a report with ikos-view</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-Options"><span class="nav-number">1.7.</span> <span class="nav-text">Analysis Options</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Checks"><span class="nav-number">1.7.1.</span> <span class="nav-text">Checks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Numerical-abstract-domains"><span class="nav-number">1.7.2.</span> <span class="nav-text">Numerical abstract domains</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Entry-points"><span class="nav-number">1.7.3.</span> <span class="nav-text">Entry points</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-threading"><span class="nav-number">1.7.4.</span> <span class="nav-text">Multi-threading</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimization-level"><span class="nav-number">1.7.5.</span> <span class="nav-text">Optimization level</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inter-procedural-vs-Intra-procedural"><span class="nav-number">1.7.6.</span> <span class="nav-text">Inter-procedural vs Intra-procedural</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fixpoint-engine-parameters"><span class="nav-number">1.7.7.</span> <span class="nav-text">Fixpoint engine parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partitioning"><span class="nav-number">1.7.8.</span> <span class="nav-text">Partitioning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hardware-addresses"><span class="nav-number">1.7.9.</span> <span class="nav-text">Hardware addresses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other-analysis-options"><span class="nav-number">1.7.10.</span> <span class="nav-text">Other analysis options</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Report-Options"><span class="nav-number">1.8.</span> <span class="nav-text">Report Options</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Format"><span class="nav-number">1.8.1.</span> <span class="nav-text">Format</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#File"><span class="nav-number">1.8.2.</span> <span class="nav-text">File</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Status-Filter"><span class="nav-number">1.8.3.</span> <span class="nav-text">Status Filter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis-Filter"><span class="nav-number">1.8.4.</span> <span class="nav-text">Analysis Filter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Verbosity"><span class="nav-number">1.8.5.</span> <span class="nav-text">Verbosity</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Other-report-options"><span class="nav-number">1.8.5.1.</span> <span class="nav-text">Other report options</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#APRON-Support"><span class="nav-number">1.9.</span> <span class="nav-text">APRON Support</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-Assumptions"><span class="nav-number">1.10.</span> <span class="nav-text">Analysis Assumptions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analyze-an-embedded-software-requiring-a-cross-compiler"><span class="nav-number">1.11.</span> <span class="nav-text">Analyze an embedded software requiring a cross-compiler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-library-functions-to-reduce-warnings"><span class="nav-number">1.12.</span> <span class="nav-text">Model library functions to reduce warnings</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview-of-the-source-code"><span class="nav-number">1.13.</span> <span class="nav-text">Overview of the source code</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#doc-x2F"><span class="nav-number">1.13.0.1.</span> <span class="nav-text">doc&#x2F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#include-x2F"><span class="nav-number">1.13.0.2.</span> <span class="nav-text">include&#x2F;</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#include-x2F-ikos-x2F-analyzer-x2F-analysis"><span class="nav-number">1.13.0.2.1.</span> <span class="nav-text">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#include-x2F-ikos-x2F-analyzer-x2F-analysis-x2F-execution-engine"><span class="nav-number">1.13.0.2.2.</span> <span class="nav-text">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;execution_engine</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#include-x2F-ikos-x2F-analyzer-x2F-analysis-x2F-pointer"><span class="nav-number">1.13.0.2.3.</span> <span class="nav-text">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;pointer</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#include-x2F-ikos-x2F-analyzer-x2F-analysis-x2F-value"><span class="nav-number">1.13.0.2.4.</span> <span class="nav-text">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;value</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#include-x2F-ikos-x2F-analyzer-x2F-checker"><span class="nav-number">1.13.0.2.5.</span> <span class="nav-text">include&#x2F;ikos&#x2F;analyzer&#x2F;checker</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#include-x2F-ikos-x2F-analyzer-x2F-database-x2F-table"><span class="nav-number">1.13.0.2.6.</span> <span class="nav-text">include&#x2F;ikos&#x2F;analyzer&#x2F;database&#x2F;table</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#include-x2F-ikos-x2F-analyzer-x2F-json"><span class="nav-number">1.13.0.2.7.</span> <span class="nav-text">include&#x2F;ikos&#x2F;analyzer&#x2F;json</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#include-x2F-ikos-x2F-analyzer-x2F-support"><span class="nav-number">1.13.0.2.8.</span> <span class="nav-text">include&#x2F;ikos&#x2F;analyzer&#x2F;support</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#include-x2F-ikos-x2F-analyzer-x2F-util"><span class="nav-number">1.13.0.2.9.</span> <span class="nav-text">include&#x2F;ikos&#x2F;analyzer&#x2F;util</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python-x2F"><span class="nav-number">1.13.0.3.</span> <span class="nav-text">python&#x2F;</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#python-x2F-ikos-x2F-analyzer-x2F-view"><span class="nav-number">1.13.0.3.1.</span> <span class="nav-text">python&#x2F;ikos&#x2F;analyzer&#x2F;view</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#script-x2F"><span class="nav-number">1.13.0.4.</span> <span class="nav-text">script&#x2F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#src-x2F"><span class="nav-number">1.13.0.5.</span> <span class="nav-text">src&#x2F;</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zoush99"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">zoush99</p>
+  <div class="site-description" itemprop="description">Record some notes on work and study</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zoush99?tab=repositories" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zoush99?tab&#x3D;repositories" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:victory_z_s@163.com" title="E-Mail → mailto:victory_z_s@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://zoush99.github.io/2023/09/05/ikos%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="zoush99">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zoush99's blog">
+      <meta itemprop="description" content="Record some notes on work and study">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="ikos的使用 | zoush99's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ikos的使用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-09-05 22:07:53 / Modified: 22:09:18" itemprop="dateCreated datePublished" datetime="2023-09-05T22:07:53+08:00">2023-09-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/ikos/" itemprop="url" rel="index"><span itemprop="name">ikos</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>25k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>45 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="IKOS-Analyzer"><a href="#IKOS-Analyzer" class="headerlink" title="IKOS Analyzer"></a>IKOS Analyzer</h1><span id="more"></span>
+
+<p>This folder contains the implementation of the analyzer.</p>
+<h2 id="Table-of-contents"><a href="#Table-of-contents" class="headerlink" title="Table of contents"></a>Table of contents</h2><ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#installation">Installation</a><ul>
+<li><a href="#dependencies">Dependencies</a></li>
+<li><a href="#build-and-install">Build and Install</a></li>
+<li><a href="#tests">Tests</a></li>
+<li><a href="#documentation">Documentation</a></li>
+</ul>
+</li>
+<li><a href="#how-to-run-ikos">How to run IKOS</a></li>
+<li><a href="#analyze-a-whole-project-with-ikos-scan">Analyze a whole project with ikos-scan</a></li>
+<li><a href="#examine-a-report-with-ikos-view">Examine a report with ikos-view</a></li>
+<li><a href="#analysis-options">Analysis Options</a><ul>
+<li><a href="#checks">Checks</a></li>
+<li><a href="#numerical-abstract-domains">Numerical abstract domains</a></li>
+<li><a href="#entry-points">Entry points</a></li>
+<li><a href="#multi-threading">Multi-threading</a></li>
+<li><a href="#optimization-level">Optimization level</a></li>
+<li><a href="#inter-procedural-vs-intra-procedural">Inter-procedural vs Intra-procedural</a></li>
+<li><a href="#fixpoint-engine-parameters">Fixpoint engine parameters</a></li>
+<li><a href="#partitioning">Partitioning</a></li>
+<li><a href="#hardware-addresses">Hardware addresses</a></li>
+<li><a href="#other-analysis-options">Other analysis options</a></li>
+</ul>
+</li>
+<li><a href="#report-options">Report Options</a><ul>
+<li><a href="#format">Format</a></li>
+<li><a href="#file">File</a></li>
+<li><a href="#status-filter">Status Filter</a></li>
+<li><a href="#analysis-filter">Analysis Filter</a></li>
+<li><a href="#verbosity">Verbosity</a></li>
+<li><a href="#other-report-options">Other report options</a></li>
+</ul>
+</li>
+<li><a href="#apron-support">APRON Support</a></li>
+<li><a href="#analysis-assumptions">Analysis Assumptions</a></li>
+<li><a href="#analyze-an-embedded-software-requiring-a-cross-compiler">Analyze an embedded software requiring a cross-compiler</a></li>
+<li><a href="#model-library-functions-to-reduce-warnings">Model library functions to reduce warnings</a></li>
+<li><a href="#overview-of-the-source-code">Overview of the source code</a></li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>The IKOS Analyzer is an abstract interpretation-based static analyzer that aims at proving the absence of runtime errors in C and C++ programs.</p>
+<p>See <a href="#checks">Checks</a> for the full list of available checks.</p>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>IKOS Analyzer can be installed independently from the other components, but we recommend to build the analyzer from the root directory. To do so, follow the instructions in the root <a href="../README.md">README.md</a>.</p>
+<h3 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h3><p>To build and run the analyzer, you will need the following dependencies:</p>
+<ul>
+<li>A C++ compiler that supports C++14 (gcc &gt;&#x3D; 4.9.2 or clang &gt;&#x3D; 3.4)</li>
+<li>CMake &gt;&#x3D; 3.4.3</li>
+<li>GMP &gt;&#x3D; 4.3.1</li>
+<li>Boost &gt;&#x3D; 1.55</li>
+<li>Python 2 &gt;&#x3D; 2.7.3 or Python 3 &gt;&#x3D; 3.3</li>
+<li>SQLite &gt;&#x3D; 3.6.20</li>
+<li>TBB &gt;&#x3D; 2</li>
+<li>LLVM and Clang 14.0.x</li>
+<li>(Optional) APRON &gt;&#x3D; 0.9.10</li>
+<li>(Optional) Pygments</li>
+<li>IKOS Core</li>
+<li>IKOS AR</li>
+<li>IKOS LLVM Frontend</li>
+</ul>
+<h3 id="Build-and-Install"><a href="#Build-and-Install" class="headerlink" title="Build and Install"></a>Build and Install</h3><p>To build and install the analyzer, run the following commands in the <code>analyzer</code> directory:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir build</span><br><span class="line">$ cd build</span><br><span class="line">$ cmake \</span><br><span class="line">    -DCMAKE_INSTALL_PREFIX=/path/to/analyzer-install-directory \</span><br><span class="line">    -DLLVM_CONFIG_EXECUTABLE=/path/to/llvm/bin/llvm-config \</span><br><span class="line">    -DCORE_ROOT=/path/to/core-install-directory \</span><br><span class="line">    -DAR_ROOT=/path/to/ar-install-directory \</span><br><span class="line">    -DFRONTEND_LLVM_ROOT=/path/to/frontend-llvm-install-directory \</span><br><span class="line">    ..</span><br><span class="line">$ make</span><br><span class="line">$ make install</span><br></pre></td></tr></table></figure>
+
+<h3 id="Tests"><a href="#Tests" class="headerlink" title="Tests"></a>Tests</h3><p>To build and run the tests, simply type:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make check</span><br></pre></td></tr></table></figure>
+
+<h3 id="Documentation"><a href="#Documentation" class="headerlink" title="Documentation"></a>Documentation</h3><p>To build the documentation, you will need <a target="_blank" rel="noopener" href="http://www.doxygen.org/">Doxygen</a>.</p>
+<p>Then, simply type:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ make doc</span><br><span class="line">$ open doc/html/index.html</span><br></pre></td></tr></table></figure>
+
+<h2 id="How-to-run-IKOS"><a href="#How-to-run-IKOS" class="headerlink" title="How to run IKOS"></a>How to run IKOS</h2><p>Suppose we want to analyze the following C program in a file, called <em>loop.c</em>:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span>: <span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> <span class="number">2</span>: <span class="type">int</span> a[<span class="number">10</span>];</span><br><span class="line"> <span class="number">3</span>: <span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> &#123;</span><br><span class="line"> <span class="number">4</span>:     <span class="type">size_t</span> i = <span class="number">0</span>;</span><br><span class="line"> <span class="number">5</span>:     <span class="keyword">for</span> (;i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line"> <span class="number">6</span>:         a[i] = i;</span><br><span class="line"> <span class="number">7</span>:     &#125;</span><br><span class="line"> <span class="number">8</span>:     a[i] = i;</span><br><span class="line"> <span class="number">9</span>:     <span class="built_in">printf</span>(<span class="string">&quot;%i&quot;</span>, a[i]);</span><br><span class="line"><span class="number">10</span>: &#125;</span><br></pre></td></tr></table></figure>
+
+<p>To analyze this program with IKOS, simply run:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ikos loop.c</span><br></pre></td></tr></table></figure>
+
+<p>You shall see the following output. IKOS reports two occurrences of buffer overflow at line 8 and 9.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">[*] Compiling loop.c</span><br><span class="line">[*] Running ikos preprocessor</span><br><span class="line">[*] Running ikos analyzer</span><br><span class="line">[*] Translating LLVM bitcode to AR</span><br><span class="line">[*] Running liveness analysis</span><br><span class="line">[*] Running widening hint analysis</span><br><span class="line">[*] Running interprocedural value analysis</span><br><span class="line">[*] Analyzing entry point &#x27;main&#x27;</span><br><span class="line">[*] Checking properties for entry point &#x27;main&#x27;</span><br><span class="line"></span><br><span class="line"># Time stats:</span><br><span class="line">clang        : 0.037 sec</span><br><span class="line">ikos-analyzer: 0.023 sec</span><br><span class="line">ikos-pp      : 0.007 sec</span><br><span class="line"></span><br><span class="line"># Summary:</span><br><span class="line">Total number of checks                : 7</span><br><span class="line">Total number of unreachable checks    : 0</span><br><span class="line">Total number of safe checks           : 5</span><br><span class="line">Total number of definite unsafe checks: 2</span><br><span class="line">Total number of warnings              : 0</span><br><span class="line"></span><br><span class="line">The program is definitely UNSAFE</span><br><span class="line"></span><br><span class="line"># Results</span><br><span class="line">loop.c: In function &#x27;main&#x27;:</span><br><span class="line">loop.c:8:10: error: buffer overflow, trying to access index 10 of global variable &#x27;a&#x27; of 10 elements</span><br><span class="line">    a[i] = i;</span><br><span class="line">         ^</span><br><span class="line">loop.c: In function &#x27;main&#x27;:</span><br><span class="line">loop.c:9:18: error: buffer overflow, trying to access index 10 of global variable &#x27;a&#x27; of 10 elements</span><br><span class="line">    printf(&quot;%i&quot;, a[i]);</span><br><span class="line">                 ^</span><br></pre></td></tr></table></figure>
+
+<p>The <code>ikos</code> command takes a source file (<code>.c</code>, <code>.cpp</code>) or a LLVM bitcode file (<code>.bc</code>) as input, analyzes it to find runtime errors (also called undefined behaviors), creates a result database <code>output.db</code> in the current working directory and prints a report.</p>
+<p>In the report, each line has one of the following status:</p>
+<ul>
+<li><strong>safe</strong>: the statement is proven safe;</li>
+<li><strong>error</strong>: the statement always results into an error (or is unreachable);</li>
+<li><strong>unreachable</strong>: the statement is never executed;</li>
+<li><strong>warning</strong> may mean three things:<ol>
+<li>the statement results into an error for some executions, or</li>
+<li>the static analyzer did not have enough information to conclude (check dependent on an external input, for instance), or</li>
+<li>the static analyzer was not powerful enough to prove the absence of errors;</li>
+</ol>
+</li>
+</ul>
+<p>By default, ikos shows warnings and errors directly in your terminal, like a compiler would do.</p>
+<p>If the analysis report is too big, you shall use:</p>
+<ul>
+<li><code>ikos-report output.db</code> to examine the report in your terminal</li>
+<li><code>ikos-view output.db</code> to examine the report in a web interface</li>
+</ul>
+<h2 id="Analyze-a-whole-project-with-ikos-scan"><a href="#Analyze-a-whole-project-with-ikos-scan" class="headerlink" title="Analyze a whole project with ikos-scan"></a>Analyze a whole project with ikos-scan</h2><p>To run IKOS on a large project, you shall use ikos-scan.</p>
+<p>ikos-scan is a command line utility that runs the static analyzer over a codebase after performing a regular build.</p>
+<p>The ikos-scan command works by overriding the environment variables <code>CC</code> and <code>CXX</code> to intercept the compiler commands. Behind the scene, it builds the original program as well as the LLVM bitcode file that is necessary to run the analyzer.</p>
+<p>To use ikos-scan, just prefix your build commands with <code>ikos-scan</code>. For instance, to analyze pkg-config:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ tar xf pkg-config-0.29.2.tar.gz</span><br><span class="line">$ cd pkg-config-0.29.2</span><br><span class="line">$ ikos-scan ./configure</span><br><span class="line">[...]</span><br><span class="line">$ ikos-scan make</span><br><span class="line">[...]</span><br><span class="line">Analyze pkg-config? [Y/n]</span><br></pre></td></tr></table></figure>
+
+<p>ikos-scan will produce a <code>.bc</code> file for each executable in your project. You can analyze them with specific options using <code>ikos [options] program.bc</code>.</p>
+<h2 id="Examine-a-report-with-ikos-view"><a href="#Examine-a-report-with-ikos-view" class="headerlink" title="Examine a report with ikos-view"></a>Examine a report with ikos-view</h2><p>ikos-view provides a web interface to examine IKOS results. It is available directly in the analyzer.</p>
+<p>The web interface shows the source code with syntax highlighting, and allows you to filter the warnings by checks.</p>
+<p>To use ikos-view, first run the analyzer on your project to generate a result database <code>output.db</code>, then simply run:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ikos-view output.db</span><br></pre></td></tr></table></figure>
+
+<p>It will start a web server. You can then launch your favorite web browser and visit <a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a></p>
+<p>Note that if you want syntax highlighting, you will need to install <a target="_blank" rel="noopener" href="http://pygments.org/">Pygments</a>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install --user pygments</span><br></pre></td></tr></table></figure>
+
+<h2 id="Analysis-Options"><a href="#Analysis-Options" class="headerlink" title="Analysis Options"></a>Analysis Options</h2><p>This section describes the most relevant options of the analyzer.</p>
+<h3 id="Checks"><a href="#Checks" class="headerlink" title="Checks"></a>Checks</h3><p>The list of available checks are:</p>
+<ul>
+<li><strong>buffer overflow analysis</strong>, <code>-a=boa</code>: checks for buffer overflows and out-of-bound array accesses.</li>
+<li><strong>division by zero analysis</strong>, <code>-a=dbz</code>: checks for integer divisions by zero.</li>
+<li><strong>null pointer analysis</strong>, <code>-a=nullity</code>: checks for null pointer dereferences.</li>
+<li><strong>assertion prover</strong>, <code>-a=prover</code>: prove user-defined properties, using <code>__ikos_assert(condition)</code>.</li>
+<li><strong>unaligned pointer analysis</strong>, <code>-a=upav</code>: checks for unaligned pointer dereferences.</li>
+<li><strong>uninitialized variable analysis</strong>, <code>-a=uva</code>: checks for read of uninitialized variables.</li>
+<li><strong>signed integer overflow analysis</strong>, <code>-a=sio</code>: checks for signed integer overflows.</li>
+<li><strong>unsigned integer overflow analysis</strong>, <code>-a=uio</code>: checks for unsigned integer overflows.</li>
+<li><strong>shift count analysis</strong>, <code>-a=shc</code>: checks for invalid shifts, where the amount shifted is greater or equal to the bit-width of the left operand, or less than zero.</li>
+<li><strong>pointer overflow analysis</strong>, <code>-a=poa</code>: checks for pointer arithmetic overflows.</li>
+<li><strong>pointer comparison analysis</strong>, <code>-a=pcmp</code>: checks for pointer comparisons between pointers referring to different objects.</li>
+<li><strong>soundness analysis</strong>, <code>-a=sound</code>: checks for instructions that could make the analysis unsound, i.e miss bugs.</li>
+<li><strong>function call analysis</strong>, <code>-a=fca</code>: checks for function calls through function pointers of the wrong type.</li>
+<li><strong>dead code analysis</strong>, <code>-a=dca</code>: checks for unreachable statements.</li>
+<li><strong>double free analysis</strong>, <code>-a=dfa</code>: checks for double free, invalid free, use after free and use after return.</li>
+<li><strong>debugger</strong>, <code>-a=dbg</code>: prints debug information, using <code>__ikos_print_values(&quot;desc&quot;, x)</code> and <code>__ikos_print_invariant()</code>.</li>
+<li><strong>memory watcher</strong>, <code>-a=watch</code>: prints memory writes at a given memory location, using <code>__ikos_watch_mem(ptr, size)</code>.</li>
+</ul>
+<p>By default, all the checks are enabled except:</p>
+<ul>
+<li><strong>unaligned pointer analysis</strong>, because it needs a congruence domain to generate meaningful results. See <a href="#numerical-abstract-domains">Numerical abstract domains</a>.</li>
+<li><strong>unsigned integer overflow analysis</strong>, because it is not an undefined behavior according to the C standard.</li>
+<li><strong>pointer overflow analysis</strong>, because it is redundant with the buffer overflow analysis.</li>
+<li><strong>memory watcher</strong>, because it is slow.</li>
+</ul>
+<p>If you want to run specific checks, use the <code>-a</code> parameter:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ikos -a=boa,nullity test.c</span><br></pre></td></tr></table></figure>
+
+<p>Note that you can use the wildcard character <code>*</code>, <code>+</code> and <code>-</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ikos -a=&#x27;*,-sio&#x27; test.c</span><br></pre></td></tr></table></figure>
+
+<p>In this example, all the checks are enabled except signed integer overflow checks.</p>
+<h3 id="Numerical-abstract-domains"><a href="#Numerical-abstract-domains" class="headerlink" title="Numerical abstract domains"></a>Numerical abstract domains</h3><p>IKOS is based on the theory of <a target="_blank" rel="noopener" href="https://www.di.ens.fr/~cousot/AI/IntroAbsInt.html">Abstract Interpretation</a>. The analysis uses a numerical abstract domain internally to model integer variables.</p>
+<p>The list of available numerical abstract domains are:</p>
+<ul>
+<li><code>-d=interval</code>: The interval domain, see <a target="_blank" rel="noopener" href="https://www.di.ens.fr/~cousot/COUSOTpapers/publications.www/CousotCousot-POPL-77-ACM-p238--252-1977.pdf">CC77</a>.</li>
+<li><code>-d=congruence</code>: The congruence domain, see <a target="_blank" rel="noopener" href="http://www.tandfonline.com/doi/abs/10.1080/00207168908803778">Gra89</a>.</li>
+<li><code>-d=interval-congruence</code>: The reduced product of interval and congruence.</li>
+<li><code>-d=dbm</code>: The Difference-Bound Matrices domain, see <a target="_blank" rel="noopener" href="https://www-apr.lip6.fr/~mine/publi/article-mine-padoII.pdf">PADO01</a>.</li>
+<li><code>-d=var-pack-dbm</code>: The Difference-Bound Matrices domain with variable packing, see <a target="_blank" rel="noopener" href="https://seahorn.github.io/papers/vmcai16.pdf">VMCAI16</a>.</li>
+<li><code>-d=var-pack-dbm-congruence</code>: The reduced product of DBM with variable packing and congruence.</li>
+<li><code>-d=gauge</code>: The gauge domain, see <a target="_blank" rel="noopener" href="https://ti.arc.nasa.gov/publications/4767/download/">CAV12</a>.</li>
+<li><code>-d=gauge-interval-congruence</code>: The reduced product of gauge, interval and congruence.</li>
+<li><code>-d=apron-interval</code>: The APRON interval domain, see <a target="_blank" rel="noopener" href="http://apron.cri.ensmp.fr/library/0.9.10/apron/apron_21.html#SEC54">Box</a>.</li>
+<li><code>-d=apron-octagon</code>: The APRON octagon domain, see <a target="_blank" rel="noopener" href="http://apron.cri.ensmp.fr/library/0.9.10/apron/oct_doc.html">Oct</a>.</li>
+<li><code>-d=apron-polka-polyhedra</code>: The APRON polka polyhedra domain, see <a target="_blank" rel="noopener" href="http://apron.cri.ensmp.fr/library/0.9.10/apron/apron_25.html#SEC58">NewPolka</a>.</li>
+<li><code>-d=apron-polka-linear-equalities</code>: The APRON polka linear equalities domain, see <a target="_blank" rel="noopener" href="http://apron.cri.ensmp.fr/library/0.9.10/apron/apron_25.html#SEC58">NewPolka</a>.</li>
+<li><code>-d=apron-ppl-polyhedra</code>: The APRON PPL polyhedra domain, see <a target="_blank" rel="noopener" href="http://apron.cri.ensmp.fr/library/0.9.10/apron/apron_29.html#SEC65">PPL</a>.</li>
+<li><code>-d=apron-ppl-linear-congruences</code>: The APRON PPL linear congruences domain, see <a target="_blank" rel="noopener" href="http://apron.cri.ensmp.fr/library/0.9.10/apron/apron_29.html#SEC65">PPL</a>.</li>
+<li><code>-d=apron-pkgrid-polyhedra-lin-cong</code>: The APRON Pkgrid polyhedra and linear congruences domain, see <a target="_blank" rel="noopener" href="http://apron.cri.ensmp.fr/library/0.9.10/apron/apron_33.html#SEC69">Pkgrid</a>.</li>
+<li><code>-d=var-pack-apron-octagon</code>: The APRON octagon domain with variable packing.</li>
+<li><code>-d=var-pack-apron-polka-polyhedra</code>: The APRON Polka polyhedra domain with variable packing.</li>
+<li><code>-d=var-pack-apron-polka-linear-equalities</code>: The APRON Polka linear equalities domain with variable packing.</li>
+<li><code>-d=var-pack-apron-ppl-polyhedra</code>: The APRON PPL polyhedra domain with variable packing.</li>
+<li><code>-d=var-pack-apron-ppl-linear-congruences</code>: The APRON PPL linear congruences domain with variable packing.</li>
+<li><code>-d=var-pack-apron-pkgrid-polyhedra-lin-cong</code>: The APRON Pkgrid polyhedra and linear congruences domain with variable packing.</li>
+</ul>
+<p>By default, IKOS uses the fastest and least precise numerical domain, the <strong>interval</strong> domain. If you want to run the analysis with a specific domain, use the <code>-d</code> parameter:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ikos -d=var-pack-dbm test.c</span><br></pre></td></tr></table></figure>
+
+<p>For most users, we recommend to analyze your project with the fastest and least precise domain (i.e, interval) first, and then try slower but more precise domains until the analysis is too long for you. This is the best way to reach a low rate of false positives (i.e, warnings).</p>
+<p>Here is a list of numerical domains, sorted from the fastest and least precise to the slowest and most precise:</p>
+<ul>
+<li><code>-d=interval</code></li>
+<li><code>-d=gauge-interval-congruence</code></li>
+<li><code>-d=var-pack-dbm</code></li>
+<li><code>-d=var-pack-apron-octagon</code></li>
+<li><code>-d=var-pack-apron-ppl-polyhedra</code></li>
+<li><code>-d=dbm</code></li>
+<li><code>-d=apron-octagon</code></li>
+<li><code>-d=apron-ppl-polyhedra</code></li>
+</ul>
+<p>You should consider running different analyses in this specific order.</p>
+<p>Please also note that:</p>
+<ul>
+<li>Floating point variables are safely ignored.</li>
+<li>In order to use the <strong>APRON</strong> abstract domain, you need to build IKOS with APRON first. See <a href="#apron-support">APRON Support</a>.</li>
+</ul>
+<h3 id="Entry-points"><a href="#Entry-points" class="headerlink" title="Entry points"></a>Entry points</h3><p>By default, the analyzer assumes the entry point of the program is <code>main</code>. You can specify a list of entry points using the <code>--entry-points</code> parameter:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ikos --entry-points=foo,bar test.c</span><br></pre></td></tr></table></figure>
+
+<p>IKOS analyses each entry point independently, as if they were running in different processes.</p>
+<h3 id="Multi-threading"><a href="#Multi-threading" class="headerlink" title="Multi-threading"></a>Multi-threading</h3><p>The analyzer can use multi-threading to speed up the analysis. You can specify the number of threads to use with the <code>--jobs</code> or <code>-j</code> parameter:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ikos --jobs=4 test.c</span><br></pre></td></tr></table></figure>
+
+<p>Use <code>-j</code> to use all available threads. By default, the analyzer only uses one thread.</p>
+<p><strong>Warning:</strong> APRON numerical abstract domains are currently NOT thread-safe and might cause crashes.</p>
+<h3 id="Optimization-level"><a href="#Optimization-level" class="headerlink" title="Optimization level"></a>Optimization level</h3><p>The parameter <code>--opt</code> allows you to set the optimization level. Optimizations are performed by running a set of LLVM passes on the analyzed code.</p>
+<p>Available levels are:</p>
+<ul>
+<li><strong>none</strong>: Disable all optimizations.</li>
+<li><strong>basic</strong>: Basic set of optimizations (similar to <code>-O1</code>). This is the default value.</li>
+<li><strong>aggressive</strong>: Aggressive optimizations (similar to <code>-O3</code>). This is not recommended since it might hide errors. The translation from LLVM to AR might fail because of unsupported instructions.</li>
+</ul>
+<h3 id="Inter-procedural-vs-Intra-procedural"><a href="#Inter-procedural-vs-Intra-procedural" class="headerlink" title="Inter-procedural vs Intra-procedural"></a>Inter-procedural vs Intra-procedural</h3><p>An <strong>inter-procedural</strong> analysis analyzes a function considering its call stack while an <strong>intra-procedural</strong> analysis ignores it. The former produces more precise results than the latter but it is often much more expensive.</p>
+<p>By default, IKOS performs an inter-procedural analysis. Use <code>--proc=intra</code> to perform an intra-procedural analysis.</p>
+<h3 id="Fixpoint-engine-parameters"><a href="#Fixpoint-engine-parameters" class="headerlink" title="Fixpoint engine parameters"></a>Fixpoint engine parameters</h3><p>The analyzer uses the theory of Abstract Interpretation to compute a fixpoint of the semantic of the program. The fixpoint engine can be tuned using several parameters.</p>
+<p>When visiting a loop, the engine will first compute a fixed number of iterations, then use a widening strategy periodically to approximate the behavior of the loop, until convergence.</p>
+<p>The fixed number of iterations performed before the widening strategy can be set using <code>--widening-delay</code>. By default, it is 1.</p>
+<p>The period of the widening strategy can be set using <code>--widening-period</code>. By default, it is 1, thus the widening strategy is always applied.</p>
+<p>The widening strategy can be set using <code>--widening-strategy=</code>:</p>
+<ul>
+<li><strong>widen</strong>: Use the widening operator to approximate the behavior of the loop (default)</li>
+<li><strong>join</strong>: Use the join operator, effectively computing all iterations (very slow)</li>
+</ul>
+<p>After reaching a fixpoint, the engine will perform extra iterations to regain precision using a narrowing strategy, until convergence.</p>
+<p>The narrowing strategy can be set using <code>--narrowing-strategy=</code>:</p>
+<ul>
+<li><strong>narrow</strong>: Use the narrowing operator, ensuring a fast convergence</li>
+<li><strong>meet</strong>: Use the meet operator, convergence can be slow</li>
+<li><strong>auto</strong>: Use the narrowing operator if available for the numerical abstract domain. Otherwise, perform 2 iterations using the meet operator (default)</li>
+</ul>
+<p>You can specify a fixed number of narrowing iterations to perform using <code>--narrowing-iterations</code>.</p>
+<p>You can specify the widening delay for a given function using <code>--widening-delay-functions</code>. For instance, <code>--widening-delay-functions=&quot;main:10, f:32&quot;</code>.</p>
+<h3 id="Partitioning"><a href="#Partitioning" class="headerlink" title="Partitioning"></a>Partitioning</h3><p>The analyzer can use abstract domain partitioning based on integer variables using the <code>--partitioning</code> option.</p>
+<p>Using <code>--partitioning=return</code>, the analyzer will split the states at the end of a function according to the function return codes.</p>
+<p>This can be used to improve the precision of the analysis on the following code pattern:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">init</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> status = xxx();</span><br><span class="line">    <span class="keyword">if</span> (status &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">// Error in xxx</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    status = yyy();</span><br><span class="line">    <span class="keyword">if</span> (status &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-2</span>; <span class="comment">// Error in yyy</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    zzz();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// Success</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Instead of performing the abstract union and lose precision, the analyzer will keep 3 invariants for each outcome of the <code>init</code> function.</p>
+<p>Using <code>--partitioning=manual</code>, the analyzer will split the states according to the values of a given integer variable, set with <code>__ikos_partitioning_var_int(x)</code>.</p>
+<p>By default, partitioning is disabled.</p>
+<h3 id="Hardware-addresses"><a href="#Hardware-addresses" class="headerlink" title="Hardware addresses"></a>Hardware addresses</h3><p>In C code for embedded systems, it is usual to read or write at specific addresses to communicate with the hardware. By default, IKOS treats memory accesses at specific addresses as errors.</p>
+<p>You can provide the <code>--hardware-addresses</code> parameter to specify a range of valid memory addresses:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ikos --hardware-addresses=0x20-0x40 project.bc</span><br></pre></td></tr></table></figure>
+
+<p>During the analysis, IKOS will assume that memory accesses in the range <code>[0x20, 0x40]</code> (in bytes, inclusive) are safe.</p>
+<h3 id="Other-analysis-options"><a href="#Other-analysis-options" class="headerlink" title="Other analysis options"></a>Other analysis options</h3><ul>
+<li><code>--globals-init</code>: use the given strategy for initialization of global variables.</li>
+<li><code>--no-init-globals</code>: disable global variable initialization for the given entry points.</li>
+<li><code>--no-liveness</code>: disable the liveness analysis.</li>
+<li><code>--no-pointer</code>: disable the pointer analysis.</li>
+<li><code>--no-widening-hints</code>: disable the detection of widening hints.</li>
+<li><code>--no-fixpoint-cache</code>: disable the cache of fixpoint for called functions.</li>
+<li><code>--no-checks</code>: disable all the checks</li>
+<li><code>--argc</code>: specify the value of <code>argc</code> for the analysis.</li>
+<li><code>--no-libc</code>: do not use libc intrinsics. Useful for bare metal programming.</li>
+</ul>
+<p>See <code>ikos --help</code> for more information.</p>
+<h2 id="Report-Options"><a href="#Report-Options" class="headerlink" title="Report Options"></a>Report Options</h2><p>This section describes the most relevant report options supported by <code>ikos</code> and <code>ikos-report</code>.</p>
+<h3 id="Format"><a href="#Format" class="headerlink" title="Format"></a>Format</h3><p>You can specify the format of the report using the <code>--format</code> (or <code>-f</code>) parameter.</p>
+<p>Available formats are:</p>
+<ul>
+<li><strong>text</strong>: Text format, convenient for the terminal;</li>
+<li><strong>csv</strong>: CSV format, convenient for spreadsheet import;</li>
+<li><strong>json</strong>: JSON format, convenient for developers.</li>
+<li><strong>web</strong>: Web interface, using ikos-view.</li>
+<li><strong>no</strong>: Disable the report.</li>
+</ul>
+<p>By default, if the report has less than 15 entries, it will be printed out using the text format.</p>
+<p>We recommend to use <a href="#examine-a-report-with-ikos-view">ikos-view</a> to examine reports of large projects.</p>
+<h3 id="File"><a href="#File" class="headerlink" title="File"></a>File</h3><p>By default, the report is generated on the standard output. You can write it into a file using <code>--report-file=/path/to/report</code></p>
+<h3 id="Status-Filter"><a href="#Status-Filter" class="headerlink" title="Status Filter"></a>Status Filter</h3><p>Use <code>--status-filter</code> to filter unwanted checks.</p>
+<p>Possible values are: <strong>error</strong>, <strong>warning</strong>, <strong>safe</strong>, <strong>unreachable</strong>.</p>
+<p>Note that you can use the wildcard character <code>*</code>, <code>+</code> and <code>-</code>.</p>
+<h3 id="Analysis-Filter"><a href="#Analysis-Filter" class="headerlink" title="Analysis Filter"></a>Analysis Filter</h3><p>Use <code>--analyses-filter</code> to filter unwanted checks.</p>
+<p>Possible values are described in <a href="#checks">Checks</a>.</p>
+<p>Note that you can use the wildcard character <code>*</code>, <code>+</code> and <code>-</code>. For instance:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ikos-report --analyses-filter=&#x27;*,-boa&#x27; output.db</span><br></pre></td></tr></table></figure>
+
+<p>This will generate a report with all the checks, except buffer overflows.</p>
+<h3 id="Verbosity"><a href="#Verbosity" class="headerlink" title="Verbosity"></a>Verbosity</h3><p>Use <code>--report-verbosity [1-4]</code> to specify the verbosity. A verbosity of one will give you very short messages, where a verbosity of 4 will provide you with all the information the analyzer has.</p>
+<h4 id="Other-report-options"><a href="#Other-report-options" class="headerlink" title="Other report options"></a>Other report options</h4><p>See <code>ikos-report --help</code> for more information.</p>
+<h2 id="APRON-Support"><a href="#APRON-Support" class="headerlink" title="APRON Support"></a>APRON Support</h2><p><a target="_blank" rel="noopener" href="http://apron.cri.ensmp.fr/library/">APRON</a> is a C library for static analysis using Abstract Interpretation. It implements several complex abstract domains, such as the Polyhedra domain.</p>
+<p>IKOS provides a wrapper for APRON, allowing you to use any APRON abstract domain in the analyzer.</p>
+<p>To use APRON, first download, build and install it. Consider using the svn trunk. You will also need to build APRON with <a target="_blank" rel="noopener" href="http://bugseng.com/products/ppl/">Parma Polyhedra Library</a> enabled. Set <code>HAS_PPL = 1</code> and define <code>PPL_PREFIX</code> in your <code>Makefile.config</code></p>
+<p>Now, to build IKOS with APRON support, just provide the option <code>-DAPRON_ROOT=/path/to/apron-install</code> when running cmake. For instance:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cmake \</span><br><span class="line">    -DCMAKE_INSTALL_PREFIX=/path/to/ikos-install \</span><br><span class="line">    -DAPRON_ROOT=/path/to/apron-install \</span><br><span class="line">    ..</span><br></pre></td></tr></table></figure>
+
+<p>See <a href="#numerical-abstract-domains">Numerical abstract domains</a> for the list of numerical abstract domains.</p>
+<h2 id="Analysis-Assumptions"><a href="#Analysis-Assumptions" class="headerlink" title="Analysis Assumptions"></a>Analysis Assumptions</h2><p>This section describes the assumptions made by the analyzer about the code.</p>
+<p>First, the analyzed code is compiled with the <strong>Clang</strong> compiler using the host target. Thus, Clang is responsible for specifying the data model (size of types), the data layout (alignments), the endianness, the signedness of <code>char</code>, the semantic of floating points, etc. depending on the host target. The analyzer uses the generated LLVM bitcode from Clang. This means that you can get different results depending on your host target.</p>
+<p>During the analysis, the analyzer will make the following assumptions:</p>
+<ul>
+<li>The program is single-threaded.</li>
+<li>The program does not receive signals.</li>
+<li>The program does not receive interrupts.</li>
+<li>Extern functions (without implementation) do not update global variables.</li>
+<li>Extern functions can write on their pointer parameters, but only with one level of indirection:<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">void</span> <span class="title function_">f</span><span class="params">(<span class="type">int</span>** p)</span>; <span class="comment">// Assume to write on *p but not **p</span></span><br></pre></td></tr></table></figure></li>
+<li>Extern functions do not call user-defined functions (no callbacks).</li>
+<li>Extern functions can throw exceptions.</li>
+<li>Extern functions return well-initialized values.</li>
+<li>Recursive function calls can update any value in memory.</li>
+<li>Recursive function calls can throw exceptions.</li>
+<li>Recursive function calls return well-initialized values.</li>
+<li>Assembly codes are treated as extern function calls.</li>
+<li>C standard library functions do not throw exceptions.</li>
+</ul>
+<h2 id="Analyze-an-embedded-software-requiring-a-cross-compiler"><a href="#Analyze-an-embedded-software-requiring-a-cross-compiler" class="headerlink" title="Analyze an embedded software requiring a cross-compiler"></a>Analyze an embedded software requiring a cross-compiler</h2><p>Running the analyzer on an embedded software that requires a cross-compiler can be challenging.</p>
+<p>You should try to use <a href="#analyze-a-whole-project-with-ikos-scan">ikos-scan</a> first, but this will probably fail with compiler errors.</p>
+<p>To solve this issue, you will need to create an alternative build file that compiles everything to LLVM bitcode. For instance, if you use <code>make</code>, you could create <code>Makefile.llvm</code> based on <code>Makefile</code>.</p>
+<p>In the alternative build file:</p>
+<ul>
+<li>Locate the build rules that generate intermediate object files (<code>.o</code>).</li>
+<li>In these rules, add the flag <code>-save-temps=obj</code> to the cross-compiler commands. This will generate a preprocessed file <code>.i</code> in addition to the <code>.o</code>.</li>
+<li>At the end of these rules, add a command to compile the preprocessed file <code>.i</code> to LLVM bitcode <code>.bc</code> using: <code>clang -c -emit-llvm -D_FORTIFY_SOURCE=0 -D__IKOS__ -g -O0 -Xclang -disable-O0-optnone &lt;file.i&gt; -o &lt;file.bc&gt;</code>.</li>
+<li>Locate the build rules that link the intermediate object files into binaries or shared libraries.</li>
+<li>At the end of these rules, link the LLVM bitcodes <code>.bc</code> together using <code>llvm-link</code>.</li>
+</ul>
+<p>For instance, in <code>Makefile.llvm</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">%.o: %.c</span><br><span class="line">	$(CC) -c $(CPPFLAGS) $(CFLAGS) -save-temps=obj $&lt; -o $@</span><br><span class="line">	clang -c -emit-llvm -D_FORTIFY_SOURCE=0 -D__IKOS__ -g -O0 -Xclang -disable-O0-optnone $(subst .o,.i,$@) -o $(subst .o,.bc,$@)</span><br><span class="line"></span><br><span class="line">program: a.o b.o</span><br><span class="line">	$(CC) $(CPPFLAGS) $(CFLAGS) a.o b.o -o $@</span><br><span class="line">	llvm-link a.bc b.bc -o $@.bc</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">	rm -f *.o *.i *.s *.bc</span><br></pre></td></tr></table></figure>
+
+<p>Then, run your build tool using the alternative build file to generate the LLVM bitcode (e.g, <code>make -f Makefile.llvm</code>).</p>
+<p>You can finally analyze your program by running ikos on the generated LLVM bitcode file (e.g, <code>ikos program.bc</code>).</p>
+<h2 id="Model-library-functions-to-reduce-warnings"><a href="#Model-library-functions-to-reduce-warnings" class="headerlink" title="Model library functions to reduce warnings"></a>Model library functions to reduce warnings</h2><p>The analyzer doesn’t require the libraries used by your program. It will consider library functions as unknown extern functions and make some <a href="#analysis-assumptions">assumptions</a> about them.</p>
+<p>The analyzer will produce a warning for each call to an unknown function. You can use <code>ikos-report --analyses-filter=sound output.db</code> to list these warnings, or filter the “ignored call side effect” in ikos-view.</p>
+<p>You can model library functions to improve the precision of the analysis and reduce the number of warnings. To model a library function, simply write a small implementation for it and link it in your program. This is usually called a “stub”.</p>
+<p>For instance, a stub for <code>fgets</code> could be:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ikos/analyzer/intrinsic.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span>* <span class="title function_">fgets</span><span class="params">(<span class="type">char</span>* <span class="keyword">restrict</span> str, <span class="type">int</span> size, FILE* <span class="keyword">restrict</span> stream)</span> &#123;</span><br><span class="line">    __ikos_assert(size &gt;= <span class="number">0</span>);</span><br><span class="line">    __ikos_forget_mem(stream, <span class="keyword">sizeof</span>(FILE));</span><br><span class="line">    __ikos_abstract_mem(str, size);</span><br><span class="line">    <span class="keyword">return</span> __ikos_nondet_int() ? str : <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The analyzer provides helper functions to implement these stubs, see <a href="include/ikos/analyzer/intrinsic.h">include&#x2F;ikos&#x2F;analyzer&#x2F;intrinsic.h</a></p>
+<p>Note that most functions of the C standard library are already modeled, but not all of them.</p>
+<h2 id="Overview-of-the-source-code"><a href="#Overview-of-the-source-code" class="headerlink" title="Overview of the source code"></a>Overview of the source code</h2><p>The following illustrates the directory structure of this folder:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── doc</span><br><span class="line">│   └── doxygen</span><br><span class="line">│       └── latex</span><br><span class="line">├── include</span><br><span class="line">│   └── ikos</span><br><span class="line">│       └── analyzer</span><br><span class="line">│           ├── analysis</span><br><span class="line">│           │   ├── execution_engine</span><br><span class="line">│           │   ├── pointer</span><br><span class="line">│           │   └── value</span><br><span class="line">│           ├── checker</span><br><span class="line">│           ├── database</span><br><span class="line">│           │   └── table</span><br><span class="line">│           ├── json</span><br><span class="line">│           ├── support</span><br><span class="line">│           └── util</span><br><span class="line">├── python</span><br><span class="line">│   └── ikos</span><br><span class="line">│       └── view</span><br><span class="line">│           ├── static</span><br><span class="line">│           │   ├── css</span><br><span class="line">│           │   └── js</span><br><span class="line">│           └── template</span><br><span class="line">├── script</span><br><span class="line">├── src</span><br><span class="line">│   ├── analysis</span><br><span class="line">│   │   ├── pointer</span><br><span class="line">│   │   └── value</span><br><span class="line">│   │       └── machine_int_domain</span><br><span class="line">│   ├── checker</span><br><span class="line">│   ├── database</span><br><span class="line">│   │   └── table</span><br><span class="line">│   ├── json</span><br><span class="line">│   └── util</span><br><span class="line">└── test</span><br><span class="line">    └── regression</span><br></pre></td></tr></table></figure>
+
+<h4 id="doc-x2F"><a href="#doc-x2F" class="headerlink" title="doc&#x2F;"></a>doc&#x2F;</h4><p>Contains Doxygen files.</p>
+<h4 id="include-x2F"><a href="#include-x2F" class="headerlink" title="include&#x2F;"></a>include&#x2F;</h4><ul>
+<li><a href="include/ikos/analyzer/intrinsic.h">include&#x2F;ikos&#x2F;analyzer&#x2F;intrinsic.h</a> contains definition of IKOS intrinsics that can be used in analyzed source code.</li>
+</ul>
+<h5 id="include-x2F-ikos-x2F-analyzer-x2F-analysis"><a href="#include-x2F-ikos-x2F-analyzer-x2F-analysis" class="headerlink" title="include&#x2F;ikos&#x2F;analyzer&#x2F;analysis"></a>include&#x2F;ikos&#x2F;analyzer&#x2F;analysis</h5><ul>
+<li><p><a href="include/ikos/analyzer/analysis/call_context.hpp">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;call_context.hpp</a> contains definition of a call context and the call context factory.</p>
+</li>
+<li><p><a href="include/ikos/analyzer/analysis/context.hpp">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;context.hpp</a> contains definition of the global context of the analyzer.</p>
+</li>
+<li><p><a href="include/ikos/analyzer/analysis/literal.hpp">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;literal.hpp</a> contains definition of the literal factory. It converts an AR operand to an AR-independent format.</p>
+</li>
+<li><p><a href="include/ikos/analyzer/analysis/liveness.hpp">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;liveness.hpp</a> contains definition of the liveness analysis. It computes the set of live and dead variables for all functions.</p>
+</li>
+<li><p><a href="include/ikos/analyzer/analysis/memory_location.hpp">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;memory_location.hpp</a> contains definition of symbolic memory locations (global, stack, heap-allocated, etc), and the memory location factory.</p>
+</li>
+<li><p><a href="include/ikos/analyzer/analysis/option.hpp">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;option.hpp</a> contains definition of analysis options.</p>
+</li>
+<li><p><a href="include/ikos/analyzer/analysis/variable.hpp">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;variable.hpp</a> contains definition of variables (local, global, etc), and the variable factory.</p>
+</li>
+</ul>
+<h5 id="include-x2F-ikos-x2F-analyzer-x2F-analysis-x2F-execution-engine"><a href="#include-x2F-ikos-x2F-analyzer-x2F-analysis-x2F-execution-engine" class="headerlink" title="include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;execution_engine"></a>include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;execution_engine</h5><ul>
+<li><p><a href="include/ikos/analyzer/analysis/execution_engine/context_insensitive.hpp">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;execution_engine&#x2F;context_insensitive.hpp</a> contains definition of <code>ContextInsensitiveCallExecutionEngine</code>, a call execution engine for context-insensitive analyses.</p>
+</li>
+<li><p><a href="include/ikos/analyzer/analysis/execution_engine/engine.hpp">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;execution_engine&#x2F;engine.hpp</a> contains definition of base classes for execution engines. It defines an API to execute AR statements.</p>
+</li>
+<li><p><a href="include/ikos/analyzer/analysis/execution_engine/inliner.hpp">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;execution_engine&#x2F;inliner.hpp</a> contains definition of <code>InlineCallExecutionEngine</code>, a call execution engine performing dynamic inlining.</p>
+</li>
+<li><p><a href="include/ikos/analyzer/analysis/execution_engine/numerical.hpp">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;execution_engine&#x2F;numerical.hpp</a> contains definition of <code>NumericalExecutionEngine</code>, the main execution engine of the analyzer. It executes AR statements on an abstract domain.</p>
+</li>
+</ul>
+<h5 id="include-x2F-ikos-x2F-analyzer-x2F-analysis-x2F-pointer"><a href="#include-x2F-ikos-x2F-analyzer-x2F-analysis-x2F-pointer" class="headerlink" title="include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;pointer"></a>include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;pointer</h5><ul>
+<li><p><a href="include/ikos/analyzer/analysis/pointer/constraint.hpp">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;pointer&#x2F;constraint.hpp</a> contains definition of <code>PointerConstraintsGenerator</code>, a generator of pointer constraints given an AR function or global variable.</p>
+</li>
+<li><p><a href="include/ikos/analyzer/analysis/pointer/function.hpp">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;pointer&#x2F;function.hpp</a> contains definition of a function pointer analysis.</p>
+</li>
+<li><p><a href="include/ikos/analyzer/analysis/pointer/pointer.hpp">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;pointer&#x2F;pointer.hpp</a> contains definition of a pointer analysis.</p>
+</li>
+</ul>
+<h5 id="include-x2F-ikos-x2F-analyzer-x2F-analysis-x2F-value"><a href="#include-x2F-ikos-x2F-analyzer-x2F-analysis-x2F-value" class="headerlink" title="include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;value"></a>include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;value</h5><ul>
+<li><p><a href="include/ikos/analyzer/analysis/value/abstract_domain.hpp">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;value&#x2F;abstract_domain.hpp</a> contains definition the abstract domain used during the value analysis.</p>
+</li>
+<li><p><a href="include/ikos/analyzer/analysis/value/interprocedural.hpp">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;value&#x2F;interprocedural.hpp</a> contains definition the interprocedural value analysis.</p>
+</li>
+<li><p><a href="include/ikos/analyzer/analysis/value/intraprocedural.hpp">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;value&#x2F;intraprocedural.hpp</a> contains definition the intraprocedural value analysis.</p>
+</li>
+<li><p><a href="include/ikos/analyzer/analysis/value/machine_int_domain.hpp">include&#x2F;ikos&#x2F;analyzer&#x2F;analysis&#x2F;value&#x2F;machine_int_domain.hpp</a> contains definition the machine integer abstract domain used during the value analysis.</p>
+</li>
+</ul>
+<h5 id="include-x2F-ikos-x2F-analyzer-x2F-checker"><a href="#include-x2F-ikos-x2F-analyzer-x2F-checker" class="headerlink" title="include&#x2F;ikos&#x2F;analyzer&#x2F;checker"></a>include&#x2F;ikos&#x2F;analyzer&#x2F;checker</h5><p>Contains definition of the different checks on the code (buffer overflow, division by zero, etc.), given the result of an analysis.</p>
+<h5 id="include-x2F-ikos-x2F-analyzer-x2F-database-x2F-table"><a href="#include-x2F-ikos-x2F-analyzer-x2F-database-x2F-table" class="headerlink" title="include&#x2F;ikos&#x2F;analyzer&#x2F;database&#x2F;table"></a>include&#x2F;ikos&#x2F;analyzer&#x2F;database&#x2F;table</h5><p>Contains definition of the different output database tables.</p>
+<h5 id="include-x2F-ikos-x2F-analyzer-x2F-json"><a href="#include-x2F-ikos-x2F-analyzer-x2F-json" class="headerlink" title="include&#x2F;ikos&#x2F;analyzer&#x2F;json"></a>include&#x2F;ikos&#x2F;analyzer&#x2F;json</h5><p>Contains definition of a JSON library.</p>
+<h5 id="include-x2F-ikos-x2F-analyzer-x2F-support"><a href="#include-x2F-ikos-x2F-analyzer-x2F-support" class="headerlink" title="include&#x2F;ikos&#x2F;analyzer&#x2F;support"></a>include&#x2F;ikos&#x2F;analyzer&#x2F;support</h5><p>Contains various helpers, e.g, assertions.</p>
+<h5 id="include-x2F-ikos-x2F-analyzer-x2F-util"><a href="#include-x2F-ikos-x2F-analyzer-x2F-util" class="headerlink" title="include&#x2F;ikos&#x2F;analyzer&#x2F;util"></a>include&#x2F;ikos&#x2F;analyzer&#x2F;util</h5><p>Contains definition of utilities for the analyzer, e.g, logging, colors, timers, etc.</p>
+<h4 id="python-x2F"><a href="#python-x2F" class="headerlink" title="python&#x2F;"></a>python&#x2F;</h4><ul>
+<li><p><a href="python/ikos/analyzer.py">python&#x2F;ikos&#x2F;analyzer.py</a> contains implementation of the <code>ikos</code> command line tool.</p>
+</li>
+<li><p><a href="python/ikos/report.py">python&#x2F;ikos&#x2F;report.py</a> contains implementation of the <code>ikos-report</code> command line tool.</p>
+</li>
+<li><p><a href="python/ikos/settings.py.in">python&#x2F;ikos&#x2F;settings.py.in</a> contains implementation of the <code>ikos-config</code> command line tool.</p>
+</li>
+<li><p><a href="python/ikos/view.py">python&#x2F;ikos&#x2F;view.py</a> contains implementation of the <code>ikos-view</code> command line tool.</p>
+</li>
+</ul>
+<h5 id="python-x2F-ikos-x2F-analyzer-x2F-view"><a href="#python-x2F-ikos-x2F-analyzer-x2F-view" class="headerlink" title="python&#x2F;ikos&#x2F;analyzer&#x2F;view"></a>python&#x2F;ikos&#x2F;analyzer&#x2F;view</h5><p>Contains the web resources for ikos-view. It includes HTML, CSS and JS code.</p>
+<h4 id="script-x2F"><a href="#script-x2F" class="headerlink" title="script&#x2F;"></a>script&#x2F;</h4><p>Contains python entry points for the command line tools.</p>
+<h4 id="src-x2F"><a href="#src-x2F" class="headerlink" title="src&#x2F;"></a>src&#x2F;</h4><p>Contains implementation files, following the structure of <code>include/ikos/analyzer</code>.</p>
+<ul>
+<li><a href="src/ikos_analyzer.cpp">src&#x2F;ikos_analyzer.cpp</a> contains the implementation of <code>ikos-analyzer</code>. This is the entry point for all analyses.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ikos/" rel="tag"># ikos</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/09/05/2023%E5%B9%B49%E6%9C%88/" rel="prev" title="2023-9-5">
+                  <i class="fa fa-chevron-left"></i> 2023-9-5
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zoush99</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Word count total: </span>
+    <span title="Word count total">35k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">1:04</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
