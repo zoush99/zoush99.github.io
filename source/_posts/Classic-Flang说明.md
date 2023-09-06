@@ -90,6 +90,8 @@ sudo make install
 
 之后所作更改时（Flang和IKOS各自）应该记住这点，因为所使用的llvm版本相同但内容不同，且不冲突。
 
+安装完成后，我还需要将编译得到的一些动态或静态库复制到系统默认查询位置中`/usr/lib`或`/usr/local`。这样才算完全没问题。
+
 ## 使用Flang
 
 使用命令：
@@ -163,6 +165,29 @@ llvm-extract --func=foo test.bc -o test-func.bc	# 用test.ll也可以
 ```
 
 一般来说，只用生成汇编文件或位码文件即可，汇编文件用来人为阅读，位码文件直接输入到IKOS中进行分析。
+
+列出Clang的一些命令如下：
+
+```sh
+# 1. .c -> .i
+clang -E -c test.c -o test.i
+# 2. .c -> .bc
+clang -emit-llvm test.c -c -o test.bc
+# 3. .c -> .ll
+clang -emit-llvm test.c -S -o test.ll
+# 4. .i -> .bc
+clang -emit-llvm test.i -c -o test.bc
+# 5. .i -> .ll
+clang -emit-llvm test.i -S -o test.ll
+# 6. .bc -> .ll
+llvm-dis test.bc -o test.ll
+# 7. .ll -> .bc
+llvm-as test.ll -o test.bc
+# 8. 多 bc 合并为一个 bc
+llvm-link test1.bc test2.bc -o test.bc
+```
+
+![img](/paper_source/Classic-Flang说明/Center.jpg)
 
 ## Flang转换成.ll的结果
 
