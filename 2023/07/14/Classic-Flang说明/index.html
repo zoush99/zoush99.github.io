@@ -29,8 +29,9 @@
 <meta property="og:description" content="Flang的使用情况">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://zoush99.github.io/paper_source/Classic-Flang%E8%AF%B4%E6%98%8E/%E5%AE%89%E8%A3%85Flang.jpg">
+<meta property="og:image" content="https://zoush99.github.io/paper_source/Classic-Flang%E8%AF%B4%E6%98%8E/Center.jpg">
 <meta property="article:published_time" content="2023-07-14T02:38:24.000Z">
-<meta property="article:modified_time" content="2023-07-19T14:05:06.802Z">
+<meta property="article:modified_time" content="2023-09-06T02:10:46.030Z">
 <meta property="article:author" content="zoush99">
 <meta property="article:tag" content="project">
 <meta property="article:tag" content="Flang">
@@ -165,7 +166,7 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -241,7 +242,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-19 22:05:06" itemprop="dateModified" datetime="2023-07-19T22:05:06+08:00">2023-07-19</time>
+      <time title="Modified: 2023-09-06 10:10:46" itemprop="dateModified" datetime="2023-09-06T10:10:46+08:00">2023-09-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -267,14 +268,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>6.6k</span>
+      <span>7k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>12 mins.</span>
+      <span>13 mins.</span>
     </span>
 </div>
 
@@ -305,6 +306,7 @@
 
 <p>这样就把Flang安装成功，之后若使用IKOS还需要安装一个14版本的llvm，但二者相互不影响，因为他们针对不同的处理模块。等安装IKOS时需要将原有的（安装Flang所需）Clang从环境变量中移除（加注释），而安装新的llvm从而加入到环境变量中。之后需要编译IKOS时应该使用官方llvm。</p>
 <p>之后所作更改时（Flang和IKOS各自）应该记住这点，因为所使用的llvm版本相同但内容不同，且不冲突。</p>
+<p>安装完成后，我还需要将编译得到的一些动态或静态库复制到系统默认查询位置中<code>/usr/lib</code>或<code>/usr/local</code>。这样才算完全没问题。</p>
 <h2 id="使用Flang"><a href="#使用Flang" class="headerlink" title="使用Flang"></a>使用Flang</h2><p>使用命令：</p>
 <p><code> flang -help</code></p>
 <p>来查找它所接受的命令，Flang本身支持所有的Clang的命令，而且支持针对Fortran特定的命令。</p>
@@ -315,6 +317,10 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">flang -emit-llvm test.f90 -S -c -o test.ll</span><br><span class="line"><span class="comment"># 传统的clang命令生成llvm IR，且是可读版本.ll：汇编文件</span></span><br><span class="line">flang -emit-llvm test.f90 -c -o test.bc</span><br><span class="line"><span class="comment"># 从源码转换成机器码.bc：位码文件</span></span><br><span class="line">llvm-as test.ll -o test.bc</span><br><span class="line"><span class="comment"># 将.ll转换成.bc</span></span><br><span class="line">llvm-dis test.bc -o test.ll</span><br><span class="line"><span class="comment"># 将.bc转换成.ll</span></span><br><span class="line">lli test.bc</span><br><span class="line"><span class="comment"># 直接执行.bc文件</span></span><br><span class="line">llvm-extract --func=foo test.bc -o test-func.bc	<span class="comment"># 用test.ll也可以</span></span><br><span class="line"><span class="comment"># 从位码文件中抽取函数名为foo的函数，除了抽取函数，还可以抽取别名和全局变量</span></span><br></pre></td></tr></table></figure>
 
 <p>一般来说，只用生成汇编文件或位码文件即可，汇编文件用来人为阅读，位码文件直接输入到IKOS中进行分析。</p>
+<p>列出Clang的一些命令如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. .c -&gt; .i</span></span><br><span class="line">clang -E -c test.c -o test.i</span><br><span class="line"><span class="comment"># 2. .c -&gt; .bc</span></span><br><span class="line">clang -emit-llvm test.c -c -o test.bc</span><br><span class="line"><span class="comment"># 3. .c -&gt; .ll</span></span><br><span class="line">clang -emit-llvm test.c -S -o test.ll</span><br><span class="line"><span class="comment"># 4. .i -&gt; .bc</span></span><br><span class="line">clang -emit-llvm test.i -c -o test.bc</span><br><span class="line"><span class="comment"># 5. .i -&gt; .ll</span></span><br><span class="line">clang -emit-llvm test.i -S -o test.ll</span><br><span class="line"><span class="comment"># 6. .bc -&gt; .ll</span></span><br><span class="line">llvm-dis test.bc -o test.ll</span><br><span class="line"><span class="comment"># 7. .ll -&gt; .bc</span></span><br><span class="line">llvm-as test.ll -o test.bc</span><br><span class="line"><span class="comment"># 8. 多 bc 合并为一个 bc</span></span><br><span class="line">llvm-link test1.bc test2.bc -o test.bc</span><br></pre></td></tr></table></figure>
+
+<p><img src="/paper_source/Classic-Flang%E8%AF%B4%E6%98%8E/Center.jpg" alt="img"></p>
 <h2 id="Flang转换成-ll的结果"><a href="#Flang转换成-ll的结果" class="headerlink" title="Flang转换成.ll的结果"></a>Flang转换成.ll的结果</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">source_filename = <span class="string">&quot;/path/to/source.c&quot;</span></span><br><span class="line"><span class="comment"># 这里描述了源文件的名称和所在路径</span></span><br><span class="line">target datalayout = <span class="string">&quot;layout specification&quot;</span></span><br><span class="line"><span class="comment"># 这里描述了目标机器中数据的内存布局方式，包括字节序、类型以及对齐方式</span></span><br><span class="line"><span class="comment"># 这个参数对理解LLVM关系不大</span></span><br><span class="line">target triple = <span class="string">&quot;ARCHITECTURE-VENDOR-OPERATIONG_SYSTEM&quot;</span></span><br><span class="line">target triple = <span class="string">&quot;ARCHITECTURE-VENDOR-OPERATING_SYSTEM-ENVIRONMENT&quot;</span></span><br><span class="line"><span class="comment"># 描述了目标机器是什么，从而指示后端生成相应的目标代码</span></span><br><span class="line">Identifiers</span><br><span class="line"><span class="comment"># 标识符分为：全局标识符和局部标识符。全局标识符以@开头，如全局函数、全局变量。局部标识符以%开头，类似于汇编语言中的寄存器</span></span><br><span class="line"><span class="comment"># 标识符有3种形式：</span></span><br><span class="line"><span class="comment">## 有名称的值，表示带有前缀（@或%）的字符串。如：%Val, @name</span></span><br><span class="line"><span class="comment">## 无名称的值，表示带前缀（@或%）的无符号数值。如%0, %1, @2</span></span><br><span class="line"><span class="comment">## 常量</span></span><br><span class="line">Functions</span><br><span class="line"><span class="comment"># define用于定义一个函数</span></span><br><span class="line">define [linkage] [PreemptionSpecifier] [visibility] [DLLStorageClass]</span><br><span class="line">       [cconv] [ret attrs]</span><br><span class="line">       &lt;ResultType&gt; @&lt;FunctionName&gt; ([argument list])</span><br><span class="line">       [(unnamed_addr|local_unnamed_addr)] [AddrSpace] [fn Attrs]</span><br><span class="line">       [section <span class="string">&quot;name&quot;</span>] [comdat [(<span class="variable">$name</span>)]] [align N] [gc] [prefix Constant]</span><br><span class="line">       [prologue Constant] [personality Constant] (!name !N)* &#123; ... &#125;</span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">define dso_local void @foo(i32 %x) <span class="comment">#0 &#123;</span></span><br><span class="line">  ; 省略 ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># define void @foo(i32 %x) &#123; ... &#125;，表示定义一个函数。其函数名称为foo，返回值的数据类型为void，参数（用%x表示）的数据类型为 i32（占用4字节的整型）</span></span><br><span class="line"><span class="comment"># #0，用于修饰函数时表示一组函数属性。这些属性定义在文件末尾</span></span><br><span class="line">  7 define weak dso_local void @foo(i32 %x) <span class="comment">#0 &#123;</span></span><br><span class="line">  8 entry:</span><br><span class="line">  9   %x.addr = alloca i32, align 4</span><br><span class="line"> 10   %y = alloca i32, align 4</span><br><span class="line"> 11   %z = alloca i32, align 4</span><br><span class="line"> 12   store i32 %x, i32* %x.addr, align 4</span><br><span class="line"> 13   %0 = load i32, i32* %x.addr, align 4</span><br><span class="line"> 14   %cmp = icmp eq i32 %0, 0</span><br><span class="line"> 15   br i1 %cmp, label %if.then, label %if.end</span><br><span class="line"> 16 </span><br><span class="line"> 17 if.then:                                          ; preds = %entry</span><br><span class="line"> 18   store i32 5, i32* %y, align 4</span><br><span class="line"> 19   br label %if.end</span><br><span class="line"> 20 </span><br><span class="line"> 21 if.end:                                           ; preds = %if.then, %entry</span><br><span class="line"> 22   %1 = load i32, i32* %x.addr, align 4</span><br><span class="line"> 23   %tobool = icmp ne i32 %1, 0</span><br><span class="line"> 24   br i1 %tobool, label %if.end2, label %if.then1</span><br><span class="line"> 25 </span><br><span class="line"> 26 if.then1:                                         ; preds = %if.end</span><br><span class="line"> 27   store i32 6, i32* %z, align 4</span><br><span class="line"> 28   br label %if.end2</span><br><span class="line"> 29 </span><br><span class="line"> 30 if.end2:                                          ; preds = %if.then1, %if.end</span><br><span class="line"> 31   ret void</span><br><span class="line"> 32 &#125;</span><br><span class="line"><span class="comment"># LLVM IR中，函数体是由基本块构成的。基本块是由一系列顺序执行的语句构成的，并（可选地）以标签作为起始。不同的标签代表不同的基本块</span></span><br><span class="line"><span class="comment"># 基本块的特点如下：</span></span><br><span class="line"><span class="comment">## 仅有一个入口，即基本块中的第一条指令</span></span><br><span class="line"><span class="comment">## 仅有一个出口，即基本块中的最后一条指令（被称为terminator instruction）。该指令要么跳转到其他基本块（不包括入口基本块），要买从函数返回</span></span><br><span class="line"><span class="comment">## 函数体中第一个出现的基本块，称为入口基本块（Entry Basic Block）。它是一个特殊的基本块，在进入函数时立即执行该基本块，并且不允许作为其他基本块的跳转目标（即不允许该基本块有前继结点）</span></span><br></pre></td></tr></table></figure>
 
 
@@ -374,14 +380,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Word count total: </span>
-    <span title="Word count total">35k</span>
+    <span title="Word count total">36k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">1:04</span>
+    <span title="Reading time total">1:06</span>
   </span>
 </div>
 <div class="busuanzi-count">
