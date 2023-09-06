@@ -21,29 +21,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zoush99.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="将Clion作为编程工具">
+    <meta name="description" content="IKOS LLVM Frontend">
 <meta property="og:type" content="article">
-<meta property="og:title" content="clion的使用">
-<meta property="og:url" content="https://zoush99.github.io/2023/09/05/clion%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="LLVMIR2AR">
+<meta property="og:url" content="https://zoush99.github.io/2023/09/06/LLVMIR2AR%E6%96%87%E6%A1%A3/index.html">
 <meta property="og:site_name" content="zoush99&#39;s blog">
-<meta property="og:description" content="将Clion作为编程工具">
+<meta property="og:description" content="IKOS LLVM Frontend">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-09-05T07:29:16.000Z">
-<meta property="article:modified_time" content="2023-09-05T08:43:47.895Z">
+<meta property="article:published_time" content="2023-09-06T08:34:22.000Z">
+<meta property="article:modified_time" content="2023-09-06T12:02:29.184Z">
 <meta property="article:author" content="zoush99">
-<meta property="article:tag" content="IKOS">
-<meta property="article:tag" content="Project">
+<meta property="article:tag" content="ikos">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://zoush99.github.io/2023/09/05/clion%E7%9A%84%E4%BD%BF%E7%94%A8/">
+<link rel="canonical" href="https://zoush99.github.io/2023/09/06/LLVMIR2AR%E6%96%87%E6%A1%A3/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zoush99.github.io/2023/09/05/clion%E7%9A%84%E4%BD%BF%E7%94%A8/","path":"2023/09/05/clion的使用/","title":"clion的使用"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://zoush99.github.io/2023/09/06/LLVMIR2AR%E6%96%87%E6%A1%A3/","path":"2023/09/06/LLVMIR2AR文档/","title":"LLVMIR2AR"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>clion的使用 | zoush99's blog</title>
+<title>LLVMIR2AR | zoush99's blog</title>
   
 
 
@@ -142,7 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86Clion%E4%BD%9C%E4%B8%BA%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7"><span class="nav-number">1.</span> <span class="nav-text">将Clion作为编程工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">1.1.</span> <span class="nav-text">快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%AD%E7%82%B9%E8%B0%83%E8%AF%95"><span class="nav-number">1.2.</span> <span class="nav-text">断点调试</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IKOS-LLVM-Frontend"><span class="nav-number">1.</span> <span class="nav-text">IKOS LLVM Frontend</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.2.</span> <span class="nav-text">Installation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dependencies"><span class="nav-number">1.2.1.</span> <span class="nav-text">Dependencies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Build-and-Install"><span class="nav-number">1.2.2.</span> <span class="nav-text">Build and Install</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tests"><span class="nav-number">1.2.3.</span> <span class="nav-text">Tests</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Running-the-LLVM-Frontend-Tools"><span class="nav-number">1.3.</span> <span class="nav-text">Running the LLVM Frontend Tools</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lib-x2F-libikos-llvm-to-ar-a"><span class="nav-number">1.3.1.</span> <span class="nav-text">lib&#x2F;libikos-llvm-to-ar.a</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ikos-pp"><span class="nav-number">1.3.2.</span> <span class="nav-text">ikos-pp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ikos-import"><span class="nav-number">1.3.3.</span> <span class="nav-text">ikos-import</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview-of-the-source-code"><span class="nav-number">1.4.</span> <span class="nav-text">Overview of the source code</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#include-x2F"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">include&#x2F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#src-x2F"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">src&#x2F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#test-x2F"><span class="nav-number">1.4.0.3.</span> <span class="nav-text">test&#x2F;</span></a></li></ol></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -203,7 +202,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://zoush99.github.io/2023/09/05/clion%E7%9A%84%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="https://zoush99.github.io/2023/09/06/LLVMIR2AR%E6%96%87%E6%A1%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -216,12 +215,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="clion的使用 | zoush99's blog">
+      <meta itemprop="name" content="LLVMIR2AR | zoush99's blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          clion的使用
+          LLVMIR2AR
         </h1>
 
         <div class="post-meta-container">
@@ -233,7 +232,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2023-09-05 15:29:16 / Modified: 16:43:47" itemprop="dateCreated datePublished" datetime="2023-09-05T15:29:16+08:00">2023-09-05</time>
+      <time title="Created: 2023-09-06 16:34:22 / Modified: 20:02:29" itemprop="dateCreated datePublished" datetime="2023-09-06T16:34:22+08:00">2023-09-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -241,7 +240,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/learn/" itemprop="url" rel="index"><span itemprop="name">learn</span></a>
+          <a href="/categories/ikos/" itemprop="url" rel="index"><span itemprop="name">ikos</span></a>
         </span>
     </span>
 
@@ -259,14 +258,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>663</span>
+      <span>2.3k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
+      <span>4 mins.</span>
     </span>
 </div>
 
@@ -276,41 +275,58 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="将Clion作为编程工具"><a href="#将Clion作为编程工具" class="headerlink" title="将Clion作为编程工具"></a>将Clion作为编程工具</h2><span id="more"></span>
+    <div class="post-body" itemprop="articleBody"><h1 id="IKOS-LLVM-Frontend"><a href="#IKOS-LLVM-Frontend" class="headerlink" title="IKOS LLVM Frontend"></a>IKOS LLVM Frontend</h1><span id="more"></span>
 
-<p>首先将Clion中的一些快捷指令快速记录，以备后续之需。目前的工作主要是将Clion作为C++语言的开发工具，加上在ubuntu上使用十分方便。</p>
-<h3 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h3><ul>
-<li>ALT+1：显示隐藏工程栏</li>
-<li>CTRL+&#x2F;：注释or解注释光标所在行</li>
-<li>CTRL+SHIFT+&#x2F;：注释or解注释选中的多行代码</li>
-<li>在某个函数的上面一行输入&#x2F;**+ENTER：快速生成某种格式的注释（for 大型项目）</li>
-<li>CTRL+D：快速复制光标所在行</li>
-<li>CTRL+X：快速剪切光标所在行</li>
-<li>CTRL+W：实现某个字符、某个字符串、某段代码的扩选（智能扩选）</li>
-<li>ALT+SHIFT+INSERT：按以下此组合建，在选中代码，可以实现多行某段代码的选中</li>
-<li>CTRL+ALT+ “-” or “+” ：展开or折叠光标所在的花括号</li>
-<li>CTRL+SHIFT+ “-” or “+” ：展开or折叠所有花括号</li>
-<li>CTRL+鼠标左键：由函数声明跳转到函数定义 or 由函数定义跳转回函数声明</li>
-<li>CTRL+ALT+R：重新格式化代码</li>
-<li>ALT+ENTER：智能提示代码错误与解决方案</li>
-<li>CTRL+F：匹配查找代码</li>
-<li>CTRL+Z：返回编辑前</li>
-<li>SHIFT+CTRL+Z：返回编辑后信息</li>
-<li>CTRL+F：查找</li>
-<li>CTRL+R：替换</li>
-<li>CTRL+L：向后查找</li>
-<li>CTRL+Shift+L：向前查找</li>
-<li>CTRL+ALT+S：设置</li>
-<li>Shift+F10：运行</li>
-<li>Shift+F9：调试</li>
+<p>This folder contains implementation of the LLVM frontend for IKOS.</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>The LLVM frontend implements:</p>
+<ul>
+<li><code>ikos-pp</code>, a LLVM bitcode pre-processor for static analysis</li>
+<li><code>llvm-to-ar</code>, a library to translate LLVM bitcode to Abstract Representation (AR)</li>
+<li><code>ikos-import</code>, a translator from LLVM bitcode to AR, used for debugging purpose.</li>
 </ul>
-<h3 id="断点调试"><a href="#断点调试" class="headerlink" title="断点调试"></a>断点调试</h3><ul>
-<li>单步运行（不跳转至其他标签，仅在本程序内）</li>
-<li>单步运行（可调转到自己编写的库or头文件）</li>
-<li>单步运行（可强制跳转到第三方库or头文件）</li>
-<li>从第三方库跳回源文件</li>
-<li>监测选中的变量</li>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>IKOS LLVM Frontend contains a C++ library and executables. It can be installed independently from the other components.</p>
+<h3 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h3><p>To build IKOS LLVM Frontend, you will need the following dependencies:</p>
+<ul>
+<li>A C++ compiler that supports C++14 (gcc &gt;&#x3D; 4.9.2 or clang &gt;&#x3D; 3.4)</li>
+<li>CMake &gt;&#x3D; 3.4.3</li>
+<li>GMP &gt;&#x3D; 4.3.1</li>
+<li>Boost &gt;&#x3D; 1.55</li>
+<li>LLVM 14.0.x</li>
+<li>IKOS Core</li>
+<li>IKOS AR</li>
 </ul>
+<h3 id="Build-and-Install"><a href="#Build-and-Install" class="headerlink" title="Build and Install"></a>Build and Install</h3><p>To build and install IKOS LLVM Frontend, run the following commands in the <code>frontend/llvm</code> directory:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir build</span><br><span class="line">$ cd build</span><br><span class="line">$ cmake \</span><br><span class="line">    -DCMAKE_INSTALL_PREFIX=/path/to/frontend-llvm-install-directory \</span><br><span class="line">    -DLLVM_CONFIG_EXECUTABLE=/path/to/llvm/bin/llvm-config \</span><br><span class="line">    -DCORE_ROOT=/path/to/core-install-directory \</span><br><span class="line">    -DAR_ROOT=/path/to/ar-install-directory \</span><br><span class="line">    ..</span><br><span class="line">$ make</span><br><span class="line">$ make install</span><br></pre></td></tr></table></figure>
+
+<h3 id="Tests"><a href="#Tests" class="headerlink" title="Tests"></a>Tests</h3><p>To build and run the tests, simply type:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make check</span><br></pre></td></tr></table></figure>
+
+<h2 id="Running-the-LLVM-Frontend-Tools"><a href="#Running-the-LLVM-Frontend-Tools" class="headerlink" title="Running the LLVM Frontend Tools"></a>Running the LLVM Frontend Tools</h2><h3 id="lib-x2F-libikos-llvm-to-ar-a"><a href="#lib-x2F-libikos-llvm-to-ar-a" class="headerlink" title="lib&#x2F;libikos-llvm-to-ar.a"></a>lib&#x2F;libikos-llvm-to-ar.a</h3><p><code>llvm-to-ar</code> is a library to translate LLVM bitcode to AR, used by the analyzer and <code>ikos-import</code>.</p>
+<h3 id="ikos-pp"><a href="#ikos-pp" class="headerlink" title="ikos-pp"></a>ikos-pp</h3><p><code>ikos-pp</code> is a LLVM bitcode pre-processor for static analysis.</p>
+<p>It is similar to the LLVM <code>opt</code> command, see <a target="_blank" rel="noopener" href="https://llvm.org/docs/CommandGuide/opt.html">https://llvm.org/docs/CommandGuide/opt.html</a></p>
+<p>See <code>ikos-pp -help</code> for more information.</p>
+<h3 id="ikos-import"><a href="#ikos-import" class="headerlink" title="ikos-import"></a>ikos-import</h3><p><code>ikos-import</code> is a translator from LLVM bitcode to AR, used for debugging purpose.</p>
+<p>See <code>ikos-import -help</code> for more information.</p>
+<h2 id="Overview-of-the-source-code"><a href="#Overview-of-the-source-code" class="headerlink" title="Overview of the source code"></a>Overview of the source code</h2><p>The following illustrates the directory structure of this folder:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── include</span><br><span class="line">│   └── ikos</span><br><span class="line">│       └── frontend</span><br><span class="line">│           └── llvm</span><br><span class="line">│               └── import</span><br><span class="line">├── src</span><br><span class="line">│   ├── import</span><br><span class="line">│   └── pass</span><br><span class="line">└── test</span><br><span class="line">    └── regression</span><br><span class="line">        ├── import</span><br><span class="line">        │   ├── aggressive_optimization</span><br><span class="line">        │   ├── basic_optimization</span><br><span class="line">        │   └── no_optimization</span><br><span class="line">        └── pass</span><br><span class="line">            ├── lower_cst_expr</span><br><span class="line">            ├── lower_select</span><br><span class="line">            ├── remove_printf_calls</span><br><span class="line">            └── remove_unreachable_blocks</span><br></pre></td></tr></table></figure>
+
+<h4 id="include-x2F"><a href="#include-x2F" class="headerlink" title="include&#x2F;"></a>include&#x2F;</h4><ul>
+<li><p><a href="include/ikos/frontend/llvm/import">include&#x2F;ikos&#x2F;frontend&#x2F;llvm&#x2F;import</a> contains definition of the translation from LLVM to AR.</p>
+</li>
+<li><p><a href="include/ikos/frontend/llvm/pass.hpp">include&#x2F;ikos&#x2F;frontend&#x2F;llvm&#x2F;pass.hpp</a> contains definition of LLVM passes for helping static analysis.</p>
+</li>
+</ul>
+<h4 id="src-x2F"><a href="#src-x2F" class="headerlink" title="src&#x2F;"></a>src&#x2F;</h4><ul>
+<li><p><a href="src/ikos_import.cpp">src&#x2F;ikos_import.cpp</a> contains implementation of <code>ikos-import</code>.</p>
+</li>
+<li><p><a href="src/ikos_pp.cpp">src&#x2F;ikos_pp.cpp</a> contains implementation of <code>ikos-pp</code>.</p>
+</li>
+<li><p><a href="src/import">src&#x2F;import</a> contains implementation of the translation from LLVM to AR.</p>
+</li>
+<li><p><a href="src/pass">src&#x2F;pass</a> contains implementation of LLVM passes for helping static analysis.</p>
+</li>
+</ul>
+<h4 id="test-x2F"><a href="#test-x2F" class="headerlink" title="test&#x2F;"></a>test&#x2F;</h4><p>Contains regression tests.</p>
 
     </div>
 
@@ -320,21 +336,20 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/IKOS/" rel="tag"># IKOS</a>
-              <a href="/tags/Project/" rel="tag"># Project</a>
+              <a href="/tags/ikos/" rel="tag"># ikos</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/07/14/Classic-Flang%E8%AF%B4%E6%98%8E/" rel="prev" title="Classic-Flang说明">
-                  <i class="fa fa-chevron-left"></i> Classic-Flang说明
+                <a href="/2023/09/05/ikos%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="prev" title="ikos的使用">
+                  <i class="fa fa-chevron-left"></i> ikos的使用
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/09/05/2023%E5%B9%B49%E6%9C%88/" rel="next" title="2023年9月">
-                  2023年9月 <i class="fa fa-chevron-right"></i>
+                <a href="/2023/09/06/%E8%AF%BBIKOS%E6%96%87%E6%A1%A3/" rel="next" title="读IKOS文档">
+                  读IKOS文档 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

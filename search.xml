@@ -141,6 +141,25 @@
 <p><img src="/paper_source/Classic-Flang%E8%AF%B4%E6%98%8E/Center.jpg" alt="img"></p>
 <h2 id="Flang转换成-ll的结果"><a href="#Flang转换成-ll的结果" class="headerlink" title="Flang转换成.ll的结果"></a>Flang转换成.ll的结果</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">source_filename = <span class="string">&quot;/path/to/source.c&quot;</span></span><br><span class="line"><span class="comment"># 这里描述了源文件的名称和所在路径</span></span><br><span class="line">target datalayout = <span class="string">&quot;layout specification&quot;</span></span><br><span class="line"><span class="comment"># 这里描述了目标机器中数据的内存布局方式，包括字节序、类型以及对齐方式</span></span><br><span class="line"><span class="comment"># 这个参数对理解LLVM关系不大</span></span><br><span class="line">target triple = <span class="string">&quot;ARCHITECTURE-VENDOR-OPERATIONG_SYSTEM&quot;</span></span><br><span class="line">target triple = <span class="string">&quot;ARCHITECTURE-VENDOR-OPERATING_SYSTEM-ENVIRONMENT&quot;</span></span><br><span class="line"><span class="comment"># 描述了目标机器是什么，从而指示后端生成相应的目标代码</span></span><br><span class="line">Identifiers</span><br><span class="line"><span class="comment"># 标识符分为：全局标识符和局部标识符。全局标识符以@开头，如全局函数、全局变量。局部标识符以%开头，类似于汇编语言中的寄存器</span></span><br><span class="line"><span class="comment"># 标识符有3种形式：</span></span><br><span class="line"><span class="comment">## 有名称的值，表示带有前缀（@或%）的字符串。如：%Val, @name</span></span><br><span class="line"><span class="comment">## 无名称的值，表示带前缀（@或%）的无符号数值。如%0, %1, @2</span></span><br><span class="line"><span class="comment">## 常量</span></span><br><span class="line">Functions</span><br><span class="line"><span class="comment"># define用于定义一个函数</span></span><br><span class="line">define [linkage] [PreemptionSpecifier] [visibility] [DLLStorageClass]</span><br><span class="line">       [cconv] [ret attrs]</span><br><span class="line">       &lt;ResultType&gt; @&lt;FunctionName&gt; ([argument list])</span><br><span class="line">       [(unnamed_addr|local_unnamed_addr)] [AddrSpace] [fn Attrs]</span><br><span class="line">       [section <span class="string">&quot;name&quot;</span>] [comdat [(<span class="variable">$name</span>)]] [align N] [gc] [prefix Constant]</span><br><span class="line">       [prologue Constant] [personality Constant] (!name !N)* &#123; ... &#125;</span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">define dso_local void @foo(i32 %x) <span class="comment">#0 &#123;</span></span><br><span class="line">  ; 省略 ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># define void @foo(i32 %x) &#123; ... &#125;，表示定义一个函数。其函数名称为foo，返回值的数据类型为void，参数（用%x表示）的数据类型为 i32（占用4字节的整型）</span></span><br><span class="line"><span class="comment"># #0，用于修饰函数时表示一组函数属性。这些属性定义在文件末尾</span></span><br><span class="line">  7 define weak dso_local void @foo(i32 %x) <span class="comment">#0 &#123;</span></span><br><span class="line">  8 entry:</span><br><span class="line">  9   %x.addr = alloca i32, align 4</span><br><span class="line"> 10   %y = alloca i32, align 4</span><br><span class="line"> 11   %z = alloca i32, align 4</span><br><span class="line"> 12   store i32 %x, i32* %x.addr, align 4</span><br><span class="line"> 13   %0 = load i32, i32* %x.addr, align 4</span><br><span class="line"> 14   %cmp = icmp eq i32 %0, 0</span><br><span class="line"> 15   br i1 %cmp, label %if.then, label %if.end</span><br><span class="line"> 16 </span><br><span class="line"> 17 if.then:                                          ; preds = %entry</span><br><span class="line"> 18   store i32 5, i32* %y, align 4</span><br><span class="line"> 19   br label %if.end</span><br><span class="line"> 20 </span><br><span class="line"> 21 if.end:                                           ; preds = %if.then, %entry</span><br><span class="line"> 22   %1 = load i32, i32* %x.addr, align 4</span><br><span class="line"> 23   %tobool = icmp ne i32 %1, 0</span><br><span class="line"> 24   br i1 %tobool, label %if.end2, label %if.then1</span><br><span class="line"> 25 </span><br><span class="line"> 26 if.then1:                                         ; preds = %if.end</span><br><span class="line"> 27   store i32 6, i32* %z, align 4</span><br><span class="line"> 28   br label %if.end2</span><br><span class="line"> 29 </span><br><span class="line"> 30 if.end2:                                          ; preds = %if.then1, %if.end</span><br><span class="line"> 31   ret void</span><br><span class="line"> 32 &#125;</span><br><span class="line"><span class="comment"># LLVM IR中，函数体是由基本块构成的。基本块是由一系列顺序执行的语句构成的，并（可选地）以标签作为起始。不同的标签代表不同的基本块</span></span><br><span class="line"><span class="comment"># 基本块的特点如下：</span></span><br><span class="line"><span class="comment">## 仅有一个入口，即基本块中的第一条指令</span></span><br><span class="line"><span class="comment">## 仅有一个出口，即基本块中的最后一条指令（被称为terminator instruction）。该指令要么跳转到其他基本块（不包括入口基本块），要买从函数返回</span></span><br><span class="line"><span class="comment">## 函数体中第一个出现的基本块，称为入口基本块（Entry Basic Block）。它是一个特殊的基本块，在进入函数时立即执行该基本块，并且不允许作为其他基本块的跳转目标（即不允许该基本块有前继结点）</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="LLVM-IR生成文件过程"><a href="#LLVM-IR生成文件过程" class="headerlink" title="LLVM IR生成文件过程"></a>LLVM IR生成文件过程</h2><p>![image-20230906205250609](&#x2F;paper_source&#x2F;2023年9月&#x2F;LLVM IR生成过程.jpg)</p>
+<h2 id="LLVM-IR语法的基本概念"><a href="#LLVM-IR语法的基本概念" class="headerlink" title="LLVM IR语法的基本概念"></a>LLVM IR语法的基本概念</h2><h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>以<code>;</code>开头并一直延申到行尾，作为注释行。</p>
+<h3 id="主程序"><a href="#主程序" class="headerlink" title="主程序"></a>主程序</h3><p>主程序是可执行程序执行的入口点，所以任何可执行程序都需要<code>main</code>函数才能运行。</p>
+<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">define</span> <span class="type">i32</span> <span class="title">@main</span>() &#123;</span><br><span class="line">    <span class="keyword">ret</span> <span class="type">i32</span> <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>就是主程序，在<code>@main()</code>之后的就是函数的函数体，<code>ret i32 0</code>就代表C语言中的<code>return 0;</code>。因此，如果要增加代码，就只需要在大括号内，<code>ret i32 0</code>前增加代码即可。</p>
+<h3 id="目标数据布局"><a href="#目标数据布局" class="headerlink" title="目标数据布局"></a>目标数据布局</h3><p>LLVM也支持我们手动定制这样的数据布局，例如，我们可以在LLVM IR的源代码中写：</p>
+<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">target</span> <span class="keyword">datalayout</span> <span class="operator">=</span> <span class="string">&quot;e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>这一长串文字就定义了目标的数据布局。具体而言：</p>
+<ul>
+<li><code>e</code>: 小端序</li>
+<li><code>m:e</code>: 符号表中使用ELF格式的命名修饰</li>
+<li><code>p270:32:32-p271:32:32-p272:64:64</code>: 与地址空间有关</li>
+<li><code>i64:64</code>: 将<code>i64</code>类型的变量采用64位的ABI对齐</li>
+<li><code>f80:128</code>: 将<code>long double</code>类型的变量采用128位的ABI对齐</li>
+<li><code>n8:16:32:64</code>: 目标CPU的原生整型包含8位、16位、32位和64位</li>
+<li><code>S128</code>: 栈以128位自然对齐</li>
+</ul>
 ]]></content>
       <categories>
         <category>learn</category>
@@ -657,6 +676,90 @@
 <ul>
 <li><a href="src/ikos_analyzer.cpp">src&#x2F;ikos_analyzer.cpp</a> contains the implementation of <code>ikos-analyzer</code>. This is the entry point for all analyses.</li>
 </ul>
+]]></content>
+      <categories>
+        <category>ikos</category>
+      </categories>
+      <tags>
+        <tag>ikos</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>读IKOS文档</title>
+    <url>/2023/09/06/%E8%AF%BBIKOS%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<h2 id="读IKOS文档"><a href="#读IKOS文档" class="headerlink" title="读IKOS文档"></a>读IKOS文档</h2><span id="more"></span>
+
+<p>主要记录IKOS文档的信息，以备自己之后做更改时，可以更好地回忆。</p>
+<h3 id="前端工作部分"><a href="#前端工作部分" class="headerlink" title="前端工作部分"></a>前端工作部分</h3><p><img src="/paper_source/%E8%AF%BBIKOS%E6%96%87%E6%A1%A3/%E5%89%8D%E7%AB%AF%E4%BF%AE%E6%94%B9LLVM2AR.jpg" alt="image-20230906195706369"></p>
+<p>前端的工作主要是在两个地址：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">include/ikos/frontend/llvm/import contains definition of the translation from LLVM to AR.</span><br><span class="line">src/import contains implementation of the translation from LLVM to AR.</span><br></pre></td></tr></table></figure>
+
+<p>这是肯定要做修改的部分，后续可能需要修改下游的一些关联数据。但是目前设计的思路是先将原来进行的转换部分先读懂。如果按照原来的思路能进行便按照最简单的方法进行，否则全部重新设计工作量太大。</p>
+]]></content>
+      <categories>
+        <category>ikos</category>
+        <category>learn</category>
+      </categories>
+      <tags>
+        <tag>project</tag>
+        <tag>ikos</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LLVMIR2AR</title>
+    <url>/2023/09/06/LLVMIR2AR%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<h1 id="IKOS-LLVM-Frontend"><a href="#IKOS-LLVM-Frontend" class="headerlink" title="IKOS LLVM Frontend"></a>IKOS LLVM Frontend</h1><span id="more"></span>
+
+<p>This folder contains implementation of the LLVM frontend for IKOS.</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>The LLVM frontend implements:</p>
+<ul>
+<li><code>ikos-pp</code>, a LLVM bitcode pre-processor for static analysis</li>
+<li><code>llvm-to-ar</code>, a library to translate LLVM bitcode to Abstract Representation (AR)</li>
+<li><code>ikos-import</code>, a translator from LLVM bitcode to AR, used for debugging purpose.</li>
+</ul>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>IKOS LLVM Frontend contains a C++ library and executables. It can be installed independently from the other components.</p>
+<h3 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h3><p>To build IKOS LLVM Frontend, you will need the following dependencies:</p>
+<ul>
+<li>A C++ compiler that supports C++14 (gcc &gt;&#x3D; 4.9.2 or clang &gt;&#x3D; 3.4)</li>
+<li>CMake &gt;&#x3D; 3.4.3</li>
+<li>GMP &gt;&#x3D; 4.3.1</li>
+<li>Boost &gt;&#x3D; 1.55</li>
+<li>LLVM 14.0.x</li>
+<li>IKOS Core</li>
+<li>IKOS AR</li>
+</ul>
+<h3 id="Build-and-Install"><a href="#Build-and-Install" class="headerlink" title="Build and Install"></a>Build and Install</h3><p>To build and install IKOS LLVM Frontend, run the following commands in the <code>frontend/llvm</code> directory:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ mkdir build</span><br><span class="line">$ cd build</span><br><span class="line">$ cmake \</span><br><span class="line">    -DCMAKE_INSTALL_PREFIX=/path/to/frontend-llvm-install-directory \</span><br><span class="line">    -DLLVM_CONFIG_EXECUTABLE=/path/to/llvm/bin/llvm-config \</span><br><span class="line">    -DCORE_ROOT=/path/to/core-install-directory \</span><br><span class="line">    -DAR_ROOT=/path/to/ar-install-directory \</span><br><span class="line">    ..</span><br><span class="line">$ make</span><br><span class="line">$ make install</span><br></pre></td></tr></table></figure>
+
+<h3 id="Tests"><a href="#Tests" class="headerlink" title="Tests"></a>Tests</h3><p>To build and run the tests, simply type:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ make check</span><br></pre></td></tr></table></figure>
+
+<h2 id="Running-the-LLVM-Frontend-Tools"><a href="#Running-the-LLVM-Frontend-Tools" class="headerlink" title="Running the LLVM Frontend Tools"></a>Running the LLVM Frontend Tools</h2><h3 id="lib-x2F-libikos-llvm-to-ar-a"><a href="#lib-x2F-libikos-llvm-to-ar-a" class="headerlink" title="lib&#x2F;libikos-llvm-to-ar.a"></a>lib&#x2F;libikos-llvm-to-ar.a</h3><p><code>llvm-to-ar</code> is a library to translate LLVM bitcode to AR, used by the analyzer and <code>ikos-import</code>.</p>
+<h3 id="ikos-pp"><a href="#ikos-pp" class="headerlink" title="ikos-pp"></a>ikos-pp</h3><p><code>ikos-pp</code> is a LLVM bitcode pre-processor for static analysis.</p>
+<p>It is similar to the LLVM <code>opt</code> command, see <a href="https://llvm.org/docs/CommandGuide/opt.html">https://llvm.org/docs/CommandGuide/opt.html</a></p>
+<p>See <code>ikos-pp -help</code> for more information.</p>
+<h3 id="ikos-import"><a href="#ikos-import" class="headerlink" title="ikos-import"></a>ikos-import</h3><p><code>ikos-import</code> is a translator from LLVM bitcode to AR, used for debugging purpose.</p>
+<p>See <code>ikos-import -help</code> for more information.</p>
+<h2 id="Overview-of-the-source-code"><a href="#Overview-of-the-source-code" class="headerlink" title="Overview of the source code"></a>Overview of the source code</h2><p>The following illustrates the directory structure of this folder:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── include</span><br><span class="line">│   └── ikos</span><br><span class="line">│       └── frontend</span><br><span class="line">│           └── llvm</span><br><span class="line">│               └── import</span><br><span class="line">├── src</span><br><span class="line">│   ├── import</span><br><span class="line">│   └── pass</span><br><span class="line">└── test</span><br><span class="line">    └── regression</span><br><span class="line">        ├── import</span><br><span class="line">        │   ├── aggressive_optimization</span><br><span class="line">        │   ├── basic_optimization</span><br><span class="line">        │   └── no_optimization</span><br><span class="line">        └── pass</span><br><span class="line">            ├── lower_cst_expr</span><br><span class="line">            ├── lower_select</span><br><span class="line">            ├── remove_printf_calls</span><br><span class="line">            └── remove_unreachable_blocks</span><br></pre></td></tr></table></figure>
+
+<h4 id="include-x2F"><a href="#include-x2F" class="headerlink" title="include&#x2F;"></a>include&#x2F;</h4><ul>
+<li><p><a href="include/ikos/frontend/llvm/import">include&#x2F;ikos&#x2F;frontend&#x2F;llvm&#x2F;import</a> contains definition of the translation from LLVM to AR.</p>
+</li>
+<li><p><a href="include/ikos/frontend/llvm/pass.hpp">include&#x2F;ikos&#x2F;frontend&#x2F;llvm&#x2F;pass.hpp</a> contains definition of LLVM passes for helping static analysis.</p>
+</li>
+</ul>
+<h4 id="src-x2F"><a href="#src-x2F" class="headerlink" title="src&#x2F;"></a>src&#x2F;</h4><ul>
+<li><p><a href="src/ikos_import.cpp">src&#x2F;ikos_import.cpp</a> contains implementation of <code>ikos-import</code>.</p>
+</li>
+<li><p><a href="src/ikos_pp.cpp">src&#x2F;ikos_pp.cpp</a> contains implementation of <code>ikos-pp</code>.</p>
+</li>
+<li><p><a href="src/import">src&#x2F;import</a> contains implementation of the translation from LLVM to AR.</p>
+</li>
+<li><p><a href="src/pass">src&#x2F;pass</a> contains implementation of LLVM passes for helping static analysis.</p>
+</li>
+</ul>
+<h4 id="test-x2F"><a href="#test-x2F" class="headerlink" title="test&#x2F;"></a>test&#x2F;</h4><p>Contains regression tests.</p>
 ]]></content>
       <categories>
         <category>ikos</category>
