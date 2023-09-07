@@ -855,3 +855,1188 @@ define void @foo #0 {
 在使用LLVM作为编译器的时候，控制流往往就意味着更多的优化可能，如分支布局、函数内联。在使用LLVM作为静态分析工具的过程中，控制流也意味着更高的复杂度，如间接跳转、间接调用的识别和恢复。
 
 因此，我们需要仔细了解LLVM中的控制流。
+
+## 汇编层面的控制语句
+
+在大多数语言中，常见的控制语句主要有四种：
+
+* `if` .. `else`
+* `for`
+* `while`
+* `switch`
+
+在汇编语言层面，控制语句则被分解为两种核心的指令：条件跳转与无条件跳转（`switch`其实还有一些工作，之后会提到）。我们下面分别来看看在汇编层面是怎样实现控制语句的。
+
+### `if` .. `else`
+
+我们有以下C代码：
+
+```c
+if (a > b) {
+    // Do something A
+} else {
+    // Do something B
+}
+// Do something C
+```
+
+为了将这个指令改写成汇编指令，我们同时需要条件跳转与无条件跳转。我们用伪代码表示其汇编指令为：
+
+```pseudocode
+    Compare a and b
+    Jump to label B if comparison is a is not greater than b // conditional jump
+label A:
+    Do something A
+    Jump to label C // unconditional jump
+label B:
+    Do something B
+label C:
+    Do something C
+```
+
+汇编语言通过条件跳转、无条件跳转和三个标签（`label A`标签实际上没有作用，只不过让代码更加清晰）实现了高级语言层面的`if` .. `else`语句。
+
+### `for`
+
+我们有以下C代码：
+
+```c
+for (int i = 0; i < 4; i++) {
+    // Do something A
+}
+// Do something B
+```
+
+为了将这个指令改写为汇编指令，我们同样地需要条件跳转与无条件跳转：
+
+```pseudocode
+    int i = 0
+label start:
+    Compare i and 4
+    Jump to label B if comparison is i is not less than 4 // conditional jump
+label A:
+    Do something A
+    i++
+    Jump to label start // unconditional jump
+label B:
+    Do something B
+```
+
+而`while`与`for`则极其类似，只不过少了初始化与自增的操作，这里不再赘述。
+
+根据我们在汇编语言中积累的经验，我们得出，要实现大多数高级语言的控制语句，我们需要四个东西：
+
+* 标签
+* 无条件跳转
+* 比较大小的指令
+* 条件跳转
+
+## LLVM IR层面的控制语句
+
+下面就以我们上面的`for`循环的C语言版本为例，解释如何写其对应的LLVM IR语句。
+
+首先，我们对应的LLVM IR的基本框架为
+
+```llvm
+%i = alloca i32                       ; int i = ...
+store i32 0, ptr %i                   ; ... = 0
+%i_value = load i32, ptr %i
+; Do something A
+%1 = add i32 %i_value, 1              ; ... = i + 1
+store i32 %1, ptr %i                  ; i = ...
+; Do something B
+```
+
+这个程序缺少了一些必要的步骤，而我们之后会将其慢慢补上。
+
+### 标签
+
+在LLVM IR中，标签与汇编语言的标签一致，也是以`:`结尾作标记。我们依照之前写的汇编语言的伪代码，给这个程序加上标签：
+
+```llvm
+    %i = alloca i32                  ; int i = ...
+    store i32 0, ptr %i              ; ... = 0
+start:
+    %i_value = load i32, ptr %i
+A:
+    ; Do something A
+    %1 = add i32 %i_value, 1         ; ... = i + 1
+    store i32 %1, ptr %i             ; i = ...
+B:
+    ; Do something B
+```
+
+### 比较指令
+
+LLVM IR提供的比较指令为`icmp`。其接受三个参数：比较方案以及两个比较参数。这样讲比较抽象，我们就来看一下一个最简单的比较指令的例子：
+
+```llvm
+%comparison_result = icmp uge i32 %a, %b
+```
+
+这个例子转化为C++语言就是
+
+```c++
+bool comparison_result = ((unsigned int)a >= (unsigned int)b);
+```
+
+这里，`uge`是比较方案，`%a`和`%b`就是用来比较的两个数，而`icmp`则返回一个`i1`类型的值，也就是C++中的`bool`值，用来表示结果是否为真。
+
+`icmp`支持的比较方案很广泛：
+
+* 首先，最简单的是`eq`与`ne`，分别代表相等或不相等。
+* 然后，是无符号的比较`ugt`, `uge`, `ult`, `ule`，分别代表大于、大于等于、小于、小于等于。我们之前在数的表示中提到，LLVM IR中一个整型变量本身的符号是没有意义的，而是需要看在其参与的指令中被看作是什么符号。这里每个方案的`u`就代表以无符号的形式进行比较。
+* 最后，是有符号的比较`sgt`, `sge`, `slt`, `sle`，分别是其无符号版本的有符号对应。
+
+我们来看加上比较指令之后，我们的例子就变成了：
+
+```llvm
+    %i = alloca i32                               ; int i = ...
+    store i32 0, ptr %i                           ; ... = 0
+start:
+    %i_value = load i32, ptr %i
+    %comparison_result = icmp slt i32 %i_value, 4 ; Test if i < 4
+A:
+    ; Do something A
+    %1 = add i32 %i_value, 1                      ; ... = i + 1
+    store i32 %1, ptr %i                          ; i = ...
+B:
+    ; Do something B
+```
+
+### 条件跳转
+
+在比较完之后，我们需要条件跳转。我们来看一下我们此刻的目的：若`%comparison_result`是`true`，那么跳转到`A`，否则跳转到`B`。
+
+LLVM IR为我们提供的条件跳转指令是`br`，其接受三个参数，第一个参数是`i1`类型的值，用于作判断；第二和第三个参数分别是值为`true`和`false`时需要跳转到的标签。比方说，在我们的例子中，就应该是
+
+```llvm
+br i1 %comparison_result, label %A, label %B
+```
+
+我们把它加入我们的例子：
+
+```llvm
+    %i = alloca i32                               ; int i = ...
+    store i32 0, ptr %i                           ; ... = 0
+start:
+    %i_value = load i32, ptr %i
+    %comparison_result = icmp slt i32 %i_value, 4 ; Test if i < 4
+    br i1 %comparison_result, label %A, label %B
+A:
+    ; Do something A
+    %1 = add i32 %i_value, 1                      ; ... = i + 1
+    store i32 %1, ptr %i                          ; i = ...
+B:
+    ; Do something B
+```
+
+### 无条件跳转
+
+无条件跳转更好理解，直接跳转到某一标签处。在LLVM IR中，我们同样可以使用`br`进行条件跳转。如，如果要直接跳转到`start`标签处，则可以
+
+```llvm
+br label %start
+```
+
+我们也把这加入我们的例子：
+
+```llvm
+    %i = alloca i32                               ; int i = ...
+    store i32 0, ptr %i                           ; ... = 0
+start:
+    %i_value = load i32, ptr %i
+    %comparison_result = icmp slt i32 %i_value, 4 ; Test if i < 4
+    br i1 %comparison_result, label %A, label %B
+A:
+    ; Do something A
+    %1 = add i32 %i_value, 1                      ; ... = i + 1
+    store i32 %1, ptr %i                          ; i = ...
+    br label %start
+B:
+    ; Do something B
+```
+
+这样看上去就结束了，然而如果大家把这个代码交给`llc`的话，并不能编译通过，这是为什么呢？
+
+### Basic block
+
+首先，我们来摘录一下LLVM IR的参考指南中[Functions](http://llvm.org/docs/LangRef.html#functions)节的一段话：
+
+> A function definition contains a list of basic blocks, forming the CFG (Control Flow Graph) for the function. Each basic block may optionally start with a label (giving the basic block a symbol table entry), contains a list of instructions, and ends with a terminator instruction (such as a branch or function return). If an explicit label name is not provided, a block is assigned an implicit numbered label, using the next value from the same counter as used for unnamed temporaries (see above).
+
+这段话的大意有几个：
+
+* 一个函数由许多基本块(Basic block)组成
+* 每个基本块包含：
+   * 开头的标签（可省略）
+   * 一系列指令
+   * 结尾是终结指令
+* 一个基本块没有标签时，会自动赋给它一个标签
+
+所谓终结指令，就是指改变执行顺序的指令，如跳转、返回等。
+
+我们来看看我们之前写好的程序是不是符合这个规定。`start`开头的基本块，在一系列指令后，以
+
+```llvm
+br i1 %comparison_result, label %A, label %B
+```
+
+结尾，是一个终结指令。`A`开头的基本块，在一系列指令后，以
+
+```llvm
+br label %start
+```
+
+结尾，也是一个终结指令。`B`开头的基本块，在最后总归是需要函数返回的（这里为了篇幅省略了），所以也一定会带有一个终结指令。
+
+看上去都很符合呀，那为什么编译不通过呢？我们来仔细想一下，我们考虑了所有基本块了吗？要注意到，一个基本块是可以没有名字的，所以，实际上还有一个基本块没有考虑到，就是函数开头的：
+
+```llvm
+%i = alloca i32          ; int i = ...
+store i32 0, ptr %i      ; ... = 0
+```
+
+这个基本块。它并没有以终结指令结尾！
+
+所以，我们把一个终结指令补充在这个基本块的结尾：
+
+```llvm
+    %i = alloca i32                               ; int i = ...
+    store i32 0, ptr %i                           ; ... = 0
+    br label %start
+start:
+    %i_value = load i32, ptr %i
+    %comparison_result = icmp slt i32 %i_value, 4 ; Test if i < 4
+    br i1 %comparison_result, label %A, label %B
+A:
+    ; Do something A
+    %1 = add i32 %i_value, 1                      ; ... = i + 1
+    store i32 %1, ptr %i                          ; i = ...
+    br label %start
+B:
+    ; Do something B
+```
+
+这样就完成了我们的例子，大家可以在本系列的GitHub的仓库中查看对应的代码`for.ll`。
+
+### 可视化
+
+LLVM的工具链甚至为我们提供了可视化控制语句的方法。我们使用之前提到的LLVM工具链中用于优化的`opt`工具：
+
+```shell
+opt -p dot-cfg for.ll
+```
+
+然后会生成一个`.main.dot`的文件。如果我们在计算机上装有[Graphviz](http://www.graphviz.org)，那么就可以用
+
+```shell
+dot .main.dot -Tpng -o for.png
+```
+
+生成其可视化的控制流图（CFG）：
+
+![](/paper_source/Classic-Flang说明/cfg.jpg)
+
+### `switch`
+
+下面我们来讲讲`switch`语句。我们有以下C语言程序：
+
+```c
+int x;
+switch (x) {
+    case 0:
+        // do something A
+        break;
+    case 1:
+        // do something B
+        break;
+    default:
+        // do something C
+        break;
+}
+// do something else
+```
+
+我们先直接来看其转换成LLVM IR是什么样子的：
+
+```llvm
+switch i32 %x, label %C [
+    i32 0, label %A
+    i32 1, label %B
+]
+A:
+    ; Do something A
+    br label %end
+B:
+    ; Do something B
+    br label %end
+C:
+    ; Do something C
+    br label %end
+end:
+    ; Do something else
+```
+
+其核心就是第一行的`switch`指令。其第一个参数`i32 %x`是用来判断的，也就是我们C语言中的`x`。第二个参数`label %C`是C语言中的`default`分支，这是必须要有的参数。也就是说，我们的`switch`必须要有`default`来处理。接下来是一个数组，其意义已经很显然了，如果`%x`值是`0`，就去`label %A`，如果值是`1`，就去`label %B`。
+
+LLVM后端对`switch`语句具体到汇编层面的实现则通常有两种方案：用一系列条件语句或跳转表。
+
+一系列条件语句的实现方式最简单，用伪代码来表示的话就是
+
+```pseudocode
+if (x == 0) {
+    Jump to label %A
+} else if (x == 1) {
+    Jump to label %B
+} else {
+    Jump to label %C
+}
+```
+
+这是十分符合常理的。然而，我们需要注意到，如果这个`switch`语句一共有n个分支，那么其查找效率实际上是O(n)。那么，这种实现方案下的`switch`语句仅仅是`if` .. `else`的语法糖，除了增加可维护性，并不会优化什么性能。
+
+跳转表则是一个可以优化性能的`switch`语句实现方案，其伪代码为：
+
+```pseudocode
+labels = [label %A, label %B]
+if (x < 0 || x > 1) {
+    Jump to label %C
+} else {
+    Jump to labels[x]
+}
+```
+
+这只是一个极其粗糙的近似的实现，我们需要的是理解其基本思想。跳转表的思想就是利用内存中数组的索引是O(1)复杂度的，所以我们可以根据目前的`x`值去查找应该跳转到哪一个地址，这就是跳转表的基本思想。
+
+根据目标平台和`switch`语句的分支数，LLVM后端会自动选择不同的实现方式去实现`switch`语句。
+
+### `select`
+
+我们经常会遇到一种情况，某一变量的值需要根据条件进行赋值，比如说以下C语言的函数：
+
+```c
+void foo(int x) {
+    int y;
+    if (x > 0) {
+        y = 1;
+    } else {
+        y = 2;
+    }
+    // Do something with y
+}
+```
+
+如果`x`大于`0`，则`y`为`1`，否则`y`为`2`。这一情况很常见，然而在C语言中，如果要实现这种功能，`y`需要被实现为可变变量，但实际上无论`x`如何取值，`y`只会被赋值一次，并不应该是可变的。
+
+我们知道，LLVM IR中，由于SSA的限制，局部可变变量都必须分配在栈上，虽然LLVM后端最终会进行一定的优化，但写起代码来还需要冗长的`alloca`, `load`, `store`等语句。如果我们按照C语言的思路来写LLVM IR，那么就会是：
+
+```llvm
+define void @foo(i32 %x) {
+    %y = alloca i32
+    %1 = icmp sgt i32 %x, 0
+    br i1 %1, label %btrue, label %bfalse
+btrue:
+    store i32 1, ptr %y
+    br label %end
+bfalse:
+    store i32 2, ptr %y
+    br label %end
+end:
+    ; do something with %y
+    ret void
+}
+```
+
+我们来看看其编译出的汇编语言是怎样的：
+
+```assembly
+foo:
+# %bb.0:
+	cmpl	$0, %edi
+	jle	.LBB0_2
+# %bb.1:                                # %btrue
+	movl	$1, -4(%rsp)
+	jmp	.LBB0_3
+.LBB0_2:                                # %bfalse
+	movl	$2, -4(%rsp)
+.LBB0_3:                                # %end
+	retq
+```
+
+算上注释，C语言代码9行，汇编语言代码11行，LLVM IR代码14行。这LLVM IR同时比低层次和高层次的代码都长，而且这种模式在真实的代码中出现的次数会非常多，这显然是不可以接受的。究其原因，就是这里把`y`看成了可变变量。那么，有没有什么办法让`y`不可变但仍然能实现这个功能呢？
+
+首先，我们来看看同样区分可变变量与不可变变量的Rust是怎么做的：
+
+```rust,ignore
+fn foo(x: i32) {
+    let y = if x > 0 { 1 } else { 2 };
+    // Do something with y
+}
+```
+
+让代码简短的方式很简单，把`y`看作不可变变量，但同时需要语言支持把`if`语句视作表达式，当`x`大于`0`时，这个表达式返回`1`，否则返回`2`。这样，就很简单地实现了我们的需求。
+
+LLVM IR中同样也有这样的指令，那就是`select`，我们来把上面的例子用`select`改写：
+
+```llvm
+define void @foo(i32 %x) {
+    %result = icmp sgt i32 %x, 0
+    %y = select i1 %result, i32 1, i32 2
+    ; Do something with %y
+}
+```
+
+`select`指令接受三个参数。第一个参数是用来判断的布尔值，也就是`i1`类型的`icmp`判断的结果，如果其为`true`，则返回第二个参数，否则返回第三个参数。极其合理。
+
+`select`不仅可以简化LLVM代码，也可以优化生成的二进制程序。在大部分情况下，在AMD64架构中，LLVM会将`select`指令编译为[`CMOV`cc](https://www.felixcloutier.com/x86/cmovcc)指令，也就是条件赋值，从而优化了生成的二进制代码。
+
+### `phi`
+
+`select`只能支持两个选择，`true`选择一个分支，`false`选择另一个分支，我们是不是可以有支持多种选择的类似`switch`的版本呢？同时，我们也可以换个角度思考，`select`是根据`i1`的值来进行判断，我们其实可以根据控制流进行判断。这就是在SSA技术中大名鼎鼎的`phi`指令。
+
+为了方便起见，我们首先先来看用`phi`指令实现的我们上面这个代码：
+
+```llvm
+define void @foo(i32 %x) {
+    %result = icmp sgt i32 %x, 0
+    br i1 %result, label %btrue, label %bfalse
+btrue:
+    br label %end
+bfalse:
+    br label %end
+end:
+    %y = phi i32 [1, %btrue], [2, %bfalse]
+    ; Do something with %y
+    ret void
+}
+```
+
+我们看到，`phi`的第一个参数是一个类型，这个类型表示其返回类型为`i32`。接下来则是两个数组，其表示，如果当前的basic block执行的时候，前一个basic block是`%btrue`，那么返回`1`，如果前一个basic block是`%bfalse`，那么返回`2`。
+
+也就是说，`select`是根据其第一个参数`i1`类型的变量的值来决定返回哪个值，而`phi`则是根据其之前是哪个basic block来决定其返回值。此外，`phi`之后可以跟无数的分支，如`phi i32 [1, %a], [2, %b], [3, %c]`等，从而可以支持多分支的赋值。
+
+## 函数
+
+在汇编层面，一个函数与一个控制语句极其相似，都是由标签组成，只不过在跳转时增加了一些附加的操作。而在LLVM IR层面，函数则得到了更高一层的抽象。
+
+## 定义与声明
+
+### 函数定义
+
+在LLVM中，一个最基本的函数定义的样子我们之前已经遇到过多次，就是`@main`函数的样子：
+
+```llvm
+define i32 @main() {
+    ret i32 0
+}
+```
+
+在函数名之后可以加上参数列表，如：
+
+```llvm
+define i32 @foo(i32 %a, i64 %b) {
+    ret i32 0
+}
+```
+
+一个函数定义最基本的框架，就是返回值（`i32`）+函数名（`@foo`）+参数列表（`(i32 %a, i64 %b）`）+函数体（`{ ret i32 0 }`）。
+
+我们可以看到，函数的名称和全局变量一样，都是以`@`开头的。并且，如果我们查看符号表的话，也会发现其和全局变量一样进入了符号表。因此，函数也有和全局变量完全一致的Linkage Types和Visibility Style，来控制函数名在符号表中的出现情况，因此，可以出现如
+
+```llvm
+define private i32 @foo() {
+    ; ...
+}
+```
+
+这样的修饰符。
+
+#### 属性
+
+此外，我们还可以在参数列表之后加上属性，也就是控制优化器和代码生成器的指令。如果我们单纯编译一个简单的C代码：
+
+```c
+void foo() {}
+```
+
+其编译出的LLVM IR实际上是
+
+```llvm
+define dso_local void @foo() #0 {
+  ret void
+}
+
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+```
+
+这里的`#0`就是一个属性组，其包含了`noinline`、`nounwind`等若干个函数的属性。这些属性可以控制LLVM在优化和生成函数时的行为。大部分的属性可以在[Function Attributes](http://llvm.org/docs/LangRef.html#function-attributes)一节看到。
+
+当函数的属性比较少时，我们可以直接把属性写在函数定义后面，而不用以属性组的形式来写。例如下面这两种写法都是对的：
+
+```llvm
+define void @foo() nounwind { ret void }
+; or
+define void @foo() #0 { ret void }
+attributes #0 {
+    nounwind ; ...
+}
+```
+
+我们知道，无论是在代码编译还是在程序分析的过程中，我们最常处理的都在函数级别。因此，属性在这一过程中就是一个非常关键的概念。我们在编译器前端分析的过程中，遇到了特定的函数，给它加上相应的属性；在编译器后端生成代码时，则判断当前函数是否有相应的属性，从而可以在编译器前后端之间传递信息。
+
+### 函数声明
+
+除了函数定义之外，还有一种情况十分常见，那就是函数声明。我们在一个编译单元（模块）下，可以使用别的模块的函数，这时候就需要在本模块先声明这个函数，才能保证编译时不出错，从而在链接时正确将声明的函数与别的模块下其定义进行链接。
+
+函数声明也相对比较简单，就是使用`declare`关键词替换`define`：
+
+```llvm
+declare i32 @printf(i8*, ...) #1
+```
+
+这个就是在C代码中调用`stdio.h`库的`printf`函数时，在LLVM IR代码中可以看到的函数声明，其中`#1`就是又一大串属性组成的属性组。
+
+## 函数的调用
+
+在LLVM IR中，函数的调用与高级语言几乎没有什么区别：
+
+```llvm
+define i32 @foo(i32 %a) {
+    ; ...
+}
+
+define void @bar() {
+    %1 = call i32 @foo(i32 1)
+}
+```
+
+使用`call`指令可以像高级语言那样直接调用函数。我们来仔细分析一下这里做了哪几件事：
+
+* 传递参数
+* 执行函数
+* 获得返回值
+
+居然能干这么多事，这是汇编语言所羡慕不已的。
+
+### 执行函数
+
+我们知道，如果一个函数没有任何参数，返回值也是`void`类型，也就是说在C语言下这个函数是
+
+```c
+void foo(void) {
+    // ...
+}
+```
+
+那么调用这个函数就没有了传递参数和获得返回值这两件事，只剩下执行函数，而这是一个最简单的事，以AMD64架构为例：
+
+1. 把函数返回地址压栈
+2. 跳转到相应函数的地址
+
+函数返回也是一个最简单的事：
+
+1. 弹栈获得函数返回地址
+2. 跳转到相应的返回地址
+
+这个在我们的汇编语言基础中已经反复遇到过多次，相信大家都会十分熟练。
+
+### 传递参数与获得返回值
+
+谈到这两点，就不得不说调用约定了。我们知道，在汇编语言中，是没有参数传递和返回值的概念的，有的仅仅是让当前的控制流跳转到指定函数执行。所以，一切的参数传递和返回值都需要我们人为约定。也就是说，我们需要约定两件事：
+
+* 被调用的函数希望知道参数是放在哪里的
+* 调用者希望知道调用函数的返回值是放在哪里的
+
+这就是调用约定。不同的调用约定会产生不同的特效，也就产生了许多高级语言的feature。
+
+#### C调用约定
+
+最广泛使用的调用约定是C调用约定，也就是各个操作系统的标准库使用的调用约定。在AMD64架构下，C调用约定是System V版本的，所有参数按顺序放入指定寄存器，如果寄存器不够，剩余的则从右往左顺序压栈。而返回值则是按先后顺序放入寄存器或者放入调用者分配的空间中，如果只有一个返回值，那么就会放在`rax`里。
+
+在LLVM IR中，函数的调用默认使用C调用约定。为了验证，我们可以写一个简单的程序：
+
+```llvm
+; calling_convention_test.ll
+%ReturnType = type { i32, i32 }
+define %ReturnType @foo(i32 %a1, i32 %a2, i32 %a3, i32 %a4, i32 %a5, i32 %a6, i32 %a7, i32 %a8) {
+    ret %ReturnType { i32 1, i32 2 }
+}
+
+define i32 @main() {
+    %1 = call %ReturnType @foo(i32 1, i32 2, i32 3, i32 4, i32 5, i32 6, i32 7, i32 8)
+    ret i32 0
+}
+```
+
+我们查看其编译出来的汇编代码。在`main`函数中，参数传递是：
+
+```x86asm
+movl    $1, %edi
+movl    $2, %esi
+movl    $3, %edx
+movl    $4, %ecx
+movl    $5, %r8d
+movl    $6, %r9d
+movl    $7, (%rsp)
+movl    $8, 8(%rsp)
+callq   foo@PLT
+```
+
+而在`foo`函数内部，返回值传递是：
+
+```x86asm
+movl    $1, %eax
+movl    $2, %edx
+retq
+```
+
+如果大家去查阅System V的指南的话，会发现完全符合。
+
+这种System V的调用约定有什么好处呢？其最大的特点在于，当寄存器数量不够时，剩余的参数是按**从右向左**的顺序压栈。这就让基于这种调用约定的高级语言可以更轻松地实现可变参数的feature。所谓可变参数，最典型的例子就是C语言中的`printf`：
+
+```c
+printf("%d %d %d %d", a, b, c, d);
+```
+
+`printf`可以接受任意数量的参数，其参数的数量是由第一个参数`"%d %d %d %d"`决定的。有多少个需要格式化的变量，接下来就还有多少个参数。
+
+那么，System V的调用约定又是为什么能满足这样的需求呢？假设我们不考虑之前传入寄存器内的参数，只考虑压入栈内的参数。那么，如果是从右往左的顺序压栈，栈顶就是`"%d %d %d %d"`的地址，接着依次是`a`, `b`, `c`, `d`。那么，我们的程序就可以先读栈顶，获得字符串，然后确定有多少个参数，接着就继续在栈上读多少个参数。相反，如果是从左往右顺序压栈，那么程序第一个读到的是`d`，程序也不知道该读多少个参数。
+
+#### fastcc
+
+各种语言的调用约定还有许多，可以参考语言指南的[Calling Conventions](http://llvm.org/docs/LangRef.html#calling-conventions)一节。把所有的调用约定都讲一遍显然是不可能且枯燥的。所以，我在这里除了C调用约定之外，只再讲一个调用约定fastcc，以体现不同的调用约定能实现不同的高级语言的feature。
+
+fastcc方案是将变量全都传入寄存器中的方案。这种方案使尾调用优化能更方便地实现。
+
+尾调用会出现在很多场景下，用一个比较平凡的例子：
+
+```c
+int foo(int a) {
+    if (a == 1) {
+        return 1;
+    } else {
+        return foo(a - 1);
+    }
+}
+```
+
+我们注意到，这个函数在返回时有可能会调用自身，这就叫尾调用。为什么尾调用需要优化呢？我们知道，在正常情况下，调用一个函数会产生函数的栈帧，也就是把函数的参数传入栈，把函数的返回地址传入栈。那么如果`a`很大，那么调用的函数会越来越多，并且直到最后一个被调用的函数返回之前，所有调用的函数的栈都不会回收，也就是说，我们此时栈上充斥着一层一层被调用函数返回的地址。
+
+然而，由于这个函数是在调用者的返回语句里调用，我们实际上可以复用调用者的栈，这就是尾调用优化的基础思想。我们希望，把这样的尾调用变成循环，从而减少栈的使用。通过将参数都传入寄存器，我们可以避免再将参数传入栈，这就是fastcc为尾调用优化提供的帮助。然后，就可以直接将函数调用变成汇编中的`jmp`。
+
+我们来看如果用fastcc调用约定，LLVM IR该怎么写：
+
+```llvm
+; tail_call_test.ll
+define fastcc i32 @foo(i32 %a) {
+    %res = icmp eq i32 %a, 1
+    br i1 %res, label %btrue, label %bfalse
+btrue:
+    ret i32 1
+bfalse:
+    %sub = sub i32 %a, 1
+    %tail_call = tail call fastcc i32 @foo(i32 %sub)
+    ret i32 %tail_call
+}
+```
+
+我们使用`llc`对其编译，并加上`-tailcallopt`的指令（实际上不加也没关系，LLVM后端会自动进行[Sibling call optimization](http://llvm.org/docs/CodeGenerator.html#sibling-call-optimization)）：
+
+```shell
+llc tail_call_test.ll -tailcallopt
+```
+
+其编译而成的汇编代码中，其主体为：
+
+```x86asm
+foo:
+    cmpl    $1, %edi
+    jne     .LBB0_2
+    movl    $1, %eax
+    retq    $8
+.LBB0_2:
+    pushq   %rax
+    decl    %edi
+    popq    %rax
+    jmp     foo@PLT
+```
+
+我们可以发现，在结尾，使用的是`jmp`而不是`call`，所以从高级语言的角度，就可以看作其将尾部的调用变成了循环。并且，有两个操作：`pushq    %rax`和`popq    %rax`。这两个操作只是为了栈对齐，具体可以参考stack overflow上的回答[Why does this function push RAX to the stack as the first operation?](https://stackoverflow.com/a/45823778/10005095)。
+
+## 可视化
+
+与控制语句的可视化类似，我们也可以通过LLVM工具链，获得LLVM IR的函数调用图（Call Graph）。
+
+假设我们有以下LLVM IR:
+
+```llvm
+; cg.ll
+define void @foo1() {
+  call void @foo4(i32 0)
+  ret void
+}
+
+declare void @foo2()
+declare void @foo3()
+
+define void @foo4(i32 %0) {
+  %comparison_result = icmp sgt i32 %0, 0
+  br i1 %comparison_result, label %true_branch, label %false_branch
+
+true_branch:
+  call void @foo1()
+  br label %final
+
+false_branch:
+  call void @foo2()
+  br label %final
+
+final:
+  call void @foo3()
+  ret void
+}
+```
+
+`foo4`根据输入，调用`foo1`或者`foo2`，最终调用`foo3`。而`foo1`则递归调用`foo4`。
+
+对于这样的LLVM IR，我们使用
+
+```shell
+opt -p dot-callgraph cg.ll
+```
+
+可以生成一个`cg.ll.callgraph.dot`的文件。类似CFG，我们可以使用
+
+```shell
+dot cg.ll -Tpng -o cg.png
+```
+
+生成如下图所示的函数调用图：
+
+![Call Graph](/paper_source/Classic-Flang说明/callCFG.jpg)
+
+## 内置函数、属性和元数据
+
+在LLVM IR中，除了基础的数据表示、控制流之外，还有内置函数、属性和元数据等，能够影响二进制程序生成的功能。
+
+## 内置函数
+
+我们回顾一下，LLVM IR的作用实际上是将编译器前端与后端解耦合。编程语言的前端开发者，负责将输入的编程语言代码进行解析，生成LLVM IR；指令集架构的后端开发者，负责将输入的LLVM IR生成为目标架构的二进制指令。因此，LLVM IR提供了若干非常基础的指令，如`add`、`br`、`call`等。这样做的好处在于：
+
+* 对前端开发者而言，这些指令语义足够全，使用方法也和常见高级语言类似。
+* 对后端开发者而言，这些指令相对数目比较少，提供的功能也相对较为独立，在大部分常见的指令集中都有类似的指令与其对应。
+
+但是，这样的策略也有其弊端：
+
+* 对前端开发者而言，仍然有部分通用的语义无法被单个指令所涵盖
+* 对后端开发者而言，对一些通用指令的优化无法针对LLVM IR指令来做
+
+### `memcpy`
+
+以内存拷贝为例。熟悉AMD64或者AArch64的开发者一定知道，在这些支持向量操作的指令集架构中，大规模的内存拷贝往往是通过向量指令来实现的，Glibc中的`memcpy`就是这样实现的。
+
+但是对于通用编程语言来说，标准库往往不喜欢直接调用libc中的函数，会产生一些不必要的依赖。并且，`memcpy`用向量操作来实现已经是一个非常通用的方案了，所以能不能复用一些逻辑呢？
+
+对于此类，LLVM IR指令过于基础，但是却非常广泛地使用同一套实现逻辑的情况，LLVM IR提供了「[内置函数](https://llvm.org/docs/LangRef.html#intrinsic-functions)」（Intrinsic Functions）功能来解决。
+
+所谓内置函数，我们可以理解成一些可以像普通的LLVM IR函数一样调用的函数，但这些函数不需要开发者自己实现，LLVM的后端开发者提供了这些函数的实现。
+
+例如，LLVM IR提供了[`llvm.memcpy`](https://llvm.org/docs/LangRef.html#llvm-memcpy-intrinsic)内置函数，以提供内存的拷贝操作。前端开发者只需要调用这个函数，就可以实现内存拷贝功能了。
+
+我们熟知的Rust语言，在利用LLVM生成二进制程序时，就是使用的这个函数，可以参考其封装的[`LLVMRustBuildMemCpy`](https://github.com/rust-lang/rust/blob/90c541806f23a127002de5b4038be731ba1458ca/compiler/rustc_llvm/llvm-wrapper/RustWrapper.cpp#L1448-L1456)与调用者[`memcpy`](https://github.com/rust-lang/rust/blob/90c541806f23a127002de5b4038be731ba1458ca/compiler/rustc_codegen_llvm/src/builder.rs#L871-L896)。
+
+### 静态分支预测
+
+LLVM IR提供的内置函数有许多，这里，我们再以静态分支预测为例，介绍一个常见内置函数。
+
+我们在阅读一些大规模项目源码时，例如Linux内核源码、QEMU源码等，往往会注意到大量使用的`likely`与`unlikely`，如：
+
+```c
+if (likely(x > 0)) {
+    // Do something
+}
+```
+
+这个`likely`是什么？它是干什么用的？事实上，`likely`与`unlikely`往往是通过宏定义实现的，它们的作用是静态分支预测。
+
+我们知道，对于C语言等常见的编程语言的`if`语句，在生成二进制程序的时候，我们可以交换它的两个分支的位置。紧接着`cmp`等判断语句的分支，在执行时，不会发生跳转，而另一个分支则需要设置PC寄存器来跳转。这种跳转往往会造成一定程度的性能损耗，这些具体的我在「[在 Apple Silicon Mac 上入门汇编语言](https://github.com/Evian-Zhang/learn-assembly-on-Apple-Silicon-Mac)」中的[编译期分支预测](https://evian-zhang.github.io/learn-assembly-on-Apple-Silicon-Mac/11-跳转.html#编译期分支预测)一节中有详细阐述。总之，我们需要给编译器一些信息，来排布不同的分支布局。
+
+对于Clang来说，这是通过[内置`expect`指令](https://llvm.org/docs/BranchWeightMetadata.html#built-in-expect-instructions)来实现的，也就是说：
+
+```c
+#define likely(x)       __builtin_expect(!!(x), 1)
+#define unlikely(x)     __builtin_expect(!!(x), 0)
+```
+
+而`__builtin_expect`这个内置指令，就会翻译为LLVM IR中的[`llvm.expect`](https://llvm.org/docs/LangRef.html#llvm-expect-intrinsic)内置函数，从而实现了静态分支预测。
+
+## 属性
+
+在C语言中，我们会遇到一个函数的修饰符：`inline`。这个修饰符会提示编译器，建议编译器在遇到这个函数的调用时，内联这个函数。这类的信息，LLVM会将其看作函数的「[属性](https://llvm.org/docs/LangRef.html#function-attributes)」（Attribtues）。
+
+在之前，我们也提到过，我们可以：
+
+```llvm
+define void @foo() attr1 attr2 attr3 {
+    ; ...
+}
+```
+
+如果有多个函数有相同的属性，我们可以用一个属性组的形式来复用：
+
+```llvm
+define void @foo1() #0 {
+    ; ...
+}
+define void @foo2() #0 {
+    ; ...
+}
+attributes #0 = { attr1 attr2 attr3 }
+```
+
+LLVM支持的函数属性有多种，我们来看看几个比较容易理解的，由函数属性控制的优化：
+
+### 内联
+
+函数内联是一个非常复杂的概念，这里我们只是简单地来看一下，下面这个C语言代码：
+
+```c
+inline int foo(int a) __attribute__((always_inline));
+
+int foo(int a) {
+    if (a > 0) {
+        return a;
+    } else {
+        return 0;
+    }
+}
+```
+
+这里声明了`foo`函数，并且用了一个扩展语法`__attribute__((always_inline))`，这个语法实际上的作用就是给函数加上`alwaysinline`的属性。
+
+我们查看其生成的LLVM IR：
+
+```llvm
+define dso_local i32 @foo(i32 noundef %0) #0 {
+  ; ...
+}
+
+attributes #0 = { alwaysinline nounwind uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+```
+
+可以看到，其确实有了`alwaysinline`这个属性。
+
+### 帧指针清除优化
+
+我们再来看一个属性控制的优化：帧指针清除优化（Frame Pointer Elimination）。
+
+在讲这个之前，先讲一个比较小的优化。我们将一个非常简单的C程序
+
+```c
+void foo(int a, int b) {}
+int main() {
+    foo(1, 2);
+    return 0;
+}
+```
+
+编译为汇编程序，可以发现，`foo`函数的汇编代码为：
+
+```x86asm
+foo:
+    pushq   %rbp
+    movq    %rsp, %rbp
+    movl    %edi, -4(%rbp)
+    movl    %esi, -8(%rbp)
+    popq    %rbp
+```
+
+与我们常识有些违背。为啥这里栈不先增加（也就是对`rsp`寄存器进行`sub`），就直接把`edi`, `esi`的值移入栈内了呢？`-4(%rbp)`和`-8(%rbp)`的内存空间此刻似乎并不属于栈。
+
+这是因为，在System V关于amd64架构的标准中，规定了`rsp`以下128个字节为red zone。这个区域，信号和异常处理函数均不会使用。因此，一个函数可以放心使用`rsp`以下128个字节的内容。
+
+同时，我们对栈指针进行操作，一个很重要的原因就是为了进一步函数调用的时候，使用`call`指令会自动将被调用函数的返回地址压栈，那么就需要在调用`call`指令之前，保证栈顶指针确实指向栈顶，否则压栈就会覆盖一些数据。
+
+但此时，我们的`foo`函数并没有调用别的函数，也就不会产生压栈行为。因此，如果在栈帧不超过128个字节的情况下，编译器自动为我们省去了这样的操作。为了验证这一点，我们做一个小的修改：
+
+```c
+void bar() {}
+void foo(int a, int b) { bar(); }
+int main() {
+    foo(1, 2);
+    return 0;
+}
+```
+
+这时，我们再看编译出的`foo`函数的汇编代码：
+
+```x86asm
+foo:
+    pushq   %rbp
+    movq    %rsp, %rbp
+    subq    $16, %rsp
+    movl    %edi, -4(%rbp)
+    movl    %esi, -8(%rbp)
+    callq   bar
+    addq    $16, %rsp
+    popq    %rbp
+    retq
+```
+
+确实增加了对`rbp`的`sub`和`add`操作。而此时的`bar`函数，也没有对`rsp`的操作。
+
+接下来，就要讲帧指针清除优化了。经过我们上述的讨论，一个函数在进入时会有一些固定动作：
+
+1. 把`rbp`压栈
+2. 把`rsp`放入`rbp`
+3. 减`rsp`，预留栈空间
+
+在函数返回之前，也有其相应的操作：
+
+1. 加`rsp`，回收栈空间
+2. 把`rbp`最初的值弹栈回到`rbp`
+
+我们刚刚讲的优化，使得没有调用别的函数的函数，可以省略掉进入时的第3步和返回前的第1步。那么，是否还可以继续省略呢？
+
+那么，我们就要考虑为什么需要这些步骤。这些步骤都是围绕`rbp`进行的，而正是因为`rbp`经常进行这种操作，所以我们把`rbp`称为帧指针。之所以要进行这些操作，是因为我们在函数执行的过程中，栈顶指针随着不断调用别的函数，会不断移动，导致我们根据栈顶指针的位置，不太方便确定局部变量的位置。而如果我们在一开始就把`rsp`的值放在`rbp`中，那么局部变量的位置相对`rbp`是固定的，就更好确认了。注意到我们这里说根据`rsp`的值确认局部变量的位置只是不方便，但并不是不能做到。所以，我们可以增加一些编译器的负担，而把帧指针清除。
+
+帧指针清除在LLVM IR层面其实十分方便，就是什么都不写。我们可以观察
+
+```llvm
+define void @foo(i32 %a, i32 %b) {
+    %1 = alloca i32
+    %2 = alloca i32
+    store i32 %a, ptr %1
+    store i32 %b, ptr %2
+    ret void
+}
+```
+
+这个函数在编译成汇编语言之后，是：
+
+```x86asm
+foo:
+    movl    %edi, -4(%rsp)
+    movl    %esi, -8(%rsp)
+    retq
+```
+
+不仅没有了栈的增加减少（之前提过的优化），也没有了对`rbp`的操作（帧指针清除）。
+
+要想恢复这一操作也十分简单，在函数参数列表后加上一个属性`"frame-pointer"="all"`：
+
+```llvm
+define void @foo(i32 %a, i32 %b) "frame-pointer"="all" {
+    %1 = alloca i32
+    %2 = alloca i32
+    store i32 %a, ptr %1
+    store i32 %b, ptr %2
+    ret void
+}
+```
+
+其编译后的汇编程序就是：
+
+```x86asm
+foo:
+    pushq   %rbp
+    movq    %rsp, %rbp
+    movl    %edi, -4(%rbp)
+    movl    %esi, -8(%rbp)
+    popq    %rbp
+    retq
+```
+
+恢复了往日的雄风。
+
+## 元数据
+
+函数的属性可以在前后端之间传递函数的信息，例如，前端发现某个函数需要后端的特殊处理，就给这个函数加一个自定义的属性。而在LLVM的整个管线中的任意一个位置，我们往往都能读到这个属性，从而可以依据是否有这个属性来做特殊的处理/优化。正因如此，之所以函数要有属性，是因为函数是LLVM的优化过程中一个非常重要的基础单元，因此需要保留各种信息。
+
+除此之外，我们有时也会希望每一条指令，或者每一个翻译单元，都可以有类似属性一样的信息，可以在管线中传递/过滤，从而能获得一些信息。这在LLVM IR中被称为「[元数据](https://llvm.org/docs/LangRef.html#metadata)」（Metadata）。
+
+### 调试信息
+
+说了这么多，元数据具体有什么用处呢？元数据的语法又是怎样的呢？我们来看一个具体的例子。
+
+我们知道，在Clang中，传入`-g`选项可以生成调试信息。那么，调试信息是怎么在LLVM IR中体现的呢？
+
+我们这样一个`debug.c`文件：
+
+```c
+int sum(int a, int b) {
+    return a + b;
+}
+```
+
+我们使用
+
+```shell
+clang debug.c -g -S -emit-llvm
+```
+
+生成LLVM IR文件，其一部分如下：
+
+```llvm
+; ...
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @sum(i32 noundef %0, i32 noundef %1) #0 !dbg !10 {
+  %3 = alloca i32, align 4
+  %4 = alloca i32, align 4
+  store i32 %0, ptr %3, align 4
+  call void @llvm.dbg.declare(metadata ptr %3, metadata !15, metadata !DIExpression()), !dbg !16
+  store i32 %1, ptr %4, align 4
+  call void @llvm.dbg.declare(metadata ptr %4, metadata !17, metadata !DIExpression()), !dbg !18
+  %5 = load i32, ptr %3, align 4, !dbg !19
+  %6 = load i32, ptr %4, align 4, !dbg !20
+  %7 = add nsw i32 %5, %6, !dbg !21
+  ret i32 %7, !dbg !22
+}
+
+; ...
+
+!llvm.dbg.cu = !{!0}
+!llvm.module.flags = !{!2, !3, !4, !5, !6, !7, !8}
+!llvm.ident = !{!9}
+
+!0 = distinct !DICompileUnit(language: DW_LANG_C11, file: !1, producer: "Homebrew clang version 16.0.6", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, splitDebugInlining: false, nameTableKind: None)
+!1 = !DIFile(filename: "debug.c", directory: "...", checksumkind: CSK_MD5, checksum: "...")
+; ...
+!10 = distinct !DISubprogram(name: "sum", scope: !1, file: !1, line: 1, type: !11, scopeLine: 1, flags: DIFlagPrototyped, spFlags: DISPFlagDefinition, unit: !0, retainedNodes: !14)
+!11 = !DISubroutineType(types: !12)
+!12 = !{!13, !13, !13}
+!13 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
+!14 = !{}
+!15 = !DILocalVariable(name: "a", arg: 1, scope: !10, file: !1, line: 1, type: !13)
+!16 = !DILocation(line: 1, column: 13, scope: !10)
+!17 = !DILocalVariable(name: "b", arg: 2, scope: !10, file: !1, line: 1, type: !13)
+!18 = !DILocation(line: 1, column: 20, scope: !10)
+!19 = !DILocation(line: 2, column: 12, scope: !10)
+!20 = !DILocation(line: 2, column: 16, scope: !10)
+!21 = !DILocation(line: 2, column: 14, scope: !10)
+!22 = !DILocation(line: 2, column: 5, scope: !10)
+```
+
+我们可以看到，在生成的LLVM IR中，出现了大量以`!`开头的符号，这就是元数据的语法。
+
+具体而言，我们看到其中的
+
+```llvm
+!12 = !{!13, !13, !13}
+!13 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
+```
+
+这里，`!13 = ...`生成了一个元数据，其内容为一个给定的结构体`DIBasicType`，而`!12`这个元数据的内容，则并不是一个给定的结构体，而是由三个`!13`这个元数据组成的结构。也就是说，元数据的组织相对比较灵活。
+
+在`sum`函数体中，我们可以看到，几乎每条指令后都附加了一个元数据，在代码下半部分找到对应的元数据，其实就是这行指令对应C语言中源代码里的位置，也就是调试信息中的location。
+
+此外，我们还可以看到`llvm.dbg.declare`内置函数的调用。这个函数的作用是标记源代码中变量的地址。例如：
+
+```llvm
+store i32 %0, ptr %3, align 4
+call void @llvm.dbg.declare(metadata ptr %3, metadata !15, metadata !DIExpression()), !dbg !16
+```
+
+这里就是指，源代码中位于`!15`元数据处的变量，也就是`a`，其在生成的二进制程序中，位于`%3`变量。
+
+LLVM中的调试信息非常全面且复杂，具体可以看官方文档[Source Level Debugging with LLVM](https://llvm.org/docs/SourceLevelDebugging.html)。
+
+### 控制流完整性
+
+元数据的另一个用途，就在于控制流完整性保护。当一个攻击者攻击一个二进制程序的时候，最低级的攻击者只是让它崩溃，造成DoS攻击。高级的攻击者，往往想让这个程序执行自己想让它执行的命令。而这一途径，在现代攻击环境下，往往是通过函数指针覆盖来实现的。
+
+举一个例子来说，在前几年，有一个非常著名的漏洞[checkm8](https://twitter.com/axi0mX/status/1177542201670168576?s=20)。这个漏洞可以攻击苹果的大部分iPhone设备，并且由于代码处于ROM中，所以被认为无法修复。其具体的分析可以看[Technical analysis of the checkm8 exploit](https://habr.com/en/companies/dsec/articles/472762/)和[iPhone史诗级漏洞checkm8攻击原理浅析 - Gh0u1L5的文章 - 知乎](https://zhuanlan.zhihu.com/p/87456653)。我们这里只需要了解一点，它的核心是，Apple代码中有一个结构体
+
+```c
+struct usb_device_io_request {
+    void *callback;
+    // ...
+};
+```
+
+这里`callback`是一个函数指针，在程序执行中会被调用。攻击者通过某种方法，强行覆盖了这个函数指针的值，从而让程序执行自己想要执行的函数。
+
+为了抵御这种攻击，我们往往会采用控制流完整性（Control Flow Integrity, CFI）策略。最简单的思路是，我们在写程序时，函数指针所指向的函数，肯定是有限个确定的函数。那么，我们可以在执行函数指针所对应的间接调用时，检查调用目标是否是那有限个确定的函数，就可以保证不会出现之前的这种问题了。
+
+但是，如何确定这个函数指针究竟能指向哪些函数呢？这个问题非常复杂，编译器往往是做不到这件事的。因此，现在一般会使用比较弱化的控制流完整性策略。在LLVM中，我们可以通过传递`-fsanitize=cfi-icall`来启用LLVM-CFI所提供的控制流完整性策略（需要同时通过`-flto`开启LTO），例如，我们有以下程序：
+
+```c
+typedef void (*f)(void);
+
+void foo1(void) {}
+void foo2(void) {}
+void bar(int a) {}
+
+void baz(f func) {
+    func();
+}
+```
+
+将其保存为`cfi.c`，然后在命令行中使用
+
+```shell
+clang cfi.c -flto -fsanitize=cfi-icall -S -emit-llvm
+```
+
+可以生成一个开启了LLVM-CFI策略的LLVM IR代码。
+
+那么，LLVM-CFI策略是什么呢？由于其相对比较复杂，具体可以参考[Control Flow Integrity Design Documentation](https://clang.llvm.org/docs/ControlFlowIntegrityDesign.html)，我们这里只是非常粗略地讲。
+
+在上述代码中，`baz`函数接收一个函数指针，然后调用了这个函数指针。这个函数指针的类型是，不接收参数，也没有返回值。而LLVM-CFI采用的策略则是，只要满足这个类型的函数，都被认为是可以被函数指针所指向的。反之，如果不满足，则被拒绝。也就是说，在这个代码中，`foo1`、`foo2`都是满足的，而`bar`函数，因为它接收一个`int`类型的参数，所以不满足。
+
+那么，具体是怎么实现的呢？我们来看看它的LLVM IR代码，其一部分为：
+
+```llvm
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @foo1() #0 !type !9 !type !10 {
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @foo2() #0 !type !9 !type !10 {
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @bar(i32 noundef %0) #0 !type !11 !type !12 {
+  %2 = alloca i32, align 4
+  store i32 %0, ptr %2, align 4
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @baz(ptr noundef %0) #0 !type !13 !type !14 {
+  %2 = alloca ptr, align 8
+  store ptr %0, ptr %2, align 8
+  %3 = load ptr, ptr %2, align 8
+  %4 = call i1 @llvm.type.test(ptr %3, metadata !"_ZTSFvvE"), !nosanitize !15
+  br i1 %4, label %6, label %5, !nosanitize !15
+
+5:                                                ; preds = %1
+  call void @llvm.ubsantrap(i8 2) #3, !nosanitize !15
+  unreachable, !nosanitize !15
+
+6:                                                ; preds = %1
+  call void %3()
+  ret void
+}
+
+!9 = !{i64 0, !"_ZTSFvvE"}
+!10 = !{i64 0, !"_ZTSFvvE.generalized"}
+!11 = !{i64 0, !"_ZTSFviE"}
+!12 = !{i64 0, !"_ZTSFviE.generalized"}
+```
+
+可以看到，在`baz`函数中，在调用这个函数指针，也就是`call void %3()`之前，被插入了一部分代码：
+
+```llvm
+  %3 = load ptr, ptr %2, align 8
+  %4 = call i1 @llvm.type.test(ptr %3, metadata !"_ZTSFvvE"), !nosanitize !15
+  br i1 %4, label %6, label %5, !nosanitize !15
+5:                                                ; preds = %1
+  call void @llvm.ubsantrap(i8 2) #3, !nosanitize !15
+  unreachable, !nosanitize !15
+```
+
+在这里，首先调用了`llvm.type.test`这个内置函数。这个内置函数的作用是查看`ptr %3`这个函数的类型，是否是`!"_ZTSFvvE"`这个元数据所代表的类型，如果不是的话，就跳转，调用`llvm.ubsantrap`报告错误。而我们可以看到，`foo1`、`foo2`、`bar`都被附加了一些元数据，查看代码的下半部分，可以看到，`foo1`、`foo2`的元数据是`!"_ZTSFvvE"`，而`bar`的元数据是`!"_ZTSFviE"`。因此，如果攻击者想让这个间接调用前往`bar`函数，就会被拒绝，从而保护了控制流的完整性。
