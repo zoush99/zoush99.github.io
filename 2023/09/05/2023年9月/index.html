@@ -30,7 +30,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://zoush99.github.io/paper_source/2023%E5%B9%B49%E6%9C%88/Flang%E4%B8%8EIKOS%E9%80%82%E9%85%8D%E6%80%9D%E8%B7%AF.jpg">
 <meta property="article:published_time" content="2023-09-05T13:00:26.000Z">
-<meta property="article:modified_time" content="2023-09-13T03:46:18.083Z">
+<meta property="article:modified_time" content="2023-09-14T09:27:11.890Z">
 <meta property="article:author" content="zoush99">
 <meta property="article:tag" content="project">
 <meta property="article:tag" content="log">
@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%97%A5%E5%BF%97"><span class="nav-number">1.</span> <span class="nav-text">问题日志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Flang%E8%BF%90%E8%A1%8C%E5%91%BD%E4%BB%A4flang-function-f90-o-function-exe%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">Flang运行命令flang function.f90 -o function.exe遇到问题：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux%E4%B8%8B%E7%9A%84so%E3%80%81a%E5%92%8Co%E6%96%87%E4%BB%B6%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.</span> <span class="nav-text">linux下的so、a和o文件的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gcc%E7%9A%84%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">gcc的编译过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3Flang%E5%92%8CIKOS%E9%80%82%E9%85%8D%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF"><span class="nav-number">1.4.</span> <span class="nav-text">解决Flang和IKOS适配问题的思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pragma-once%E7%9A%84%E4%BD%BF%E7%94%A8%E8%A7%84%E5%88%99"><span class="nav-number">1.5.</span> <span class="nav-text">pragma once的使用规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#namespace%EF%BC%9A%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.6.</span> <span class="nav-text">namespace：命名空间的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unordered-map%E5%AE%B9%E5%99%A8%E7%94%A8%E6%B3%95"><span class="nav-number">1.7.</span> <span class="nav-text">unordered_map容器用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E8%AF%AD%E6%B3%95%E4%B8%ADexplicit%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8%E5%8F%8A%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.8.</span> <span class="nav-text">C++语法中explicit关键字的使用及示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84noexcept%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E7%94%A8%E6%B3%95"><span class="nav-number">1.9.</span> <span class="nav-text">C++中的noexcept关键字的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84const%E5%85%B3%E9%94%AE%E5%AD%97%E4%BD%BF%E7%94%A8"><span class="nav-number">1.10.</span> <span class="nav-text">C++中的const关键字使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84delete%E5%85%B3%E9%94%AE%E5%AD%97%E4%BD%BF%E7%94%A8"><span class="nav-number">1.11.</span> <span class="nav-text">C++中的delete关键字使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0%E5%92%8C%E5%8F%8B%E5%85%83%E7%B1%BB"><span class="nav-number">1.12.</span> <span class="nav-text">C++中的友元函数和友元类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88unique-ptr%E4%BD%BF%E7%94%A8"><span class="nav-number">1.13.</span> <span class="nav-text">C++中智能指针unique_ptr使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84static%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.14.</span> <span class="nav-text">C++中的static关键字的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84override%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.15.</span> <span class="nav-text">C++中的override的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#virtual%EF%BC%9A"><span class="nav-number">1.15.1.</span> <span class="nav-text">virtual：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#override%EF%BC%9A"><span class="nav-number">1.15.2.</span> <span class="nav-text">override：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#final%EF%BC%9A"><span class="nav-number">1.15.3.</span> <span class="nav-text">final：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84static-cast%E6%80%8E%E4%B9%88%E7%94%A8"><span class="nav-number">1.16.</span> <span class="nav-text">C++中的static_cast怎么用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84-ifdef%E6%80%8E%E4%B9%88%E7%94%A8"><span class="nav-number">1.17.</span> <span class="nav-text">C++中的# ifdef怎么用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84-if-elif-endif%E6%80%8E%E4%B9%88%E7%94%A8"><span class="nav-number">1.18.</span> <span class="nav-text">C++中的# if, # elif, # endif怎么用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84typename%E5%92%8Cclass%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.19.</span> <span class="nav-text">C++中的typename和class的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD-typename-%E5%92%8C-class-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.20.</span> <span class="nav-text">C++ 中 typename 和 class 的区别</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%97%A5%E5%BF%97"><span class="nav-number">1.</span> <span class="nav-text">问题日志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Flang%E8%BF%90%E8%A1%8C%E5%91%BD%E4%BB%A4flang-function-f90-o-function-exe%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">Flang运行命令flang function.f90 -o function.exe遇到问题：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux%E4%B8%8B%E7%9A%84so%E3%80%81a%E5%92%8Co%E6%96%87%E4%BB%B6%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.</span> <span class="nav-text">linux下的so、a和o文件的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gcc%E7%9A%84%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">gcc的编译过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3Flang%E5%92%8CIKOS%E9%80%82%E9%85%8D%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF"><span class="nav-number">1.4.</span> <span class="nav-text">解决Flang和IKOS适配问题的思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pragma-once%E7%9A%84%E4%BD%BF%E7%94%A8%E8%A7%84%E5%88%99"><span class="nav-number">1.5.</span> <span class="nav-text">pragma once的使用规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#namespace%EF%BC%9A%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.6.</span> <span class="nav-text">namespace：命名空间的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unordered-map%E5%AE%B9%E5%99%A8%E7%94%A8%E6%B3%95"><span class="nav-number">1.7.</span> <span class="nav-text">unordered_map容器用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E8%AF%AD%E6%B3%95%E4%B8%ADexplicit%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8%E5%8F%8A%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.8.</span> <span class="nav-text">C++语法中explicit关键字的使用及示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84noexcept%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E7%94%A8%E6%B3%95"><span class="nav-number">1.9.</span> <span class="nav-text">C++中的noexcept关键字的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84const%E5%85%B3%E9%94%AE%E5%AD%97%E4%BD%BF%E7%94%A8"><span class="nav-number">1.10.</span> <span class="nav-text">C++中的const关键字使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84delete%E5%85%B3%E9%94%AE%E5%AD%97%E4%BD%BF%E7%94%A8"><span class="nav-number">1.11.</span> <span class="nav-text">C++中的delete关键字使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0%E5%92%8C%E5%8F%8B%E5%85%83%E7%B1%BB"><span class="nav-number">1.12.</span> <span class="nav-text">C++中的友元函数和友元类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88unique-ptr%E4%BD%BF%E7%94%A8"><span class="nav-number">1.13.</span> <span class="nav-text">C++中智能指针unique_ptr使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84static%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.14.</span> <span class="nav-text">C++中的static关键字的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84override%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.15.</span> <span class="nav-text">C++中的override的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#virtual%EF%BC%9A"><span class="nav-number">1.15.1.</span> <span class="nav-text">virtual：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#override%EF%BC%9A"><span class="nav-number">1.15.2.</span> <span class="nav-text">override：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#final%EF%BC%9A"><span class="nav-number">1.15.3.</span> <span class="nav-text">final：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84static-cast%E6%80%8E%E4%B9%88%E7%94%A8"><span class="nav-number">1.16.</span> <span class="nav-text">C++中的static_cast怎么用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84-ifdef%E6%80%8E%E4%B9%88%E7%94%A8"><span class="nav-number">1.17.</span> <span class="nav-text">C++中的# ifdef怎么用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84-if-elif-endif%E6%80%8E%E4%B9%88%E7%94%A8"><span class="nav-number">1.18.</span> <span class="nav-text">C++中的# if, # elif, # endif怎么用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84typename%E5%92%8Cclass%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.19.</span> <span class="nav-text">C++中的typename和class的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84void-%E6%80%8E%E4%B9%88%E7%94%A8"><span class="nav-number">1.20.</span> <span class="nav-text">C++中的void*怎么用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%94%A8doxygen%E5%86%99%E9%A1%B9%E7%9B%AE%E6%B3%A8%E9%87%8A"><span class="nav-number">1.21.</span> <span class="nav-text">在项目中用doxygen写项目注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84this%E5%92%8C-this%E7%9A%84%E4%BD%9C%E7%94%A8%E5%92%8C%E5%8C%BA%E5%88%AB"><span class="nav-number">1.22.</span> <span class="nav-text">C++中的this和*this的作用和区别</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -241,7 +241,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-13 11:46:18" itemprop="dateModified" datetime="2023-09-13T11:46:18+08:00">2023-09-13</time>
+      <time title="Modified: 2023-09-14 17:27:11" itemprop="dateModified" datetime="2023-09-14T17:27:11+08:00">2023-09-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -271,14 +271,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>13k</span>
+      <span>16k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>24 mins.</span>
+      <span>28 mins.</span>
     </span>
 </div>
 
@@ -463,7 +463,7 @@
 <p>详情请见<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/cpp/cpp/static-cast-operator?view=msvc-170">static_cast 运算符 | Microsoft Learn</a></p>
 <h2 id="C-中的-ifdef怎么用"><a href="#C-中的-ifdef怎么用" class="headerlink" title="C++中的# ifdef怎么用"></a>C++中的<code># ifdef</code>怎么用</h2><p>可以在任何可以使用 <code>#if</code> 的地方使用 <code>#ifdef</code>*和 <code>#ifndef</code>指令。 如果定义了 <code>identifier</code>，<code>#ifdef``identifier</code> 语句等效于 <code>#if 1</code>。 如果 <code>identifier</code> 尚未定义或未被 <code>#undef</code>指令定义，它等效于 <code>#if 0</code>。 这些指令只检查使用 <code>#define</code> 定义的标识符是否存在，而不检查在 C 或 C++ 源代码中声明的标识符。</p>
 <p>提供这些指令只是为了实现与该语言的早期版本的兼容性。 首选与 <code>#if</code> 指令一起使用的 <code>defined(``identifier</code>)&#96; 常量表达式。</p>
-<p><code>#ifndef</code> 指令检查与 <code>#ifdef</code>检查的条件相反的情况。 如果尚未定义标识符，或者如果它的定义已用 <code>#undef</code> 删除，则条件为 true（非零值）。 否则，条件为 false (0)。</p>
+<p><code>#ifndef</code> 指令检查与 <code>#ifdef</code>检查的条件相反的情况。 如果尚未定义标识符，或者如果它的定义已用 <code>#undef</code> 删除，则条件为 <code>true</code>（非零值）。 否则，条件为 <code>false </code>(0)。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ifdef_ifndef.CPP</span></span><br><span class="line"><span class="comment">// compile with: /Dtest /c</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> test</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> final</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
 
 <h2 id="C-中的-if-elif-endif怎么用"><a href="#C-中的-if-elif-endif怎么用" class="headerlink" title="C++中的# if, # elif, # endif怎么用"></a>C++中的<code># if, # elif, # endif</code>怎么用</h2><p>源文件中的每个 <code>#if </code>指令必须与表示结束的<code> #endif</code> 指令匹配。 任意数量的 <code>#elif</code> 指令可以出现在 #if 和<code>#endif</code>指令之间，但最多允许一个<code>#else</code>指令。 <code>#else </code>指令（如果有）必须是<code>#endif</code>之前的最后一个指令。</p>
@@ -488,18 +488,162 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">if</span> DLEVEL &gt; 5</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> SIGNAL  1</span></span><br><span class="line">    <span class="meta">#<span class="keyword">if</span> STACKUSE == 1</span></span><br><span class="line">        <span class="meta">#<span class="keyword">define</span> STACK   200</span></span><br><span class="line">    <span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">        <span class="meta">#<span class="keyword">define</span> STACK   100</span></span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> SIGNAL  0</span></span><br><span class="line">    <span class="meta">#<span class="keyword">if</span> STACKUSE == 1</span></span><br><span class="line">        <span class="meta">#<span class="keyword">define</span> STACK   100</span></span><br><span class="line">    <span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">        <span class="meta">#<span class="keyword">define</span> STACK   50</span></span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> DLEVEL == 0</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> STACK 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">elif</span> DLEVEL == 1</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> STACK 100</span></span><br><span class="line"><span class="meta">#<span class="keyword">elif</span> DLEVEL &gt; 5</span></span><br><span class="line">    <span class="built_in">display</span>( debugptr );</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> STACK 200</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
 
 <p>具体请看<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/cpp/preprocessor/hash-if-hash-elif-hash-else-and-hash-endif-directives-c-cpp?view=msvc-170">#if、#elif、#else 和 #endif 指令 (C&#x2F;C++) | Microsoft Learn</a></p>
-<h2 id="C-中的typename和class的区别"><a href="#C-中的typename和class的区别" class="headerlink" title="C++中的typename和class的区别"></a>C++中的<code>typename</code>和<code>class</code>的区别</h2><h2 id="C-中-typename-和-class-的区别"><a href="#C-中-typename-和-class-的区别" class="headerlink" title="C++ 中 typename 和 class 的区别"></a>C++ 中 typename 和 class 的区别</h2><p>在 C++ Template 中很多地方都用到了 typename 与 class 这两个关键字，而且好像可以替换，是不是这两个关键字完全一样呢?</p>
+<h2 id="C-中的typename和class的区别"><a href="#C-中的typename和class的区别" class="headerlink" title="C++中的typename和class的区别"></a>C++中的<code>typename</code>和<code>class</code>的区别</h2><p>在 C++ Template 中很多地方都用到了 typename 与 class 这两个关键字，而且好像可以替换，是不是这两个关键字完全一样呢?</p>
 <p>相信学习 C++ 的人对 class 这个关键字都非常明白，class 用于定义类，在模板引入 c++ 后，最初定义模板的方法为：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;......</span><br></pre></td></tr></table></figure>
 
 <p>这里 class 关键字表明T是一个类型，后来为了避免 class 在这两个地方的使用可能给人带来混淆，所以引入了 typename 这个关键字，它的作用同 class 一样表明后面的符号为一个类型，这样在定义模板的时候就可以使用下面的方式了：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span></span><br><span class="line">T&gt;......</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;......</span><br></pre></td></tr></table></figure>
 
 <p>在模板定义语法中关键字 class 与 typename 的作用完全一样。</p>
 <p>typename 难道仅仅在模板定义中起作用吗？其实不是这样，typename 另外一个作用为：**使用嵌套依赖类型(nested depended name)**，如下所示：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyArray</span> </span><br><span class="line">&#123; </span><br><span class="line">    <span class="keyword">public</span>：</span><br><span class="line">    <span class="keyword">typedef</span> <span class="type">int</span> LengthType;</span><br><span class="line">.....</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MyMethod</span><span class="params">( T myarr )</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> T::LengthType LengthType; </span><br><span class="line">    LengthType length = myarr.GetLength; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这个时候 typename 的作用就是告诉 c++ 编译器，typename 后面的字符串为一个类型名称，而不是成员函数或者成员变量，这个时候如果前面没有 typename，编译器没有任何办法知道 T::LengthType 是一个类型还是一个成员名称(静态数据成员或者静态函数)，所以编译不能够通过。</p>
+<h2 id="C-中的void-怎么用"><a href="#C-中的void-怎么用" class="headerlink" title="C++中的void*怎么用"></a>C++中的<code>void*</code>怎么用</h2><p>首先<code>void*</code>中的void代表一个任意的数据类型，”星号”代表一个指针，所以其就是一个任意数据类型的指针。</p>
+<blockquote>
+<p>对于指定数据类型的指针如<code>int* ，double*</code>等，他们的sizeof都是4个字节，因为都是一个指针，只是指针指向的数据类型不一致。</p>
+</blockquote>
+<p><strong>当函数传参时不确定数据类型时或者支持多种数据类型传递时。</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">say</span><span class="params">(<span class="type">int</span> type,<span class="type">void</span>* pArgs)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (type) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">double</span>* d = (<span class="type">double</span>*)pArgs;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;   </span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span>* i = (<span class="type">int</span>*)pArgs;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;       </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>函数返回值不需要考虑类型，只关心返回的大小。</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span>* <span class="title">malloc</span><span class="params">(<span class="type">size_t</span> size)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>代码使用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>* a = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="type">double</span>* b = <span class="literal">nullptr</span>;</span><br><span class="line">b = (<span class="type">double</span>*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(<span class="type">double</span>));</span><br><span class="line">a = (<span class="type">int</span>*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(<span class="type">double</span>));</span><br></pre></td></tr></table></figure>
+
+<p>可以看到<code>malloc</code>返回值类型为<code>void*</code>，其只返回分配内存的大小，不关心分配后的内存你是使用int还是double类型进行划分.</p>
+<blockquote>
+<p>注意：函数外部在接收到void*格式的返回值时，需要强转为自己的数据类型才能使用。</p>
+</blockquote>
+<p><strong>当void*作为函数的参数类型或者返回值类型时，说明该函数可以接收或者返回任意类型的指针。</strong></p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span>* _say(<span class="type">void</span>* pArgs) &#123;</span><br><span class="line">    <span class="keyword">return</span> pArgs;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span>  <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> _a = <span class="number">5</span>;</span><br><span class="line">    <span class="type">float</span> f = <span class="number">10.8</span>;</span><br><span class="line">    <span class="type">int</span>* _pi = &amp;_a;</span><br><span class="line">    <span class="type">float</span>* pf = &amp;f;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; *(<span class="type">int</span>*)_say(_pi) &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; *(<span class="type">float</span>*)_say(pf) &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">运行结果：</span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">10.8</span></span><br></pre></td></tr></table></figure>
+
+<p>代码中可以看出参数<code>void* pArgs</code>可以使用任意类型的实参，返回值也可以返回任意类型的指针，但是最终需要转换为具体类型才能使用。</p>
+<p><code>void*</code>在C++中的作用其实就是为了实现<strong>泛型编程</strong>，和Java中使用Object来表示是一样的，所以又称为通用指针和泛指针，不过<strong>C++中大部分情况下会使用模板编程来实现泛型</strong>。</p>
+<h2 id="在项目中用doxygen写项目注释"><a href="#在项目中用doxygen写项目注释" class="headerlink" title="在项目中用doxygen写项目注释"></a>在项目中用doxygen写项目注释</h2><p><strong>Doxygen语法简介</strong></p>
+<p>所谓<code>Doxygen</code>语法就是在写程序注视时候按照<code>Doxygen</code>语法规则来写注释。只有按照标准的注释规则来写注释，生成的文档才会非常漂亮，否则乱七八糟的。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>字段名</th>
+<th>语法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@file</td>
+<td>文件名</td>
+<td>file [&lt; name &gt;]</td>
+</tr>
+<tr>
+<td>@brief</td>
+<td>简介</td>
+<td>brief { brief description }</td>
+</tr>
+<tr>
+<td>@author</td>
+<td>作者</td>
+<td>author { list of authors }</td>
+</tr>
+<tr>
+<td>@mainpage</td>
+<td>主页信息</td>
+<td>mainpage [(title)]</td>
+</tr>
+<tr>
+<td>@date</td>
+<td>年-月-日</td>
+<td>date { date description }</td>
+</tr>
+<tr>
+<td>@author</td>
+<td>版本号</td>
+<td>version { version number }</td>
+</tr>
+<tr>
+<td>@copyright</td>
+<td>版权</td>
+<td>copyright { copyright description }</td>
+</tr>
+<tr>
+<td>@param</td>
+<td>参数</td>
+<td>param [(dir)] &lt; parameter-name&gt; { parameter description }</td>
+</tr>
+<tr>
+<td>@return</td>
+<td>返回</td>
+<td>return { description of the return value }</td>
+</tr>
+<tr>
+<td>@retval</td>
+<td>返回值</td>
+<td>retval { description }</td>
+</tr>
+<tr>
+<td>@bug</td>
+<td>漏洞</td>
+<td>bug { bug description }</td>
+</tr>
+<tr>
+<td>@details</td>
+<td>细节</td>
+<td>details { detailed description }</td>
+</tr>
+<tr>
+<td>@pre</td>
+<td>前提条件</td>
+<td>pre { description of the precondition }</td>
+</tr>
+<tr>
+<td>@see</td>
+<td>参考</td>
+<td>see { references }</td>
+</tr>
+<tr>
+<td>@link</td>
+<td>连接(与@see类库，{@link <a href="https://link.zhihu.com/?target=http://www.google.com">http://www.google.com</a>})</td>
+<td>link &lt; link-object&gt;</td>
+</tr>
+<tr>
+<td>@throw</td>
+<td>异常描述</td>
+<td>throw &lt; exception-object&gt; { exception description }</td>
+</tr>
+<tr>
+<td>@todo</td>
+<td>待处理</td>
+<td>todo { paragraph describing what is to be done }</td>
+</tr>
+<tr>
+<td>@warning</td>
+<td>警告信息</td>
+<td>warning { warning message }</td>
+</tr>
+<tr>
+<td>@deprecated</td>
+<td>弃用说明。可用于描述替代方案，预期寿命等</td>
+<td>deprecated { description }</td>
+</tr>
+<tr>
+<td>@example</td>
+<td>弃用说明。可用于描述替代方案，预期寿命等</td>
+<td>deprecated { description }</td>
+</tr>
+</tbody></table>
+<p><strong>文件注释</strong></p>
+<p>一般放在文件开头</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @file 文件名</span><br><span class="line"> * @brief 简介</span><br><span class="line"> * @details 细节</span><br><span class="line"> * @author 作者</span><br><span class="line"> * @version 版本号</span><br><span class="line"> * @date 年-月-日</span><br><span class="line"> * @copyright 版权</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+
+<p><strong>函数注释</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">  * @brief 函数描述</span><br><span class="line">  * @param 参数描述</span><br><span class="line">  * @return 返回描述</span><br><span class="line">  * @retval 返回值描述</span><br><span class="line">  */</span><br></pre></td></tr></table></figure>
+
+<p>细节请看<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/510925324">干货|教你使用Doxygen制作漂亮的程序文档 - 知乎 (zhihu.com)</a></p>
+<h2 id="C-中的this和-this的作用和区别"><a href="#C-中的this和-this的作用和区别" class="headerlink" title="C++中的this和*this的作用和区别"></a>C++中的<code>this</code>和<code>*this</code>的作用和区别</h2><p><code>return *this</code>返回的是当前对象的克隆或者本身（若返回类型为A， 则是克隆， 若返回类型为A&amp;， 则是本身 ）。<code>return this</code>返回当前对象的地址（指向当前对象的指针）。</p>
+<p>具体请见<a target="_blank" rel="noopener" href="https://blog.csdn.net/u011663005/article/details/106151786">C++中this与*this的区别_北海的星辰大海的博客-CSDN博客</a></p>
 
     </div>
 
@@ -557,14 +701,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Word count total: </span>
-    <span title="Word count total">86k</span>
+    <span title="Word count total">88k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">2:37</span>
+    <span title="Reading time total">2:41</span>
   </span>
 </div>
 <div class="busuanzi-count">
