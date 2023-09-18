@@ -1158,6 +1158,124 @@
 
 <p>第二个例子是在普通函数中接受初始化列表。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;initializer_list&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">sum</span><span class="params">(initializer_list&lt;<span class="type">double</span>&gt; il)</span></span>;</span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">average</span><span class="params">(<span class="type">const</span> initializer_list&lt;<span class="type">double</span>&gt; &amp;ril)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">sum</span><span class="params">(initializer_list&lt;<span class="type">double</span>&gt; il)</span></span>&#123;</span><br><span class="line">	<span class="type">double</span> sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> tmp : il) sum += tmp;</span><br><span class="line">	<span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">average</span><span class="params">(<span class="type">const</span> initializer_list&lt;<span class="type">double</span>&gt; &amp;ril)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (ril.<span class="built_in">size</span>() &gt; <span class="number">0</span>)&#123;</span><br><span class="line">		<span class="type">double</span> sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">auto</span> tmp : ril) sum += tmp;</span><br><span class="line">		<span class="keyword">return</span> sum / ril.<span class="built_in">size</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0.0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;sum:&quot;</span> &lt;&lt; <span class="built_in">sum</span>(&#123; <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> &#125;) &lt;&lt; <span class="string">&quot;, ave:&quot;</span> &lt;&lt; <span class="built_in">average</span>(&#123; <span class="number">2.0</span>, <span class="number">3</span>, <span class="number">4</span> &#125;) &lt;&lt; endl;</span><br><span class="line">	initializer_list&lt;<span class="type">double</span>&gt; dl = &#123; <span class="number">1.5</span>, <span class="number">2.5</span>, <span class="number">3.5</span>, <span class="number">4.5</span>, <span class="number">5.5</span> &#125;;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;sum:&quot;</span> &lt;&lt; <span class="built_in">sum</span>(dl) &lt;&lt; <span class="string">&quot;, ave:&quot;</span> &lt;&lt; <span class="built_in">average</span>(dl) &lt;&lt; endl;</span><br><span class="line">	dl = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span> &#125;;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;sum:&quot;</span> &lt;&lt; <span class="built_in">sum</span>(dl) &lt;&lt; <span class="string">&quot;, ave:&quot;</span> &lt;&lt; <span class="built_in">average</span>(dl) &lt;&lt; endl;</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="C-运算符优先级"><a href="#C-运算符优先级" class="headerlink" title="C++运算符优先级"></a>C++运算符优先级</h2><p>C++运算符优先级，是描述在计算机运算计算表达式时执行运算的先后顺序。 先执行具有较高优先级的运算，然后执行较低优先级的运算。 例如，我们常说的先执行相乘和除，再执行加减运算。</p>
+<table>
+<thead>
+<tr>
+<th>优先级</th>
+<th>结合性</th>
+<th>运算符</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>左结合</td>
+<td>() [] -&gt; .</td>
+<td>圆括号 下标运算符 指向结构体成员运算符 结构体成员运算符</td>
+</tr>
+<tr>
+<td>2</td>
+<td>右结合</td>
+<td>! ~ ++ – + - (类型) * &amp; sizeof</td>
+<td>逻辑非运算符 按位取反运算符 前缀增量运算符 前缀减量运算符 正号运算符 负号运算符 类型转换运算符 指针运算符 地址运算符 长度运算符</td>
+</tr>
+<tr>
+<td>3</td>
+<td>左结合</td>
+<td>* &#x2F; %</td>
+<td>乘法运算符 除法运算符 取余运算符</td>
+</tr>
+<tr>
+<td>4</td>
+<td>左结合</td>
+<td>+ -</td>
+<td>加法运算符 减法运算符</td>
+</tr>
+<tr>
+<td>5</td>
+<td>左结合</td>
+<td>&lt;&lt; &gt;&gt;</td>
+<td>左移运算符 右移运算符</td>
+</tr>
+<tr>
+<td>6</td>
+<td>左结合</td>
+<td>&lt; &lt;&#x3D; &gt; &gt;&#x3D;</td>
+<td>关系运算符</td>
+</tr>
+<tr>
+<td>7</td>
+<td>左结合</td>
+<td>&#x3D;&#x3D; !&#x3D;</td>
+<td>等于运算符 不等于运算符</td>
+</tr>
+<tr>
+<td>8</td>
+<td>左结合</td>
+<td>&amp;</td>
+<td>按位与运算符</td>
+</tr>
+<tr>
+<td>9</td>
+<td>左结合</td>
+<td>^</td>
+<td>按位异或运算符</td>
+</tr>
+<tr>
+<td>10</td>
+<td>结合性</td>
+<td>|</td>
+<td>按位或运算符</td>
+</tr>
+<tr>
+<td>11</td>
+<td>左结合</td>
+<td>&amp;&amp;</td>
+<td>逻辑与运算符</td>
+</tr>
+<tr>
+<td>12</td>
+<td>左结合</td>
+<td>||</td>
+<td>逻辑或运算符</td>
+</tr>
+<tr>
+<td>13</td>
+<td>右结合</td>
+<td>? :</td>
+<td>条件运算符</td>
+</tr>
+<tr>
+<td>14</td>
+<td>右结合</td>
+<td>&#x3D; +&#x3D; -&#x3D; *&#x3D; &#x2F;&#x3D; %&#x3D; &amp;&#x3D; ^&#x3D; |&#x3D; &lt;&lt;&#x3D; &gt;&gt;&#x3D;</td>
+<td>赋值运算符</td>
+</tr>
+<tr>
+<td>15</td>
+<td>左结合</td>
+<td>,</td>
+<td>逗号运算符</td>
+</tr>
+</tbody></table>
+<p> 细节请看<a href="https://www.cnblogs.com/shangdawei/p/3883702.html">C++ 运算符优先级列表 - IAmAProgrammer - 博客园 (cnblogs.com)</a></p>
+<h2 id="C-中for循环的几种用法"><a href="#C-中for循环的几种用法" class="headerlink" title="C++中for循环的几种用法"></a>C++中<code>for</code>循环的几种用法</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span>, <span class="type">char</span> **)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">list</span><span class="params">(&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 下标法 */</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; list.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        cout&lt;&lt;list[i]; <span class="comment">//or list.at(i)</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 迭代器 */</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = list.<span class="built_in">begin</span>(); iter != list.<span class="built_in">end</span>(); ++iter) &#123;</span><br><span class="line">        cout&lt;&lt;*iter;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* STL函数 */</span></span><br><span class="line">    for_each(list.<span class="built_in">begin</span>(), list.<span class="built_in">end</span>(), [](<span class="type">int</span> item)&#123; cout&lt;&lt;item; &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* C++11新增加 */</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> each : list) &#123;</span><br><span class="line">        cout&lt;&lt;each;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>详情请见<a href="https://cloud.tencent.com/developer/article/1463130">C++ for循环的几种用法-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
+<h2 id="提问IKOS关于AR的问题"><a href="#提问IKOS关于AR的问题" class="headerlink" title="提问IKOS关于AR的问题"></a>提问IKOS关于AR的问题</h2><blockquote>
+<p>Hi, everyone! do you have some syntactic details, or documentation, about your own design of the abstract representation language (AR)? When I read the source code, I find that there is a lot designed in it and it is not intuitive enough. Thank you guys! Thank you for doing the work for the program analysis and open-sourcing the results so that I have the opportunity to learn from it!</p>
+</blockquote>
+<blockquote>
+<p>Unfortunately, AR is pretty loosely documented.<br>In a way, it is pretty similar to the LLVM language: <a href="https://llvm.org/docs/LangRef.html">https://llvm.org/docs/LangRef.html</a><br>Each instruction is pretty much translated 1:1 into AR.<br>You can find the implementation of the translation in <a href="https://github.com/NASA-SW-VnV/ikos/blob/master/frontend/llvm/src/import/function.cpp#L305">https://github.com/NASA-SW-VnV/ikos/blob/master/frontend/llvm/src/import/function.cpp#L305</a><br>The major differences are:</p>
+<ul>
+<li>AR integer types are either signed or unsigned. LLVM integers do not have a signedness.</li>
+<li>AR has a concept of local variables. LLVM has a<a href="https://llvm.org/docs/LangRef.html#alloca-instruction"> <code>alloca</code> instruction</a> that allocates memory on the stack (effectively a local variable).</li>
+<li>AR has names for variables, LLVM doesn’t (names are in the debugging information, which uses a different format)</li>
+<li>LLVM phi nodes and branching are translated into <code>ar::Comparison</code> statement within the control flow graph. Basically, <code>ar::Comparison</code> is an assert. To translate a <code>if(cond) &#123; x =1 &#125; else &#123; x = 2 &#125;</code> you would have 2 basic blocks, one with <code>Comparison(cond, NE, 0)</code> and one with <code>Comparison(cond, EQ, 0)</code>.</li>
+</ul>
+</blockquote>
 ]]></content>
       <categories>
         <category>log</category>

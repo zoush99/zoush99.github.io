@@ -30,7 +30,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://zoush99.github.io/paper_source/2023%E5%B9%B49%E6%9C%88/Flang%E4%B8%8EIKOS%E9%80%82%E9%85%8D%E6%80%9D%E8%B7%AF.jpg">
 <meta property="article:published_time" content="2023-09-05T13:00:26.000Z">
-<meta property="article:modified_time" content="2023-09-14T14:12:01.236Z">
+<meta property="article:modified_time" content="2023-09-18T01:33:01.079Z">
 <meta property="article:author" content="zoush99">
 <meta property="article:tag" content="project">
 <meta property="article:tag" content="log">
@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%97%A5%E5%BF%97"><span class="nav-number">1.</span> <span class="nav-text">问题日志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Flang%E8%BF%90%E8%A1%8C%E5%91%BD%E4%BB%A4flang-function-f90-o-function-exe%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">Flang运行命令flang function.f90 -o function.exe遇到问题：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux%E4%B8%8B%E7%9A%84so%E3%80%81a%E5%92%8Co%E6%96%87%E4%BB%B6%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.</span> <span class="nav-text">linux下的so、a和o文件的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gcc%E7%9A%84%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">gcc的编译过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3Flang%E5%92%8CIKOS%E9%80%82%E9%85%8D%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF"><span class="nav-number">1.4.</span> <span class="nav-text">解决Flang和IKOS适配问题的思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pragma-once%E7%9A%84%E4%BD%BF%E7%94%A8%E8%A7%84%E5%88%99"><span class="nav-number">1.5.</span> <span class="nav-text">pragma once的使用规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#namespace%EF%BC%9A%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.6.</span> <span class="nav-text">namespace：命名空间的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unordered-map%E5%AE%B9%E5%99%A8%E7%94%A8%E6%B3%95"><span class="nav-number">1.7.</span> <span class="nav-text">unordered_map容器用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E8%AF%AD%E6%B3%95%E4%B8%ADexplicit%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8%E5%8F%8A%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.8.</span> <span class="nav-text">C++语法中explicit关键字的使用及示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84noexcept%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E7%94%A8%E6%B3%95"><span class="nav-number">1.9.</span> <span class="nav-text">C++中的noexcept关键字的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84const%E5%85%B3%E9%94%AE%E5%AD%97%E4%BD%BF%E7%94%A8"><span class="nav-number">1.10.</span> <span class="nav-text">C++中的const关键字使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84delete%E5%85%B3%E9%94%AE%E5%AD%97%E4%BD%BF%E7%94%A8"><span class="nav-number">1.11.</span> <span class="nav-text">C++中的delete关键字使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0%E5%92%8C%E5%8F%8B%E5%85%83%E7%B1%BB"><span class="nav-number">1.12.</span> <span class="nav-text">C++中的友元函数和友元类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88unique-ptr%E4%BD%BF%E7%94%A8"><span class="nav-number">1.13.</span> <span class="nav-text">C++中智能指针unique_ptr使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84static%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.14.</span> <span class="nav-text">C++中的static关键字的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84override%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.15.</span> <span class="nav-text">C++中的override的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#virtual%EF%BC%9A"><span class="nav-number">1.15.1.</span> <span class="nav-text">virtual：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#override%EF%BC%9A"><span class="nav-number">1.15.2.</span> <span class="nav-text">override：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#final%EF%BC%9A"><span class="nav-number">1.15.3.</span> <span class="nav-text">final：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84static-cast%E6%80%8E%E4%B9%88%E7%94%A8"><span class="nav-number">1.16.</span> <span class="nav-text">C++中的static_cast怎么用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84-ifdef%E6%80%8E%E4%B9%88%E7%94%A8"><span class="nav-number">1.17.</span> <span class="nav-text">C++中的# ifdef怎么用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84-if-elif-endif%E6%80%8E%E4%B9%88%E7%94%A8"><span class="nav-number">1.18.</span> <span class="nav-text">C++中的# if, # elif, # endif怎么用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84typename%E5%92%8Cclass%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.19.</span> <span class="nav-text">C++中的typename和class的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84void-%E6%80%8E%E4%B9%88%E7%94%A8"><span class="nav-number">1.20.</span> <span class="nav-text">C++中的void*怎么用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%94%A8doxygen%E5%86%99%E9%A1%B9%E7%9B%AE%E6%B3%A8%E9%87%8A"><span class="nav-number">1.21.</span> <span class="nav-text">在项目中用doxygen写项目注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84this%E5%92%8C-this%E7%9A%84%E4%BD%9C%E7%94%A8%E5%92%8C%E5%8C%BA%E5%88%AB"><span class="nav-number">1.22.</span> <span class="nav-text">C++中的this和*this的作用和区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84initializer-list%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="nav-number">1.23.</span> <span class="nav-text">C++中的initializer_list类型的简单使用</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%97%A5%E5%BF%97"><span class="nav-number">1.</span> <span class="nav-text">问题日志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Flang%E8%BF%90%E8%A1%8C%E5%91%BD%E4%BB%A4flang-function-f90-o-function-exe%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">Flang运行命令flang function.f90 -o function.exe遇到问题：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux%E4%B8%8B%E7%9A%84so%E3%80%81a%E5%92%8Co%E6%96%87%E4%BB%B6%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.</span> <span class="nav-text">linux下的so、a和o文件的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gcc%E7%9A%84%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">gcc的编译过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3Flang%E5%92%8CIKOS%E9%80%82%E9%85%8D%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF"><span class="nav-number">1.4.</span> <span class="nav-text">解决Flang和IKOS适配问题的思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pragma-once%E7%9A%84%E4%BD%BF%E7%94%A8%E8%A7%84%E5%88%99"><span class="nav-number">1.5.</span> <span class="nav-text">pragma once的使用规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#namespace%EF%BC%9A%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.6.</span> <span class="nav-text">namespace：命名空间的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unordered-map%E5%AE%B9%E5%99%A8%E7%94%A8%E6%B3%95"><span class="nav-number">1.7.</span> <span class="nav-text">unordered_map容器用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E8%AF%AD%E6%B3%95%E4%B8%ADexplicit%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8%E5%8F%8A%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.8.</span> <span class="nav-text">C++语法中explicit关键字的使用及示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84noexcept%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E7%94%A8%E6%B3%95"><span class="nav-number">1.9.</span> <span class="nav-text">C++中的noexcept关键字的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84const%E5%85%B3%E9%94%AE%E5%AD%97%E4%BD%BF%E7%94%A8"><span class="nav-number">1.10.</span> <span class="nav-text">C++中的const关键字使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84delete%E5%85%B3%E9%94%AE%E5%AD%97%E4%BD%BF%E7%94%A8"><span class="nav-number">1.11.</span> <span class="nav-text">C++中的delete关键字使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0%E5%92%8C%E5%8F%8B%E5%85%83%E7%B1%BB"><span class="nav-number">1.12.</span> <span class="nav-text">C++中的友元函数和友元类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88unique-ptr%E4%BD%BF%E7%94%A8"><span class="nav-number">1.13.</span> <span class="nav-text">C++中智能指针unique_ptr使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84static%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.14.</span> <span class="nav-text">C++中的static关键字的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84override%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.15.</span> <span class="nav-text">C++中的override的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#virtual%EF%BC%9A"><span class="nav-number">1.15.1.</span> <span class="nav-text">virtual：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#override%EF%BC%9A"><span class="nav-number">1.15.2.</span> <span class="nav-text">override：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#final%EF%BC%9A"><span class="nav-number">1.15.3.</span> <span class="nav-text">final：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84static-cast%E6%80%8E%E4%B9%88%E7%94%A8"><span class="nav-number">1.16.</span> <span class="nav-text">C++中的static_cast怎么用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84-ifdef%E6%80%8E%E4%B9%88%E7%94%A8"><span class="nav-number">1.17.</span> <span class="nav-text">C++中的# ifdef怎么用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84-if-elif-endif%E6%80%8E%E4%B9%88%E7%94%A8"><span class="nav-number">1.18.</span> <span class="nav-text">C++中的# if, # elif, # endif怎么用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84typename%E5%92%8Cclass%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.19.</span> <span class="nav-text">C++中的typename和class的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84void-%E6%80%8E%E4%B9%88%E7%94%A8"><span class="nav-number">1.20.</span> <span class="nav-text">C++中的void*怎么用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%94%A8doxygen%E5%86%99%E9%A1%B9%E7%9B%AE%E6%B3%A8%E9%87%8A"><span class="nav-number">1.21.</span> <span class="nav-text">在项目中用doxygen写项目注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84this%E5%92%8C-this%E7%9A%84%E4%BD%9C%E7%94%A8%E5%92%8C%E5%8C%BA%E5%88%AB"><span class="nav-number">1.22.</span> <span class="nav-text">C++中的this和*this的作用和区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84initializer-list%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="nav-number">1.23.</span> <span class="nav-text">C++中的initializer_list类型的简单使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">1.24.</span> <span class="nav-text">C++运算符优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E4%B8%ADfor%E5%BE%AA%E7%8E%AF%E7%9A%84%E5%87%A0%E7%A7%8D%E7%94%A8%E6%B3%95"><span class="nav-number">1.25.</span> <span class="nav-text">C++中for循环的几种用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E9%97%AEIKOS%E5%85%B3%E4%BA%8EAR%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.26.</span> <span class="nav-text">提问IKOS关于AR的问题</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -241,7 +241,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-09-14 22:12:01" itemprop="dateModified" datetime="2023-09-14T22:12:01+08:00">2023-09-14</time>
+      <time title="Modified: 2023-09-18 09:33:01" itemprop="dateModified" datetime="2023-09-18T09:33:01+08:00">2023-09-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -271,14 +271,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>17k</span>
+      <span>20k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>32 mins.</span>
+      <span>36 mins.</span>
     </span>
 </div>
 
@@ -655,6 +655,124 @@
 <p>第二个例子是在普通函数中接受初始化列表。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;initializer_list&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">sum</span><span class="params">(initializer_list&lt;<span class="type">double</span>&gt; il)</span></span>;</span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">average</span><span class="params">(<span class="type">const</span> initializer_list&lt;<span class="type">double</span>&gt; &amp;ril)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">sum</span><span class="params">(initializer_list&lt;<span class="type">double</span>&gt; il)</span></span>&#123;</span><br><span class="line">	<span class="type">double</span> sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> tmp : il) sum += tmp;</span><br><span class="line">	<span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">average</span><span class="params">(<span class="type">const</span> initializer_list&lt;<span class="type">double</span>&gt; &amp;ril)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (ril.<span class="built_in">size</span>() &gt; <span class="number">0</span>)&#123;</span><br><span class="line">		<span class="type">double</span> sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">auto</span> tmp : ril) sum += tmp;</span><br><span class="line">		<span class="keyword">return</span> sum / ril.<span class="built_in">size</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0.0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;sum:&quot;</span> &lt;&lt; <span class="built_in">sum</span>(&#123; <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> &#125;) &lt;&lt; <span class="string">&quot;, ave:&quot;</span> &lt;&lt; <span class="built_in">average</span>(&#123; <span class="number">2.0</span>, <span class="number">3</span>, <span class="number">4</span> &#125;) &lt;&lt; endl;</span><br><span class="line">	initializer_list&lt;<span class="type">double</span>&gt; dl = &#123; <span class="number">1.5</span>, <span class="number">2.5</span>, <span class="number">3.5</span>, <span class="number">4.5</span>, <span class="number">5.5</span> &#125;;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;sum:&quot;</span> &lt;&lt; <span class="built_in">sum</span>(dl) &lt;&lt; <span class="string">&quot;, ave:&quot;</span> &lt;&lt; <span class="built_in">average</span>(dl) &lt;&lt; endl;</span><br><span class="line">	dl = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span> &#125;;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;sum:&quot;</span> &lt;&lt; <span class="built_in">sum</span>(dl) &lt;&lt; <span class="string">&quot;, ave:&quot;</span> &lt;&lt; <span class="built_in">average</span>(dl) &lt;&lt; endl;</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h2 id="C-运算符优先级"><a href="#C-运算符优先级" class="headerlink" title="C++运算符优先级"></a>C++运算符优先级</h2><p>C++运算符优先级，是描述在计算机运算计算表达式时执行运算的先后顺序。 先执行具有较高优先级的运算，然后执行较低优先级的运算。 例如，我们常说的先执行相乘和除，再执行加减运算。</p>
+<table>
+<thead>
+<tr>
+<th>优先级</th>
+<th>结合性</th>
+<th>运算符</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>左结合</td>
+<td>() [] -&gt; .</td>
+<td>圆括号 下标运算符 指向结构体成员运算符 结构体成员运算符</td>
+</tr>
+<tr>
+<td>2</td>
+<td>右结合</td>
+<td>! ~ ++ – + - (类型) * &amp; sizeof</td>
+<td>逻辑非运算符 按位取反运算符 前缀增量运算符 前缀减量运算符 正号运算符 负号运算符 类型转换运算符 指针运算符 地址运算符 长度运算符</td>
+</tr>
+<tr>
+<td>3</td>
+<td>左结合</td>
+<td>* &#x2F; %</td>
+<td>乘法运算符 除法运算符 取余运算符</td>
+</tr>
+<tr>
+<td>4</td>
+<td>左结合</td>
+<td>+ -</td>
+<td>加法运算符 减法运算符</td>
+</tr>
+<tr>
+<td>5</td>
+<td>左结合</td>
+<td>&lt;&lt; &gt;&gt;</td>
+<td>左移运算符 右移运算符</td>
+</tr>
+<tr>
+<td>6</td>
+<td>左结合</td>
+<td>&lt; &lt;&#x3D; &gt; &gt;&#x3D;</td>
+<td>关系运算符</td>
+</tr>
+<tr>
+<td>7</td>
+<td>左结合</td>
+<td>&#x3D;&#x3D; !&#x3D;</td>
+<td>等于运算符 不等于运算符</td>
+</tr>
+<tr>
+<td>8</td>
+<td>左结合</td>
+<td>&amp;</td>
+<td>按位与运算符</td>
+</tr>
+<tr>
+<td>9</td>
+<td>左结合</td>
+<td>^</td>
+<td>按位异或运算符</td>
+</tr>
+<tr>
+<td>10</td>
+<td>结合性</td>
+<td>|</td>
+<td>按位或运算符</td>
+</tr>
+<tr>
+<td>11</td>
+<td>左结合</td>
+<td>&amp;&amp;</td>
+<td>逻辑与运算符</td>
+</tr>
+<tr>
+<td>12</td>
+<td>左结合</td>
+<td>||</td>
+<td>逻辑或运算符</td>
+</tr>
+<tr>
+<td>13</td>
+<td>右结合</td>
+<td>? :</td>
+<td>条件运算符</td>
+</tr>
+<tr>
+<td>14</td>
+<td>右结合</td>
+<td>&#x3D; +&#x3D; -&#x3D; *&#x3D; &#x2F;&#x3D; %&#x3D; &amp;&#x3D; ^&#x3D; |&#x3D; &lt;&lt;&#x3D; &gt;&gt;&#x3D;</td>
+<td>赋值运算符</td>
+</tr>
+<tr>
+<td>15</td>
+<td>左结合</td>
+<td>,</td>
+<td>逗号运算符</td>
+</tr>
+</tbody></table>
+<p> 细节请看<a target="_blank" rel="noopener" href="https://www.cnblogs.com/shangdawei/p/3883702.html">C++ 运算符优先级列表 - IAmAProgrammer - 博客园 (cnblogs.com)</a></p>
+<h2 id="C-中for循环的几种用法"><a href="#C-中for循环的几种用法" class="headerlink" title="C++中for循环的几种用法"></a>C++中<code>for</code>循环的几种用法</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span>, <span class="type">char</span> **)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">list</span><span class="params">(&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 下标法 */</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; list.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        cout&lt;&lt;list[i]; <span class="comment">//or list.at(i)</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 迭代器 */</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> iter = list.<span class="built_in">begin</span>(); iter != list.<span class="built_in">end</span>(); ++iter) &#123;</span><br><span class="line">        cout&lt;&lt;*iter;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* STL函数 */</span></span><br><span class="line">    for_each(list.<span class="built_in">begin</span>(), list.<span class="built_in">end</span>(), [](<span class="type">int</span> item)&#123; cout&lt;&lt;item; &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* C++11新增加 */</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> each : list) &#123;</span><br><span class="line">        cout&lt;&lt;each;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>详情请见<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1463130">C++ for循环的几种用法-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
+<h2 id="提问IKOS关于AR的问题"><a href="#提问IKOS关于AR的问题" class="headerlink" title="提问IKOS关于AR的问题"></a>提问IKOS关于AR的问题</h2><blockquote>
+<p>Hi, everyone! do you have some syntactic details, or documentation, about your own design of the abstract representation language (AR)? When I read the source code, I find that there is a lot designed in it and it is not intuitive enough. Thank you guys! Thank you for doing the work for the program analysis and open-sourcing the results so that I have the opportunity to learn from it!</p>
+</blockquote>
+<blockquote>
+<p>Unfortunately, AR is pretty loosely documented.<br>In a way, it is pretty similar to the LLVM language: <a target="_blank" rel="noopener" href="https://llvm.org/docs/LangRef.html">https://llvm.org/docs/LangRef.html</a><br>Each instruction is pretty much translated 1:1 into AR.<br>You can find the implementation of the translation in <a target="_blank" rel="noopener" href="https://github.com/NASA-SW-VnV/ikos/blob/master/frontend/llvm/src/import/function.cpp#L305">https://github.com/NASA-SW-VnV/ikos/blob/master/frontend/llvm/src/import/function.cpp#L305</a><br>The major differences are:</p>
+<ul>
+<li>AR integer types are either signed or unsigned. LLVM integers do not have a signedness.</li>
+<li>AR has a concept of local variables. LLVM has a<a target="_blank" rel="noopener" href="https://llvm.org/docs/LangRef.html#alloca-instruction"> <code>alloca</code> instruction</a> that allocates memory on the stack (effectively a local variable).</li>
+<li>AR has names for variables, LLVM doesn’t (names are in the debugging information, which uses a different format)</li>
+<li>LLVM phi nodes and branching are translated into <code>ar::Comparison</code> statement within the control flow graph. Basically, <code>ar::Comparison</code> is an assert. To translate a <code>if(cond) &#123; x =1 &#125; else &#123; x = 2 &#125;</code> you would have 2 basic blocks, one with <code>Comparison(cond, NE, 0)</code> and one with <code>Comparison(cond, EQ, 0)</code>.</li>
+</ul>
+</blockquote>
+
     </div>
 
     
@@ -711,14 +829,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Word count total: </span>
-    <span title="Word count total">90k</span>
+    <span title="Word count total">93k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">2:44</span>
+    <span title="Reading time total">2:48</span>
   </span>
 </div>
 <div class="busuanzi-count">
