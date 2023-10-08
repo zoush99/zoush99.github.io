@@ -1388,6 +1388,153 @@
 </li>
 </ol>
 <p>总之，回归测试是一种关键的软件测试方法，旨在确保软件在不断进行修改和更新的过程中仍然保持了稳定性和质量。它有助于减少新功能引入的风险，同时维护现有功能的可靠性。</p>
+<h2 id="阅读LLVM-IR"><a href="#阅读LLVM-IR" class="headerlink" title="阅读LLVM IR"></a>阅读LLVM IR</h2><p>当你提到LLVM IR语句时，你是在谈论低级虚拟指令集（Low-Level Virtual Instruction Set），它是由LLVM编译器框架使用的中间表示形式。LLVM IR用于表示源代码的中间表示，通常是在编译源代码到目标代码的过程中使用。</p>
+<p>以下是一些常见的LLVM IR语句以及它们的解释：</p>
+<ol>
+<li><p><strong>声明变量</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">%x = alloca i32</span><br></pre></td></tr></table></figure>
+<p>这个语句创建一个名为<code>%x</code>的整数类型（<code>i32</code>）的变量。</p>
+</li>
+<li><p><strong>赋值</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">store i32 42, i32* %x</span><br></pre></td></tr></table></figure>
+<p>这个语句将整数值42存储到变量<code>%x</code>中。</p>
+</li>
+<li><p><strong>加载变量</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">%val = load i32, i32* %x</span><br></pre></td></tr></table></figure>
+<p>这个语句从变量<code>%x</code>中加载整数值，并将其存储到<code>%val</code>中。</p>
+</li>
+<li><p><strong>条件分支</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">br i1 %condition, label %trueLabel, label %falseLabel</span><br></pre></td></tr></table></figure>
+<p>这个语句根据条件<code>%condition</code>的值，选择跳转到<code>%trueLabel</code>或<code>%falseLabel</code>。</p>
+</li>
+<li><p><strong>循环</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">br label %loopHeader</span><br><span class="line">; ...</span><br><span class="line">%loopHeader:</span><br><span class="line">; 循环体</span><br><span class="line">br i1 %loopCondition, label %loopHeader, label %afterLoop</span><br><span class="line">%afterLoop:</span><br></pre></td></tr></table></figure>
+<p>这个语句表示一个简单的循环结构，根据<code>%loopCondition</code>的值反复执行循环体，直到条件不满足，然后跳转到<code>%afterLoop</code>。</p>
+</li>
+<li><p><strong>函数调用</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">%result = call i32 @myFunction(i32 %arg1, i32 %arg2)</span><br></pre></td></tr></table></figure>
+<p>这个语句调用名为<code>myFunction</code>的函数，传递两个整数参数<code>%arg1</code>和<code>%arg2</code>，并将返回值存储在<code>%result</code>中。</p>
+</li>
+</ol>
+<p>这些示例涵盖了LLVM IR中的一些基本语句。LLVM IR是一种灵活且强大的中间表示，用于优化和生成目标代码。不同的编译器和工具可以使用LLVM IR来执行各种优化和分析，以改进程序的性能和可靠性。</p>
+<h2 id="由Flang转换的Fortran程序"><a href="#由Flang转换的Fortran程序" class="headerlink" title="由Flang转换的Fortran程序"></a>由Flang转换的Fortran程序</h2><p>原来的Fortran程序：</p>
+<figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">program</span></span> main</span><br><span class="line">	<span class="keyword">integer</span> a</span><br><span class="line">	<span class="keyword">integer</span> b</span><br><span class="line">	a = <span class="number">1</span></span><br><span class="line"><span class="keyword">stop</span></span><br><span class="line"><span class="keyword">end</span> <span class="function"><span class="keyword">program</span></span> main</span><br></pre></td></tr></table></figure>
+
+<p>转换后的LLVM IR是这样的：</p>
+<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line"><span class="comment">; this block is definition that is related to sourcefile</span></span><br><span class="line"><span class="comment">; ModuleID = &#x27;/tmp/defineVariabl-775d8e.ll&#x27;</span></span><br><span class="line">source_filename <span class="operator">=</span> <span class="string">&quot;/tmp/defineVariabl-775d8e.ll&quot;</span></span><br><span class="line"><span class="keyword">target</span> <span class="keyword">datalayout</span> <span class="operator">=</span> <span class="string">&quot;e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128&quot;</span></span><br><span class="line"><span class="keyword">target</span> <span class="keyword">triple</span> <span class="operator">=</span> <span class="string">&quot;x86_64-unknown-linux-gnu&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="title">@.C310_MAIN_</span> <span class="operator">=</span> <span class="keyword">internal</span> <span class="keyword">constant</span> <span class="type">i64</span> <span class="number">0</span></span><br><span class="line"><span class="title">@.C311_MAIN_</span> <span class="operator">=</span> <span class="keyword">internal</span> <span class="keyword">constant</span> <span class="type">i32</span> <span class="number">1</span></span><br><span class="line"><span class="title">@.C309_MAIN_</span> <span class="operator">=</span> <span class="keyword">internal</span> <span class="keyword">constant</span> <span class="type">i32</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">define</span> void <span class="title">@MAIN_</span>() <span class="title">!dbg</span> <span class="title">!5</span> &#123;</span><br><span class="line">L.entry:</span><br><span class="line">  <span class="variable">%a_329</span> <span class="operator">=</span> <span class="keyword">alloca</span> <span class="type">i32</span><span class="punctuation">,</span> <span class="keyword">align</span> <span class="number">4</span></span><br><span class="line">  <span class="variable">%0</span> <span class="operator">=</span> <span class="keyword">bitcast</span> <span class="type">i32</span>* <span class="title">@.C309_MAIN_</span> <span class="keyword">to</span> <span class="type">i8</span>*</span><br><span class="line">  <span class="variable">%1</span> <span class="operator">=</span> <span class="keyword">bitcast</span> void (...)* <span class="title">@fort_init</span> <span class="keyword">to</span> void (<span class="type">i8</span>*<span class="punctuation">,</span> ...)*</span><br><span class="line">  <span class="keyword">call</span> void (<span class="type">i8</span>*<span class="punctuation">,</span> ...) <span class="variable">%1</span>(<span class="type">i8</span>* <span class="variable">%0</span>)</span><br><span class="line">  <span class="keyword">br</span> label <span class="variable">%L.LB1_335</span></span><br><span class="line"></span><br><span class="line">L.LB<span class="number">1</span>_<span class="number">335</span>:                                        <span class="comment">; preds = %L.entry</span></span><br><span class="line">  <span class="keyword">store</span> <span class="type">i32</span> <span class="number">1</span><span class="punctuation">,</span> <span class="type">i32</span>* <span class="variable">%a_329</span><span class="punctuation">,</span> <span class="keyword">align</span> <span class="number">4</span><span class="punctuation">,</span> <span class="title">!dbg</span> <span class="title">!8</span></span><br><span class="line">  <span class="variable">%2</span> <span class="operator">=</span> <span class="keyword">bitcast</span> <span class="type">i32</span>* <span class="title">@.C309_MAIN_</span> <span class="keyword">to</span> <span class="type">i8</span>*<span class="punctuation">,</span> <span class="title">!dbg</span> <span class="title">!9</span></span><br><span class="line">  <span class="variable">%3</span> <span class="operator">=</span> <span class="keyword">bitcast</span> void (...)* <span class="title">@f90_stop08a</span> <span class="keyword">to</span> void (<span class="type">i8</span>*<span class="punctuation">,</span> <span class="type">i8</span>*<span class="punctuation">,</span> <span class="type">i64</span><span class="punctuation">,</span> ...)*<span class="punctuation">,</span> <span class="title">!dbg</span> <span class="title">!9</span></span><br><span class="line">  <span class="keyword">call</span> void (<span class="type">i8</span>*<span class="punctuation">,</span> <span class="type">i8</span>*<span class="punctuation">,</span> <span class="type">i64</span><span class="punctuation">,</span> ...) <span class="variable">%3</span>(<span class="type">i8</span>* <span class="variable">%2</span><span class="punctuation">,</span> <span class="type">i8</span>* <span class="keyword">null</span><span class="punctuation">,</span> <span class="type">i64</span> <span class="number">0</span>)<span class="punctuation">,</span> <span class="title">!dbg</span> <span class="title">!9</span></span><br><span class="line">  <span class="keyword">ret</span> void<span class="punctuation">,</span> <span class="title">!dbg</span> <span class="title">!10</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span> void <span class="title">@f90_stop08a</span>(...)</span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span> void <span class="title">@fort_init</span>(...)</span><br><span class="line"></span><br><span class="line"><span class="title">!llvm.module.flags</span> <span class="operator">=</span> !&#123;<span class="title">!0</span><span class="punctuation">,</span> <span class="title">!1</span>&#125;</span><br><span class="line"><span class="title">!llvm.dbg.cu</span> <span class="operator">=</span> !&#123;<span class="title">!2</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="title">!0</span> <span class="operator">=</span> !&#123;<span class="type">i32</span> <span class="number">2</span><span class="punctuation">,</span> !<span class="string">&quot;Dwarf Version&quot;</span><span class="punctuation">,</span> <span class="type">i32</span> <span class="number">4</span>&#125;</span><br><span class="line"><span class="title">!1</span> <span class="operator">=</span> !&#123;<span class="type">i32</span> <span class="number">2</span><span class="punctuation">,</span> !<span class="string">&quot;Debug Info Version&quot;</span><span class="punctuation">,</span> <span class="type">i32</span> <span class="number">3</span>&#125;</span><br><span class="line"><span class="title">!2</span> <span class="operator">=</span> distinct <span class="title">!DICompileUnit</span>(language: DW_LANG_Fortran<span class="number">90</span><span class="punctuation">,</span> file: <span class="title">!3</span><span class="punctuation">,</span> producer: <span class="string">&quot; F90 Flang - 1.5 2017-05-01&quot;</span><span class="punctuation">,</span> isOptimized: <span class="keyword">false</span><span class="punctuation">,</span> flags: <span class="string">&quot;&#x27;+flang -emit-llvm -S defineVariabl.f90 -o defineVariable.ll&#x27;&quot;</span><span class="punctuation">,</span> runtimeVersion: <span class="number">0</span><span class="punctuation">,</span> emissionKind: FullDebug<span class="punctuation">,</span> enums: <span class="title">!4</span><span class="punctuation">,</span> retainedTypes: <span class="title">!4</span><span class="punctuation">,</span> globals: <span class="title">!4</span><span class="punctuation">,</span> imports: <span class="title">!4</span><span class="punctuation">,</span> nameTableKind: None)</span><br><span class="line"><span class="title">!3</span> <span class="operator">=</span> <span class="title">!DIFile</span>(filename: <span class="string">&quot;defineVariabl.f90&quot;</span><span class="punctuation">,</span> directory: <span class="string">&quot;/home/zou/Downloads/FortranProgram/easyBenchmark&quot;</span>)</span><br><span class="line"><span class="title">!4</span> <span class="operator">=</span> !&#123;&#125;</span><br><span class="line"><span class="title">!5</span> <span class="operator">=</span> distinct <span class="title">!DISubprogram</span>(name: <span class="string">&quot;main&quot;</span><span class="punctuation">,</span> scope: <span class="title">!2</span><span class="punctuation">,</span> file: <span class="title">!3</span><span class="punctuation">,</span> line: <span class="number">1</span><span class="punctuation">,</span> <span class="keyword">type</span>: <span class="title">!6</span><span class="punctuation">,</span> scopeLine: <span class="number">1</span><span class="punctuation">,</span> spFlags: DISPFlagDefinition | DISPFlagMainSubprogram<span class="punctuation">,</span> unit: <span class="title">!2</span><span class="punctuation">,</span> retainedNodes: <span class="title">!4</span>)</span><br><span class="line"><span class="title">!6</span> <span class="operator">=</span> <span class="title">!DISubroutineType</span>(<span class="keyword">cc</span>: DW_CC_program<span class="punctuation">,</span> types: <span class="title">!7</span>)</span><br><span class="line"><span class="title">!7</span> <span class="operator">=</span> !&#123;<span class="keyword">null</span>&#125;</span><br><span class="line"><span class="title">!8</span> <span class="operator">=</span> <span class="title">!DILocation</span>(line: <span class="number">4</span><span class="punctuation">,</span> column: <span class="number">1</span><span class="punctuation">,</span> scope: <span class="title">!5</span>)</span><br><span class="line"><span class="title">!9</span> <span class="operator">=</span> <span class="title">!DILocation</span>(line: <span class="number">5</span><span class="punctuation">,</span> column: <span class="number">1</span><span class="punctuation">,</span> scope: <span class="title">!5</span>)</span><br><span class="line"><span class="title">!10</span> <span class="operator">=</span> <span class="title">!DILocation</span>(line: <span class="number">6</span><span class="punctuation">,</span> column: <span class="number">1</span><span class="punctuation">,</span> scope: <span class="title">!5</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line"><span class="title">@.C310_MAIN_</span> <span class="operator">=</span> <span class="keyword">internal</span> <span class="keyword">constant</span> <span class="type">i64</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>这行LLVM IR代码表示一个内部常量的定义，名为@.C310_MAIN_，其类型为i64（64位整数），并且其初始值为0。让我们逐一解释这个代码：</p>
+<ul>
+<li><p><code>@.C310_MAIN_</code>: 这是一个LLVM IR中的符号名，用作常量的名称。符号名以<code>@</code>开头，通常用于全局变量和常量。</p>
+</li>
+<li><p><code>internal</code>: 这个关键字表示@.C310_MAIN_是一个内部常量，它的可见性被限制在当前编译单元内。这意味着它不能在其他编译单元中被引用，只能在当前编译单元内使用。</p>
+</li>
+<li><p><code>constant</code>: 这表明@.C310_MAIN_是一个常量，它的值在编译时就确定了，不能在运行时更改。</p>
+</li>
+<li><p><code>i64</code>: 这是@.C310_MAIN_的数据类型，表示64位整数。</p>
+</li>
+<li><p><code>0</code>: 这是@.C310_MAIN_的初始值，表示这个常量的值是0。</p>
+</li>
+</ul>
+<p>这行代码的作用是在LLVM IR中定义一个64位整数常量@.C310_MAIN_，其值为0。在后续的LLVM IR代码中，可以使用@.C310_MAIN_来引用这个常量，就像引用任何其他全局变量或常量一样。这有助于提高代码的可读性和维护性，因为可以使用有意义的名称来代替数字0。</p>
+<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line"><span class="variable">%a_329</span> <span class="operator">=</span> <span class="keyword">alloca</span> <span class="type">i32</span><span class="punctuation">,</span> <span class="keyword">align</span> <span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<p>这行LLVM IR代码表示在当前函数的栈帧上分配存储空间来存储一个32位整数（i32类型），并要求按4字节对齐。让我们逐一解释这个代码：</p>
+<ul>
+<li><p><code>%a_329</code>: 这是一个局部变量的名称，以<code>%</code>开头，用于在当前函数中引用这个变量。这个变量的名字是<code>a_329</code>。</p>
+</li>
+<li><p><code>alloca</code>: 这是LLVM IR中的一条指令，用于在当前函数的栈帧上分配内存。它用于创建局部变量的存储空间。</p>
+</li>
+<li><p><code>i32</code>: 这是要分配的内存块的数据类型，表示32位整数。</p>
+</li>
+<li><p><code>align 4</code>: 这是对齐要求，表示内存块的起始地址应该是4的倍数。这是一种常见的对齐方式，有助于提高内存访问的效率。</p>
+</li>
+</ul>
+<p>因此，这行代码的作用是在当前函数的栈帧上分配了一块用于存储32位整数的内存空间，并将其命名为<code>%a_329</code>。后续的代码可以使用<code>%a_329</code>来引用这个局部变量，并在其中存储和访问32位整数的值。这是在函数内部定义局部变量的一种方式，用于存储临时数据或计算结果。</p>
+<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line"><span class="variable">%0</span> <span class="operator">=</span> <span class="keyword">bitcast</span> <span class="type">i32</span>* <span class="title">@.C309_MAIN_</span> <span class="keyword">to</span> <span class="type">i8</span>*</span><br></pre></td></tr></table></figure>
+
+<p>这行LLVM IR代码表示了一个位转换（bitcast）操作，将一个指向32位整数（i32<em>）的指针<code>@.C309_MAIN_</code>转换为指向8位整数（i8</em>，也就是字节）的指针。让我们逐一解释这个代码：</p>
+<ul>
+<li><p><code>%0</code>: 这是一个临时值的名称，以<code>%</code>开头，用于在LLVM IR中引用这个位转换操作的结果。<code>%0</code>通常用于表示临时变量或操作结果。</p>
+</li>
+<li><p><code>bitcast</code>: 这是LLVM IR中的一条指令，用于执行位转换操作。位转换操作允许将一个数据类型的值解释为另一个数据类型，但不会改变其实际存储内容，只是改变了视图。</p>
+</li>
+<li><p><code>i32* @.C309_MAIN_</code>: 这表示一个指向32位整数（i32*）的指针，这个指针的名称是<code>@.C309_MAIN_</code>。这个指针通常用于引用某个变量或内存位置。</p>
+</li>
+<li><p><code>to i8*</code>: 这表示将原始的32位整数指针转换为指向8位整数（i8*，也就是字节）的指针。这种位转换操作通常用于将不同数据类型的数据以字节为单位进行操作。</p>
+</li>
+</ul>
+<p>所以，这行代码的作用是将名为<code>@.C309_MAIN_</code>的32位整数指针转换为指向8位整数（字节）的指针，并将结果存储在<code>%0</code>中，以便后续的LLVM IR代码可以使用<code>%0</code>来引用这个新的字节指针。这种转换通常在处理底层内存操作或数据类型转换时使用。</p>
+<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line"><span class="variable">%1</span> <span class="operator">=</span> <span class="keyword">bitcast</span> void (...)* <span class="title">@fort_init</span> <span class="keyword">to</span> void (<span class="type">i8</span>*<span class="punctuation">,</span> ...)*</span><br></pre></td></tr></table></figure>
+
+<p>这行LLVM IR代码表示一个位转换（bitcast）操作，将一个函数指针<code>@fort_init</code>，指向接受任意数量参数的函数（void (…)），转换为一个函数指针，指向接受第一个参数为指向8位整数（i8<em>）的指针，其余参数可以是任意数量的参数的函数（void (i8</em>, …)）。让我们逐一解释这个代码：</p>
+<ul>
+<li><p><code>%1</code>: 这是一个临时值的名称，以<code>%</code>开头，用于在LLVM IR中引用这个位转换操作的结果。<code>%1</code>通常用于表示临时变量或操作结果。</p>
+</li>
+<li><p><code>bitcast</code>: 这是LLVM IR中的一条指令，用于执行位转换操作。位转换操作允许将一个函数指针的类型转换为另一个函数指针的类型。</p>
+</li>
+<li><p><code>void (...)* @fort_init</code>: 这表示一个函数指针，<code>@fort_init</code>指向一个接受任意数量参数的函数，返回类型为<code>void</code>。这种函数指针通常用于表示可变参数函数，其中<code>...</code>表示可接受不定数量的参数。</p>
+</li>
+<li><p><code>to void (i8*, ...)*</code>: 这表示将原始的函数指针<code>@fort_init</code>转换为一个新的函数指针，指向一个接受第一个参数为指向8位整数（i8*）的指针，其余参数可以是任意数量的参数的函数。这种转换通常用于调整函数的参数类型，以便在调用该函数时传递正确类型的参数。</p>
+</li>
+</ul>
+<p>所以，这行代码的作用是将函数指针<code>@fort_init</code>从接受任意数量参数的函数类型转换为接受第一个参数为指向8位整数（i8*）的指针，其余参数可以是任意数量的参数的函数类型，并将结果存储在<code>%1</code>中，以便后续的LLVM IR代码可以使用<code>%1</code>来引用这个新的函数指针。这种转换通常在需要与不同参数类型的函数交互时使用。</p>
+<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">call</span> void (<span class="type">i8</span>*<span class="punctuation">,</span> ...) <span class="variable">%1</span>(<span class="type">i8</span>* <span class="variable">%0</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这行LLVM IR代码表示一个函数调用操作。让我们逐一解释这个代码：</p>
+<ul>
+<li><p><code>call</code>: 这是LLVM IR中用于执行函数调用的指令。</p>
+</li>
+<li><p><code>void (i8*, ...)* %1</code>: 这部分表示要调用的函数。<code>%1</code>是一个函数指针，它指向一个接受第一个参数为指向8位整数（i8*）的指针，其余参数可以是任意数量的参数的函数。这意味着我们将调用由<code>%1</code>指向的函数。</p>
+</li>
+<li><p><code>(i8* %0)</code>: 这是传递给函数的参数列表。在这里，我们传递了一个参数，即<code>i8*</code>类型的值，它是之前进行位转换（bitcast）操作时得到的结果，即<code>%0</code>。</p>
+</li>
+</ul>
+<p>所以，这行代码的作用是调用由函数指针<code>%1</code>所指向的函数，传递了一个参数，即<code>%0</code>。这种调用通常用于动态地调用不同类型或不定参数的函数，具体函数的实现由<code>%1</code>所指向的函数决定。这种机制通常在与函数指针或可变参数函数交互时使用。</p>
+<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">store</span> <span class="type">i32</span> <span class="number">1</span><span class="punctuation">,</span> <span class="type">i32</span>* <span class="variable">%a_329</span><span class="punctuation">,</span> <span class="keyword">align</span> <span class="number">4</span><span class="punctuation">,</span> <span class="title">!dbg</span> <span class="title">!8</span></span><br></pre></td></tr></table></figure>
+
+<p>这是一个LLVM IR语句的示例，让我解释一下：</p>
+<ul>
+<li><p><code>store i32 1, i32* %a_329</code>：这个语句表示将整数值1存储到指针变量<code>%a_329</code>指向的位置。具体来说，它将整数值1存储到<code>%a_329</code>指向的32位整数（<code>i32</code>）的内存位置。</p>
+</li>
+<li><p><code>align 4</code>：这是一个对齐（alignment）选项，它指定了存储操作的对齐方式。在这里，数据被4字节对齐，这意味着它将被存储在内存中的地址应该是4的倍数。对齐通常用于优化内存访问。</p>
+</li>
+<li><p><code>!dbg !8</code>：这是调试信息的一部分，它指向调试元数据。<code>!dbg</code>后面的<code>!8</code>可能是一个引用，它将链接到源代码中的调试信息，以帮助调试器在源代码级别调试程序。</p>
+</li>
+</ul>
+<p>综合起来，这个语句的作用是将整数值1存储到指针变量<code>%a_329</code>指向的内存位置，并要求对齐方式为4字节。调试信息<code>!dbg !8</code>则用于调试和源代码关联。这是编译器生成的一条低级指令，通常在LLVM IR的中间表示中出现，用于在编译过程中管理和操作数据。</p>
+<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line"><span class="title">!llvm.module.flags</span> <span class="operator">=</span> !&#123;<span class="title">!0</span><span class="punctuation">,</span> <span class="title">!1</span>&#125;</span><br><span class="line"><span class="title">!llvm.dbg.cu</span> <span class="operator">=</span> !&#123;<span class="title">!2</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="title">!0</span> <span class="operator">=</span> !&#123;<span class="type">i32</span> <span class="number">2</span><span class="punctuation">,</span> !<span class="string">&quot;Dwarf Version&quot;</span><span class="punctuation">,</span> <span class="type">i32</span> <span class="number">4</span>&#125;</span><br><span class="line"><span class="title">!1</span> <span class="operator">=</span> !&#123;<span class="type">i32</span> <span class="number">2</span><span class="punctuation">,</span> !<span class="string">&quot;Debug Info Version&quot;</span><span class="punctuation">,</span> <span class="type">i32</span> <span class="number">3</span>&#125;</span><br><span class="line"><span class="title">!2</span> <span class="operator">=</span> distinct <span class="title">!DICompileUnit</span>(language: DW_LANG_Fortran<span class="number">90</span><span class="punctuation">,</span> file: <span class="title">!3</span><span class="punctuation">,</span> producer: <span class="string">&quot; F90 Flang - 1.5 2017-05-01&quot;</span><span class="punctuation">,</span> isOptimized: <span class="keyword">false</span><span class="punctuation">,</span> flags: <span class="string">&quot;&#x27;+flang -emit-llvm -S defineVariabl.f90 -o defineVariable.ll&#x27;&quot;</span><span class="punctuation">,</span> runtimeVersion: <span class="number">0</span><span class="punctuation">,</span> emissionKind: FullDebug<span class="punctuation">,</span> enums: <span class="title">!4</span><span class="punctuation">,</span> retainedTypes: <span class="title">!4</span><span class="punctuation">,</span> globals: <span class="title">!4</span><span class="punctuation">,</span> imports: <span class="title">!4</span><span class="punctuation">,</span> nameTableKind: None)</span><br><span class="line"><span class="title">!3</span> <span class="operator">=</span> <span class="title">!DIFile</span>(filename: <span class="string">&quot;defineVariabl.f90&quot;</span><span class="punctuation">,</span> directory: <span class="string">&quot;/home/zou/Downloads/FortranProgram/easyBenchmark&quot;</span>)</span><br><span class="line"><span class="title">!4</span> <span class="operator">=</span> !&#123;&#125;</span><br><span class="line"><span class="title">!5</span> <span class="operator">=</span> distinct <span class="title">!DISubprogram</span>(name: <span class="string">&quot;main&quot;</span><span class="punctuation">,</span> scope: <span class="title">!2</span><span class="punctuation">,</span> file: <span class="title">!3</span><span class="punctuation">,</span> line: <span class="number">1</span><span class="punctuation">,</span> <span class="keyword">type</span>: <span class="title">!6</span><span class="punctuation">,</span> scopeLine: <span class="number">1</span><span class="punctuation">,</span> spFlags: DISPFlagDefinition | DISPFlagMainSubprogram<span class="punctuation">,</span> unit: <span class="title">!2</span><span class="punctuation">,</span> retainedNodes: <span class="title">!4</span>)</span><br><span class="line"><span class="title">!6</span> <span class="operator">=</span> <span class="title">!DISubroutineType</span>(<span class="keyword">cc</span>: DW_CC_program<span class="punctuation">,</span> types: <span class="title">!7</span>)</span><br><span class="line"><span class="title">!7</span> <span class="operator">=</span> !&#123;<span class="keyword">null</span>&#125;</span><br><span class="line"><span class="title">!8</span> <span class="operator">=</span> <span class="title">!DILocation</span>(line: <span class="number">4</span><span class="punctuation">,</span> column: <span class="number">1</span><span class="punctuation">,</span> scope: <span class="title">!5</span>)</span><br><span class="line"><span class="title">!9</span> <span class="operator">=</span> <span class="title">!DILocation</span>(line: <span class="number">5</span><span class="punctuation">,</span> column: <span class="number">1</span><span class="punctuation">,</span> scope: <span class="title">!5</span>)</span><br><span class="line"><span class="title">!10</span> <span class="operator">=</span> <span class="title">!DILocation</span>(line: <span class="number">6</span><span class="punctuation">,</span> column: <span class="number">1</span><span class="punctuation">,</span> scope: <span class="title">!5</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这些代码片段看起来是LLVM调试信息的一部分，用于在编译器生成的中间表示代码（LLVM IR）中存储关于源代码的元数据和调试信息。让我解释一下这些代码：</p>
+<ol>
+<li><p><code>!llvm.module.flags = !&#123;!0, !1&#125;</code>：这行代码包含了模块级别的标志，可能包括有关Dwarf调试信息和调试版本的信息。<code>!0</code>和<code>!1</code>是后面两个标志的引用。</p>
+</li>
+<li><p><code>!0 = !&#123;i32 2, !&quot;Dwarf Version&quot;, i32 4&#125;</code>：这个标志表示Dwarf调试信息的版本。在这里，Dwarf版本被设置为4。</p>
+</li>
+<li><p><code>!1 = !&#123;i32 2, !&quot;Debug Info Version&quot;, i32 3&#125;</code>：这个标志表示调试信息的版本。在这里，调试信息版本被设置为3。</p>
+</li>
+<li><p><code>!2 = distinct !DICompileUnit(...)</code>：这是一个表示编译单元的调试信息，其中包含了有关源代码文件、编译器版本、是否进行了优化等信息。这对于调试非常重要。</p>
+</li>
+<li><p><code>!3 = !DIFile(...)</code>：这是一个表示源文件的调试信息，其中包含了源文件的名称和目录信息。</p>
+</li>
+<li><p><code>!4 = !&#123;&#125;</code>：这个标志表示一个空的列表，通常用于一些调试信息的元素，比如枚举、全局变量、导入等等。</p>
+</li>
+<li><p><code>!5 = distinct !DISubprogram(...)</code>：这个标志表示一个子程序（或函数）的调试信息，包括名称、源文件、行号等信息。在这里，它代表名为”main”的程序入口点。</p>
+</li>
+<li><p><code>!6 = !DISubroutineType(...)</code>：这个标志表示子程序的类型信息，包括调用约定等信息。在这里，它指示DW_CC_program调用约定，表示这是一个程序的入口点。</p>
+</li>
+<li><p><code>!7 = !&#123;null&#125;</code>：这个标志表示一个空的类型列表，通常用于描述子程序的参数和返回类型。</p>
+</li>
+<li><p><code>!8</code>, <code>!9</code>, <code>!10</code> 是不同的DILocation标志，用于表示源代码中不同位置的行和列号。这些信息对于在调试器中定位和调试代码非常重要。</p>
+</li>
+</ol>
+<p>总之，这些调试信息是为了帮助开发人员在LLVM IR级别调试程序时能够将代码映射回源代码，以便更容易地理解和解决问题。这些信息通常由编译器生成，并与生成的目标代码一起提供给调试器。</p>
+<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">declare</span> void <span class="title">@f90_stop08a</span>(...)</span><br></pre></td></tr></table></figure>
+
+<p>这是一个LLVM IR中的声明语句，它声明了一个名为 <code>f90_stop08a</code> 的函数，该函数返回 <code>void</code>，即没有返回值，并且接受一个或多个参数，但在声明中没有提供参数的具体类型或数量。这种声明通常用于与其他编译单元或库函数进行链接，而具体的函数定义则在另一个地方提供。在这里，<code>@f90_stop08a</code> 函数的具体实现将在其他地方定义或链接到程序中。这种方式可以在不暴露函数内部实现细节的情况下使用外部函数。</p>
+<h2 id="LLVM-IR中有很多bitcast语句"><a href="#LLVM-IR中有很多bitcast语句" class="headerlink" title="LLVM IR中有很多bitcast语句"></a>LLVM IR中有很多<code>bitcast</code>语句</h2><p>这个有什么作用？</p>
 ]]></content>
       <categories>
         <category>log</category>
@@ -1983,6 +2130,34 @@
       </categories>
       <tags>
         <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2023年10月</title>
+    <url>/2023/10/07/2023%E5%B9%B410%E6%9C%88/</url>
+    <content><![CDATA[<h1 id="问题日志"><a href="#问题日志" class="headerlink" title="问题日志"></a>问题日志</h1><span id="more"></span>
+
+<h2 id="IEEE754和binary32这种模式有什么区别"><a href="#IEEE754和binary32这种模式有什么区别" class="headerlink" title="IEEE754和binary32这种模式有什么区别"></a>IEEE754和binary32这种模式有什么区别</h2><p>IEEE 754和binary32都是浮点数表示的标准。IEEE 754是一种用于表示浮点数的标准，它定义了浮点数的表示方法、运算规则等。而binary32是IEEE 754标准中的一种具体实现，也称为单精度浮点数，用32位（或4个字节）来表示一个浮点数。</p>
+<p>主要区别在于，IEEE 754是一个标准，定义了多种浮点数的表示方式，包括单精度（binary32）、双精度（binary64）等。而binary32是这个标准中的一种特定实现，它使用32位来表示一个浮点数，其中1位表示符号位，8位表示指数，23位表示尾数。这种表示方式允许在一定范围内表示很大或很小的数字，并保持相对较高的精度。</p>
+<p>简而言之，IEEE 754是浮点数表示的标准，而binary32是这个标准中的一种具体实现，用32位表示一个浮点数。</p>
+<h2 id="IEEE754标准中都有哪些模式"><a href="#IEEE754标准中都有哪些模式" class="headerlink" title="IEEE754标准中都有哪些模式"></a>IEEE754标准中都有哪些模式</h2><p>IEEE 754标准定义了几种不同精度的浮点数表示方式，包括：</p>
+<ol>
+<li><p><strong>单精度（binary32）：</strong> 使用32位（4字节）来表示一个浮点数，其中1位表示符号，8位表示指数，23位表示尾数。</p>
+</li>
+<li><p><strong>双精度（binary64）：</strong> 使用64位（8字节）来表示一个浮点数，其中1位表示符号，11位表示指数，52位表示尾数。</p>
+</li>
+<li><p><strong>拓展精度（extended precision）：</strong> 使用80位或128位来表示一个浮点数，具体的位数可能因硬件和软件平台而异。这种格式在一些计算中常用，因为它提供了比双精度更高的精度。</p>
+</li>
+</ol>
+<p>此外，IEEE 754标准还定义了一些特殊值，包括正无穷大、负无穷大、NaN（Not a Number，表示非数值，用于表示无效的操作结果或未定义的数学运算）等。这些标准确保了在不同计算机系统之间的浮点数表示的一致性和可移植性。</p>
+]]></content>
+      <categories>
+        <category>log</category>
+        <category>learn</category>
+      </categories>
+      <tags>
+        <tag>project</tag>
+        <tag>log</tag>
       </tags>
   </entry>
 </search>
