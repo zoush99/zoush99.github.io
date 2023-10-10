@@ -2509,6 +2509,58 @@
 </li>
 </ol>
 <p>这个文件为IKOS提供了一个类型系统，可以表示大多数在中间表示(IR)中常见的类型。这些类型包括标量类型、聚合类型(如结构体和数组)以及函数类型。</p>
+<p>这是一个C++项目中的类型定义文件，其中包含了一些类和枚举用于表示不同类型的数据。</p>
+<ol>
+<li><p><strong>FloatSemantic 枚举</strong>:</p>
+<ul>
+<li>包括 Half, Float, Double, X86_FP80, FP128, PPC_FP128，表示浮点数的语义。</li>
+</ul>
+</li>
+<li><p><strong>Type 类</strong>:</p>
+<ul>
+<li>是所有类型的基类，包括了各种类型的共同特性和方法。</li>
+</ul>
+</li>
+<li><p><strong>TypeKind 枚举</strong>:</p>
+<ul>
+<li>定义了不同类型的种类，如IntegerKind, FloatKind, PointerKind等。</li>
+</ul>
+</li>
+<li><p><strong>各种具体类型</strong>:</p>
+<ul>
+<li><p><code>VoidType</code>, <code>IntegerType</code>, <code>FloatType</code>, <code>PointerType</code>, <code>StructType</code>, <code>ArrayType</code>, <code>VectorType</code>, <code>OpaqueType</code>, <code>FunctionType</code>，它们分别表示了不同种类的类型。</p>
+</li>
+<li><p>每种类型都有相应的构造函数和静态方法用于获取实例。</p>
+</li>
+<li><p>每种类型都有相应的方法用于查询其特性，比如是否是整数类型，浮点类型，指针类型等。</p>
+</li>
+<li><p><code>ScalarType</code> 是所有标量类型的基类，包括 <code>IntegerType</code> 和 <code>FloatType</code>。</p>
+</li>
+<li><p><code>AggregateType</code> 是所有聚合类型的基类，包括 <code>StructType</code>, <code>ArrayType</code>, <code>VectorType</code> 和 <code>OpaqueType</code>。</p>
+</li>
+<li><p><code>SequentialType</code> 是所有顺序类型的基类，包括 <code>ArrayType</code> 和 <code>VectorType</code>。</p>
+</li>
+<li><p><code>FunctionType</code> 表示函数类型，包括返回类型和参数类型。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Context 类</strong>:</p>
+<ul>
+<li>类型的创建和管理都需要一个上下文环境，<code>Context</code> 提供了相应的功能。</li>
+</ul>
+</li>
+<li><p><strong>各种构造函数和静态方法</strong>:</p>
+<ul>
+<li>这些方法用于创建各种类型的实例，比如 <code>IntegerType::get</code> 用于创建整数类型的实例。</li>
+</ul>
+</li>
+<li><p><strong>其他方法</strong>:</p>
+<ul>
+<li>每种类型还有一些特定的方法，如 <code>dump</code> 方法用于调试目的。</li>
+</ul>
+</li>
+</ol>
+<p>这个文件主要定义了用于表示各种类型的类和枚举，并提供了相应的方法来操作这些类型。同时也包含了一些静态方法来获取特定类型的实例。</p>
 <h2 id="x2F-home-x2F-zou-x2F-Documents-x2F-ikos-x2F-ar-x2F-include-x2F-ikos-x2F-semantic-目录下的type-hpp文件中的FloatType类的分析"><a href="#x2F-home-x2F-zou-x2F-Documents-x2F-ikos-x2F-ar-x2F-include-x2F-ikos-x2F-semantic-目录下的type-hpp文件中的FloatType类的分析" class="headerlink" title="&#x2F;home&#x2F;zou&#x2F;Documents&#x2F;ikos&#x2F;ar&#x2F;include&#x2F;ikos&#x2F;semantic 目录下的type.hpp文件中的FloatType类的分析"></a>&#x2F;home&#x2F;zou&#x2F;Documents&#x2F;ikos&#x2F;ar&#x2F;include&#x2F;ikos&#x2F;semantic 目录下的type.hpp文件中的FloatType类的分析</h2><p>当然可以。下面是对<code>FloatType</code>类的详细分析：</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/// \brief Floating point type</span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// Represents any floating point type, with its bit-width and semantic.</span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// See `FloatSemantic`.</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FloatType</span> <span class="keyword">final</span> : <span class="keyword">public</span> ScalarType &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  <span class="comment">// Bit width</span></span><br><span class="line">  <span class="type">uint64_t</span> _bit_width;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Float semantic</span></span><br><span class="line">  FloatSemantic _float_sem;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  <span class="comment">/// \brief Private constructor</span></span><br><span class="line">  <span class="built_in">FloatType</span>(<span class="type">uint64_t</span> bit_width, FloatSemantic float_sem);</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="comment">/// \brief Static constructor</span></span><br><span class="line">  <span class="function"><span class="type">static</span> FloatType* <span class="title">get</span><span class="params">(Context&amp; ctx, FloatSemantic float_sem)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// \brief Get the bit width</span></span><br><span class="line">  <span class="function"><span class="type">uint64_t</span> <span class="title">bit_width</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>-&gt;_bit_width; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// \brief Get the float semantic</span></span><br><span class="line">  <span class="function">FloatSemantic <span class="title">float_semantic</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>-&gt;_float_sem; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// \brief Dump the type for debugging purpose</span></span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">dump</span><span class="params">(std::ostream&amp;)</span> <span class="type">const</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// \brief Method for type support (isa, cast, dyn_cast)</span></span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">bool</span> <span class="title">classof</span><span class="params">(<span class="type">const</span> Type* t)</span> </span>&#123; <span class="keyword">return</span> t-&gt;<span class="built_in">kind</span>() == FloatKind; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// friends</span></span><br><span class="line">  <span class="keyword">friend</span> <span class="keyword">class</span> <span class="title class_">ContextImpl</span>;</span><br><span class="line"></span><br><span class="line">&#125;; <span class="comment">// end class FloatType</span></span><br></pre></td></tr></table></figure>
 
@@ -2581,6 +2633,67 @@
 </li>
 </ol>
 <p>总之，这个方法检查给定的<code>Type</code>对象是否代表一个无符号整数类型。如果是，返回<code>true</code>，否则返回<code>false</code>。</p>
+<h2 id="x2F-home-x2F-zou-x2F-Documents-x2F-ikos-x2F-ar-x2F-include-x2F-ikos-x2F-semantic-目录下的type-hpp中的Type类声明了什么"><a href="#x2F-home-x2F-zou-x2F-Documents-x2F-ikos-x2F-ar-x2F-include-x2F-ikos-x2F-semantic-目录下的type-hpp中的Type类声明了什么" class="headerlink" title="&#x2F;home&#x2F;zou&#x2F;Documents&#x2F;ikos&#x2F;ar&#x2F;include&#x2F;ikos&#x2F;semantic 目录下的type.hpp中的Type类声明了什么"></a>&#x2F;home&#x2F;zou&#x2F;Documents&#x2F;ikos&#x2F;ar&#x2F;include&#x2F;ikos&#x2F;semantic 目录下的type.hpp中的Type类声明了什么</h2><p><code>Type</code>类在这段代码中代表一个基本的抽象类型。所有的具体类型，如整数、浮点数、向量等，都继承自这个基类。在<code>type.cpp</code>中，我们可以看到<code>Type</code>类的一些实现细节：</p>
+<ol>
+<li><p><strong>构造函数</strong>:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Type::<span class="built_in">Type</span>(TypeKind kind) : _kind(kind) &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>这个构造函数只接受一个<code>TypeKind</code>枚举作为参数，这个枚举描述了这个类型的种类，例如整数、浮点数等。</p>
+</li>
+<li><p><strong>析构函数</strong>:</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Type::~<span class="built_in">Type</span>() = <span class="keyword">default</span>;</span><br></pre></td></tr></table></figure>
+<p><code>Type</code>的析构函数被设为默认，意味着当<code>Type</code>对象被销毁时，不需要额外的清理工作。</p>
+</li>
+<li><p><strong>查询方法</strong>:<br>这些方法允许查询给定类型的某些属性。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">Type::is_unsigned_integer</span><span class="params">()</span> <span class="type">const</span> </span>&#123; ... &#125;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">Type::is_signed_integer</span><span class="params">()</span> <span class="type">const</span> </span>&#123; ... &#125;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">Type::is_primitive</span><span class="params">()</span> <span class="type">const</span> </span>&#123; ... &#125;</span><br><span class="line"><span class="function"><span class="type">uint64_t</span> <span class="title">Type::primitive_bit_width</span><span class="params">()</span> <span class="type">const</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>ctx_impl</strong>:<br>这是一个辅助函数，返回给定上下文的实现。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">ContextImpl&amp; <span class="title">Type::ctx_impl</span><span class="params">(Context&amp; ctx)</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>这些就是<code>Type</code>类在<code>type.cpp</code>中的主要声明和实现。它主要是作为其他具体类型的基类，提供了一些基本的查询方法。</p>
+<h2 id="x2F-home-x2F-zou-x2F-Documents-x2F-FIKOS-x2F-ar-x2F-src-x2F-semantic-目录下的bundle-cpp文件中的create函数"><a href="#x2F-home-x2F-zou-x2F-Documents-x2F-FIKOS-x2F-ar-x2F-src-x2F-semantic-目录下的bundle-cpp文件中的create函数" class="headerlink" title="&#x2F;home&#x2F;zou&#x2F;Documents&#x2F;FIKOS&#x2F;ar&#x2F;src&#x2F;semantic 目录下的bundle.cpp文件中的create函数"></a>&#x2F;home&#x2F;zou&#x2F;Documents&#x2F;FIKOS&#x2F;ar&#x2F;src&#x2F;semantic 目录下的bundle.cpp文件中的create函数</h2><p><code>Bundle::create</code> 是一个静态成员函数，用于创建一个新的 <code>Bundle</code> 对象。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Bundle* <span class="title">Bundle::create</span><span class="params">(Context&amp; ctx,</span></span></span><br><span class="line"><span class="params"><span class="function">                       std::unique_ptr&lt; DataLayout &gt; data_layout,</span></span></span><br><span class="line"><span class="params"><span class="function">                       std::string triple)</span> </span>&#123;</span><br><span class="line">  Bundle* bundle = <span class="keyword">new</span> <span class="built_in">Bundle</span>(ctx, std::<span class="built_in">move</span>(data_layout), std::<span class="built_in">move</span>(triple));</span><br><span class="line">  ctx._impl-&gt;<span class="built_in">add_bundle</span>(std::<span class="built_in">unique_ptr</span>&lt; Bundle &gt;(bundle));</span><br><span class="line">  <span class="keyword">return</span> bundle;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>让我为你解释一下这个函数的具体步骤：</p>
+<ol>
+<li><p><code>Bundle* Bundle::create(Context&amp; ctx, std::unique_ptr&lt; DataLayout &gt; data_layout, std::string triple)</code> 是一个静态成员函数，因此可以通过 <code>Bundle::create(...)</code> 的方式调用，而不需要先实例化一个 <code>Bundle</code> 对象。</p>
+</li>
+<li><p>当调用 <code>Bundle::create</code> 时，它接受三个参数：</p>
+<ul>
+<li><code>ctx</code> 是一个 <code>Context</code> 的引用，表示上下文对象。</li>
+<li><code>data_layout</code> 是一个指向 <code>DataLayout</code> 对象的独占指针（unique_ptr）。</li>
+<li><code>triple</code> 是一个字符串，用于初始化 <code>Bundle</code> 对象的 <code>_target_triple</code> 成员。</li>
+</ul>
+</li>
+<li><p>在函数内部，首先通过 <code>new</code> 运算符在堆上创建了一个新的 <code>Bundle</code> 对象，并使用传入的参数对其进行初始化。这个对象的指针被赋值给了 <code>bundle</code>。</p>
+</li>
+<li><p>接着，通过 <code>ctx._impl-&gt;add_bundle(...)</code> 将新创建的 <code>Bundle</code> 对象添加到了 <code>Context</code> 的内部实现中。</p>
+</li>
+<li><p>最后，函数返回了指向新创建的 <code>Bundle</code> 对象的指针。</p>
+</li>
+</ol>
+<p>总的来说，<code>Bundle::create</code> 函数的目的是创建一个新的 <code>Bundle</code> 对象，并将其添加到相应的 <code>Context</code> 中，然后返回指向该新对象的指针。</p>
+<h2 id="x2F-home-x2F-zou-x2F-Documents-x2F-FIKOS-x2F-ar-x2F-src-x2F-semantic-目录下的bundle-cpp文件中的std-unique-ptr-lt-DataLayout-gt-data-layout怎么用"><a href="#x2F-home-x2F-zou-x2F-Documents-x2F-FIKOS-x2F-ar-x2F-src-x2F-semantic-目录下的bundle-cpp文件中的std-unique-ptr-lt-DataLayout-gt-data-layout怎么用" class="headerlink" title="&#x2F;home&#x2F;zou&#x2F;Documents&#x2F;FIKOS&#x2F;ar&#x2F;src&#x2F;semantic 目录下的bundle.cpp文件中的std::unique_ptr&lt; DataLayout &gt; data_layout怎么用"></a>&#x2F;home&#x2F;zou&#x2F;Documents&#x2F;FIKOS&#x2F;ar&#x2F;src&#x2F;semantic 目录下的bundle.cpp文件中的std::unique_ptr&lt; DataLayout &gt; data_layout怎么用</h2><p><code>std::unique_ptr&lt;DataLayout&gt;</code> 是一个智能指针，用于管理一个 <code>DataLayout</code> 对象的所有权。智能指针允许你自动管理对象的生命周期，当不再需要时，会自动释放资源，防止内存泄漏。以下是如何使用 <code>std::unique_ptr&lt;DataLayout&gt;</code> 的示例：</p>
+<p>首先，创建一个 <code>DataLayout</code> 对象，并将其包装在 <code>std::unique_ptr</code> 中：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::unique_ptr&lt;DataLayout&gt; dataLayoutPtr = std::<span class="built_in">make_unique</span>&lt;DataLayout&gt;(<span class="string">&quot;your_data_layout_string&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在这个示例中，我们使用 <code>std::make_unique</code> 函数创建了一个 <code>DataLayout</code> 对象，并将其所有权分配给了 <code>dataLayoutPtr</code>。</p>
+<p>接下来，你可以通过 <code>dataLayoutPtr</code> 访问 <code>DataLayout</code> 对象的方法和成员变量，就像直接操作 <code>DataLayout</code> 对象一样：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 访问 DataLayout 对象的方法</span></span><br><span class="line">std::string alignment = dataLayoutPtr-&gt;<span class="built_in">getAlignmentInfo</span>();</span><br><span class="line"><span class="type">unsigned</span> pointerSize = dataLayoutPtr-&gt;<span class="built_in">getPointerSize</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改 DataLayout 对象的成员变量</span></span><br><span class="line">dataLayoutPtr-&gt;<span class="built_in">setAlignmentInfo</span>(<span class="string">&quot;new_alignment_info&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>当不再需要 <code>DataLayout</code> 对象时，不需要手动释放内存，因为 <code>std::unique_ptr</code> 会在其超出范围时自动销毁对象并释放内存。例如，当 <code>dataLayoutPtr</code> 超出其作用域时，关联的 <code>DataLayout</code> 对象将被销毁：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// dataLayoutPtr 超出作用域，关联的 DataLayout 对象会被销毁</span></span><br></pre></td></tr></table></figure>
+
+<p>这种方式可以帮助你避免内存泄漏问题，因为 <code>std::unique_ptr</code> 会在适当的时候自动释放资源。</p>
+<p>说白了就是一个指针，但是能够在不需要的时候自动释放内存。</p>
+<h2 id="x2F-home-x2F-zou-x2F-Documents-x2F-FIKOS-x2F-ar-x2F-src-x2F-semantic-目录下的bundle-cpp文件中的SymbolTable怎么用"><a href="#x2F-home-x2F-zou-x2F-Documents-x2F-FIKOS-x2F-ar-x2F-src-x2F-semantic-目录下的bundle-cpp文件中的SymbolTable怎么用" class="headerlink" title="&#x2F;home&#x2F;zou&#x2F;Documents&#x2F;FIKOS&#x2F;ar&#x2F;src&#x2F;semantic 目录下的bundle.cpp文件中的SymbolTable怎么用"></a>&#x2F;home&#x2F;zou&#x2F;Documents&#x2F;FIKOS&#x2F;ar&#x2F;src&#x2F;semantic 目录下的bundle.cpp文件中的SymbolTable怎么用</h2><p><code>SymbolTable&lt; GlobalVariable &gt; _globals;</code> 是 <code>Bundle</code> 类的一个私有成员变量，用于存储 <code>GlobalVariable</code> 对象的符号表。</p>
+<p>让我为您解释一下：</p>
+<ul>
+<li><p><code>_globals</code> 是一个名为 <code>_globals</code> 的成员变量，它的类型是 <code>SymbolTable&lt; GlobalVariable &gt;</code>。它实际上是一个符号表，用于存储全局变量对象。</p>
+</li>
+<li><p><code>SymbolTable</code> 可能是一个模板类，接受一个模板参数，这里是 <code>GlobalVariable</code> 类型。它提供了一种将符号与对象关联起来的机制，使得可以通过符号来查找、插入、删除对应的对象。</p>
+</li>
+</ul>
+<p>总的来说，<code>_globals</code> 成员变量是用于存储 <code>GlobalVariable</code> 对象的符号表，这样 <code>Bundle</code> 对象可以有效地管理全局变量。</p>
 ]]></content>
       <categories>
         <category>log</category>
