@@ -2694,6 +2694,21 @@
 </li>
 </ul>
 <p>总的来说，<code>_globals</code> 成员变量是用于存储 <code>GlobalVariable</code> 对象的符号表，这样 <code>Bundle</code> 对象可以有效地管理全局变量。</p>
+<h2 id="x2F-home-x2F-zou-x2F-Documents-x2F-FIKOS-x2F-ar-x2F-src-x2F-semantic-目录下的symbol-table-hpp文件"><a href="#x2F-home-x2F-zou-x2F-Documents-x2F-FIKOS-x2F-ar-x2F-src-x2F-semantic-目录下的symbol-table-hpp文件" class="headerlink" title="&#x2F;home&#x2F;zou&#x2F;Documents&#x2F;FIKOS&#x2F;ar&#x2F;src&#x2F;semantic  目录下的symbol_table.hpp文件"></a>&#x2F;home&#x2F;zou&#x2F;Documents&#x2F;FIKOS&#x2F;ar&#x2F;src&#x2F;semantic  目录下的symbol_table.hpp文件</h2><p><code>SymbolTable</code> 类的主要作用是管理符号（symbols）的集合。在编译器或解释器的上下文中，符号通常指代程序中的变量、函数、类型等命名实体。</p>
+<p>以下是 <code>SymbolTable</code> 的主要功能：</p>
+<ol>
+<li><p><strong>存储符号：</strong> <code>SymbolTable</code> 使用 <code>std::unordered_map</code> 存储符号的名称与其对应的指针。这样，通过符号的名称可以快速检索到相应的符号。</p>
+</li>
+<li><p><strong>添加符号：</strong> 提供了 <code>add</code> 函数，用于向符号表中添加新的符号。在添加之前，会检查符号的名称是否已经存在，以确保符号表中的每个符号都有唯一的名称。</p>
+</li>
+<li><p><strong>重命名符号：</strong> 提供了 <code>rename</code> 函数，用于将符号在符号表中的名称修改为新的名称。同样，会进行一些检查以确保新的名称是唯一的。</p>
+</li>
+<li><p><strong>迭代符号：</strong> 使用 <code>boost::transform_iterator</code> 提供了迭代器，允许用户遍历符号表中的符号，而无需直接处理底层的键值对。</p>
+</li>
+<li><p><strong>查询符号：</strong> 提供了 <code>find</code> 函数，通过符号的名称查找符号在符号表中的指针。同时，提供了 <code>contains</code> 函数，用于检查符号表中是否包含特定名称的符号。</p>
+</li>
+</ol>
+<p>总体而言，<code>SymbolTable</code> 提供了一种组织和管理程序中命名实体的机制。这在编译器、解释器和其他静态或动态分析工具中是常见的需求。通过使用符号表，可以更方便地处理程序中的符号，并进行一些必要的操作，如重命名、检索、迭代等。</p>
 ]]></content>
       <categories>
         <category>log</category>
