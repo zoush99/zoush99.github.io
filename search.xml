@@ -2709,6 +2709,248 @@
 </li>
 </ol>
 <p>总体而言，<code>SymbolTable</code> 提供了一种组织和管理程序中命名实体的机制。这在编译器、解释器和其他静态或动态分析工具中是常见的需求。通过使用符号表，可以更方便地处理程序中的符号，并进行一些必要的操作，如重命名、检索、迭代等。</p>
+<h2 id="x2F-home-x2F-zou-x2F-Documents-x2F-FIKOS-x2F-ar-x2F-src-x2F-semantic-目录下的bundle-cpp文件中有什么函数"><a href="#x2F-home-x2F-zou-x2F-Documents-x2F-FIKOS-x2F-ar-x2F-src-x2F-semantic-目录下的bundle-cpp文件中有什么函数" class="headerlink" title="&#x2F;home&#x2F;zou&#x2F;Documents&#x2F;FIKOS&#x2F;ar&#x2F;src&#x2F;semantic 目录下的bundle.cpp文件中有什么函数"></a>&#x2F;home&#x2F;zou&#x2F;Documents&#x2F;FIKOS&#x2F;ar&#x2F;src&#x2F;semantic 目录下的bundle.cpp文件中有什么函数</h2><p><code>Bundle</code> 类中定义了一些函数，以下是这些函数的简要解释：</p>
+<ol>
+<li><p><code>create</code>（静态构造函数）：</p>
+<ul>
+<li>作用：创建一个新的 <code>Bundle</code> 实例。</li>
+<li>参数：接受AR上下文、数据布局和目标三元组作为参数。</li>
+<li>返回：新的 <code>Bundle</code> 实例。</li>
+<li>解释：这个函数用于创建 <code>Bundle</code> 的新实例，它确保了 <code>Bundle</code> 的正确初始化。</li>
+</ul>
+</li>
+<li><p><code>context</code>：</p>
+<ul>
+<li>作用：返回与 <code>Bundle</code> 相关联的AR上下文。</li>
+<li>返回：AR上下文的引用。</li>
+<li>解释：这个函数返回了 <code>Bundle</code> 中使用的AR上下文，这个上下文包含了关于程序的各种信息。</li>
+</ul>
+</li>
+<li><p><code>data_layout</code>：</p>
+<ul>
+<li>作用：返回 <code>Bundle</code> 中定义的数据布局。</li>
+<li>返回：数据布局的引用。</li>
+<li>解释：这个函数返回了描述数据布局的对象，数据布局包括有关数据类型如何在内存中排列的信息。</li>
+</ul>
+</li>
+<li><p><code>target_triple</code>：</p>
+<ul>
+<li>作用：返回 <code>Bundle</code> 中保存的目标三元组。</li>
+<li>返回：目标三元组的字符串。</li>
+<li>解释：这个函数返回了用于指定生成的目标代码的目标架构和操作系统的字符串。</li>
+</ul>
+</li>
+<li><p><code>global_begin</code> 和 <code>global_end</code>：</p>
+<ul>
+<li>作用：用于遍历 <code>Bundle</code> 中全局变量的迭代器的起始和结束位置。</li>
+<li>返回：全局变量迭代器的起始和结束位置。</li>
+<li>解释：这对函数允许你遍历 <code>Bundle</code> 中的全局变量，以便查看或修改它们。</li>
+</ul>
+</li>
+<li><p><code>num_globals</code>：</p>
+<ul>
+<li>作用：返回 <code>Bundle</code> 中全局变量的数量。</li>
+<li>返回：全局变量的数量。</li>
+<li>解释：这个函数返回 <code>Bundle</code> 中全局变量的数量。</li>
+</ul>
+</li>
+<li><p><code>global_or_null</code>：</p>
+<ul>
+<li>作用：通过名称获取全局变量的指针，如果不存在则返回空指针。</li>
+<li>参数：要查找的全局变量的名称。</li>
+<li>返回：全局变量的指针或空指针。</li>
+<li>解释：这个函数允许你根据名称查找 <code>Bundle</code> 中的全局变量。</li>
+</ul>
+</li>
+<li><p><code>function_begin</code> 和 <code>function_end</code>：</p>
+<ul>
+<li>作用：用于遍历 <code>Bundle</code> 中函数的迭代器的起始和结束位置。</li>
+<li>返回：函数迭代器的起始和结束位置。</li>
+<li>解释：这对函数允许你遍历 <code>Bundle</code> 中的函数，以便查看或修改它们。</li>
+</ul>
+</li>
+<li><p><code>num_functions</code>：</p>
+<ul>
+<li>作用：返回 <code>Bundle</code> 中函数的数量。</li>
+<li>返回：函数的数量。</li>
+<li>解释：这个函数返回 <code>Bundle</code> 中函数的数量。</li>
+</ul>
+</li>
+<li><p><code>intrinsic_function</code>：</p>
+<ul>
+<li>作用：获取或创建具有给定ID和（可选）类型参数的内部函数。</li>
+<li>参数：内部函数的ID和可选的类型模板。</li>
+<li>返回：内部函数的指针。</li>
+<li>解释：这个函数用于获取或创建具有特定内部ID的内部函数，用于内部操作和编译器优化。</li>
+</ul>
+</li>
+<li><p><code>function_or_null</code>：</p>
+<ul>
+<li>作用：通过名称获取函数的指针，如果不存在则返回空指针。</li>
+<li>参数：要查找的函数的名称。</li>
+<li>返回：函数的指针或空指针。</li>
+<li>解释：这个函数允许你根据名称查找 <code>Bundle</code> 中的函数。</li>
+</ul>
+</li>
+<li><p><code>is_name_available</code> 和 <code>find_available_name</code>：</p>
+<ul>
+<li>作用：用于检查名称是否可用以及查找可用的名称。</li>
+<li>参数：要检查的名称或查找的名称前缀。</li>
+<li>返回：<code>is_name_available</code> 返回布尔值，<code>find_available_name</code> 返回新的可用名称。</li>
+<li>解释：这些函数用于处理名称冲突，确保全局变量和函数的名称唯一性。</li>
+</ul>
+</li>
+</ol>
+<p>这些函数为 <code>Bundle</code> 类提供了管理全局变量、函数和与程序分析相关的信息的方法。</p>
+<h2 id="x2F-home-x2F-zou-x2F-Documents-x2F-FIKOS-x2F-ar-x2F-src-x2F-semantic-目录下的value-cpp文件"><a href="#x2F-home-x2F-zou-x2F-Documents-x2F-FIKOS-x2F-ar-x2F-src-x2F-semantic-目录下的value-cpp文件" class="headerlink" title="&#x2F;home&#x2F;zou&#x2F;Documents&#x2F;FIKOS&#x2F;ar&#x2F;src&#x2F;semantic 目录下的value.cpp文件"></a>&#x2F;home&#x2F;zou&#x2F;Documents&#x2F;FIKOS&#x2F;ar&#x2F;src&#x2F;semantic 目录下的value.cpp文件</h2><p>这是一个C++文件，涉及了一些与程序分析和编译相关的类，主要包括 <code>Value</code> 类和与值相关的各种常量、变量类。以下是该文件中的一些重要内容：</p>
+<ol>
+<li><p><code>Value</code> 类：这是表示各种值的基类，包括常量和变量。它包括一个值的种类（<code>ValueKind</code>）和类型（<code>Type</code>）信息。<code>Value</code> 类有一些派生类，如 <code>Constant</code>、<code>Variable</code> 等。</p>
+</li>
+<li><p>常量类：包括 <code>UndefinedConstant</code>（未定义常量）、<code>IntegerConstant</code>（整数常量）、<code>FloatConstant</code>（浮点数常量）等。每个常量类都有相应的构造函数和 <code>dump</code> 方法，用于创建和打印常量。</p>
+</li>
+<li><p>变量类：包括 <code>GlobalVariable</code>（全局变量）、<code>LocalVariable</code>（局部变量）和 <code>InternalVariable</code>（内部变量）。这些变量类表示程序中的各种变量。<code>GlobalVariable</code> 和 <code>LocalVariable</code> 具有名称、类型和其他信息，而 <code>InternalVariable</code> 通常是编译器内部使用的。</p>
+</li>
+<li><p>全局变量类（<code>GlobalVariable</code>）：表示程序中的全局变量，包括名称、类型、是否定义等信息。它还包括一些与全局变量相关的方法，如 <code>create</code> 用于创建全局变量，<code>set_name</code> 用于设置名称，以及 <code>dump</code> 用于打印信息。</p>
+</li>
+<li><p>局部变量类（<code>LocalVariable</code>）：表示程序中的局部变量，类似于全局变量，但通常在函数内部定义。也包括与局部变量相关的方法和打印信息的函数。</p>
+</li>
+<li><p>内部变量类（<code>InternalVariable</code>）：表示程序中的内部变量，通常由编译器生成。它也包括与内部变量相关的方法和打印信息的函数。</p>
+</li>
+</ol>
+<p>这个文件主要定义了这些类，以及它们之间的关系和方法。这些类在程序分析和编译过程中用于表示和处理各种值和变量。如果你有特定的问题或需要深入了解其中的某个方面，请告诉我，我会尽力提供更多信息。</p>
+<h2 id="x2F-home-x2F-zou-x2F-Documents-x2F-ar-x2F-ikos-x2F-include-x2F-semantic-目录下的number-hpp文件"><a href="#x2F-home-x2F-zou-x2F-Documents-x2F-ar-x2F-ikos-x2F-include-x2F-semantic-目录下的number-hpp文件" class="headerlink" title="&#x2F;home&#x2F;zou&#x2F;Documents&#x2F;ar&#x2F;ikos&#x2F;include&#x2F;semantic 目录下的number.hpp文件"></a>&#x2F;home&#x2F;zou&#x2F;Documents&#x2F;ar&#x2F;ikos&#x2F;include&#x2F;semantic 目录下的number.hpp文件</h2><p>这是一个标题为“Number definitions”的C++头文件，它定义了一些与数字和整数操作相关的类和类型。以下是文件的主要内容：</p>
+<ol>
+<li><p>头文件包含：该文件包含了一些与整数操作相关的其他头文件，如 <code>supported_integral.hpp</code>、<code>z_number.hpp</code> 和 <code>machine_int.hpp</code>。这些头文件可能定义了一些整数和数字操作的具体实现。</p>
+</li>
+<li><p>类型定义：文件定义了以下类型和类别：</p>
+<ul>
+<li><code>Signedness</code>：表示整数的符号（有符号或无符号）的枚举类型。</li>
+<li><code>Signed</code>：符号为有符号的整数值。</li>
+<li><code>Unsigned</code>：符号为无符号的整数值。</li>
+<li><code>ZNumber</code>：用于表示无限精度整数的类，这是一个支持任意精度的整数类。</li>
+<li><code>MachineInt</code>：用于表示任意精度机器整数的类，支持不同精度和符号。</li>
+</ul>
+</li>
+</ol>
+<p>这些定义用于处理各种整数和数字操作，包括整数运算、符号处理以及其他与整数相关的计算。这些类和类型可能在程序分析、编译器和其他需要数值处理的应用中起到关键作用。</p>
+<h2 id="用IKOS分析C程序的流程如下"><a href="#用IKOS分析C程序的流程如下" class="headerlink" title="用IKOS分析C程序的流程如下"></a>用IKOS分析C程序的流程如下</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">zou@zou-VirtualBox:~/Documents/FIKOS/test/mytest$ ikos hello.c</span><br><span class="line">[*] Compiling hello.c</span><br><span class="line">[*] Running ikos preprocessor</span><br><span class="line">[*] Running ikos analyzer</span><br><span class="line">[*] Translating LLVM bitcode to AR</span><br><span class="line">[*] Running liveness analysis</span><br><span class="line">[*] Running widening hint analysis</span><br><span class="line">[*] Running interprocedural value analysis</span><br><span class="line">[*] Analyzing entry point <span class="string">&#x27;main&#x27;</span></span><br><span class="line">[*] Checking properties <span class="keyword">for</span> entry point <span class="string">&#x27;main&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Time stats:</span></span><br><span class="line">clang        : 0.032 sec</span><br><span class="line">ikos-analyzer: 0.007 sec</span><br><span class="line">ikos-pp      : 0.007 sec</span><br><span class="line"></span><br><span class="line"><span class="comment"># Summary:</span></span><br><span class="line">Total number of checks                : 3</span><br><span class="line">Total number of unreachable checks    : 0</span><br><span class="line">Total number of safe checks           : 3</span><br><span class="line">Total number of definite unsafe checks: 0</span><br><span class="line">Total number of warnings              : 0</span><br><span class="line"></span><br><span class="line">The program is SAFE</span><br><span class="line"></span><br><span class="line"><span class="comment"># Results</span></span><br><span class="line">No entries.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="解读Python脚本"><a href="#解读Python脚本" class="headerlink" title="解读Python脚本"></a>解读Python脚本</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">parser.add_argument(<span class="string">&#x27;-v&#x27;</span>,</span><br><span class="line">                    dest=<span class="string">&#x27;verbosity&#x27;</span>,</span><br><span class="line">                    <span class="built_in">help</span>=<span class="string">&#x27;Increase verbosity&#x27;</span>,</span><br><span class="line">                    action=<span class="string">&#x27;count&#x27;</span>,</span><br><span class="line">                    default=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这段代码是使用 Python 的 argparse 模块创建命令行参数解析器。它定义了一个名为 <code>-v</code> 或 <code>--verbosity</code> 的参数，用于控制输出的详细程度。参数的具体解释如下：</p>
+<ul>
+<li><code>dest=&#39;verbosity&#39;</code>：将解析后的值存储在名为 <code>verbosity</code> 的变量中。</li>
+<li><code>help=&#39;Increase verbosity&#39;</code>：当用户运行脚本时，如果使用了 <code>-h</code> 或 <code>--help</code> 参数，将显示的帮助信息，说明这个参数的作用是增加详细程度。</li>
+<li><code>action=&#39;count&#39;</code>：指定了当这个参数出现时的行为。在这种情况下，<code>action=&#39;count&#39;</code> 表示每次出现 <code>-v</code> 就增加 <code>verbosity</code> 变量的值。例如，<code>-v</code> 会使 <code>verbosity</code> 变为2，<code>-vv</code> 会使其变为3，以此类推。</li>
+<li><code>default=1</code>：如果用户没有提供 <code>-v</code> 参数，将使用默认值1。</li>
+</ul>
+<p>这段代码的作用是允许用户通过命令行控制脚本的输出详细程度，通过多次使用 <code>-v</code> 参数来增加详细级别。</p>
+<h2 id="上述的代码怎么调用函数实现功能"><a href="#上述的代码怎么调用函数实现功能" class="headerlink" title="上述的代码怎么调用函数实现功能"></a>上述的代码怎么调用函数实现功能</h2><p>在使用这个参数解析器的脚本中，你可以通过以下方式来调用相关函数：</p>
+<ol>
+<li><p><strong>导入 argparse 模块：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>创建 ArgumentParser 对象：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">parser = argparse.ArgumentParser()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>添加参数：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">parser.add_argument(<span class="string">&#x27;-v&#x27;</span>, dest=<span class="string">&#x27;verbosity&#x27;</span>, <span class="built_in">help</span>=<span class="string">&#x27;Increase verbosity&#x27;</span>, action=<span class="string">&#x27;count&#x27;</span>, default=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>解析命令行参数：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">args = parser.parse_args()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>使用解析后的参数：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> args.verbosity == <span class="number">1</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Low verbosity output&quot;</span>)</span><br><span class="line"><span class="keyword">elif</span> args.verbosity == <span class="number">2</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Medium verbosity output&quot;</span>)</span><br><span class="line"><span class="keyword">elif</span> args.verbosity &gt;= <span class="number">3</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;High verbosity output&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>这样，当用户在命令行中使用 <code>-v</code> 参数时，<code>args.verbosity</code> 将包含相应的值，你可以根据这个值来实现不同的功能。例如，你可以根据 <code>verbosity</code> 的不同级别输出不同详细程度的信息。</p>
+<h2 id="Python脚本中的metavar和help关键词"><a href="#Python脚本中的metavar和help关键词" class="headerlink" title="Python脚本中的metavar和help关键词"></a>Python脚本中的metavar和help关键词</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">parser.add_argument(<span class="string">&#x27;-o&#x27;</span>, <span class="string">&#x27;--output-db&#x27;</span>,</span><br><span class="line">                    dest=<span class="string">&#x27;output_db&#x27;</span>,</span><br><span class="line">                    metavar=<span class="string">&#x27;&lt;file&gt;&#x27;</span>,</span><br><span class="line">                    <span class="built_in">help</span>=<span class="string">&#x27;Output database file (default: output.db)&#x27;</span>,</span><br><span class="line">                    default=<span class="string">&#x27;output.db&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这段代码是用于解析命令行参数的 argparse 代码，针对输出数据库文件的设置。下面是对这段代码的解释：</p>
+<ul>
+<li><code>-o</code> 和 <code>--output-db</code> 是两种不同的方式来指定输出数据库文件的参数，用户可以选择其中一种来使用。</li>
+<li><code>dest=&#39;output_db&#39;</code> 表示解析后的值将存储在名为 <code>output_db</code> 的变量中。</li>
+<li><code>metavar=&#39;&lt;file&gt;&#39;</code> 用于指定在帮助消息中显示的参数值的名称，这里是 <code>&lt;file&gt;</code>。</li>
+<li><code>help=&#39;Output database file (default: output.db)&#39;</code> 提供了在用户请求帮助时显示的信息，指明了这个参数的作用以及默认值。</li>
+<li><code>default=&#39;output.db&#39;</code> 指定了参数的默认值，如果用户未提供输出数据库文件的参数，则将使用这个默认值。</li>
+</ul>
+<p>用户可以通过命令行指定输出数据库文件的名称，例如 <code>-o custom_db.db</code> 或 <code>--output-db custom_db.db</code>。如果用户未指定，将使用默认的输出数据库文件名 <code>output.db</code>。在脚本中，你可以通过 <code>args.output_db</code> 访问解析后的输出数据库文件的值。</p>
+<p>上面的metavar是怎么用的?</p>
+<p><code>metavar</code> 是 argparse 模块中的一个参数，用于指定在帮助消息中显示的参数值的名称。它通常用于提供用户在命令行中应该提供什么样的值。</p>
+<p>在你提供的代码中，<code>metavar=&#39;&lt;file&gt;&#39;</code> 表示用户在命令行中指定输出数据库文件参数时，应该提供一个文件名。这个文件名在帮助消息中被称为 <code>&lt;file&gt;</code>，用于说明用户应该提供一个文件的路径作为参数值。</p>
+<p>例如，当用户运行脚本时使用 <code>-o custom_db.db</code> 或 <code>--output-db custom_db.db</code>，帮助消息可能会包含类似以下的信息：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">-o &lt;file&gt;, --output-db &lt;file&gt;		Output database file (default: output.db)</span><br></pre></td></tr></table></figure>
+
+<p>这样的帮助消息有助于用户理解该参数的期望值。</p>
+<h2 id="argparse库中的action字段的多个选项"><a href="#argparse库中的action字段的多个选项" class="headerlink" title="argparse库中的action字段的多个选项"></a>argparse库中的action字段的多个选项</h2><p><code>argparse</code>库中的<code>action</code>字段有多种可选项，用于定义当命令行选项出现时应该执行的操作。以下是一些常见的<code>action</code>选项：</p>
+<ol>
+<li><p><code>store</code>（默认值）：将命令行参数的值存储在一个变量中。</p>
+</li>
+<li><p><code>store_const</code>：存储一个常数值在一个变量中，通常与<code>const</code>参数一起使用。</p>
+</li>
+<li><p><code>store_true</code>：存储<code>True</code>值在一个变量中，通常用于标志选项。</p>
+</li>
+<li><p><code>store_false</code>：存储<code>False</code>值在一个变量中，也通常用于标志选项。</p>
+</li>
+<li><p><code>append</code>：将多个参数值存储在一个列表中，用于多次出现的选项。</p>
+</li>
+<li><p><code>append_const</code>：将一个常数值附加到一个列表中，通常与<code>const</code>参数一起使用。</p>
+</li>
+<li><p><code>count</code>：计算选项出现的次数，存储在一个整数变量中，用于计数操作。</p>
+</li>
+<li><p><code>version</code>：用于显示版本信息并退出。</p>
+</li>
+</ol>
+<p>这些<code>action</code>选项允许您自定义如何处理不同类型的命令行参数，以满足您的应用程序的需求。</p>
+<h2 id="命令行中可选参数值"><a href="#命令行中可选参数值" class="headerlink" title="命令行中可选参数值"></a>命令行中可选参数值</h2><p><code>choices=args.choices(args.log_levels)</code></p>
+<p>这行代码涉及到 <code>args.choices</code> 函数，它似乎用于从命令行参数的可选值列表中获取选项的可选值。在这个特定上下文中，<code>args.log_levels</code> 应该是一个包含可选日志级别的列表。这行代码的目的是使用 <code>args.choices</code> 函数将这些可选日志级别作为合法的选择，以便在命令行参数中指定日志级别时进行验证。</p>
+<p>例如，如果 <code>args.log_levels</code> 包含以下日志级别：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">args.log_levels = [<span class="string">&#x27;info&#x27;</span>, <span class="string">&#x27;warning&#x27;</span>, <span class="string">&#x27;error&#x27;</span>, <span class="string">&#x27;debug&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>然后，使用 <code>choices=args.choices(args.log_levels)</code> 将会确保在命令行中选择日志级别时，只能从这些选项中进行选择，而不会输入无效的日志级别。这是一种在命令行工具中限制和验证用户输入的常见方式。</p>
+<h2 id="指定分析函数入口的脚本在第514行"><a href="#指定分析函数入口的脚本在第514行" class="headerlink" title="指定分析函数入口的脚本在第514行"></a>指定分析函数入口的脚本在第514行</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># by default, the entry point is main</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> opt.entry_points:</span><br><span class="line">    opt.entry_points = (<span class="string">&#x27;main&#x27;</span>,)</span><br></pre></td></tr></table></figure>
+
+<h2 id="保存临时文件"><a href="#保存临时文件" class="headerlink" title="保存临时文件"></a>保存临时文件</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">ikos hello.c --save-temps --temp-dir=/home/zou/Documents/FIKOS/test/mytest</span><br></pre></td></tr></table></figure>
+
+<p>临时文件包括<code>.bc, .pp.bc</code>，我现在想将所有的文件保存下来，需要额外组合指令，并且更改脚本代码。</p>
+<h2 id="现在想保存尽可能多的文件，如ar文件"><a href="#现在想保存尽可能多的文件，如ar文件" class="headerlink" title="现在想保存尽可能多的文件，如ar文件"></a>现在想保存尽可能多的文件，如ar文件</h2><p>则需修改脚本文件将其保存到文件中。展示AR的代码在&#x2F;FIKOS&#x2F;analyzer&#x2F;src 目录下的ikos_analyzer.cpp文件中的1009行。</p>
+<h2 id="x2F-home-x2F-zou-x2F-Documents-x2F-FIKOS-x2F-analyzer-x2F-src-目录下的ikos-analyzer-cpp文件中display-ar操作的源代码及解析"><a href="#x2F-home-x2F-zou-x2F-Documents-x2F-FIKOS-x2F-analyzer-x2F-src-目录下的ikos-analyzer-cpp文件中display-ar操作的源代码及解析" class="headerlink" title="&#x2F;home&#x2F;zou&#x2F;Documents&#x2F;FIKOS&#x2F;analyzer&#x2F;src 目录下的ikos-analyzer.cpp文件中display-ar操作的源代码及解析"></a>&#x2F;home&#x2F;zou&#x2F;Documents&#x2F;FIKOS&#x2F;analyzer&#x2F;src 目录下的ikos-analyzer.cpp文件中display-ar操作的源代码及解析</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Display the abstract representation</span></span><br><span class="line"><span class="keyword">if</span> (DisplayAR) &#123;</span><br><span class="line">  analyzer::log::<span class="built_in">info</span>(<span class="string">&quot;Printing Abstract Representation&quot;</span>);</span><br><span class="line">  <span class="function">analyzer::ScopeTimerDatabase <span class="title">t</span><span class="params">(output_db.times,</span></span></span><br><span class="line"><span class="params"><span class="function">                                 <span class="string">&quot;ikos-analyzer.display-ar&quot;</span>)</span></span>;</span><br><span class="line">  <span class="function">ar::TextFormatter <span class="title">formatter</span><span class="params">(make_format_options())</span></span>;</span><br><span class="line">  formatter.format(analyzer::log::<span class="built_in">msg</span>().<span class="built_in">stream</span>(), bundle);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码的主要目的是在满足条件时，展示程序的抽象表示（Abstract Representation）。</p>
+<p>它包含以下步骤：</p>
+<ol>
+<li><p>首先，它检查条件 <code>DisplayAR</code> 是否为真（即，是否应该显示抽象表示）。<code>DisplayAR</code> 是一个控制是否显示抽象表示的开关。</p>
+</li>
+<li><p>如果条件 <code>DisplayAR</code> 为真，那么它执行以下操作。</p>
+</li>
+<li><p>它使用 <code>analyzer::log::info</code> 函数打印一条信息，说明要开始打印抽象表示。</p>
+</li>
+<li><p>接着，它创建一个名为 <code>t</code> 的计时器（<code>analyzer::ScopeTimerDatabase</code>），用于测量打印抽象表示所需的时间。这个计时器将记录在 <code>output_db.times</code> 数据结构中，用于后续的时间报告。</p>
+</li>
+<li><p>使用 <code>ar::TextFormatter</code> 类创建一个文本格式化器（formatter）。这个格式化器用于将抽象表示以文本形式呈现。</p>
+</li>
+<li><p>使用 <code>make_format_options()</code> 函数创建格式选项，这些选项用于配置格式化器的行为。</p>
+</li>
+<li><p>最后，使用格式化器 <code>formatter</code> 将抽象表示打印到日志中（使用 <code>analyzer::log::msg().stream()</code>）。这将在日志中显示程序的抽象表示。</p>
+</li>
+</ol>
+<p>总之，这段代码用于在满足条件时，以文本形式打印程序的抽象表示，以便开发人员和分析人员可以查看和理解程序的抽象结构。这有助于调试和分析程序的行为。</p>
+<h2 id="SCADE-model是什么"><a href="#SCADE-model是什么" class="headerlink" title="SCADE model是什么"></a>SCADE model是什么</h2><p>Scade（Safety Critical Application Development Environment）是一种用于开发安全关键应用程序的工具和环境。Scade模型是一种用于设计和开发安全关键系统的模型，通常用于航空航天、汽车、医疗设备等领域。Scade模型通常采用形式化建模方法，以确保系统的可靠性、安全性和高可用性。这些模型通常基于数据流和状态转换的概念，用于描述系统的行为和功能。 Scade模型通常与自动代码生成工具一起使用，以生成可执行代码，从而减少人为错误的可能性。这些模型在开发需要极高可靠性和安全性的系统时非常有用。</p>
+<h2 id="超越函数是什么"><a href="#超越函数是什么" class="headerlink" title="超越函数是什么"></a>超越函数是什么</h2><p>超越函数（Transcendental Function）是一种在数学中描述的函数，它不满足任何有限次代数方程（多项式方程）的解。这意味着超越函数不能用一个有限次的代数运算来表示。相反，它们通常涉及到无限级数、无穷集合或者特殊函数，如指数函数、三角函数、对数函数等。</p>
+<p>一些著名的超越函数包括：</p>
+<ol>
+<li><p>指数函数（Exponential Function）：例如，y &#x3D; e^x 是一个常见的超越函数，其中 e 是自然对数的底数。</p>
+</li>
+<li><p>正弦函数和余弦函数（Sine and Cosine Functions）：例如，y &#x3D; sin(x) 和 y &#x3D; cos(x) 也是超越函数。</p>
+</li>
+<li><p>对数函数（Logarithmic Function）：例如，y &#x3D; ln(x) 表示自然对数。</p>
+</li>
+<li><p>阶乘函数（Factorial Function）：n! 表示整数 n 的阶乘，也可以看作一个特殊的超越函数。</p>
+</li>
+</ol>
+<p>这些函数在数学、物理学、工程学和其他领域中广泛应用，因为它们能够描述许多自然现象和复杂的数学关系。超越函数通常在解微分方程、数值分析、和科学建模等领域中发挥重要作用。</p>
+<h2 id="open-convex-domain是什么"><a href="#open-convex-domain是什么" class="headerlink" title="open convex domain是什么"></a>open convex domain是什么</h2><p>“Open convex domain” 意味着一个凸域（区域）的子集，这个子集在域内具有开放性质，也就是不包括边界上的点。凸域是一个在任意两点之间的线段完全位于域内的区域，而 “open” 表示这个区域不包括域的边界。</p>
+<p>例如，考虑二维平面上的一个圆，其中所有圆内的点都构成一个凸域，但如果我们从这个圆中排除圆周上的点，那么我们得到的是一个开放的凸域。</p>
+<p>在数学、优化、和凸几何学等领域中，开放凸域是一个重要的概念，因为它们通常用于定义约束条件或分析问题的可行域。例如，线性规划中的可行域通常定义为一个开放凸域，因为这些问题通常要求变量取值的范围不能包括边界上的点。</p>
 ]]></content>
       <categories>
         <category>log</category>
