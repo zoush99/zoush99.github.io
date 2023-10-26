@@ -3013,6 +3013,146 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;llvm/Support/CommandLine.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> llvm;</span><br><span class="line"></span><br><span class="line"><span class="function">cl::OptionCategory <span class="title">AnalysisCategory</span><span class="params">(<span class="string">&quot;Analysis Options&quot;</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">cl::opt&lt;<span class="type">int</span>&gt; <span class="title">Opt1</span><span class="params">(<span class="string">&quot;opt1&quot;</span>, cl::desc(<span class="string">&quot;Option 1&quot;</span>), cl::cat(AnalysisCategory))</span></span>;</span><br><span class="line"><span class="function">cl::opt&lt;<span class="type">bool</span>&gt; <span class="title">Opt2</span><span class="params">(<span class="string">&quot;opt2&quot;</span>, cl::desc(<span class="string">&quot;Option 2&quot;</span>), cl::cat(AnalysisCategory))</span></span>;</span><br></pre></td></tr></table></figure>
 
 <p>在上面的示例中，我们定义了两个命令行选项<code>Opt1</code>和<code>Opt2</code>，它们都属于<code>AnalysisCategory</code>类别。这样，当我们使用命令行工具时，这些选项将被自动分组到<code>Analysis Options</code>类别中，以便更好地组织和显示这些选项。</p>
+<h2 id="analyzer-src-analysis目录下的variable-cpp文件阅读"><a href="#analyzer-src-analysis目录下的variable-cpp文件阅读" class="headerlink" title="/analyzer/src/analysis目录下的variable.cpp文件阅读"></a><code>/analyzer/src/analysis</code>目录下的variable.cpp文件阅读</h2><p>在 <code>variable.cpp</code> 文件中，定义了一系列从 <code>Variable</code> 类派生的具体变量类，包括 <code>LocalVariable</code>、<code>GlobalVariable</code>、<code>InternalVariable</code> 等。以下是这些类的成员函数及其功能的简要介绍：</p>
+<ol>
+<li><p><strong>LocalVariable</strong>:</p>
+<ul>
+<li><code>LocalVariable(ar::LocalVariable* var)</code>: 构造函数，初始化本地变量对象。</li>
+<li><code>void dump(std::ostream&amp; o) const</code>: 将本地变量信息输出到给定的输出流中，用于调试和可视化。</li>
+</ul>
+</li>
+<li><p><strong>GlobalVariable</strong>:</p>
+<ul>
+<li><code>GlobalVariable(ar::GlobalVariable* var)</code>: 构造函数，初始化全局变量对象。</li>
+<li><code>void dump(std::ostream&amp; o) const</code>: 将全局变量信息输出到给定的输出流中，用于调试和可视化。</li>
+</ul>
+</li>
+<li><p><strong>InternalVariable</strong>:</p>
+<ul>
+<li><code>InternalVariable(ar::InternalVariable* var)</code>: 构造函数，初始化内部变量对象。</li>
+<li><code>void dump(std::ostream&amp; o) const</code>: 将内部变量信息输出到给定的输出流中，用于调试和可视化。</li>
+</ul>
+</li>
+<li><p><strong>InlineAssemblyPointerVariable</strong>:</p>
+<ul>
+<li><code>InlineAssemblyPointerVariable(ar::InlineAssemblyConstant* inline_asm)</code>: 构造函数，初始化内联汇编指针变量。</li>
+<li><code>void dump(std::ostream&amp; o) const</code>: 将内联汇编指针变量信息输出到给定的输出流中，用于调试和可视化。</li>
+</ul>
+</li>
+<li><p><strong>FunctionPointerVariable</strong>:</p>
+<ul>
+<li><code>FunctionPointerVariable(ar::Function* fun)</code>: 构造函数，初始化函数指针变量。</li>
+<li><code>void dump(std::ostream&amp; o) const</code>: 将函数指针变量信息输出到给定的输出流中，用于调试和可视化。</li>
+</ul>
+</li>
+<li><p><strong>CellVariable</strong>:</p>
+<ul>
+<li><code>CellVariable(ar::Type* type, MemoryLocation* address, MachineInt offset, MachineInt size)</code>: 构造函数，初始化内存单元变量。</li>
+<li><code>void dump(std::ostream&amp; o) const</code>: 将内存单元变量信息输出到给定的输出流中，用于调试和可视化。</li>
+</ul>
+</li>
+<li><p><strong>OffsetVariable</strong>:</p>
+<ul>
+<li><code>OffsetVariable(ar::Type* type, Variable* pointer)</code>: 构造函数，初始化偏移变量。</li>
+<li><code>void dump(std::ostream&amp; o) const</code>: 将偏移变量信息输出到给定的输出流中，用于调试和可视化。</li>
+</ul>
+</li>
+<li><p><strong>AllocSizeVariable</strong>:</p>
+<ul>
+<li><code>AllocSizeVariable(ar::Type* type, MemoryLocation* address)</code>: 构造函数，初始化分配大小变量。</li>
+<li><code>void dump(std::ostream&amp; o) const</code>: 将分配大小变量信息输出到给定的输出流中，用于调试和可视化。</li>
+</ul>
+</li>
+<li><p><strong>ReturnVariable</strong>:</p>
+<ul>
+<li><code>ReturnVariable(ar::Function* fun)</code>: 构造函数，初始化返回值变量。</li>
+<li><code>void dump(std::ostream&amp; o) const</code>: 将返回值变量信息输出到给定的输出流中，用于调试和可视化。</li>
+</ul>
+</li>
+<li><p><strong>NamedShadowVariable</strong>:</p>
+<ul>
+<li><code>NamedShadowVariable(ar::Type* type, std::string name)</code>: 构造函数，初始化具名影子变量。</li>
+<li><code>void dump(std::ostream&amp; o) const</code>: 将具名影子变量信息输出到给定的输出流中，用于调试和可视化。</li>
+</ul>
+</li>
+<li><p><strong>UnnamedShadowVariable</strong>:</p>
+<ul>
+<li><code>UnnamedShadowVariable(ar::Type* type, std::size_t id)</code>: 构造函数，初始化匿名影子变量。</li>
+<li><code>void dump(std::ostream&amp; o) const</code>: 将匿名影子变量信息输出到给定的输出流中，用于调试和可视化。</li>
+</ul>
+</li>
+</ol>
+<p>这些具体变量类是 IKOS 静态分析工具中用于表示程序变量的关键组件，每个类都提供了适用于其特定类型的方法。通过这些方法，IKOS 能够有效地处理各种不同类型的程序变量，支持静态分析的实施。这些方法中的 <code>dump</code> 方法用于将变量信息输出到标准输出或文件中，以帮助开发人员进行调试和分析。</p>
+<p>这是 <code>VariableFactory</code> 类的实现，它用于创建不同类型的变量对象。以下是 <code>VariableFactory</code> 的主要成员函数及其功能：</p>
+<ol>
+<li><p><code>VariableFactory::VariableFactory(ar::Bundle* bundle)</code>：构造函数，接受一个 ar::Bundle 对象，并初始化 <code>_ar_context</code> 和 <code>_size_type</code> 成员。</p>
+</li>
+<li><p><code>VariableFactory::~VariableFactory()</code>：析构函数，通常不执行任何操作，因为智能指针会自动释放内存。</p>
+</li>
+<li><p><code>VariableFactory::get_local(ar::LocalVariable* var)</code>：创建并返回一个 <code>LocalVariable</code> 对象，如果已经存在具有相同参数的对象，则返回现有对象。这个函数用于获取局部变量。</p>
+</li>
+<li><p><code>VariableFactory::get_global(ar::GlobalVariable* var)</code>：创建并返回一个 <code>GlobalVariable</code> 对象，如果已经存在具有相同参数的对象，则返回现有对象。这个函数用于获取全局变量。</p>
+</li>
+<li><p><code>VariableFactory::get_internal(ar::InternalVariable* var)</code>：创建并返回一个 <code>InternalVariable</code> 对象，如果已经存在具有相同参数的对象，则返回现有对象。这个函数用于获取内部变量。</p>
+</li>
+<li><p><code>VariableFactory::get_asm_ptr(ar::InlineAssemblyConstant* cst)</code>：创建并返回一个 <code>InlineAssemblyPointerVariable</code> 对象，如果已经存在具有相同参数的对象，则返回现有对象。这个函数用于获取内联汇编指令的指针。</p>
+</li>
+<li><p><code>VariableFactory::get_function_ptr(ar::Function* fun)</code>：创建并返回一个 <code>FunctionPointerVariable</code> 对象，如果已经存在具有相同参数的对象，则返回现有对象。这个函数用于获取函数指针。</p>
+</li>
+<li><p><code>VariableFactory::get_function_ptr(ar::FunctionPointerConstant* cst)</code>：基于函数指针常量创建并返回一个 <code>FunctionPointerVariable</code> 对象。这个函数用于获取函数指针。</p>
+</li>
+<li><p><code>VariableFactory::get_cell(MemoryLocation* address, const MachineInt&amp; offset, const MachineInt&amp; size, Signedness sign)</code>：创建并返回一个 <code>CellVariable</code> 对象，如果已经存在具有相同参数的对象，则返回现有对象。这个函数用于获取内存单元变量，通常表示整数、浮点数或指针。</p>
+</li>
+<li><p><code>VariableFactory::get_alloc_size(MemoryLocation* address)</code>：创建并返回一个 <code>AllocSizeVariable</code> 对象，如果已经存在具有相同参数的对象，则返回现有对象。这个函数用于获取分配大小变量。</p>
+</li>
+<li><p><code>VariableFactory::get_return(ar::Function* fun)</code>：创建并返回一个 <code>ReturnVariable</code> 对象，如果已经存在具有相同参数的对象，则返回现有对象。这个函数用于获取函数返回变量。</p>
+</li>
+<li><p><code>VariableFactory::get_named_shadow(ar::Type* type, llvm::StringRef name)</code>：创建并返回一个 <code>NamedShadowVariable</code> 对象，如果已经存在具有相同参数的对象，则返回现有对象。这个函数用于获取具有命名的阴影变量。</p>
+</li>
+<li><p><code>VariableFactory::create_unnamed_shadow(ar::Type* type)</code>：创建并返回一个 <code>UnnamedShadowVariable</code> 对象，具有未命名的阴影变量。这个函数用于创建未命名的阴影变量。</p>
+</li>
+</ol>
+<p>这些函数允许您创建不同类型的变量对象，每个对象都表示不同的程序元素，例如局部变量、全局变量、内部变量、函数指针、内存单元、分配大小等。通过创建这些变量对象，您可以在静态分析工具中表示和跟踪程序的状态和数据流，以支持静态代码分析。此外，它们还可以帮助记录和可视化分析工具的内部状态以进行调试和分析。</p>
+<h2 id="analyzer-include-ikos-analyzer-analysis目录下的fixpoint-parameters-hpp文件解读"><a href="#analyzer-include-ikos-analyzer-analysis目录下的fixpoint-parameters-hpp文件解读" class="headerlink" title="/analyzer/include/ikos/analyzer/analysis目录下的fixpoint_parameters.hpp文件解读"></a><code>/analyzer/include/ikos/analyzer/analysis</code>目录下的fixpoint_parameters.hpp文件解读</h2><p><code>WideningHints</code> 类用于表示控制流图（CFG）中循环的加宽提示（Widening Hints）。在静态分析中，加宽是指在计算不动点（Fixpoint）时，为了加快收敛速度，选择放宽约束条件的过程。加宽提示是一种机制，用于为分析器提供循环迭代时何时加宽的建议或提示。</p>
+<p>以下是 <code>WideningHints</code> 类的主要成员和作用：</p>
+<ul>
+<li><p><code>Map _map</code>：一个私有的成员变量，它是一个映射（Map），将循环的头部（Cycle Head，通常是循环的入口基本块）与加宽提示（<code>MachineInt</code> 类型的整数值）相关联。这个映射表示不同循环头部的加宽提示。</p>
+</li>
+<li><p><code>get(ar::BasicBlock* head) const</code> 函数：用于获取与给定循环头部相关联的加宽提示。如果存在与给定循头部相关联的加宽提示，则返回一个 <code>MachineInt</code> 类型的不可选引用；否则，返回一个空的 <code>boost::optional</code>。</p>
+</li>
+<li><p><code>add(ar::BasicBlock* head, const MachineInt&amp; hint)</code> 函数：用于为给定的循环头部添加加宽提示。这个函数将循环头部和相应的加宽提示加入映射 <code>_map</code> 中，以备后续使用。</p>
+</li>
+<li><p><code>begin()</code> 和 <code>end()</code> 函数：用于返回迭代器，可以用于遍历所有循环头部及其加宽提示。<code>begin()</code> 函数返回映射的起始迭代器，<code>end()</code> 函数返回映射的结束迭代器，这样可以轻松地遍历所有加宽提示。</p>
+</li>
+</ul>
+<p><code>WideningHints</code> 类的主要目的是在静态分析中协助控制收敛速度，特别是在涉及循环的情况下。通过为不同的循环头部提供加宽提示，分析器可以更好地选择何时进行加宽操作，以加快不动点的计算速度，同时保持分析的精度。这有助于处理复杂的程序结构，如循环，而不会导致分析无限循环。</p>
+<p><code>CodeFixpointParameters</code> 类用于表示控制流图（CFG）中的不动点分析参数，这些参数用于配置不动点分析的行为。在静态分析中，不动点分析用于逐步近似程序的状态，以查找可能的程序状态空间，以检测错误或属性。这些参数控制分析中的加宽和缩窄策略、循环处理以及其他关键方面。</p>
+<p>以下是 <code>CodeFixpointParameters</code> 类的主要成员和作用：</p>
+<ul>
+<li><p><code>WideningStrategy widening_strategy</code>：表示不动点分析中的加宽策略。加宽策略是在每次迭代时决定何时进行加宽的策略，以加速不动点的收敛。这可以是一种启发式方法，例如按照循环迭代的次数来决定是否进行加宽。</p>
+</li>
+<li><p><code>NarrowingStrategy narrowing_strategy</code>：表示不动点分析中的缩窄策略。缩窄策略是在已经达到一个近似的不动点后，决定如何缩窄精度以提高精确度的策略。</p>
+</li>
+<li><p><code>unsigned widening_delay</code>：表示不动点分析中的加宽延迟。它指定了在开始执行加宽操作之前的循环迭代次数。通常，在初始迭代中，分析器可能需要保持较高的精度，然后逐渐放宽以提高分析的速度。</p>
+</li>
+<li><p><code>unsigned widening_period</code>：表示循环迭代之间执行加宽的间隔。这决定了在循环中何时执行加宽操作。例如，如果设置为5，那么在第5个迭代之后，将执行一次加宽操作。</p>
+</li>
+<li><p><code>boost::optional&lt;unsigned&gt; narrowing_iterations</code>：表示缩窄操作的固定次数。如果设置为 <code>boost::none</code>，则表示分析器将执行缩窄操作，直到达到收敛状态为止。</p>
+</li>
+<li><p><code>WideningHints widening_hints</code>：表示循环的加宽提示。它是 <code>WideningHints</code> 类型的对象，用于为循环提供加宽提示，以帮助分析器更好地控制何时进行加宽操作。</p>
+</li>
+</ul>
+<p><code>CodeFixpointParameters</code> 类的目的是配置不动点分析的行为，以在控制流图中对程序状态进行逐步近似。这些参数允许分析器根据特定的分析需求和性能要求来调整不动点分析的方式，以实现准确性和效率的平衡。这些参数通常在不同的程序部分和函数之间可能会有所不同，以满足不同部分的分析需求。</p>
+<p><code>FixpointParameters</code> 类用于表示整个程序的不动点分析参数。在静态分析中，不动点分析是一种常见的技术，用于逐步逼近程序状态以查找可能的程序状态空间，以检测错误或属性。这些参数配置了程序中不同函数的不动点分析行为，以便在每个函数中进行适当的配置。</p>
+<p>以下是 <code>FixpointParameters</code> 类的主要成员和作用：</p>
+<ul>
+<li><p><code>_default_params</code>：表示默认的不动点分析参数，用于所有函数，除非为特定函数配置了不同的参数。这允许用户为整个程序的大多数函数设置默认的分析策略。</p>
+</li>
+<li><p><code>_map</code>：是一个映射，将函数（<code>ar::Function*</code>）映射到其特定的不动点分析参数。这允许用户为特定的函数配置不同的不动点分析参数，以满足其特定的分析需求。</p>
+</li>
+</ul>
+<p><code>FixpointParameters</code> 类的目的是提供一种机制，通过该机制可以为整个程序以及程序中的每个函数配置不同的不动点分析策略。这允许开发人员根据不同函数的特定需求来调整不动点分析的方式，以平衡准确性和性能。</p>
+<p>这种分层配置的方式使得可以为整个程序定义一组默认参数，然后根据需要为特定函数或部分函数提供不同的配置。这有助于适应不同函数的分析需求，以满足各种不同类型的代码的要求。</p>
 ]]></content>
       <categories>
         <category>log</category>
