@@ -3230,6 +3230,185 @@
 </ol>
 <p>在这个代码片段中，如果 <code>DisplayPointer</code> 为真，将会执行 <code>pointer.dump</code> 操作，将 <code>pointer</code> 对象的内容记录到日志消息中。这通常用于调试和跟踪程序中的特定变量或对象的状态。如果 <code>DisplayPointer</code> 为假，<code>pointer.dump</code> 操作将不会执行。</p>
 <p>这种方式可以方便地将特定对象的信息记录到日志中，以便进行排查和调试。在调试期间，开发人员可以将 <code>DisplayPointer</code> 设置为真，以查看 <code>pointer</code> 对象的信息，而在正式发布或不需要这些信息时，可以将 <code>DisplayPointer</code> 设置为假，以避免记录不必要的信息。</p>
+<h2 id="QNumber类的构造函数及其用法"><a href="#QNumber类的构造函数及其用法" class="headerlink" title="QNumber类的构造函数及其用法"></a><code>QNumber</code>类的构造函数及其用法</h2><p><code>QNumber</code> 类具有多个构造函数，用于不同的方式来初始化 <code>QNumber</code> 对象。以下是这些构造函数的解释和示例：</p>
+<ol>
+<li><p><strong>默认构造函数</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">QNumber</span>()</span><br></pre></td></tr></table></figure>
+
+<p>默认构造函数创建一个值为0的 <code>QNumber</code> 对象。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">QNumber q1; <span class="comment">// 创建一个值为0的QNumber对象</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>从整数构造</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">QNumber</span>(<span class="type">int</span> value)</span><br></pre></td></tr></table></figure>
+
+<p>这个构造函数允许您使用整数来初始化 <code>QNumber</code> 对象。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">QNumber <span class="title">q2</span><span class="params">(<span class="number">5</span>)</span></span>; <span class="comment">// 创建一个值为5的QNumber对象</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>从<code>mpq_class</code>构造</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">QNumber</span>(<span class="type">const</span> mpq_class&amp; q)</span><br></pre></td></tr></table></figure>
+
+<p>这个构造函数允许您使用 GMP 库的 <code>mpq_class</code> 类型的对象来初始化 <code>QNumber</code> 对象。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">mpq_class <span class="title">rational</span><span class="params">(<span class="number">3</span>, <span class="number">2</span>)</span></span>;</span><br><span class="line"><span class="function">QNumber <span class="title">q3</span><span class="params">(rational)</span></span>; <span class="comment">// 使用mpq_class对象初始化QNumber</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>从<code>ZNumber</code>构造</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">QNumber</span>(<span class="type">const</span> ZNumber&amp; z)</span><br></pre></td></tr></table></figure>
+
+<p>这个构造函数允许您使用自定义的 <code>ZNumber</code> 类型的对象来初始化 <code>QNumber</code> 对象。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">ZNumber <span class="title">customInt</span><span class="params">(<span class="number">7</span>)</span></span>;</span><br><span class="line"><span class="function">QNumber <span class="title">q4</span><span class="params">(customInt)</span></span>; <span class="comment">// 使用ZNumber对象初始化QNumber</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>从字符串构造</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">QNumber</span>(<span class="type">const</span> std::string&amp; str, <span class="type">int</span> base = <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这个构造函数允许您使用字符串来初始化 <code>QNumber</code> 对象。<code>base</code> 参数指定字符串的进制，如果未指定，默认为10。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::string numStr = <span class="string">&quot;2/3&quot;</span>;</span><br><span class="line"><span class="function">QNumber <span class="title">q5</span><span class="params">(numStr)</span></span>; <span class="comment">// 使用字符串&quot;2/3&quot;初始化QNumber</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>从分子和分母构造</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">QNumber</span>(<span class="type">const</span> ZNumber&amp; numerator, <span class="type">const</span> ZNumber&amp; denominator)</span><br></pre></td></tr></table></figure>
+
+<p>这个构造函数允许您使用分子和分母的 <code>ZNumber</code> 对象来初始化 <code>QNumber</code> 对象。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">ZNumber <span class="title">num</span><span class="params">(<span class="number">4</span>)</span></span>;</span><br><span class="line"><span class="function">ZNumber <span class="title">den</span><span class="params">(<span class="number">7</span>)</span></span>;</span><br><span class="line"><span class="function">QNumber <span class="title">q6</span><span class="params">(num, den)</span></span>; <span class="comment">// 使用分子4和分母7初始化QNumber</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>使用<code>NormalizedTag</code>构造</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">QNumber</span>(<span class="type">const</span> ZNumber&amp; numerator, <span class="type">const</span> ZNumber&amp; denominator, NormalizedTag)</span><br></pre></td></tr></table></figure>
+
+<p>这个构造函数与上一个构造函数相同，但它创建一个已经规范化（normalized）的 <code>QNumber</code> 对象。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">ZNumber <span class="title">num</span><span class="params">(<span class="number">2</span>)</span></span>;</span><br><span class="line"><span class="function">ZNumber <span class="title">den</span><span class="params">(<span class="number">4</span>)</span></span>;</span><br><span class="line"><span class="function">QNumber <span class="title">q7</span><span class="params">(num, den, NormalizedTag())</span></span>; <span class="comment">// 创建一个已规范化的QNumber</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>这些构造函数允许您以不同的方式初始化 <code>QNumber</code> 对象，根据需要选择合适的构造函数来创建 <code>QNumber</code> 对象。</p>
+<h2 id="移动构造和复制构造的区别是什么"><a href="#移动构造和复制构造的区别是什么" class="headerlink" title="移动构造和复制构造的区别是什么"></a>移动构造和复制构造的区别是什么</h2><p>移动构造和复制构造是 C++ 中用于创建新对象的两种不同方式，它们有以下主要区别：</p>
+<ol>
+<li><p>目的：</p>
+<ul>
+<li><p>复制构造：用于创建一个新对象，新对象的内容与现有对象相同。复制构造函数通常接收常量引用（const reference）作为参数，以表示将现有对象的内容复制到新对象。</p>
+</li>
+<li><p>移动构造：用于创建一个新对象，并在创建新对象的同时将现有对象的资源（通常是动态分配的内存）移交给新对象。移动构造函数接收一个非常量右值引用（non-const rvalue reference）作为参数。</p>
+</li>
+</ul>
+</li>
+<li><p>参数类型：</p>
+<ul>
+<li><p>复制构造：接收常量引用（const reference）作为参数，因为它通常不修改传递的对象。</p>
+</li>
+<li><p>移动构造：接收非常量右值引用（non-const rvalue reference）作为参数，因为它需要移动资源，通常是通过窃取（move）的方式。</p>
+</li>
+</ul>
+</li>
+<li><p>行为：</p>
+<ul>
+<li><p>复制构造：复制对象的内容，新对象与原对象相互独立，对新对象的修改不会影响原对象。</p>
+</li>
+<li><p>移动构造：将现有对象的资源移交给新对象，通常通过转移指针或其他资源控制机制来实现。原对象通常会进入有效但不再可用的状态。</p>
+</li>
+</ul>
+</li>
+<li><p>使用场景：</p>
+<ul>
+<li><p>复制构造通常用于创建对象的副本，保留原对象的内容，适用于不想改变原对象的情况。</p>
+</li>
+<li><p>移动构造通常用于提高性能，避免昂贵的资源复制操作，适用于已经不再需要使用的对象的资源移交情况。</p>
+</li>
+</ul>
+</li>
+<li><p>标识符：</p>
+<ul>
+<li><p>复制构造的函数标识符是类名，例如 <code>MyClass(const MyClass&amp; other)</code>。</p>
+</li>
+<li><p>移动构造的函数标识符是类名，后面跟着 &amp;&amp;，例如 <code>MyClass(MyClass&amp;&amp; other)</code>。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>总之，复制构造和移动构造在参数类型、行为和使用场景上有显著不同。复制构造用于创建对象的副本，而移动构造用于将资源从一个对象移交到另一个对象以提高性能。根据不同的情况，可以选择使用适当的构造函数。</p>
+<h2 id="Bound类中的各个函数的使用方式"><a href="#Bound类中的各个函数的使用方式" class="headerlink" title="Bound类中的各个函数的使用方式"></a><code>Bound</code>类中的各个函数的使用方式</h2><p>Bound类中定义了多个函数，用于操作和查询Bound对象的属性。以下是这些函数的解释和示例用法：</p>
+<p><strong>Bound构造函数</strong></p>
+<p>Bound类的构造函数用于创建Bound对象。有两个重载版本，一个接受整数参数，另一个接受Number类型的参数（通常是mpq_class或mpz_class类型的有理数或整数）。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">explicit</span> <span class="title">Bound</span><span class="params">(<span class="type">int</span> n)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">explicit</span> <span class="title">Bound</span><span class="params">(Number n)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>示例用法：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Bound&lt;ZNumber&gt; <span class="title">bound1</span><span class="params">(<span class="number">5</span>)</span></span>;  <span class="comment">// 创建一个有限数值的Bound对象</span></span><br><span class="line"><span class="function">Bound&lt;ZNumber&gt; <span class="title">bound2</span><span class="params">(ZNumber(<span class="number">10</span>))</span></span>;  <span class="comment">// 使用Number类型参数创建Bound对象</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>is_infinite函数</strong></p>
+<p>is_infinite函数用于检查Bound对象是否为无穷，返回布尔值。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">is_infinite</span><span class="params">()</span> <span class="type">const</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>示例用法：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Bound&lt;ZNumber&gt; <span class="title">bound1</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line">Bound&lt;ZNumber&gt; bound2 = Bound&lt;ZNumber&gt;::<span class="built_in">plus_infinity</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (bound1.<span class="built_in">is_infinite</span>()) &#123;</span><br><span class="line">    <span class="comment">// 此Bound对象为无穷</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!bound2.<span class="built_in">is_infinite</span>()) &#123;</span><br><span class="line">    <span class="comment">// 此Bound对象不是无穷</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>is_finite函数</strong></p>
+<p>is_finite函数用于检查Bound对象是否为有限数值，返回布尔值。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">is_finite</span><span class="params">()</span> <span class="type">const</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>示例用法：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Bound&lt;ZNumber&gt; <span class="title">bound1</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line">Bound&lt;ZNumber&gt; bound2 = Bound&lt;ZNumber&gt;::<span class="built_in">minus_infinity</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (bound1.<span class="built_in">is_finite</span>()) &#123;</span><br><span class="line">    <span class="comment">// 此Bound对象为有限数值</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!bound2.<span class="built_in">is_finite</span>()) &#123;</span><br><span class="line">    <span class="comment">// 此Bound对象不是有限数值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>is_plus_infinity函数</strong></p>
+<p>is_plus_infinity函数用于检查Bound对象是否为正无穷，返回布尔值。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">is_plus_infinity</span><span class="params">()</span> <span class="type">const</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>示例用法：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Bound&lt;ZNumber&gt; <span class="title">bound1</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line">Bound&lt;ZNumber&gt; bound2 = Bound&lt;ZNumber&gt;::<span class="built_in">plus_infinity</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (bound1.<span class="built_in">is_plus_infinity</span>()) &#123;</span><br><span class="line">    <span class="comment">// 此Bound对象为正无穷</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (bound2.<span class="built_in">is_plus_infinity</span>()) &#123;</span><br><span class="line">    <span class="comment">// 此Bound对象为正无穷</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>is_minus_infinity函数</strong></p>
+<p>is_minus_infinity函数用于检查Bound对象是否为负无穷，返回布尔值。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">is_minus_infinity</span><span class="params">()</span> <span class="type">const</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>示例用法：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Bound&lt;ZNumber&gt; <span class="title">bound1</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line">Bound&lt;ZNumber&gt; bound2 = Bound&lt;ZNumber&gt;::<span class="built_in">minus_infinity</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (bound1.<span class="built_in">is_minus_infinity</span>()) &#123;</span><br><span class="line">    <span class="comment">// 此Bound对象为负无穷</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (bound2.<span class="built_in">is_minus_infinity</span>()) &#123;</span><br><span class="line">    <span class="comment">// 此Bound对象为负无穷</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>is_zero函数</strong></p>
+<p>is_zero函数用于检查Bound对象是否为零，返回布尔值。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">is_zero</span><span class="params">()</span> <span class="type">const</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>示例用法：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Bound&lt;ZNumber&gt; <span class="title">bound1</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="function">Bound&lt;ZNumber&gt; <span class="title">bound2</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!bound1.<span class="built_in">is_zero</span>()) &#123;</span><br><span class="line">    <span class="comment">// 此Bound对象不是零</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (bound2.<span class="built_in">is_zero</span>()) &#123;</span><br><span class="line">    <span class="comment">// 此Bound对象为零</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>operator-函数</strong></p>
+<p>operator-函数用于返回Bound对象的相反数。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Bound <span class="keyword">operator</span>-() <span class="type">const</span>;</span><br></pre></td></tr></table></figure>
+
+<p>示例用法：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Bound&lt;ZNumber&gt; <span class="title">bound1</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line">Bound&lt;ZNumber&gt; neg_bound1 = -bound1; <span class="comment">// neg_bound1表示-5</span></span><br><span class="line"></span><br><span class="line">Bound&lt;ZNumber&gt; bound2 = Bound&lt;ZNumber&gt;::<span class="built_in">plus_infinity</span>();</span><br><span class="line">Bound&lt;ZNumber&gt; neg_bound2 = -bound2; <span class="comment">// neg_bound2表示负无穷</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>operator+&#x3D;函数</strong></p>
+<p>operator+&#x3D;函数用于将另一个Bound对象添加到当前Bound对象。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="keyword">operator</span>+=(<span class="type">const</span> Bound&amp; other);</span><br></pre></td></tr></table></figure>
+
+<p>示例用法：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Bound&lt;ZNumber&gt; <span class="title">bound1</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="function">Bound&lt;ZNumber&gt; <span class="title">bound2</span><span class="params">(<span class="number">3</span>)</span></span>;</span><br><span class="line">bound1 += bound2; <span class="comment">// bound1现在表示8</span></span><br><span class="line"></span><br><span class="line">Bound&lt;ZNumber&gt; bound3 = Bound&lt;ZNumber&gt;::<span class="built_in">plus_infinity</span>();</span><br><span class="line">bound3 += bound2; <span class="comment">// bound3仍然表示正无穷</span></span><br></pre></td></tr></table></figure>
+
+<p>这些函数使Bound类更容易操作和查询Bound对象的属性，可以用于数学运算、比较和其他操作。</p>
+<h2 id="子类型检查模板"><a href="#子类型检查模板" class="headerlink" title="子类型检查模板"></a>子类型检查模板</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/// \brief Equality operator with integral types</span></span><br><span class="line"><span class="keyword">template</span> &lt; <span class="keyword">typename</span> T,</span><br><span class="line">           <span class="keyword">class</span> = std::<span class="type">enable_if_t</span>&lt; IsSupportedIntegral&lt; T &gt;::value &gt; &gt;</span><br><span class="line"><span class="keyword">inline</span> <span class="type">bool</span> <span class="keyword">operator</span>==(T lhs, <span class="type">const</span> MachineInt&amp; rhs) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">MachineInt</span>(lhs, rhs.<span class="built_in">bit_width</span>(), rhs.<span class="built_in">sign</span>()) == rhs;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这是一个用于比较整数类型 <code>T</code> 和 <code>MachineInt</code> 对象是否相等的相等性运算符重载函数。让我来解释其中的各个部分：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">class</span> = std::<span class="type">enable_if_t</span>&lt;IsSupportedIntegral&lt;T&gt;::value&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这是一个函数模板，接受两个参数：<code>T lhs</code> 和 <code>const MachineInt&amp; rhs</code>。同时，它使用了一个额外的模板参数 <code>class</code>，用于启用 SFINAE（替代子类型无法匹配错误）。<code>std::enable_if_t</code> 是 C++ 标准库的类型特性工具，用于根据给定条件启用或禁用模板函数。</p>
+<ul>
+<li><code>typename T</code> 表示函数的第一个参数 <code>lhs</code> 可以是任何类型的参数。</li>
+<li><code>class = std::enable_if_t&lt;IsSupportedIntegral&lt;T&gt;::value&gt;</code> 表示函数有一个额外的模板参数，通过 <code>std::enable_if_t</code> 来检查 <code>T</code> 是否为支持的整数类型。如果 <code>T</code> 是支持的整数类型，那么这个条件为真，该函数就会被启用。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="type">bool</span> <span class="keyword">operator</span>==(T lhs, <span class="type">const</span> MachineInt&amp; rhs) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">MachineInt</span>(lhs, rhs.<span class="built_in">bit_width</span>(), rhs.<span class="built_in">sign</span>()) == rhs;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这是实际的相等性运算符的实现。</p>
+<ul>
+<li><code>T lhs</code> 是第一个操作数，可以是任何支持的整数类型。</li>
+<li><code>const MachineInt&amp; rhs</code> 是第二个操作数，是一个 <code>MachineInt</code> 类型的常量引用。</li>
+</ul>
+<p>函数内部的操作是将第一个操作数 <code>lhs</code> 转换为 <code>MachineInt</code> 类型，以保证操作数具有相同的类型。然后，它使用 <code>==</code> 运算符比较转换后的 <code>lhs</code> 和 <code>rhs</code> 是否相等。</p>
+<p>这个运算符的目的是允许你比较一个支持的整数类型 <code>T</code> 和一个 <code>MachineInt</code> 对象是否相等。如果相等，它将返回 <code>true</code>，否则返回 <code>false</code>。这是在将不同整数类型和 <code>MachineInt</code> 对象进行比较时非常有用的运算符重载函数。</p>
+<h2 id="为什么有的地方使用struct而不是class"><a href="#为什么有的地方使用struct而不是class" class="headerlink" title="为什么有的地方使用struct而不是class"></a>为什么有的地方使用<code>struct</code>而不是<code>class</code></h2><p>在C++中，<code>struct</code> 和 <code>class</code> 都用于定义类（class）和结构体（struct），它们非常相似，但有一些细微的区别，主要是在成员访问权限和默认访问权限上有所不同。</p>
+<p>关于为什么在这里使用 <code>struct</code>，主要有以下几个原因：</p>
+<ol>
+<li><p>默认成员访问权限：在 <code>struct</code> 中，类的成员默认是公有的（<code>public</code>），而在 <code>class</code> 中，默认是私有的（<code>private</code>）。由于这里的 <code>ZNumberAdapter</code> 结构不包含私有成员，所以它们的成员默认都是公有的，因此使用 <code>struct</code> 更符合默认的成员访问权限。</p>
+</li>
+<li><p>可读性：在某些情况下，使用 <code>struct</code> 可以使代码更具可读性。人们通常将 <code>struct</code> 用于表示较为简单的数据结构，而将 <code>class</code> 用于表示有更多成员函数和复杂行为的类。这有助于其他开发者更容易理解代码的意图，即使没有查看类的详细实现。</p>
+</li>
+<li><p>惯例：在某些代码风格规范或项目中，可能会规定在某些特定情况下使用 <code>struct</code>，例如用于表示简单数据结构或只包含公有成员的类。这是一种约定俗成的做法，有助于提高代码的一致性。</p>
+</li>
+</ol>
+<p>在这种情况下，<code>struct</code> 的使用可能是出于上述原因中的一个或多个。它并不是绝对的规则，而是根据项目和团队的编码风格和约定来选择的。最重要的是，在这段代码中，使用 <code>struct</code> 是完全合法的，而且与代码的设计和用途相符。</p>
 ]]></content>
       <categories>
         <category>log</category>
