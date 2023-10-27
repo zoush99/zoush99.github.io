@@ -3153,6 +3153,83 @@
 </ul>
 <p><code>FixpointParameters</code> 类的目的是提供一种机制，通过该机制可以为整个程序以及程序中的每个函数配置不同的不动点分析策略。这允许开发人员根据不同函数的特定需求来调整不动点分析的方式，以平衡准确性和性能。</p>
 <p>这种分层配置的方式使得可以为整个程序定义一组默认参数，然后根据需要为特定函数或部分函数提供不同的配置。这有助于适应不同函数的分析需求，以满足各种不同类型的代码的要求。</p>
+<h2 id="using的用法"><a href="#using的用法" class="headerlink" title="using的用法"></a><code>using</code>的用法</h2><p><code>using</code> 语法用于引入命名空间中的成员或其他作用域中的成员，以使其在当前作用域内可用，从而简化代码编写和提高可读性。下面是使用 <code>using</code> 的示例：</p>
+<ol>
+<li><strong>引入命名空间成员</strong>：</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入 std 命名空间中的 cout</span></span><br><span class="line"><span class="keyword">using</span> std::cout;</span><br><span class="line"><span class="keyword">using</span> std::endl;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Hello, world!&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码中，使用 <code>using</code> 引入了 <code>std::cout</code> 和 <code>std::endl</code>，使它们可以在 <code>main</code> 函数中直接使用，而无需在前面加上 <code>std::</code> 前缀。</p>
+<ol start="2">
+<li><strong>引入类型别名</strong>：</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建一个类型别名</span></span><br><span class="line"><span class="keyword">using</span> MyInt = <span class="type">int</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    MyInt x = <span class="number">42</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码中，使用 <code>using</code> 创建了一个类型别名 <code>MyInt</code>，将 <code>MyInt</code> 视为 <code>int</code> 的同义词，因此可以在代码中使用 <code>MyInt</code> 来声明整数变量。</p>
+<ol start="3">
+<li><strong>引入类的成员</strong>：</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">memberFunction</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    MyClass obj;</span><br><span class="line">    <span class="comment">// 使用 using 引入类的成员函数</span></span><br><span class="line">    <span class="keyword">using</span> obj.memberFunction;</span><br><span class="line">    <span class="built_in">memberFunction</span>(); <span class="comment">// 等效于 obj.memberFunction()</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码中，使用 <code>using</code> 引入了 <code>obj</code> 对象的 <code>memberFunction</code>，从而可以直接调用 <code>memberFunction</code> 而不需要使用 <code>obj</code> 对象。</p>
+<p><code>using</code> 的使用有助于简化代码，但也需要小心，以避免引入过多的符号或可能导致歧义的符号。通常应谨慎使用 <code>using</code>，以确保代码的可读性和维护性。</p>
+<h2 id="core-include-ikos-core-number目录下的z-number-hpp文件解读"><a href="#core-include-ikos-core-number目录下的z-number-hpp文件解读" class="headerlink" title="/core/include/ikos/core/number目录下的z_number.hpp文件解读"></a><code>/core/include/ikos/core/number</code>目录下的z_number.hpp文件解读</h2><p><code>ZNumber</code>类的运算符重载函数怎么使用的？</p>
+<p><code>ZNumber</code> 类中的运算符重载函数允许你像使用内置整数类型一样对 <code>ZNumber</code> 对象执行各种算术和比较运算。以下是 <code>ZNumber</code> 类中一些重要的运算符重载函数，以及它们是如何定义和使用的：</p>
+<ol>
+<li><p><strong>加法运算符重载</strong>：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ZNumber <span class="keyword">operator</span>+(<span class="type">const</span> ZNumber&amp; lhs, <span class="type">const</span> ZNumber&amp; rhs);</span><br></pre></td></tr></table></figure>
+
+<p>这个运算符重载允许你对两个 <code>ZNumber</code> 对象执行加法操作。例如：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ZNumber a = <span class="number">10</span>;</span><br><span class="line">ZNumber b = <span class="number">20</span>;</span><br><span class="line">ZNumber result = a + b; <span class="comment">// result 现在包含 30</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>减法运算符重载</strong>：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ZNumber <span class="keyword">operator</span>-(<span class="type">const</span> ZNumber&amp; lhs, <span class="type">const</span> ZNumber&amp; rhs);</span><br></pre></td></tr></table></figure>
+
+<p>这个运算符重载允许你对两个 <code>ZNumber</code> 对象执行减法操作。例如：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ZNumber a = <span class="number">30</span>;</span><br><span class="line">ZNumber b = <span class="number">20</span>;</span><br><span class="line">ZNumber result = a - b; <span class="comment">// result 现在包含 10</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>乘法运算符重载</strong>：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ZNumber <span class="keyword">operator</span>*(<span class="type">const</span> ZNumber&amp; lhs, <span class="type">const</span> ZNumber&amp; rhs);</span><br></pre></td></tr></table></figure>
+
+<p>这个运算符重载允许你对两个 <code>ZNumber</code> 对象执行乘法操作。例如：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ZNumber a = <span class="number">5</span>;</span><br><span class="line">ZNumber b = <span class="number">6</span>;</span><br><span class="line">ZNumber result = a * b; <span class="comment">// result 现在包含 30</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>除法运算符重载</strong>：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ZNumber <span class="keyword">operator</span>/(<span class="type">const</span> ZNumber&amp; lhs, <span class="type">const</span> ZNumber&amp; rhs);</span><br></pre></td></tr></table></figure>
+
+<p>这个运算符重载允许你对两个 <code>ZNumber</code> 对象执行除法操作。例如：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ZNumber a = <span class="number">30</span>;</span><br><span class="line">ZNumber b = <span class="number">5</span>;</span><br><span class="line">ZNumber result = a / b; <span class="comment">// result 现在包含 6</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>比较运算符重载</strong>：</p>
+<p>以下比较运算符允许你比较两个 <code>ZNumber</code> 对象的大小关系：</p>
+<ul>
+<li><code>operator==</code>：相等比较</li>
+<li><code>operator!=</code>：不等比较</li>
+<li><code>operator&lt;</code>：小于比较</li>
+<li><code>operator&lt;=</code>：小于或等于比较</li>
+<li><code>operator&gt;</code>：大于比较</li>
+<li><code>operator&gt;=</code>：大于或等于比较</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ZNumber a = <span class="number">10</span>;</span><br><span class="line">ZNumber b = <span class="number">20</span>;</span><br><span class="line"><span class="keyword">if</span> (a &lt; b) &#123;</span><br><span class="line">    <span class="comment">// 这个条件为真</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>这些运算符重载函数让你可以像操作内置整数类型一样操作 <code>ZNumber</code> 对象，使代码更加直观和易读。通过运算符重载，你可以利用 <code>ZNumber</code> 类的功能，执行各种整数运算，包括加法、减法、乘法、除法，以及比较操作。</p>
+<h2 id="log类中的打印信息使用方法"><a href="#log类中的打印信息使用方法" class="headerlink" title="log类中的打印信息使用方法"></a><code>log</code>类中的打印信息使用方法</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/// \brief Write a log message</span></span><br><span class="line"><span class="keyword">template</span> &lt; <span class="keyword">typename</span> T &gt;</span><br><span class="line"><span class="keyword">inline</span> <span class="type">const</span> LogMessage&amp; <span class="keyword">operator</span>&lt;&lt;(<span class="type">const</span> LogMessage&amp; msg, T&amp;&amp; v) &#123;</span><br><span class="line">  msg.<span class="built_in">stream</span>() &lt;&lt; std::forward&lt; T &gt;(v);</span><br><span class="line">  <span class="keyword">return</span> msg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这是一个重载的输出操作符 <code>&lt;&lt;</code>，它允许您将各种类型的数据附加到 <code>LogMessage</code> 对象上，以便将它们记录到日志中。这个函数模板可以接受任何类型 <code>T</code> 的参数，并将该参数的内容附加到 <code>LogMessage</code> 对象的输出流中。</p>
+<p>这是一个非常常见的日志记录方法，它允许您以可读的方式将各种数据（例如字符串、数字、对象等）记录到日志中。在C++中，<code>&lt;&lt;</code> 操作符被广泛用于将数据附加到输出流中，这里的代码片段扩展了这一概念，以便将日志消息与各种数据结合起来。</p>
+<p>示例用法：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;log.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  ikos::<span class="function">analyzer::TerminalLogger <span class="title">logger</span><span class="params">(std::cout)</span></span>;</span><br><span class="line">  ikos::analyzer::log::<span class="built_in">set_logger</span>(logger);</span><br><span class="line"></span><br><span class="line">  <span class="type">int</span> x = <span class="number">42</span>;</span><br><span class="line">  std::string message = <span class="string">&quot;Hello, world!&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 创建一个日志消息</span></span><br><span class="line">  ikos::analyzer::LogMessage logMessage = ikos::analyzer::log::<span class="built_in">msg</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 使用输出操作符将数据添加到日志消息中</span></span><br><span class="line">  logMessage &lt;&lt; <span class="string">&quot;The answer is: &quot;</span> &lt;&lt; x &lt;&lt; <span class="string">&quot;. &quot;</span> &lt;&lt; message;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在此示例中，我们首先创建一个 <code>LogMessage</code> 对象，然后使用 <code>&lt;&lt;</code> 操作符将整数 <code>x</code> 和字符串 <code>message</code> 附加到该日志消息中。最终，该日志消息将被记录，并输出到终端上。</p>
+<h2 id="log输出信息"><a href="#log输出信息" class="headerlink" title="log输出信息"></a><code>log</code>输出信息</h2><p>这段代码片段检查一个名为 <code>DisplayPointer</code> 的条件，如果条件为真，则调用 <code>pointer.dump(analyzer::log::msg().stream())</code> 函数。这段代码的作用可以分为以下几个部分：</p>
+<ol>
+<li><code>DisplayPointer</code> 是一个条件，它用于检查是否应该执行后续的操作。</li>
+<li><code>analyzer::log::msg().stream()</code> 创建一个日志消息对象，并返回该消息对象的输出流。</li>
+<li><code>pointer.dump(analyzer::log::msg().stream())</code> 调用了一个名为 <code>dump</code> 的成员函数，该函数将 <code>pointer</code> 对象的内容输出到日志消息对象的输出流中。</li>
+</ol>
+<p>在这个代码片段中，如果 <code>DisplayPointer</code> 为真，将会执行 <code>pointer.dump</code> 操作，将 <code>pointer</code> 对象的内容记录到日志消息中。这通常用于调试和跟踪程序中的特定变量或对象的状态。如果 <code>DisplayPointer</code> 为假，<code>pointer.dump</code> 操作将不会执行。</p>
+<p>这种方式可以方便地将特定对象的信息记录到日志中，以便进行排查和调试。在调试期间，开发人员可以将 <code>DisplayPointer</code> 设置为真，以查看 <code>pointer</code> 对象的信息，而在正式发布或不需要这些信息时，可以将 <code>DisplayPointer</code> 设置为假，以避免记录不必要的信息。</p>
 ]]></content>
       <categories>
         <category>log</category>
