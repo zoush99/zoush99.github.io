@@ -29,7 +29,7 @@
 <meta property="og:description" content="问题日志">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-01T12:42:21.000Z">
-<meta property="article:modified_time" content="2023-11-01T13:54:01.751Z">
+<meta property="article:modified_time" content="2023-11-06T14:02:51.299Z">
 <meta property="article:author" content="zoush99">
 <meta property="article:tag" content="project">
 <meta property="article:tag" content="log">
@@ -142,7 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%97%A5%E5%BF%97"><span class="nav-number">1.</span> <span class="nav-text">问题日志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#core-include-ikos-core-literal-hpp%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">&#x2F;core&#x2F;include&#x2F;ikos&#x2F;core&#x2F;literal.hpp文件的作用是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#core-include-ikos-core-number%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84dummy-number-hpp%E6%96%87%E4%BB%B6%E8%A7%A3%E8%AF%BB"><span class="nav-number">1.2.</span> <span class="nav-text">&#x2F;core&#x2F;include&#x2F;ikos&#x2F;core&#x2F;number目录下的dummy_number.hpp文件解读</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%97%A5%E5%BF%97"><span class="nav-number">1.</span> <span class="nav-text">问题日志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#core-include-ikos-core-literal-hpp%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">&#x2F;core&#x2F;include&#x2F;ikos&#x2F;core&#x2F;literal.hpp文件的作用是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#core-include-ikos-core-number%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84dummy-number-hpp%E6%96%87%E4%BB%B6%E8%A7%A3%E8%AF%BB"><span class="nav-number">1.2.</span> <span class="nav-text">&#x2F;core&#x2F;include&#x2F;ikos&#x2F;core&#x2F;number目录下的dummy_number.hpp文件解读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#core-include-ikos-core-adt-patricia-tree-map-hpp%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E7%9A%84%E9%82%A3%E4%BA%9B%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">&#x2F;core&#x2F;include&#x2F;ikos&#x2F;core&#x2F;adt&#x2F;patricia_tree&#x2F;map.hpp文件包含的那些函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SFINAE%E6%8A%80%E5%B7%A7%E6%9D%A5%E6%A3%80%E6%9F%A5%E7%B1%BB%E5%9E%8B%E6%98%AF%E5%90%A6%E7%AC%A6%E5%90%88%E6%9F%90%E7%A7%8D%E7%89%B9%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">SFINAE技巧来检查类型是否符合某种特性</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -168,7 +168,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -231,9 +231,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2023-11-01 20:42:21 / Modified: 21:54:01" itemprop="dateCreated datePublished" datetime="2023-11-01T20:42:21+08:00">2023-11-01</time>
+      <time title="Created: 2023-11-01 20:42:21" itemprop="dateCreated datePublished" datetime="2023-11-01T20:42:21+08:00">2023-11-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-11-06 22:02:51" itemprop="dateModified" datetime="2023-11-06T22:02:51+08:00">2023-11-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -263,14 +269,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>1.1k</span>
+      <span>9.5k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>2 mins.</span>
+      <span>17 mins.</span>
     </span>
 </div>
 
@@ -311,6 +317,183 @@
 </li>
 </ol>
 <p>总之，这段代码定义了一个虚拟的 <code>DummyNumber</code> 结构体，然后提供了一个 <code>&lt;&lt;</code> 输出流操作符的实现，该操作符用于将 “dummy” 字符串输出到输出流中。这可能用于在某些情况下表示未定义或无效的数值或情况。</p>
+<h2 id="core-include-ikos-core-adt-patricia-tree-map-hpp文件包含的那些函数"><a href="#core-include-ikos-core-adt-patricia-tree-map-hpp文件包含的那些函数" class="headerlink" title="/core/include/ikos/core/adt/patricia_tree/map.hpp文件包含的那些函数"></a><code>/core/include/ikos/core/adt/patricia_tree/map.hpp</code>文件包含的那些函数</h2><p>这个文件包含了一系列与 Patricia Tree 有关的函数的前置声明。这些函数主要用于对 Patricia Tree 进行操作，如插入、查找、更新、删除等。以下是这些函数的解读和解释：</p>
+<ol>
+<li><p><code>empty</code> 函数:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">empty</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">const</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt;&amp; tree)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>作用：检查给定的 Patricia Tree 是否为空。</li>
+<li>参数：<code>tree</code> 是一个 <code>std::shared_ptr</code>，指向 Patricia Tree。</li>
+<li>返回值：如果 Patricia Tree 为空，则返回 <code>true</code>；否则返回 <code>false</code>。</li>
+</ul>
+</li>
+<li><p><code>size</code> 函数:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> std::<span class="type">size_t</span> <span class="title">size</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">const</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt;&amp; tree)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>作用：获取给定 Patricia Tree 中键值对的数量。</li>
+<li>参数：<code>tree</code> 是一个 <code>std::shared_ptr</code>，指向 Patricia Tree。</li>
+<li>返回值：返回 Patricia Tree 中键值对的数量。</li>
+</ul>
+</li>
+<li><p><code>find_value</code> 函数:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> boost::optional&lt; <span class="type">const</span> Value&amp; &gt; <span class="title">find_value</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">const</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt;&amp; tree,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">const</span> Key&amp; key)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>作用：在 Patricia Tree 中查找给定键对应的值。</li>
+<li>参数：<code>tree</code> 是一个 <code>std::shared_ptr</code>，指向 Patricia Tree；<code>key</code> 是要查找的键。</li>
+<li>返回值：如果找到键对应的值，则返回 <code>boost::optional</code> 包含该值；如果找不到，则返回 <code>boost::none</code>。</li>
+</ul>
+</li>
+<li><p><code>leq</code> 函数:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="keyword">typename</span> Key, <span class="keyword">typename</span> Value, <span class="keyword">typename</span> Compare &gt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">leq</span><span class="params">(<span class="type">const</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt;&amp; s,</span></span></span><br><span class="line"><span class="params"><span class="function">                <span class="type">const</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt;&amp; t,</span></span></span><br><span class="line"><span class="params"><span class="function">                <span class="type">const</span> Compare&amp; cmp)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>作用：比较两个 Patricia Tree 是否满足 “小于等于” 的关系。</li>
+<li>参数：<code>s</code> 和 <code>t</code> 是两个 <code>std::shared_ptr</code>，分别指向两个 Patricia Tree；<code>cmp</code> 是用于比较键的比较函数对象。</li>
+<li>返回值：如果 <code>s</code> 中的所有键都小于等于 <code>t</code> 中的相应键，则返回 <code>true</code>，否则返回 <code>false</code>。</li>
+</ul>
+</li>
+<li><p><code>equals</code> 函数:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="keyword">typename</span> Key, <span class="keyword">typename</span> Value, <span class="keyword">typename</span> Compare &gt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">equals</span><span class="params">(<span class="type">const</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt;&amp; s,</span></span></span><br><span class="line"><span class="params"><span class="function">                   <span class="type">const</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt;&amp; t,</span></span></span><br><span class="line"><span class="params"><span class="function">                   <span class="type">const</span> Compare&amp; cmp)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>作用：比较两个 Patricia Tree 是否相等。</li>
+<li>参数：<code>s</code> 和 <code>t</code> 是两个 <code>std::shared_ptr</code>，分别指向两个 Patricia Tree；<code>cmp</code> 是用于比较键的比较函数对象。</li>
+<li>返回值：如果 <code>s</code> 和 <code>t</code> 中的键值对都相同，则返回 <code>true</code>，否则返回 <code>false</code>。</li>
+</ul>
+</li>
+</ol>
+<p>这些函数的前置声明在 <code>patricia_tree_map_impl</code> 命名空间中，并在其他文件中得到实际实现。这些函数是用于管理和操作 Patricia Tree 数据结构的核心功能，使得可以高效地进行数据存储和检索操作。</p>
+<p>继续解释其他函数的作用：</p>
+<ol start="6">
+<li><p><code>insert_or_assign</code> 函数:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="keyword">typename</span> Key, <span class="keyword">typename</span> Value &gt;</span><br><span class="line"><span class="keyword">inline</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt; <span class="built_in">insert_or_assign</span>(</span><br><span class="line">    <span class="type">const</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt;&amp; tree,</span><br><span class="line">    <span class="type">const</span> Key&amp; key,</span><br><span class="line">    <span class="type">const</span> Value&amp; value);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>作用：向 Patricia Tree 中插入或更新一个键值对。</li>
+<li>参数：<code>tree</code> 是一个 <code>std::shared_ptr</code>，指向 Patricia Tree；<code>key</code> 是要插入或更新的键；<code>value</code> 是要关联的值。</li>
+<li>返回值：返回一个新的 Patricia Tree，其中包含插入或更新后的键值对。</li>
+</ul>
+</li>
+<li><p><code>update_or_insert</code> 函数:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="keyword">typename</span> Key, <span class="keyword">typename</span> Value, <span class="keyword">typename</span> CombiningFunction &gt;</span><br><span class="line"><span class="keyword">inline</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt; <span class="built_in">update_or_insert</span>(</span><br><span class="line">    <span class="type">const</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt;&amp; tree,</span><br><span class="line">    <span class="type">const</span> CombiningFunction&amp; combine,</span><br><span class="line">    <span class="type">const</span> Key&amp; key,</span><br><span class="line">    <span class="type">const</span> Value&amp; value);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>作用：根据用户定义的合并函数，更新或插入一个键值对。</li>
+<li>参数：<code>tree</code> 是一个 <code>std::shared_ptr</code>，指向 Patricia Tree；<code>combine</code> 是用户定义的合并函数；<code>key</code> 是要插入或更新的键；<code>value</code> 是要关联的值。</li>
+<li>返回值：返回一个新的 Patricia Tree，其中包含按照用户定义的合并函数进行更新或插入后的键值对。</li>
+</ul>
+</li>
+<li><p><code>update_or_ignore</code> 函数:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="keyword">typename</span> Key, <span class="keyword">typename</span> Value, <span class="keyword">typename</span> CombiningFunction &gt;</span><br><span class="line"><span class="keyword">inline</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt; <span class="built_in">update_or_ignore</span>(</span><br><span class="line">    <span class="type">const</span> std.shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt;&amp; tree,</span><br><span class="line">    <span class="type">const</span> CombiningFunction&amp; combine,</span><br><span class="line">    <span class="type">const</span> Key&amp; key,</span><br><span class="line">    <span class="type">const</span> Value&amp; value);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>作用：根据用户定义的合并函数，更新或忽略（如果合并函数返回 <code>None</code>）一个键值对。</li>
+<li>参数：<code>tree</code> 是一个 <code>std::shared_ptr</code>，指向 Patricia Tree；<code>combine</code> 是用户定义的合并函数；<code>key</code> 是要更新或插入的键；<code>value</code> 是要关联的值。</li>
+<li>返回值：返回一个新的 Patricia Tree，其中包含按照用户定义的合并函数进行更新或忽略后的键值对。</li>
+</ul>
+</li>
+</ol>
+<p>这些函数提供了对 Patricia Tree 进行增删改查的操作，并允许用户使用自定义的合并函数，使其非常灵活和可定制。这对于需要高效地管理键值对的应用程序非常有用，例如静态分析和数据流分析。</p>
+<p>继续解释其他函数的作用：</p>
+<ol start="9">
+<li><p><code>erase</code> 函数:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="keyword">typename</span> Key, <span class="keyword">typename</span> Value &gt;</span><br><span class="line"><span class="keyword">inline</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt; <span class="built_in">erase</span>(</span><br><span class="line">    <span class="type">const</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt;&amp; tree,</span><br><span class="line">    <span class="type">const</span> Key&amp; key);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>作用：从 Patricia Tree 中移除指定键的键值对。</li>
+<li>参数：<code>tree</code> 是一个 <code>std::shared_ptr</code>，指向 Patricia Tree；<code>key</code> 是要移除的键。</li>
+<li>返回值：返回一个新的 Patricia Tree，其中不再包含指定键的键值对。</li>
+</ul>
+</li>
+<li><p><code>transform</code> 函数:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="keyword">typename</span> Key, <span class="keyword">typename</span> Value, <span class="keyword">typename</span> UnaryOp &gt;</span><br><span class="line"><span class="keyword">inline</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt; <span class="built_in">transform</span>(</span><br><span class="line">    <span class="type">const</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt;&amp; tree,</span><br><span class="line">    <span class="type">const</span> UnaryOp&amp; op);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>作用：应用用户定义的一元操作符（<code>UnaryOp</code>）到每个键值对上，以更新值。</li>
+<li>参数：<code>tree</code> 是一个 <code>std::shared_ptr</code>，指向 Patricia Tree；<code>op</code> 是用户定义的一元操作符。</li>
+<li>返回值：返回一个新的 Patricia Tree，其中包含更新后的键值对。</li>
+</ul>
+</li>
+<li><p><code>join</code> 函数:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="keyword">typename</span> Key, <span class="keyword">typename</span> Value, <span class="keyword">typename</span> CombiningFunction &gt;</span><br><span class="line"><span class="keyword">inline</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt; <span class="built_in">join</span>(</span><br><span class="line">    <span class="type">const</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt;&amp; s,</span><br><span class="line">    <span class="type">const</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt;&amp; t,</span><br><span class="line">    <span class="type">const</span> CombiningFunction&amp; combine);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>作用：将两个 Patricia Trees（<code>s</code> 和 <code>t</code>）合并为一个，根据用户定义的合并函数（<code>CombiningFunction</code>）来处理冲突。</li>
+<li>参数：<code>s</code> 和 <code>t</code> 是两个 <code>std::shared_ptr</code>，指向待合并的 Patricia Trees；<code>combine</code> 是用户定义的合并函数。</li>
+<li>返回值：返回一个新的 Patricia Tree，其中包含 <code>s</code> 和 <code>t</code> 合并后的键值对。</li>
+</ul>
+</li>
+<li><p><code>intersect</code> 函数:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="keyword">typename</span> Key, <span class="keyword">typename</span> Value, <span class="keyword">typename</span> CombiningFunction &gt;</span><br><span class="line"><span class="keyword">inline</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt; <span class="built_in">intersect</span>(</span><br><span class="line">    <span class="type">const</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt;&amp; s,</span><br><span class="line">    <span class="type">const</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt;&amp; t,</span><br><span class="line">    <span class="type">const</span> CombiningFunction&amp; combine);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>作用：计算两个 Patricia Trees（<code>s</code> 和 <code>t</code>）的交集，根据用户定义的合并函数（<code>CombiningFunction</code>）来处理冲突。</li>
+<li>参数：<code>s</code> 和 <code>t</code> 是两个 <code>std::shared_ptr</code>，指向待计算交集的 Patricia Trees；<code>combine</code> 是用户定义的合并函数。</li>
+<li>返回值：返回一个新的 Patricia Tree，其中包含 <code>s</code> 和 <code>t</code> 的交集后的键值对。</li>
+</ul>
+</li>
+<li><p><code>binary_operation</code> 函数:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt; <span class="keyword">typename</span> Key, <span class="keyword">typename</span> Value, <span class="keyword">typename</span> BinaryOp &gt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">typename</span> BinaryOp::ResultType <span class="title">binary_operation</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">const</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt;&amp; s,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">const</span> std::shared_ptr&lt; <span class="type">const</span> PatriciaTree&lt; Key, Value &gt; &gt;&amp; t,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">const</span> BinaryOp&amp; op)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>作用：执行用户定义的二元操作符（<code>BinaryOp</code>）来处理两个 Patricia Trees（<code>s</code> 和 <code>t</code>）之间的关系。</li>
+<li>参数：<code>s</code> 和 <code>t</code> 是两个 <code>std::shared_ptr</code>，指向 Patricia Trees；<code>op</code> 是用户定义的二元操作符。</li>
+<li>返回值：根据用户定义的二元操作符，返回一个结果，其类型由 <code>BinaryOp::ResultType</code> 指定。</li>
+</ul>
+</li>
+</ol>
+<p>这些函数扩展了 Patricia Tree 的功能，使其适用于各种用例，包括插入、更新、删除、合并、交集计算和用户定义操作等操作。这对于处理数据结构的不同需求非常有用。</p>
+<h2 id="SFINAE技巧来检查类型是否符合某种特性"><a href="#SFINAE技巧来检查类型是否符合某种特性" class="headerlink" title="SFINAE技巧来检查类型是否符合某种特性"></a><code>SFINAE技巧来检查类型是否符合某种特性</code></h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">IsIndexable</span>&lt;</span><br><span class="line">    T,</span><br><span class="line">    IndexableTrait,</span><br><span class="line">    <span class="comment">// Check if IndexableTrait has: index(const T&amp;) -&gt; Index</span></span><br><span class="line">    std::<span class="type">enable_if_t</span>&lt; std::is_same&lt; Index,</span><br><span class="line">                                    <span class="keyword">decltype</span>(IndexableTrait::<span class="built_in">index</span>(</span><br><span class="line">                                        std::<span class="built_in">declval</span>&lt; T &gt;())) &gt;::value &gt; &gt;</span><br><span class="line">    : std::true_type &#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这部分代码是一个SFINAE（Substitution Failure Is Not An Error）的技巧，用于检查类型是否实现了 <code>IndexableTraits</code> 的特性。让我详细解释它：</p>
+<ul>
+<li><p><code>IsIndexable</code> 是一个模板结构，它接受三个参数：</p>
+<ol>
+<li><code>T</code>：要检查的类型。</li>
+<li><code>IndexableTrait</code>：用于检查 <code>T</code> 类型是否实现 <code>IndexableTraits</code> 的 traits 类型。</li>
+<li>一个额外的默认模板参数，用于SFINAE。</li>
+</ol>
+</li>
+<li><p>在这个结构中，我们使用SFINAE技巧，通过 <code>std::enable_if_t</code> 来检查特性是否存在。<code>std::enable_if_t</code> 是C++标准库提供的帮助我们进行SFINAE的工具，当条件为真时，它会启用这个结构。</p>
+</li>
+<li><p><code>std::is_same&lt; Index, decltype(IndexableTrait::index(std::declval&lt;T&gt;())) &gt;</code> 是条件部分。它检查 <code>IndexableTrait</code> 是否具有一个名为 <code>index</code> 的静态方法，该方法接受一个 <code>T</code> 类型对象，并返回一个 <code>Index</code> 类型。这个方法实际上是用于获取对象的唯一索引。</p>
+</li>
+<li><p>如果条件 <code>std::is_same&lt;...&gt;</code> 为真，表示 <code>IndexableTrait</code> 类型有一个 <code>index</code> 方法，并且这个方法返回的类型为 <code>Index</code>，那么 <code>IsIndexable</code> 的 <code>value</code> 成员将被设置为 <code>true</code>，表示类型 <code>T</code> 可以索引。</p>
+</li>
+</ul>
+<p>因此，这段代码的目的是使用SFINAE技巧来检查类型 <code>T</code> 是否实现了 <code>IndexableTraits</code> 特性。如果是，那么 <code>IsIndexable</code> 结构体的 <code>value</code> 成员将为 <code>true</code>。这对于编写通用代码，以处理各种类型的索引对象非常有用，因为它允许您在编译时检查类型是否实现了必要的特性。</p>
+<p>SFINAE（Substitution Failure Is Not An Error）是C++编程中的一种重要技巧，用于在编译时控制模板特化的选择。这个技巧允许我们通过模板元编程实现高度通用和灵活的代码，根据类型的特性来选择不同的代码路径，而不会导致编译错误。</p>
+<p>SFINAE 基本思想是，如果模板实例化过程中出现错误，编译器不应该抛出错误，而是应该选择备用的模板特化。这种行为使得我们可以根据某些条件（通常是类型特性）来排除或选择模板特化。</p>
+<p>SFINAE 的常见应用包括：</p>
+<ol>
+<li>函数重载：可以根据不同的参数类型或数量选择不同的函数重载。</li>
+<li>检查类型特性：可以通过SFINAE来检查类型是否具有某些成员函数、类型别名或特定特性。</li>
+<li>选择模板特化：可以根据类型特性来选择不同的模板特化。</li>
+<li>禁用特定特化：可以使用SFINAE来排除某些特化。</li>
+</ol>
+<p>SFINAE 通常与以下工具一起使用：</p>
+<ul>
+<li><code>std::enable_if</code>：通过在函数模板参数中使用 <code>std::enable_if</code>，可以根据条件来启用或禁用函数模板。</li>
+<li><code>std::enable_if_t</code>：是 <code>std::enable_if</code> 的C++14版本，用于更简洁的类型转发。</li>
+<li><code>decltype</code>：用于获取表达式的类型，通常用于SFINAE条件的构造。</li>
+<li><code>std::is_same</code>、<code>std::is_convertible</code> 等类型特性检查工具。</li>
+</ul>
+<p>例如，以下是一个使用SFINAE的示例，用于检查一个类型是否具有某个特定成员函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">HasToString</span> &#123;</span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U&gt;</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="keyword">auto</span> <span class="title">test</span><span class="params">(<span class="type">int</span>)</span> -&gt; <span class="title">decltype</span><span class="params">(std::declval&lt;U&gt;().toString(), std::true_type())</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U&gt;</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="keyword">auto</span> <span class="title">test</span><span class="params">(...)</span> -&gt; std::false_type</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">static</span> <span class="keyword">constexpr</span> <span class="type">bool</span> value = <span class="keyword">decltype</span>(<span class="built_in">test</span>&lt;T&gt;(<span class="number">0</span>))::value;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的示例中，<code>HasToString</code> 结构体用于检查类型 <code>T</code> 是否具有名为 <code>toString</code> 的成员函数。通过SFINAE技巧，它会选择不同的 <code>test</code> 函数模板来检查，如果 <code>T</code> 具有 <code>toString</code> 函数，那么 <code>HasToString::value</code> 将为 <code>true</code>，否则为 <code>false</code>。</p>
+<p>SFINAE 是C++中非常强大和灵活的编程技巧，允许编写更通用和类型安全的代码。它在元编程、模板元编程和类型特性检查等方面发挥着关键作用。</p>
+<p><code>std::is_same</code> 和 <code>std::is_convertible</code> 是C++标准库提供的类型特性检查工具，用于在编译时检查类型关系。它们通常与SFINAE（Substitution Failure Is Not An Error）一起使用，以选择不同的代码路径或生成不同的模板特化。</p>
+<ol>
+<li><p><code>std::is_same</code>：</p>
+<ul>
+<li><code>std::is_same</code> 是一个类型特性检查工具，用于检查两个类型是否相同。</li>
+<li>它的模板参数是两个类型，如果这两个类型相同，那么它的 <code>value</code> 成员变量将为 <code>true</code>，否则为 <code>false</code>。</li>
+<li>这可以用于在模板编程中根据类型是否相同来选择不同的特化。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;type_traits&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">static_assert</span>(std::is_same&lt;<span class="type">int</span>, <span class="type">int</span>&gt;::value, <span class="string">&quot;int and int are the same&quot;</span>);</span><br><span class="line"><span class="built_in">static_assert</span>(!std::is_same&lt;<span class="type">int</span>, <span class="type">double</span>&gt;::value, <span class="string">&quot;int and double are not the same&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>std::is_convertible</code>：</p>
+<ul>
+<li><code>std::is_convertible</code> 是另一个类型特性检查工具，用于检查一个类型是否可以隐式转换为另一个类型。</li>
+<li>它的模板参数是两个类型，如果第一个类型可以隐式转换为第二个类型，那么它的 <code>value</code> 成员变量将为 <code>true</code>，否则为 <code>false</code>。</li>
+<li>这可以用于在模板编程中检查是否可以进行类型转换。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;type_traits&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">static_assert</span>(std::is_convertible&lt;<span class="type">int</span>, <span class="type">double</span>&gt;::value, <span class="string">&quot;int can be converted to double&quot;</span>);</span><br><span class="line"><span class="built_in">static_assert</span>(!std::is_convertible&lt;<span class="type">double</span>, <span class="type">int</span>&gt;::value, <span class="string">&quot;double cannot be converted to int&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>这两个类型特性检查工具对于编写泛型代码、模板特化和类型安全性检查非常有用。它们可以在编译时捕捉许多类型相关的错误，使代码更加健壮和安全。</p>
 
     </div>
 
@@ -365,14 +548,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Word count total: </span>
-    <span title="Word count total">177k</span>
+    <span title="Word count total">185k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">5:22</span>
+    <span title="Reading time total">5:37</span>
   </span>
 </div>
 <div class="busuanzi-count">
