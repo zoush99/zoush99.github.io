@@ -29,7 +29,7 @@
 <meta property="og:description" content="问题日志">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-01T12:42:21.000Z">
-<meta property="article:modified_time" content="2023-11-06T14:02:51.299Z">
+<meta property="article:modified_time" content="2023-11-07T14:15:26.690Z">
 <meta property="article:author" content="zoush99">
 <meta property="article:tag" content="project">
 <meta property="article:tag" content="log">
@@ -142,7 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%97%A5%E5%BF%97"><span class="nav-number">1.</span> <span class="nav-text">问题日志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#core-include-ikos-core-literal-hpp%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">&#x2F;core&#x2F;include&#x2F;ikos&#x2F;core&#x2F;literal.hpp文件的作用是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#core-include-ikos-core-number%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84dummy-number-hpp%E6%96%87%E4%BB%B6%E8%A7%A3%E8%AF%BB"><span class="nav-number">1.2.</span> <span class="nav-text">&#x2F;core&#x2F;include&#x2F;ikos&#x2F;core&#x2F;number目录下的dummy_number.hpp文件解读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#core-include-ikos-core-adt-patricia-tree-map-hpp%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E7%9A%84%E9%82%A3%E4%BA%9B%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">&#x2F;core&#x2F;include&#x2F;ikos&#x2F;core&#x2F;adt&#x2F;patricia_tree&#x2F;map.hpp文件包含的那些函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SFINAE%E6%8A%80%E5%B7%A7%E6%9D%A5%E6%A3%80%E6%9F%A5%E7%B1%BB%E5%9E%8B%E6%98%AF%E5%90%A6%E7%AC%A6%E5%90%88%E6%9F%90%E7%A7%8D%E7%89%B9%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">SFINAE技巧来检查类型是否符合某种特性</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%97%A5%E5%BF%97"><span class="nav-number">1.</span> <span class="nav-text">问题日志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#core-include-ikos-core-literal-hpp%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">&#x2F;core&#x2F;include&#x2F;ikos&#x2F;core&#x2F;literal.hpp文件的作用是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#core-include-ikos-core-number%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84dummy-number-hpp%E6%96%87%E4%BB%B6%E8%A7%A3%E8%AF%BB"><span class="nav-number">1.2.</span> <span class="nav-text">&#x2F;core&#x2F;include&#x2F;ikos&#x2F;core&#x2F;number目录下的dummy_number.hpp文件解读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#core-include-ikos-core-adt-patricia-tree-map-hpp%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E7%9A%84%E9%82%A3%E4%BA%9B%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">&#x2F;core&#x2F;include&#x2F;ikos&#x2F;core&#x2F;adt&#x2F;patricia_tree&#x2F;map.hpp文件包含的那些函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SFINAE%E6%8A%80%E5%B7%A7%E6%9D%A5%E6%A3%80%E6%9F%A5%E7%B1%BB%E5%9E%8B%E6%98%AF%E5%90%A6%E7%AC%A6%E5%90%88%E6%9F%90%E7%A7%8D%E7%89%B9%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">SFINAE技巧来检查类型是否符合某种特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#z-number-hpp%E6%96%87%E4%BB%B6%E7%9A%84detail%E7%BB%86%E8%8A%82"><span class="nav-number">1.5.</span> <span class="nav-text">z_number.hpp文件的detail细节</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -239,7 +239,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-06 22:02:51" itemprop="dateModified" datetime="2023-11-06T22:02:51+08:00">2023-11-06</time>
+      <time title="Modified: 2023-11-07 22:15:26" itemprop="dateModified" datetime="2023-11-07T22:15:26+08:00">2023-11-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -269,14 +269,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>9.5k</span>
+      <span>11k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>17 mins.</span>
+      <span>19 mins.</span>
     </span>
 </div>
 
@@ -494,6 +494,37 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;type_traits&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">static_assert</span>(std::is_convertible&lt;<span class="type">int</span>, <span class="type">double</span>&gt;::value, <span class="string">&quot;int can be converted to double&quot;</span>);</span><br><span class="line"><span class="built_in">static_assert</span>(!std::is_convertible&lt;<span class="type">double</span>, <span class="type">int</span>&gt;::value, <span class="string">&quot;double cannot be converted to int&quot;</span>);</span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>这两个类型特性检查工具对于编写泛型代码、模板特化和类型安全性检查非常有用。它们可以在编译时捕捉许多类型相关的错误，使代码更加健壮和安全。</p>
+<h2 id="z-number-hpp文件的detail细节"><a href="#z-number-hpp文件的detail细节" class="headerlink" title="z_number.hpp文件的detail细节"></a><code>z_number.hpp</code>文件的<code>detail</code>细节</h2><p>这段代码定义了一系列结构和函数，用于处理 GMP（GNU多精度算术库）的 <code>mpz_class</code> 类型与不同整数类型之间的转换和检查。下面是每个结构和函数的介绍，以及一个简单的示例：</p>
+<ol>
+<li><p><code>MpzAdapter</code> 结构</p>
+<ul>
+<li>该结构是一个通用的辅助结构，用于处理所有支持的整数类型，通过模板特化来实现。它包含一个 <code>operator()</code> 函数，接受整数值，并将该值返回。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 MpzAdapter 处理整数转换</span></span><br><span class="line"><span class="type">int</span> x = <span class="number">42</span>;</span><br><span class="line">MpzAdapter&lt;<span class="type">int</span>&gt; adapter;</span><br><span class="line">mpz_class mpz_x = <span class="built_in">adapter</span>(x);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>MpzAdapterUnsignedLongLong</code> 和 <code>MpzAdapterLongLong</code> 结构</p>
+<ul>
+<li>这两个结构用于处理无符号长整数和有符号长整数的特殊情况。它们包括模板特化，分别处理不同整数类型的情况。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 MpzAdapterUnsignedLongLong 处理无符号长整数转换</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> ull = <span class="number">1234567890ULL</span>;</span><br><span class="line">MpzAdapterUnsignedLongLong&lt;<span class="literal">true</span>&gt; adapter;</span><br><span class="line">mpz_class mpz_ull = <span class="built_in">adapter</span>(ull);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>MpzFits</code> 结构</p>
+<ul>
+<li>该结构用于检查 <code>mpz_class</code> 是否适合转换为给定整数类型。它包括模板特化，用于不同整数类型的情况。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 MpzFits 检查 mpz_class 是否适合转换为 unsigned int</span></span><br><span class="line">mpz_class mpz_value = <span class="number">42</span>;</span><br><span class="line">MpzFits&lt;<span class="type">unsigned</span> <span class="type">int</span>&gt; fits;</span><br><span class="line"><span class="type">bool</span> fits_unsigned = <span class="built_in">fits</span>(mpz_value);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>MpzTo</code> 结构</p>
+<ul>
+<li>该结构用于将 <code>mpz_class</code> 转换为给定整数类型。它包括模板特化，用于不同整数类型的情况。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 MpzTo 将 mpz_class 转换为 long</span></span><br><span class="line">mpz_class mpz_value = <span class="number">12345</span>;</span><br><span class="line">MpzTo&lt;<span class="type">long</span>&gt; converter;</span><br><span class="line"><span class="type">long</span> converted_value = <span class="built_in">converter</span>(mpz_value);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>这些结构和函数的目的是执行不同整数类型的转换和检查操作，以确保数值正确性和一致性。模板特化允许根据目标整数类型的大小和符号性质来执行适当的操作。这些功能对于处理高精度整数和整数类型之间的相互转换非常有用。</p>
 
     </div>
 
@@ -548,14 +579,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Word count total: </span>
-    <span title="Word count total">185k</span>
+    <span title="Word count total">187k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">5:37</span>
+    <span title="Reading time total">5:39</span>
   </span>
 </div>
 <div class="busuanzi-count">

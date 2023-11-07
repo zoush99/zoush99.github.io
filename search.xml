@@ -3774,6 +3774,37 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;type_traits&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">static_assert</span>(std::is_convertible&lt;<span class="type">int</span>, <span class="type">double</span>&gt;::value, <span class="string">&quot;int can be converted to double&quot;</span>);</span><br><span class="line"><span class="built_in">static_assert</span>(!std::is_convertible&lt;<span class="type">double</span>, <span class="type">int</span>&gt;::value, <span class="string">&quot;double cannot be converted to int&quot;</span>);</span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>这两个类型特性检查工具对于编写泛型代码、模板特化和类型安全性检查非常有用。它们可以在编译时捕捉许多类型相关的错误，使代码更加健壮和安全。</p>
+<h2 id="z-number-hpp文件的detail细节"><a href="#z-number-hpp文件的detail细节" class="headerlink" title="z_number.hpp文件的detail细节"></a><code>z_number.hpp</code>文件的<code>detail</code>细节</h2><p>这段代码定义了一系列结构和函数，用于处理 GMP（GNU多精度算术库）的 <code>mpz_class</code> 类型与不同整数类型之间的转换和检查。下面是每个结构和函数的介绍，以及一个简单的示例：</p>
+<ol>
+<li><p><code>MpzAdapter</code> 结构</p>
+<ul>
+<li>该结构是一个通用的辅助结构，用于处理所有支持的整数类型，通过模板特化来实现。它包含一个 <code>operator()</code> 函数，接受整数值，并将该值返回。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 使用 MpzAdapter 处理整数转换</span></span><br><span class="line"><span class="type">int</span> x = <span class="number">42</span>;</span><br><span class="line">MpzAdapter&lt;<span class="type">int</span>&gt; adapter;</span><br><span class="line">mpz_class mpz_x = <span class="built_in">adapter</span>(x);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>MpzAdapterUnsignedLongLong</code> 和 <code>MpzAdapterLongLong</code> 结构</p>
+<ul>
+<li>这两个结构用于处理无符号长整数和有符号长整数的特殊情况。它们包括模板特化，分别处理不同整数类型的情况。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 使用 MpzAdapterUnsignedLongLong 处理无符号长整数转换</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> ull = <span class="number">1234567890ULL</span>;</span><br><span class="line">MpzAdapterUnsignedLongLong&lt;<span class="literal">true</span>&gt; adapter;</span><br><span class="line">mpz_class mpz_ull = <span class="built_in">adapter</span>(ull);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>MpzFits</code> 结构</p>
+<ul>
+<li>该结构用于检查 <code>mpz_class</code> 是否适合转换为给定整数类型。它包括模板特化，用于不同整数类型的情况。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 使用 MpzFits 检查 mpz_class 是否适合转换为 unsigned int</span></span><br><span class="line">mpz_class mpz_value = <span class="number">42</span>;</span><br><span class="line">MpzFits&lt;<span class="type">unsigned</span> <span class="type">int</span>&gt; fits;</span><br><span class="line"><span class="type">bool</span> fits_unsigned = <span class="built_in">fits</span>(mpz_value);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>MpzTo</code> 结构</p>
+<ul>
+<li>该结构用于将 <code>mpz_class</code> 转换为给定整数类型。它包括模板特化，用于不同整数类型的情况。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 使用 MpzTo 将 mpz_class 转换为 long</span></span><br><span class="line">mpz_class mpz_value = <span class="number">12345</span>;</span><br><span class="line">MpzTo&lt;<span class="type">long</span>&gt; converter;</span><br><span class="line"><span class="type">long</span> converted_value = <span class="built_in">converter</span>(mpz_value);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>这些结构和函数的目的是执行不同整数类型的转换和检查操作，以确保数值正确性和一致性。模板特化允许根据目标整数类型的大小和符号性质来执行适当的操作。这些功能对于处理高精度整数和整数类型之间的相互转换非常有用。</p>
 ]]></content>
       <categories>
         <category>log</category>
