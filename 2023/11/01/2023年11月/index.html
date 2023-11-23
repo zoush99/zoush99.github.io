@@ -29,7 +29,7 @@
 <meta property="og:description" content="问题日志">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-01T12:42:21.000Z">
-<meta property="article:modified_time" content="2023-11-07T14:15:26.690Z">
+<meta property="article:modified_time" content="2023-11-23T07:50:08.579Z">
 <meta property="article:author" content="zoush99">
 <meta property="article:tag" content="project">
 <meta property="article:tag" content="log">
@@ -142,7 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%97%A5%E5%BF%97"><span class="nav-number">1.</span> <span class="nav-text">问题日志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#core-include-ikos-core-literal-hpp%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">&#x2F;core&#x2F;include&#x2F;ikos&#x2F;core&#x2F;literal.hpp文件的作用是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#core-include-ikos-core-number%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84dummy-number-hpp%E6%96%87%E4%BB%B6%E8%A7%A3%E8%AF%BB"><span class="nav-number">1.2.</span> <span class="nav-text">&#x2F;core&#x2F;include&#x2F;ikos&#x2F;core&#x2F;number目录下的dummy_number.hpp文件解读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#core-include-ikos-core-adt-patricia-tree-map-hpp%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E7%9A%84%E9%82%A3%E4%BA%9B%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">&#x2F;core&#x2F;include&#x2F;ikos&#x2F;core&#x2F;adt&#x2F;patricia_tree&#x2F;map.hpp文件包含的那些函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SFINAE%E6%8A%80%E5%B7%A7%E6%9D%A5%E6%A3%80%E6%9F%A5%E7%B1%BB%E5%9E%8B%E6%98%AF%E5%90%A6%E7%AC%A6%E5%90%88%E6%9F%90%E7%A7%8D%E7%89%B9%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">SFINAE技巧来检查类型是否符合某种特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#z-number-hpp%E6%96%87%E4%BB%B6%E7%9A%84detail%E7%BB%86%E8%8A%82"><span class="nav-number">1.5.</span> <span class="nav-text">z_number.hpp文件的detail细节</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%97%A5%E5%BF%97"><span class="nav-number">1.</span> <span class="nav-text">问题日志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#core-include-ikos-core-literal-hpp%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">&#x2F;core&#x2F;include&#x2F;ikos&#x2F;core&#x2F;literal.hpp文件的作用是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#core-include-ikos-core-number%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84dummy-number-hpp%E6%96%87%E4%BB%B6%E8%A7%A3%E8%AF%BB"><span class="nav-number">1.2.</span> <span class="nav-text">&#x2F;core&#x2F;include&#x2F;ikos&#x2F;core&#x2F;number目录下的dummy_number.hpp文件解读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#core-include-ikos-core-adt-patricia-tree-map-hpp%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E7%9A%84%E9%82%A3%E4%BA%9B%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">&#x2F;core&#x2F;include&#x2F;ikos&#x2F;core&#x2F;adt&#x2F;patricia_tree&#x2F;map.hpp文件包含的那些函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SFINAE%E6%8A%80%E5%B7%A7%E6%9D%A5%E6%A3%80%E6%9F%A5%E7%B1%BB%E5%9E%8B%E6%98%AF%E5%90%A6%E7%AC%A6%E5%90%88%E6%9F%90%E7%A7%8D%E7%89%B9%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">SFINAE技巧来检查类型是否符合某种特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#z-number-hpp%E6%96%87%E4%BB%B6%E7%9A%84detail%E7%BB%86%E8%8A%82"><span class="nav-number">1.5.</span> <span class="nav-text">z_number.hpp文件的detail细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#camke%E6%96%87%E4%BB%B6%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84"><span class="nav-number">1.6.</span> <span class="nav-text">.camke文件是做什么的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E5%86%99CMakeLists-txt%E8%83%BD%E5%A4%9F%E6%94%AF%E6%8C%81%E6%89%80%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="nav-number">1.7.</span> <span class="nav-text">编写CMakeLists.txt能够支持所写代码的单元测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mpfr-init2%E5%87%BD%E6%95%B0%E7%9A%84%E7%94%A8%E6%B3%95"><span class="nav-number">1.8.</span> <span class="nav-text">mpfr_init2函数的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mpfr%E5%BA%93%E4%B8%AD%E7%9A%84%E6%89%93%E5%8D%B0%E6%93%8D%E4%BD%9C"><span class="nav-number">1.9.</span> <span class="nav-text">mpfr库中的打印操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E8%A7%A3%E9%87%8A%E4%B8%AD%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99join%E6%93%8D%E4%BD%9C%EF%BC%8C%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99meet%E6%93%8D%E4%BD%9C"><span class="nav-number">1.10.</span> <span class="nav-text">抽象解释中什么时候join操作，什么时候meet操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#analyzer%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.11.</span> <span class="nav-text">analyzer目录下的文件的作用</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -239,7 +239,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-07 22:15:26" itemprop="dateModified" datetime="2023-11-07T22:15:26+08:00">2023-11-07</time>
+      <time title="Modified: 2023-11-23 15:50:08" itemprop="dateModified" datetime="2023-11-23T15:50:08+08:00">2023-11-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -269,14 +269,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>11k</span>
+      <span>16k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>19 mins.</span>
+      <span>28 mins.</span>
     </span>
 </div>
 
@@ -525,6 +525,135 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 MpzTo 将 mpz_class 转换为 long</span></span><br><span class="line">mpz_class mpz_value = <span class="number">12345</span>;</span><br><span class="line">MpzTo&lt;<span class="type">long</span>&gt; converter;</span><br><span class="line"><span class="type">long</span> converted_value = <span class="built_in">converter</span>(mpz_value);</span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>这些结构和函数的目的是执行不同整数类型的转换和检查操作，以确保数值正确性和一致性。模板特化允许根据目标整数类型的大小和符号性质来执行适当的操作。这些功能对于处理高精度整数和整数类型之间的相互转换非常有用。</p>
+<h2 id="camke文件是做什么的"><a href="#camke文件是做什么的" class="headerlink" title=".camke文件是做什么的"></a><code>.camke</code>文件是做什么的</h2><p>.cmake 文件是给cmake执行用的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake -P  /path/of/xxx.cmake</span><br></pre></td></tr></table></figure>
+
+<h2 id="编写CMakeLists-txt能够支持所写代码的单元测试"><a href="#编写CMakeLists-txt能够支持所写代码的单元测试" class="headerlink" title="编写CMakeLists.txt能够支持所写代码的单元测试"></a>编写CMakeLists.txt能够支持所写代码的单元测试</h2><p>以下是一个简单的CMakeLists.txt文件，用于测试<code>number</code>路径下的<code>f_number.hpp</code>定义的函数是否正确。请将以下内容添加到项目的根目录中的<code>CMakeLists.txt</code>文件中：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.10</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(NumberTestProject)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置C++标准</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">11</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD_REQUIRED <span class="keyword">ON</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加测试执行程序</span></span><br><span class="line"><span class="keyword">add_executable</span>(test_number <span class="keyword">test</span>/unit/number/test_f_number.cpp)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 包含头文件路径</span></span><br><span class="line"><span class="keyword">target_include_directories</span>(test_number PRIVATE <span class="keyword">include</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 链接测试程序和库</span></span><br><span class="line"><span class="keyword">target_link_libraries</span>(test_number gtest)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加测试</span></span><br><span class="line"><span class="keyword">add_test</span>(NAME NumberTest <span class="keyword">COMMAND</span> test_number)</span><br><span class="line"></span><br><span class="line">-DLLVM_CONFIG_EXECUTABLE=<span class="string">&quot;/usr/bin/llvm-config-14&quot;</span> -DAPRON_ROOT=/usr/local/apron -DTBB_ROOT=/usr/local/tbb/ -DTBB_INCLUDE_DIRS=/usr/local/tbb/<span class="keyword">include</span></span><br></pre></td></tr></table></figure>
+
+<p>然后，在<code>test/unit/number</code>目录下创建一个新的测试文件<code>test_f_number.cpp</code>：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;gtest/gtest.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ikos/core/number/f_number.hpp&quot;</span>  <span class="comment">// 根据实际路径调整</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">TEST</span>(FNumberTest, YourTestNameHere) &#123;</span><br><span class="line">    <span class="comment">// 编写你的测试逻辑</span></span><br><span class="line">    <span class="comment">// 例如，调用 f_number.hpp 中的函数并检查输出是否符合预期</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以添加更多测试用例</span></span><br></pre></td></tr></table></figure>
+
+<p>确保你已经在项目中正确安装了Google Test库。在构建项目时，CTest将执行你的测试，并将结果报告给你。你可以使用<code>ctest</code>命令来运行测试。</p>
+<p>请根据你的实际情况调整路径和测试逻辑。希望这能帮助你设置一个简单的CMake文件来测试<code>f_number.hpp</code>中的函数。</p>
+<h2 id="mpfr-init2函数的用法"><a href="#mpfr-init2函数的用法" class="headerlink" title="mpfr_init2函数的用法"></a><code>mpfr_init2</code>函数的用法</h2><p><code>mpfr_init2</code> 函数用于初始化一个 <code>mpfr_t</code> 类型的变量，并指定其精度（位数）。这个函数的原型为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">mpfr_init2</span><span class="params">(<span class="type">mpfr_t</span> x, <span class="type">mpfr_prec_t</span> prec)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li><code>x</code> 是要初始化的 <code>mpfr_t</code> 类型变量。</li>
+<li><code>prec</code> 是指定的精度，即变量的位数。</li>
+</ul>
+<p>以下是一个使用 <code>mpfr_init2</code> 函数的示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mpfr.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">mpfr_t</span> myNumber;</span><br><span class="line">    mpfr_init2(myNumber, <span class="number">53</span>);  <span class="comment">// 初始化myNumber，指定精度为53位</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在这里可以使用myNumber进行各种MPFR操作</span></span><br><span class="line"></span><br><span class="line">    mpfr_set_d(myNumber, <span class="number">3.14159265358979323846</span>, MPFR_RNDN);  <span class="comment">// 将myNumber的值设置为pi</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在这里可以使用myNumber进行其他操作</span></span><br><span class="line"></span><br><span class="line">    mpfr_printf(<span class="string">&quot;The value of myNumber is %.20Rf\n&quot;</span>, myNumber);</span><br><span class="line"></span><br><span class="line">    mpfr_clear(myNumber);  <span class="comment">// 清理myNumber，释放资源</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个示例中，我们首先包含了 MPFR 的头文件，并在 <code>main</code> 函数中声明了一个 <code>mpfr_t</code> 类型的变量 <code>myNumber</code>。然后，我们使用 <code>mpfr_init2</code> 函数初始化 <code>myNumber</code>，指定精度为53位。接着，我们使用 <code>mpfr_set_d</code> 函数将 <code>myNumber</code> 的值设置为 pi（3.14159265358979323846）。最后，我们使用 <code>mpfr_printf</code> 函数打印出 <code>myNumber</code> 的值，并在程序结束时使用 <code>mpfr_clear</code> 函数释放 <code>myNumber</code> 占用的内存。</p>
+<p>请确保你的编译器可以找到 MPFR 库并链接到你的程序，然后按照上述示例进行使用。在实际使用中，你可以根据需要修改精度和进行其他 MPFR 操作。</p>
+<h2 id="mpfr库中的打印操作"><a href="#mpfr库中的打印操作" class="headerlink" title="mpfr库中的打印操作"></a><code>mpfr</code>库中的打印操作</h2><p><code>mpfr_printf</code> 函数用于格式化输出 MPFR（Multiple Precision Floating-Point Reliable）变量的值。它的用法与标准的 <code>printf</code> 函数非常相似，支持类似的格式说明符。下面是 <code>mpfr_printf</code> 函数的一般用法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">mpfr_printf</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这个函数的参数包括一个格式字符串 <code>format</code> 和一系列的可变参数，类似于 <code>printf</code>。格式字符串中的格式说明符 <code>%Rf</code> 用于表示 MPFR 变量。</p>
+<p>以下是一个简单的示例，演示如何使用 <code>mpfr_printf</code> 打印 MPFR 变量的值：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mpfr.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">mpfr_t</span> x;</span><br><span class="line">    mpfr_init2(x, <span class="number">128</span>); <span class="comment">// 初始化 MPFR 变量 x，精度设置为 128 位</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置 x 的值为 3.14</span></span><br><span class="line">    mpfr_set_d(x, <span class="number">3.14</span>, MPFR_RNDN);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用 mpfr_printf 打印 x 的值</span></span><br><span class="line">    mpfr_printf(<span class="string">&quot;x = %.30Rf\n&quot;</span>, x);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 清理 MPFR 变量</span></span><br><span class="line">    mpfr_clear(x);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个示例中，我们首先初始化了一个 MPFR 变量 <code>x</code>，然后使用 <code>mpfr_set_d</code> 设置了它的值为 3.14。最后，我们使用 <code>mpfr_printf</code> 打印了 <code>x</code> 的值。请注意 <code>%Rf</code> 是用于打印 MPFR 变量的格式说明符，<code>.30</code> 是指定输出的小数点后的位数。</p>
+<p>输出将是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = 3.140000000000000000000000000000</span><br></pre></td></tr></table></figure>
+
+<p>你可以根据需要调整格式字符串和精度。MPFR 库支持其他的格式说明符，具体可以参考 MPFR 文档。</p>
+<h2 id="抽象解释中什么时候join操作，什么时候meet操作"><a href="#抽象解释中什么时候join操作，什么时候meet操作" class="headerlink" title="抽象解释中什么时候join操作，什么时候meet操作"></a>抽象解释中什么时候join操作，什么时候meet操作</h2><p>在抽象解释中，<code>join</code> 和 <code>meet</code> 是用于组合抽象域元素的两种基本操作。它们在不同的情境中发挥作用：</p>
+<ol>
+<li><p><strong>Join 操作：</strong></p>
+<ul>
+<li><strong>情境：</strong> 当我们合并两个路径或两个状态时，通常使用 <code>join</code> 操作。在路径或状态划分的情况下，可能存在多个不同的分支，<code>join</code> 用于合并这些分支的抽象信息。</li>
+<li><strong>目的：</strong> <code>join</code> 操作旨在获取抽象域元素的上界，以确保合并后的抽象信息包括了所有可能的路径或状态的性质。</li>
+<li><strong>示例：</strong> 如果在程序分析中，一条路径中的某个变量被认为是正数，而另一条路径中认为该变量是负数，那么在合并这两个路径时，可能使用 <code>join</code> 来得到一个更宽泛的信息，即该变量可能是任何实数。</li>
+</ul>
+</li>
+<li><p><strong>Meet 操作：</strong></p>
+<ul>
+<li><strong>情境：</strong> 当我们需要分析程序路径或状态的交集时，通常使用 <code>meet</code> 操作。在路径或状态合并的情况下，可能需要找到多个分支之间的共同性质。</li>
+<li><strong>目的：</strong> <code>meet</code> 操作旨在获取抽象域元素的下界，以确保合并后的抽象信息是多个路径或状态的共同性质。</li>
+<li><strong>示例：</strong> 如果在程序分析中，一条路径中的某个变量被认为是非零的，而另一条路径中认为该变量是偶数，那么在这两个路径的 meet 操作中，可能得到的信息是该变量是非零的偶数。</li>
+</ul>
+</li>
+</ol>
+<p>总体而言，<code>join</code> 用于获取上界，而 <code>meet</code> 用于获取下界。这两个操作帮助分析人员在抽象解释中推导出更精确的信息，以便更好地理解程序的性质和行为。</p>
+<h2 id="analyzer目录下的文件的作用"><a href="#analyzer目录下的文件的作用" class="headerlink" title="analyzer目录下的文件的作用"></a>analyzer目录下的文件的作用</h2><p>当然，让我为你梳理一下每个文件的作用：</p>
+<ul>
+<li><p><strong>doc&#x2F;</strong></p>
+<ul>
+<li><strong>doxygen&#x2F;</strong>: 存放着Doxygen生成的文档，这可能包含项目的代码文档和说明。</li>
+</ul>
+</li>
+<li><p><strong>include&#x2F;</strong></p>
+<ul>
+<li><p><strong>ikos&#x2F;analyzer&#x2F;intrinsic.h</strong>: 定义了IKOS内部的一些函数、指令或者特殊处理，可以在被分析的源代码中使用。</p>
+</li>
+<li><p><strong>ikos&#x2F;analyzer&#x2F;analysis&#x2F;</strong></p>
+<ul>
+<li><strong>call_context.hpp</strong>: 定义了调用上下文和调用上下文工厂的概念。</li>
+<li><strong>context.hpp</strong>: 定义了分析器的全局上下文，可能包含全局设置和状态。</li>
+<li><strong>literal.hpp</strong>: 转换操作数到与AR（Abstract Representation）无关的格式的工厂。</li>
+<li><strong>liveness.hpp</strong>: 计算所有函数的活跃和死亡变量集合的活跃性分析。</li>
+<li><strong>memory_location.hpp</strong>: 定义了符号内存位置（全局、栈、堆等），以及管理这些内存位置的工厂。</li>
+<li><strong>option.hpp</strong>: 定义了分析器的选项。</li>
+<li><strong>variable.hpp</strong>: 定义了变量（局部、全局等），以及管理这些变量的工厂。</li>
+</ul>
+</li>
+<li><p><strong>ikos&#x2F;analyzer&#x2F;analysis&#x2F;execution_engine&#x2F;</strong></p>
+<ul>
+<li><strong>context_insensitive.hpp</strong>: 定义了<code>ContextInsensitiveCallExecutionEngine</code>，一个用于上下文不敏感分析的调用执行引擎。</li>
+<li><strong>engine.hpp</strong>: 定义了执行引擎的基类，提供执行AR语句的API。</li>
+<li><strong>inliner.hpp</strong>: 定义了<code>InlineCallExecutionEngine</code>，一个执行动态内联的调用执行引擎。</li>
+<li><strong>numerical.hpp</strong>: 定义了<code>NumericalExecutionEngine</code>，分析器的主要执行引擎，用于在抽象域上执行AR语句。</li>
+</ul>
+</li>
+<li><p><strong>ikos&#x2F;analyzer&#x2F;analysis&#x2F;pointer&#x2F;</strong></p>
+<ul>
+<li><strong>constraint.hpp</strong>: 定义了<code>PointerConstraintsGenerator</code>，根据AR函数或全局变量生成指针约束的生成器。</li>
+<li><strong>function.hpp</strong>: 定义了函数指针分析。</li>
+<li><strong>pointer.hpp</strong>: 定义了指针分析。</li>
+</ul>
+</li>
+<li><p><strong>ikos&#x2F;analyzer&#x2F;analysis&#x2F;value&#x2F;</strong></p>
+<ul>
+<li><strong>abstract_domain.hpp</strong>: 定义了值分析中使用的抽象域。</li>
+<li><strong>interprocedural.hpp</strong>: 定义了插值值分析。</li>
+<li><strong>intraprocedural.hpp</strong>: 定义了函数内值分析。</li>
+<li><strong>machine_int_domain.hpp</strong>: 定义了值分析中使用的机器整数抽象域。</li>
+</ul>
+</li>
+<li><p><strong>ikos&#x2F;analyzer&#x2F;checker&#x2F;</strong>: 包含了不同代码检查（如缓冲区溢出、除零等）的定义，基于分析结果进行检查。</p>
+</li>
+<li><p><strong>ikos&#x2F;analyzer&#x2F;database&#x2F;table&#x2F;</strong>: 包含了输出数据库表的定义。</p>
+</li>
+<li><p><strong>ikos&#x2F;analyzer&#x2F;json&#x2F;</strong>: JSON库的定义。</p>
+</li>
+<li><p><strong>ikos&#x2F;analyzer&#x2F;support&#x2F;</strong>: 包含了各种辅助函数和断言。</p>
+</li>
+<li><p><strong>ikos&#x2F;analyzer&#x2F;util&#x2F;</strong>: 包含了分析器的各种实用工具，例如日志、颜色、计时器等。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>python&#x2F;</strong></p>
+<ul>
+<li><strong>ikos&#x2F;analyzer.py</strong>: <code>ikos</code>命令行工具的实现。</li>
+<li><strong>ikos&#x2F;report.py</strong>: <code>ikos-report</code>命令行工具的实现。</li>
+<li><strong>ikos&#x2F;settings.py.in</strong>: <code>ikos-config</code>命令行工具的实现。</li>
+<li><strong>ikos&#x2F;view.py</strong>: <code>ikos-view</code>命令行工具的实现。</li>
+<li><strong>ikos&#x2F;analyzer&#x2F;view&#x2F;</strong>: <code>ikos-view</code>的Web资源，包含HTML、CSS和JS代码。</li>
+</ul>
+</li>
+<li><p><strong>script&#x2F;</strong>: 包含了命令行工具的Python入口点。</p>
+</li>
+<li><p><strong>src&#x2F;</strong>: 包含了分析器的实现文件，遵循<code>include/ikos/analyzer</code>的结构。</p>
+<ul>
+<li><strong>ikos_analyzer.cpp</strong>: <code>ikos-analyzer</code>的实现，是所有分析的入口点。</li>
+</ul>
+</li>
+</ul>
+<p>这些文件和文件夹提供了整个分析器的框架和组成部分。每个文件都负责实现不同的功能，包括分析算法、数据结构定义、执行引擎等等。</p>
 
     </div>
 
@@ -579,14 +708,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Word count total: </span>
-    <span title="Word count total">187k</span>
+    <span title="Word count total">192k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">5:39</span>
+    <span title="Reading time total">5:48</span>
   </span>
 </div>
 <div class="busuanzi-count">
