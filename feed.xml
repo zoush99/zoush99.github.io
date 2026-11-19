@@ -1,1 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://zoush99.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://zoush99.github.io/" rel="alternate" type="text/html" /><updated>2026-11-19T23:46:05+08:00</updated><id>https://zoush99.github.io/feed.xml</id><title type="html">Sheng | 个人主页</title><subtitle>个人主页：研究项目、论文、项目与经历</subtitle><author><name>S. Z. Sheng</name><email>your@email.com</email></author></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://zoush99.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://zoush99.github.io/" rel="alternate" type="text/html" /><updated>2026-11-19T23:52:17+08:00</updated><id>https://zoush99.github.io/feed.xml</id><title type="html">Sheng | 个人主页</title><subtitle>个人主页：研究项目、论文、项目与经历</subtitle><author><name>S. Z. Sheng</name><email>your@email.com</email></author><entry><title type="html">开篇：为什么把过程记下来</title><link href="https://zoush99.github.io/%E9%9A%8F%E7%AC%94/hello/" rel="alternate" type="text/html" title="开篇：为什么把过程记下来" /><published>2026-11-19T00:00:00+08:00</published><updated>2026-11-19T00:00:00+08:00</updated><id>https://zoush99.github.io/%E9%9A%8F%E7%AC%94/hello</id><content type="html" xml:base="https://zoush99.github.io/%E9%9A%8F%E7%AC%94/hello/"><![CDATA[<p>做项目久了会发现，真正难的不是把功能写出来，而是过一段时间还能说清楚<strong>当时为什么这么选</strong>：为什么放弃散点重建、为什么把通道排序改成数值提取、为什么这个指标口径要统一。</p>
+
+<p>代码能留下实现，留不下判断。所以开了这个博客，主要记三类东西：</p>
+
+<ol>
+  <li><strong>研究笔记</strong>——方法选型、实验结论、失败的尝试。</li>
+  <li><strong>工程踩坑</strong>——看起来是小事、但卡了一整天的问题。</li>
+  <li><strong>阶段性总结</strong>——把散在项目里的结论收拢成一篇。</li>
+</ol>
+
+<p>写作标准只有一条：写清楚「问题是什么、试了什么、为什么最后选这个」，不写只对自己有意义的流水账。</p>]]></content><author><name>S. Z. Sheng</name><email>your@email.com</email></author><category term="随笔" /><category term="记录" /><summary type="html"><![CDATA[做项目久了会发现，真正难的不是把功能写出来，而是过一段时间还能说清楚当时为什么这么选：为什么放弃散点重建、为什么把通道排序改成数值提取、为什么这个指标口径要统一。]]></summary></entry></feed>
