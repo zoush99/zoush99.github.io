@@ -40,8 +40,15 @@ $type-size-6                : 0.75em;   // ~12px
 $type-size-7                : 0.6875em; // ~11px
 $type-size-8                : 0.625em;  // ~10px
 
-$global-font-family         : $sans-serif;
-$header-font-family         : $sans-serif;
+/* 中文宋体优先的字体栈：西文用 Georgia，中文落到宋体 */
+$zh-serif                   : Georgia, "Times New Roman", "Songti SC", "STSong", "SimSun", "Source Han Serif SC", "Noto Serif CJK SC", serif;
+
+/* 全站（含导航、按钮、表单）统一为宋体风格，代码块仍用等宽字体 */
+$sans-serif                 : $zh-serif;
+$sans-serif-narrow          : $zh-serif;
+
+$global-font-family         : $zh-serif;
+$header-font-family         : $zh-serif;
 $caption-font-family        : $serif;
 
 /* ==========================================================================
