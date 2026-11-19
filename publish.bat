@@ -34,7 +34,7 @@ set /a tries+=1
 git push origin main
 if errorlevel 1 (
   if %tries% lss 6 (
-    echo     推送失败，可能是网络波动，15 秒后重试 %tries%/6...
+    echo     推送失败（可能是网络波动），15 秒后重试 %tries%/6...
     timeout /t 15 /nobreak >nul
     goto push
   )
@@ -47,7 +47,6 @@ echo.
 echo ============================================================
 echo  已推送。GitHub Actions 正在构建，约 1~3 分钟后访问：
 echo  https://zoush99.github.io
-echo  构建进度：仓库 Actions 页面的 Deploy site 工作流
 echo ============================================================
 echo.
 pause

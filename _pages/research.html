@@ -1,0 +1,13 @@
+---
+layout: archive
+title: "研究项目"
+permalink: /research/
+author_profile: true
+---
+
+{% include base_path %}
+
+{% assign items = site.portfolio | where: "category", "research" | sort: "importance" %}
+{% for post in items %}
+  {% include archive-single.html %}
+{% endfor %}
