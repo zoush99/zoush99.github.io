@@ -6,13 +6,13 @@ subtitle: 工业软件与人工智能视觉 · 个人主页
 
 profile:
   align: right
-  # image: prof_pic.jpg # 把你的照片命名为 prof_pic.jpg 放到 assets/img/ 后取消本行注释
+  image: prof_pic.jpg # 占位图：把你的照片命名为 prof_pic.jpg 覆盖 assets/img/ 下的同名文件即可
   image_circular: false # 圆形头像改为 true
   more_info: >
     <p>研究方向：局部放电模式识别</p>
     <p>工程方向：数据采集、处理与报告自动化</p>
 
-selected_papers: false # 首页显示“代表性论文”：在 papers.bib 中给论文加 selected = {true} 后改为 true
+selected_papers: true # 首页显示“代表性论文”（papers.bib 中 selected = {true} 的条目）
 social: true # 在页面底部显示社交链接
 ---
 

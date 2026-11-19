@@ -2,29 +2,123 @@
 ---
 
 % ============================================================================
-% 论文数据文件
-% ----------------------------------------------------------------------------
-% 每条论文是一个 BibTeX 条目，会按年份倒序显示在 /publications/ 页面。
-% 替换下面这条示例即可。常用字段：
-%   title / author / journal / booktitle / year / volume / number / pages / doi / url
-% 可选字段（本主题支持）：
-%   selected     = {true}   -> 在首页"代表性论文"中展示
-%   bibtex_show  = {true}   -> 显示"BibTeX"按钮
-%   abstract     = {摘要}   -> 显示"摘要"折叠块
-%   preview      = {xxx.png}-> 缩略图（放在 assets/img/ 下）
-%   code / pdf / html / arxiv / supp
-% 作者字段中，与 site.scholar 配置的姓名一致者会被加粗显示。
+% 占位示例数据：以下为 al-folio 模板自带的爱因斯坦论文条目，仅用于占位演示。
+% 替换方法：删掉下面的条目，粘贴你自己的 BibTeX 即可（/publications/ 页面会自动重排）。
+% 常用字段：title / author / journal / booktitle / year / volume / pages / doi / url
+% 可选字段：selected = {true}（首页"代表性论文"）、bibtex_show = {true}（BibTeX 按钮）、
+%          abstract = {摘要}、preview = {图片名}、code / pdf / html / arxiv / video
+% 注意：作者名与 _config.yml 中 scholar.first_name / last_name 一致时会被加粗。
 % ============================================================================
 
-@article{example2026prpd,
-  title        = {（示例）基于 Swin Transformer 的 PRPD 局部放电模式识别},
-  author       = {Sheng, S. Z. and 其他作者},
-  journal      = {期刊名称},
-  volume       = {1},
-  number       = {1},
-  pages        = {1--10},
-  year         = {2026},
-  doi          = {10.0000/example},
-  bibtex_show  = {true},
-  abstract     = {这是一条示例条目，用于展示论文页面的排版效果。把它替换成你自己的论文即可：修改 title、author、journal、year 等字段，或直接删除本条目后粘贴自己的 BibTeX。}
+@string{aps = {American Physical Society,}}
+
+@book{einstein1920relativity,
+  title     = {Relativity: the Special and General Theory},
+  author    = {Einstein, Albert},
+  year      = {1920},
+  publisher = {Methuen & Co Ltd},
+  html      = {relativity.html}
+}
+
+@book{einstein1956investigations,
+  bibtex_show = {true},
+  title       = {Investigations on the Theory of the Brownian Movement},
+  author      = {Einstein, Albert},
+  year        = {1956},
+  publisher   = {Courier Corporation},
+  preview     = {brownian-motion.gif}
+}
+
+@article{einstein1950meaning,
+  abbr        = {AJP},
+  bibtex_show = {true},
+  title       = {The meaning of relativity},
+  author      = {Einstein, Albert and Taub, AH},
+  journal     = {American Journal of Physics},
+  volume      = {18},
+  number      = {6},
+  pages       = {403--404},
+  year        = {1950},
+  publisher   = {American Association of Physics Teachers}
+}
+
+@article{PhysRev.47.777,
+  abbr              = {PhysRev},
+  title             = {Can Quantum-Mechanical Description of Physical Reality Be Considered Complete?},
+  author            = {Einstein*†, A. and Podolsky*, B. and Rosen*, N.},
+  abstract          = {In a complete theory there is an element corresponding to each element of reality. A sufficient condition for the reality of a physical quantity is the possibility of predicting it with certainty, without disturbing the system. In quantum mechanics in the case of two physical quantities described by non-commuting operators, the knowledge of one precludes the knowledge of the other. Then either (1) the description of reality given by the wave function in quantum mechanics is not complete or (2) these two quantities cannot have simultaneous reality. Consideration of the problem of making predictions concerning a system on the basis of measurements made on another system that had previously interacted with it leads to the result that if (1) is false then (2) is also false. One is thus led to conclude that the description of reality as given by a wave function is not complete.},
+  journal           = {Phys. Rev.},
+  location          = {New Jersey},
+  volume            = {47},
+  issue             = {10},
+  pages             = {777--780},
+  numpages          = {0},
+  year              = {1935},
+  month             = {May},
+  publisher         = aps,
+  doi               = {10.1103/PhysRev.47.777},
+  url               = {https://link.aps.org/doi/10.1103/PhysRev.47.777},
+  html              = {https://journals.aps.org/pr/abstract/10.1103/PhysRev.47.777},
+  pdf               = {example_pdf.pdf},
+  altmetric         = {248277},
+  dimensions        = {true},
+  google_scholar_id = {qyhmnyLat1gC},
+  video             = {https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ},
+  additional_info   = {. *More Information* can be [found here](https://github.com/alshedivat/al-folio/)},
+  annotation        = {* Example use of superscripts<br>† Albert Einstein},
+  selected          = {true},
+  inspirehep_id     = {3255}
+}
+
+@article{einstein1905molekularkinetischen,
+  title     = {{\"U}ber die von der molekularkinetischen Theorie der W{\"a}rme geforderte Bewegung von in ruhenden Fl{\"u}ssigkeiten suspendierten Teilchen},
+  author    = {Einstein, A.},
+  journal   = {Annalen der physik},
+  volume    = {322},
+  number    = {8},
+  pages     = {549--560},
+  year      = {1905},
+  publisher = {Wiley Online Library}
+}
+
+@article{einstein1905movement,
+  abbr    = {Ann. Phys.},
+  title   = {Un the movement of small particles suspended in statiunary liquids required by the molecular-kinetic theory 0f heat},
+  author  = {Einstein, A.},
+  journal = {Ann. Phys.},
+  volume  = {17},
+  pages   = {549--560},
+  year    = {1905}
+}
+
+@article{einstein1905electrodynamics,
+  title  = {On the electrodynamics of moving bodies},
+  author = {Einstein, A.},
+  year   = {1905}
+}
+
+@article{einstein1905photoelectriceffect,
+  bibtex_show = {true},
+  abbr        = {Ann. Phys.},
+  title       = {{{\"U}ber einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt}},
+  author      = {Albert Einstein},
+  abstract    = {This is the abstract text.},
+  journal     = {Ann. Phys.},
+  volume      = {322},
+  number      = {6},
+  pages       = {132--148},
+  year        = {1905},
+  doi         = {10.1002/andp.19053220607},
+  award       = {Albert Einstein receveid the **Nobel Prize in Physics** 1921 *for his services to Theoretical Physics, and especially for his discovery of the law of the photoelectric effect*},
+  award_name  = {Nobel Prize}
+}
+
+@book{przibram1967letters,
+  bibtex_show = {true},
+  title       = {Letters on wave mechanics},
+  author      = {Einstein, Albert and Schrödinger, Erwin and Planck, Max and Lorentz, Hendrik Antoon and Przibram, Karl},
+  year        = {1967},
+  publisher   = {Vision},
+  preview     = {wave-mechanics.gif},
+  abbr        = {Vision}
 }
