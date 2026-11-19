@@ -1,34 +1,32 @@
 ---
 layout: about
-title: about
+title: 首页
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: 工业软件与人工智能视觉 · 个人主页
 
 profile:
   align: right
-  image: prof_pic.jpg
-  image_circular: false # crops the image to make it circular
+  # image: prof_pic.jpg # 把你的照片命名为 prof_pic.jpg 放到 assets/img/ 后取消本行注释
+  image_circular: false # 圆形头像改为 true
   more_info: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
+    <p>研究方向：局部放电模式识别</p>
+    <p>工程方向：数据采集、处理与报告自动化</p>
 
-selected_papers: true # includes a list of papers marked as "selected={true}"
-social: true # includes social icons at the bottom of the page
-
-announcements:
-  enabled: true # includes a list of news items
-  scrollable: true # adds a vertical scroll bar if there are more than 3 news items
-  limit: 5 # leave blank to include all the news in the `_news` folder
-
-latest_posts:
-  enabled: true
-  scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
-  limit: 3 # leave blank to include all the blog posts
+selected_papers: false # 首页显示“代表性论文”：在 papers.bib 中给论文加 selected = {true} 后改为 true
+social: true # 在页面底部显示社交链接
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](https://www.reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+我从事工业软件与人工智能视觉方向的研发工作，关注如何把深度学习、数据处理方法真正落到工业现场的检测与分析流程中：
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+- **局部放电模式识别**：以 PRPD（相位分辨局部放电）图谱为输入，研究基于视觉 Transformer 的放电类型识别方法。
+- **数据增强与样本扩充**：针对现场实测样本稀少的问题，研究在密度矩阵层面直接生成增强样本的方法，避免传统散点重建流程引入的失真。
+- **试验数据处理与报告自动化**：面向温升试验等场景，构建从原始测点数据到结构化数据集、再到 Word 报告自动生成的一体化处理链路。
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+本站用于整理这几方面的研究成果与工程实践，分为四个部分：
+
+| 板块 | 内容 |
+| --- | --- |
+| [研究项目](/research/) | 正在开展与已完成的研究课题、方法与阶段结论 |
+| [论文](/publications/) | 已发表与在投论文，可按年份浏览与检索 |
+| [项目](/projects/) | 交付过的软件系统与工程实践，含技术栈与实现要点 |
+| [经历](/cv/) | 教育与工作经历、技能与荣誉 |

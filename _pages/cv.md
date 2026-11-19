@@ -1,12 +1,49 @@
 ---
-layout: cv
+layout: page
 permalink: /cv/
-title: CV
+title: 经历
+description: 教育背景、工作经历、专业技能与荣誉。
 nav: true
-nav_order: 5
-cv_pdf: /assets/pdf/example_pdf.pdf # you can also use external links here
-cv_format: rendercv # options: rendercv, jsonresume
-description: This is a description of the page. You can modify it in '_pages/cv.md'. You can also change or remove the top pdf download button.
+nav_order: 4
 toc:
   sidebar: left
 ---
+
+## 教育经历
+
+**2023.09 – 2026.06　（待填写学校）　硕士研究生 ·（待填写专业）**
+
+- 研究方向：（待填写，例如局部放电模式识别、工业视觉检测）
+- 学位论文：（待填写题目）
+- 主要课程：机器学习、模式识别、信号处理
+
+**2019.09 – 2023.06　（待填写学校）　本科 ·（待填写专业）**
+
+- 主修课程：（待填写）
+- 毕业设计：（待填写题目）
+
+## 工作经历
+
+**2026.07 – 至今　（待填写单位）　（待填写岗位）**
+
+- 负责（待填写）：例如试验数据处理链路的设计与实现、检测算法研发与落地。
+- 产出（待填写）：例如数据处理模块、报告自动生成功能、模型评估报告。
+
+**（可选）2025.07 – 2025.12　（待填写单位）　实习 ·（待填写岗位）**
+
+- 工作内容：（待填写）
+
+## 专业技能
+
+**编程语言**：Java、Python、SQL
+
+**框架与工具**：Spring Boot、PyTorch、Git、Docker、Maven
+
+**方向能力**：
+- 工业数据处理：多通道测点数据清洗、结构化建模、Word/Excel 报告自动化生成
+- 计算机视觉：Transformer 类模型训练与评估、小样本数据增强
+- 工程实践：后端接口开发、数据库设计、构建与部署流程
+
+## 荣誉与奖项
+
+- （待填写）奖学金 / 竞赛奖项 / 荣誉称号，附年份

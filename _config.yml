@@ -2,20 +2,16 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-title: Sheng's Blog # the website title (if blank, full name will be used instead)
+title: Sheng # 站点标题，显示在导航栏左上角（如需用姓名，可改 first_name/last_name 并把 title 设为 blank）
 first_name: S.
 middle_name: Z.
 last_name: Sheng
-contact_note: >
-  You can even add a little note about which of these is the best way to reach you.
-description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
+description: > # 网站描述，用于搜索引擎与分享预览
+  个人主页：记录研究项目、学术论文与工程实践。
 footer_text: >
-  Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
-  Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
-  Photos from <a href="https://unsplash.com" target="_blank">Unsplash</a>.
-keywords: jekyll, jekyll-theme, academic-website, portfolio-website # add your own keywords or leave empty
-lang: cn # the language of your site (for example: en, fr, cn, ru, etc.)
+  由 <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> 与 <a href="https://github.com/alshedivat/al-folio">al-folio</a> 主题构建，托管于 <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>。
+keywords: 局部放电, PRPD, 深度学习, 工业软件, 数据处理, 个人主页
+lang: zh-CN # 站点语言（中文使用 zh-CN）
 icon: ⚛️ # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 apple_touch_icon: # image name in /assets/img/ (or a rooted path / absolute URL) used for iOS home-screen bookmarks; needs a real 180x180 PNG, since Safari ignores the emoji favicon above. Left empty, iOS falls back to a screenshot of the page.
 
@@ -99,7 +95,7 @@ navbar_fixed: true
 footer_fixed: true
 search_enabled: true
 socials_in_search: true
-posts_in_search: true
+posts_in_search: false # 本站不包含博客文章
 bib_search: true
 
 # Dimensions
@@ -136,17 +132,17 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # Blog
 # -----------------------------------------------------------------------------
 
-blog_name: al-folio # blog_name will be displayed in your blog page
-blog_description: a simple whitespace theme for academics
+blog_name: 未使用 # 博客功能已移除
+blog_description: 本站仅包含研究项目、论文、项目与经历
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 
 # Pagination
 pagination:
-  enabled: true
+  enabled: false
 
 related_blog_posts:
-  enabled: true
+  enabled: false
   max_related: 5
 
 # Giscus comments (RECOMMENDED)
@@ -170,20 +166,8 @@ disqus_shortname: al-folio # put your disqus shortname
 # https://help.disqus.com/en/articles/1717111-what-s-a-shortname
 
 # External sources.
-# If you have blog posts published on medium.com or other external sources,
-# you can display them in your blog by adding a link to the RSS feed.
-# Optional: Set default categories and tags for posts from each source.
-external_sources:
-  - name: medium.com
-    rss_url: https://medium.com/@al-folio/feed
-    categories: [external-posts]
-    tags: [medium]
-  - name: Google Blog
-    posts:
-      - url: https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/
-        published_date: 2024-05-14
-    categories: [external-posts]
-    tags: [google]
+# 外部 RSS 源（如 medium）。本站不使用，留空以避免构建时抓取第三方站点。
+external_sources: []
 
 # -----------------------------------------------------------------------------
 # Newsletter
@@ -199,15 +183,7 @@ newsletter:
 # -----------------------------------------------------------------------------
 
 collections:
-  books:
-    output: true
-  news:
-    defaults:
-      layout: post
-    output: true
   projects:
-    output: true
-  teachings:
     output: true
 
 # -----------------------------------------------------------------------------
@@ -244,10 +220,14 @@ exclude:
   - lighthouse_results/
   - package.json
   - package-lock.json
-  - _pages/about_einstein.md
+  - preview-local.bat
+  - deploy-local.bat
+  - deploy-local.sh
   - purgecss.config.js
   - README.md
   - readme_preview/
+  - requirements.txt
+  - test/
   - gems/
   - migrations/
   - vendor
@@ -261,16 +241,13 @@ theme: al_folio_core
 # Plug-ins
 plugins:
   - jekyll-3rd-party-libraries
-  - jekyll-archives-v2
   - jekyll-cache-bust
   - jekyll-email-protect
   - jekyll-feed
   - jekyll-get-json
   - jekyll-imagemagick
-  - jekyll-jupyter-notebook
   - jekyll-link-attributes
   - jekyll-minifier
-  - jekyll-paginate-v2
   - jekyll-regex-replace
   - jekyll/scholar
   - jekyll-sitemap
@@ -278,7 +255,6 @@ plugins:
   - jekyll-tabs
   - jekyll-terser
   - jekyll-toc
-  - jekyll-twitter-plugin
   - jemoji
 
   # al-folio plugins
@@ -291,15 +267,12 @@ plugins:
   - al_cookie
   - al_analytics
   - al_citations
-  - al_ext_posts
   - al_img_tools
   - al_search
   - al_charts
   - al_math
   - al_comments
-  - al_newsletter
   - al_email_protect
-  - al_marimo
   - al_rtl
 
 # Sitemap settings
@@ -338,26 +311,15 @@ terser:
 # Jekyll Archives
 # -----------------------------------------------------------------------------
 
-jekyll-archives:
-  posts:
-    enabled: [year, tags, categories] # enables year, tag and category archives (remove if you need to disable one of them).
-    permalinks:
-      year: "/blog/:year/"
-      tags: "/blog/:type/:name/"
-      categories: "/blog/:type/:name/"
-  books:
-    enabled: [year, tags, categories] # enables year, tag and category archives (remove if you need to disable one of them).
-
-display_tags: ["formatting", "images", "links", "math", "code", "blockquotes"] # these tags will be displayed on the front page of your blog
-display_categories: ["external-services"] # these categories will be displayed on the front page of your blog
+# 博客归档与首页标签/分类展示已随博客功能一并移除（本站无文章、无书籍集合）。
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar
 # -----------------------------------------------------------------------------
 
 scholar:
-  last_name: [Einstein]
-  first_name: [Albert, A.]
+  last_name: [Sheng]
+  first_name: [S.]
 
   style: apa
   locale: zh-CN
@@ -374,7 +336,7 @@ scholar:
   join_strings: true
 
   details_dir: bibliography
-  details_link: Details
+  details_link: 详情
 
   query: "@*"
   group_by: year
@@ -693,21 +655,7 @@ third_party_libraries:
 # -----------------------------------------------------------------------------
 # Get external JSON data
 # -----------------------------------------------------------------------------
-
-jekyll_get_json:
-  - data: resume
-    json: assets/json/resume.json # it can also be an url
-
-jsonresume:
-  - basics
-  - work
-  - education
-  - publications
-  - projects
-  - volunteer
-  - awards
-  - certificates
-  - skills
-  - languages
-  - interests
-  - references
+# 已停用：JSON Resume 格式简历不再使用，经历内容直接写在 _pages/cv.md。
+# jekyll_get_json:
+#   - data: resume
+#     json: assets/json/resume.json
