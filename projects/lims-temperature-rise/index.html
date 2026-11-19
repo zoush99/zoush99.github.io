@@ -1,0 +1,108 @@
+<!DOCTYPE html> <html lang="zh-CN"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> LIMS 温升试验数据处理与 Word 报告自动生成 | Sheng </title> <meta name="author" content="S. Z. Sheng"> <meta name="description" content="Spring Boot 后端模块，把多通道温升测点数据整理为结构化数据集并自动生成规范报告。"> <meta name="keywords" content="局部放电, PRPD, 深度学习, 工业软件, 数据处理, 个人主页"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://zoush99.github.io/projects/lims-temperature-rise/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Sheng </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">首页 </a> </li> <li class="nav-item "> <a class="nav-link" href="/research/">研究项目 </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">论文 </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">项目 <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">经历 </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">LIMS 温升试验数据处理与 Word 报告自动生成</h1> <p class="post-description">Spring Boot 后端模块，把多通道温升测点数据整理为结构化数据集并自动生成规范报告。</p> </header> <article> <h2 id="需求">需求</h2> <p>温升试验会产生大量按通道、按时间点分布的测点数据，试验结束后需要整理成统一格式的试验记录与报告。原来的流程靠人工从采集系统导出、在 Excel 里逐个通道核对再粘贴进 Word 模板，耗时长且容易错位。</p> <p>目标是在 LIMS（实验室信息管理系统）中实现：<strong>数据入库 → 结构化整理 → 报告自动生成</strong>的闭环。</p> <h2 id="实现要点">实现要点</h2> <p><strong>数据结构建模</strong></p> <p>以 <code class="language-plaintext highlighter-rouge">CombinedData017</code> 作为顶层组合数据类，内部通过 <code class="language-plaintext highlighter-rouge">Measurement</code> 内部类承载单个测点的测量信息（通道、时间点、测量值、单位等），使多通道、多时间点的数据可以按统一结构装配。</p> <p><strong>通道排序</strong></p> <p>报告中的通道必须按编号自然升序输出（<code class="language-plaintext highlighter-rouge">CHA001 → CHA013</code>），而不是字符串序——否则会出现 <code class="language-plaintext highlighter-rouge">CHA1, CHA10, CHA11, CHA2</code> 这样错乱。排序时对通道号做数值提取后比较。</p> <p><strong>报告生成</strong></p> <ul> <li>用模板占位符方式写入 Word，保留模板的样式、页眉页脚与表格结构。</li> <li>表格行按通道与时间点动态展开，单元格数值统一格式化（有效位、单位）。</li> <li>生成后做一次回读校验，确认表格行数、通道数量与源数据一致。</li> </ul> <h2 id="成果">成果</h2> <ul> <li>单次试验的报告整理从人工数小时缩短到分钟级，且消除了手工复制的错行问题。</li> <li>数据结构与报告模板解耦，新增通道或调整表格样式不需要改动业务逻辑。</li> </ul> <h2 id="技术栈">技术栈</h2> <p><code class="language-plaintext highlighter-rouge">Java</code> · <code class="language-plaintext highlighter-rouge">Spring Boot</code> · <code class="language-plaintext highlighter-rouge">MyBatis</code> · <code class="language-plaintext highlighter-rouge">MySQL</code> · <code class="language-plaintext highlighter-rouge">Apache POI</code></p> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> 版权所有 © 2026 S. Z. Sheng. 由 <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> 与 <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> 主题构建，托管于 <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>。 </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-首页",
+    title: "首页",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-研究项目",
+          title: "研究项目",
+          description: "研究课题、技术路线与阶段结论。条目按重要度排序。",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-论文",
+          title: "论文",
+          description: "按年份倒序排列。数据来自 _bibliography/papers.bib。",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-项目",
+          title: "项目",
+          description: "交付过的软件系统与工程实践，含技术栈、职责与实现要点。",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-经历",
+          title: "经历",
+          description: "教育背景、工作经历、专业技能与荣誉。",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "projects-lims-温升试验数据处理与-word-报告自动生成",
+          title: 'LIMS 温升试验数据处理与 Word 报告自动生成',
+          description: "Spring Boot 后端模块，把多通道温升测点数据整理为结构化数据集并自动生成规范报告。",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/lims-temperature-rise/";
+            },},{id: "projects-prpd-数据增强-基于密度矩阵的直接增强方法",
+          title: 'PRPD 数据增强：基于密度矩阵的直接增强方法',
+          description: "跳过散点重建流程，直接在 PRPD 密度矩阵上做几何与强度扰动，解决小样本下增强失真问题。",
+          section: "Projects",handler: () => {
+              window.location.href = "/research/prpd-augmentation/";
+            },},{id: "projects-prpd-模型评估与结果汇总工具链",
+          title: 'PRPD 模型评估与结果汇总工具链',
+          description: "批量跑评测、汇总指标、生成对比表格与报告的脚本工具，保证多模型多数据集结果可比。",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/prpd-eval-toolchain/";
+            },},{id: "projects-基于-swin-transformer-的-prpd-局部放电模式识别",
+          title: '基于 Swin Transformer 的 PRPD 局部放电模式识别',
+          description: "以相位分辨局部放电图谱为输入，用视觉 Transformer 完成放电类型识别与模型对比评估。",
+          section: "Projects",handler: () => {
+              window.location.href = "/research/prpd-swin/";
+            },},{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/zoush99", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>
