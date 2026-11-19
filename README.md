@@ -1,6 +1,6 @@
 # 个人主页（Academic Pages）
 
-基于 [Academic Pages](https://github.com/academicpages/academicpages.github.io) 模板改的个人主页，界面为中文，包含四个板块：研究项目、论文、项目、经历。
+基于 [Academic Pages](https://github.com/academicpages/academicpages.github.io) 模板改的个人主页，界面为中文，包含六个板块：博客、项目、论文、经历、总结、关于。
 
 线上地址：https://zoush99.github.io
 
@@ -12,9 +12,12 @@
 
 | 想改什么 | 改哪里 |
 | --- | --- |
-| 首屏简介 | `_pages/about.md` |
+| 首页 | `_pages/home.md` |
+| 关于页 | `_pages/about.md` |
 | 论文 | `_publications/` 下新建一个 `.md`（文件名 `年-月-日-标题.md`） |
-| 研究项目 / 项目 | `_portfolio/` 下新建 `.md`，用 `category: research` 进研究项目页、`category: engineering` 进项目页 |
+| 项目（研究项目 / 工程项目） | `_portfolio/` 下新建 `.md`，用 `category: research` 或 `category: engineering` |
+| 博客 | `_posts/` 下新建 `年-月-日-标题.md` |
+| 总结 | `_pages/summary.md` |
 | 经历（教育/工作/技能/荣誉） | `_pages/cv.md` |
 | 顶部导航 | `_data/navigation.yml` |
 | 姓名、简介、头像、邮箱、社交链接 | `_config.yml` 的 `author:` 段 |
@@ -56,7 +59,8 @@ bundle exec jekyll serve   # 本地预览 http://127.0.0.1:4000
 | `_config.yml` | 站点全局配置（作者信息、主题、分类等） |
 | `_data/navigation.yml` | 顶部导航 |
 | `_data/ui-text.yml` | 界面文案（已设 `locale: zh-CN`，自动用中文标签） |
-| `_pages/` | 独立页面：首页、论文、研究项目、项目、经历、404 |
+| `_pages/` | 独立页面：首页、博客、项目、论文、经历、总结、关于、404 |
+| `_posts/` | 博客文章 |
 | `_publications/` | 论文条目 |
 | `_portfolio/` | 研究项目与项目条目 |
 | `_includes/` `_layouts/` `_sass/` | 主题模板与样式 |

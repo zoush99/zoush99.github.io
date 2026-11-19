@@ -1,0 +1,16 @@
+---
+layout: archive
+title: "博客"
+permalink: /blog/
+author_profile: true
+---
+
+{% include base_path %}
+
+{% if site.posts.size > 0 %}
+  {% for post in site.posts %}
+    {% include archive-single.html %}
+  {% endfor %}
+{% else %}
+  <p>还没有文章。在 <code>_posts/</code> 目录下新建 Markdown 文件即可，文件名格式为 <code>年-月-日-标题.md</code>。</p>
+{% endif %}

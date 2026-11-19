@@ -1,9 +1,8 @@
 ---
-permalink: /
-title: "你好，我是 Sheng"
+permalink: /about/
+title: "关于"
 author_profile: true
 redirect_from:
-  - /about/
   - /about.html
 ---
 
@@ -15,11 +14,16 @@ redirect_from:
 - **数据增强**：针对现场实测样本稀少的问题，研究在密度矩阵层面直接生成增强样本，避开「散点重建 → 分布拟合 → 重采样」带来的失真。
 - **试验数据处理与报告自动化**：把多通道测点数据整理为结构化数据集，模板化生成 Word 报告并回读校验，替代人工抄录。
 
+## 工程实践
+
+- Java / Spring Boot 后端开发：数据结构建模、接口开发、报告生成
+- 深度学习：模型训练与评估流程搭建、实验配置管理、结果汇总与可视化
+- 数据处理：多通道测点数据清洗、通道排序、指标口径统一
+
 ## 这个站点
 
-- [研究项目](/research/)：课题、技术路线与阶段结论
-- [论文](/publications/)：按类型分组的论文列表
-- [项目](/portfolio/)：交付过的软件系统与工程实践
-- [经历](/cv/)：教育、工作、技能与荣誉
+用 [Academic Pages](https://github.com/academicpages/academicpages.github.io) 搭建，内容用 Markdown 维护，推送到 GitHub 后自动构建发布。用来整理研究过程、工程经验与阶段性总结。
 
-如需联系，见左侧信息栏，或直接到 [GitHub](https://github.com/zoush99) 找我。
+## 联系方式
+
+见左侧信息栏，或直接到 [GitHub](https://github.com/zoush99) 找我。

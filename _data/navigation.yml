@@ -1,13 +1,19 @@
 # 顶部导航：顺序即显示顺序，删掉一项即从菜单移除
 main:
-  - title: "研究项目"
-    url: /research/
-
-  - title: "论文"
-    url: /publications/
+  - title: "博客"
+    url: /blog/
 
   - title: "项目"
     url: /portfolio/
 
+  - title: "论文"
+    url: /publications/
+
   - title: "经历"
     url: /cv/
+
+  - title: "总结"
+    url: /summary/
+
+  - title: "关于"
+    url: /about/
