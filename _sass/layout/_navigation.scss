@@ -455,3 +455,63 @@
     }
   }
 }
+
+/* ==========================================================================
+   六项导航适配：缩小左右间距并禁止换行，尽量让所有栏目在桌面宽度下都显示
+   ========================================================================== */
+
+.greedy-nav {
+  a,
+  #theme-toggle > button {
+    margin: 0 0.62rem;
+    white-space: nowrap;
+  }
+
+  .visible-links li:first-child a {
+    margin-left: 0;
+  }
+
+  .visible-links li.masthead__menu-item--lg a {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 720px) {
+  .greedy-nav {
+    a,
+    #theme-toggle > button {
+      margin: 0 0.4rem;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+/* ==========================================================================
+   六项导航适配：缩小左右间距并禁止换行，尽量让所有栏目在桌面宽度下都显示
+   ========================================================================== */
+
+.greedy-nav {
+  a,
+  #theme-toggle > button {
+    margin: 0 0.62rem;
+    white-space: nowrap;
+  }
+
+  .visible-links li:first-child a {
+    margin-left: 0;
+  }
+
+  .visible-links li.masthead__menu-item--lg a {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 720px) {
+  .greedy-nav {
+    a,
+    #theme-toggle > button {
+      margin: 0 0.4rem;
+      font-size: 0.9rem;
+    }
+  }
+}

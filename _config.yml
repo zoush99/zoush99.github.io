@@ -11,6 +11,7 @@ locale                   : "zh-CN"
 site_theme               : "default" # The available themes options are "default", "air", "sunrise", "mint", "dirt" and "contrast"
 title                    : "Sheng | 个人主页"
 title_separator          : "-"
+masthead_title           : "Sheng" # 导航栏左上角显示的站名（浏览器标题仍用 title）
 name                     : &name "S. Z. Sheng"
 description              : &description "个人主页：研究项目、论文、项目与经历"   # Update this with a general description of your site, this is the default if not overridden by a page
 url                      : https://zoush99.github.io # The base hostname & protocol for your site e.g. "https://[your GitHub username].github.io",
