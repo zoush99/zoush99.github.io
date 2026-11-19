@@ -1,33 +1,57 @@
 name: Deploy site
 
 # ---------------------------------------------------------------------------
-# 部署模式：本地预构建静态文件直传（无云端 Jekyll 构建）
+# 部署模式：GitHub Actions 云端构建（推荐日常使用）
 #
-# 本站已改为「本地构建 -> 直接推送 _site 静态文件到 gh-pages 分支」的模式：
-#   - gh-pages 分支根目录包含 .nojekyll，GitHub Pages 直接托管静态文件，
-#     不会再运行 Jekyll 构建。
-#   - 因此云端不再需要（也不应）自动构建，否则会覆盖本地上传的静态产物。
+# 日常更新流程：
+#   1. 本地改 Markdown / 配置 / 加图片
+#   2. git push 到 main
+#   3. 本 workflow 自动构建并部署到 gh-pages，1~3 分钟后线上生效
 #
-# 更新站点的正确流程（见项目根目录 deploy-local.sh / deploy-local.bat）：
-#   1. 本地运行 jekyll build 生成 _site
-#   2. 将 _site 内容推送到 gh-pages 分支（脚本已封装）
-#
-# 本 workflow 保留为一个占位入口，仅手动触发时输出提示信息，
-# 不会修改 gh-pages，也不会构建站点。
+# 手动兜底：如果 Actions 因网络等原因失败，可在本地运行 deploy-local.bat
+#          （本地构建后直接推 gh-pages），效果相同。
 # ---------------------------------------------------------------------------
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # 支持在 Actions 页面手动点按钮重跑
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: deploy-pages
+  cancel-in-progress: true
 
 jobs:
-  notice:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deployment mode notice
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4"
+          bundler-cache: true
+
+      - name: Build site
+        env:
+          JEKYLL_ENV: production
         run: |
-          echo "::notice::本站采用本地预构建静态文件直传模式。"
-          echo "::notice::请运行本地 deploy-local 脚本构建并推送到 gh-pages 分支。"
-          echo "::notice::本 workflow 不会构建站点，也不会修改 gh-pages。"
+          sudo apt-get update -qq
+          sudo apt-get install -y imagemagick
+          bundle exec jekyll build
+          touch _site/.nojekyll
+
+      - name: Deploy to gh-pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: _site
+          branch: gh-pages
+          clean: true
+          clean-exclude: |
+            .nojekyll

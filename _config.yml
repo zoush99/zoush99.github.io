@@ -221,6 +221,7 @@ exclude:
   - package.json
   - package-lock.json
   - preview-local.bat
+  - publish.bat
   - deploy-local.bat
   - deploy-local.sh
   - purgecss.config.js

@@ -3,8 +3,11 @@ chcp 65001 >nul
 setlocal
 
 REM ============================================================
-REM  本地预构建静态文件 -> 推送 gh-pages 一键部署脚本
-REM  本站不依赖云端 Jekyll 构建，静态文件由本地生成后直接上传。
+REM  【备选方案】本地预构建静态文件 -> 推送 gh-pages 一键部署
+REM
+REM  日常更新请优先用 publish.bat（推送到 main，由 GitHub Actions
+REM  自动构建部署）。只有 Actions 构建失败、需要立即上线时，
+REM  才用本脚本在本地构建后直接推 gh-pages。
 REM ============================================================
 
 set "SITE_DIR=C:\Code\zoush99.github.io"
