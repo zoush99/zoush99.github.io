@@ -2,7 +2,7 @@
 title: "On the electrodynamics of moving bodies"
 collection: publications
 category: manuscripts
-permalink: /publication/1905-electrodynamics
+permalink: /publication/1905-electrodynamics/
 excerpt: '占位示例：狭义相对论奠基论文，替换成你自己的论文即可。'
 date: 1905-06-30
 venue: 'Annalen der Physik'

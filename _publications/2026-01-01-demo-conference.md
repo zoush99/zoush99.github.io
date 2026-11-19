@@ -2,7 +2,7 @@
 title: "本地放电图谱的密度矩阵增强方法"
 collection: publications
 category: conferences
-permalink: /publication/2026-demo-conference
+permalink: /publication/2026-demo-conference/
 excerpt: '占位示例：会议论文条目，用来展示「会议论文」分组效果，替换成你自己的即可。'
 date: 2026-01-01
 venue: '示例会议（占位）'

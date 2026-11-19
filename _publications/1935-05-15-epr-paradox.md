@@ -2,7 +2,7 @@
 title: "Can Quantum-Mechanical Description of Physical Reality Be Considered Complete?"
 collection: publications
 category: manuscripts
-permalink: /publication/1935-epr-paradox
+permalink: /publication/1935-epr-paradox/
 excerpt: '占位示例：EPR 悖论论文，替换成你自己的论文即可。'
 date: 1935-05-15
 venue: 'Physical Review'
