@@ -1,33 +1,33 @@
 @echo off
-chcp 65001 >nul
+chcp 936 >nul
 setlocal
 
 REM ============================================================
-REM  ã€å¤‡é€‰æ–¹æ¡ˆã€‘æœ¬åœ°é¢„æ„å»ºé™æ€æ–‡ä»¶ -> æ¨é€ gh-pages ä¸€é”®éƒ¨ç½²
+REM  ¡¾±¸Ñ¡·½°¸¡¿±¾µØÔ¤¹¹½¨¾²Ì¬ÎÄ¼ş -> ÍÆËÍ gh-pages Ò»¼ü²¿Êğ
 REM
-REM  æ—¥å¸¸æ›´æ–°è¯·ä¼˜å…ˆç”¨ publish.batï¼ˆæ¨é€åˆ° mainï¼Œç”± GitHub Actions
-REM  è‡ªåŠ¨æ„å»ºéƒ¨ç½²ï¼‰ã€‚åªæœ‰ Actions æ„å»ºå¤±è´¥ã€éœ€è¦ç«‹å³ä¸Šçº¿æ—¶ï¼Œ
-REM  æ‰ç”¨æœ¬è„šæœ¬åœ¨æœ¬åœ°æ„å»ºåç›´æ¥æ¨ gh-pagesã€‚
+REM  ÈÕ³£¸üĞÂÇëÓÅÏÈÓÃ publish.bat£¨ÍÆËÍµ½ main£¬ÓÉ GitHub Actions
+REM  ×Ô¶¯¹¹½¨²¿Êğ£©¡£Ö»ÓĞ Actions ¹¹½¨Ê§°Ü¡¢ĞèÒªÁ¢¼´ÉÏÏßÊ±£¬
+REM  ²ÅÓÃ±¾½Å±¾ÔÚ±¾µØ¹¹½¨ºóÖ±½ÓÍÆ gh-pages¡£
 REM ============================================================
 
 set "SITE_DIR=C:\Code\zoush99.github.io"
 set "RUBY_BIN=C:\Ruby34-x64\bin"
 set "DEPLOY_DIR=C:\Code\zoush99-ghpages-deploy"
 
-echo [1/5] é…ç½®ç¯å¢ƒ...
+echo [1/5] ÅäÖÃ»·¾³...
 set "PATH=%RUBY_BIN%;%PATH%"
 set "RUBYOPT=-Eutf-8"
 set "JEKYLL_ENV=production"
 cd /d "%SITE_DIR%" || goto :error
 
-echo [2/5] æœ¬åœ°æ„å»ºé™æ€ç«™ç‚¹...
+echo [2/5] ±¾µØ¹¹½¨¾²Ì¬Õ¾µã...
 call bundle _4.0.6_ exec jekyll build --config _config.yml,_config_local.yml
 if errorlevel 1 goto :error
 
-echo [3/5] æ·»åŠ  .nojekyllï¼ˆè®© Pages è·³è¿‡æ„å»ºï¼‰...
+echo [3/5] Ìí¼Ó .nojekyll£¨ÈÃ Pages Ìø¹ı¹¹½¨£©...
 type nul > _site\.nojekyll
 
-echo [4/5] å‡†å¤‡ gh-pages éƒ¨ç½²ç›®å½•...
+echo [4/5] ×¼±¸ gh-pages ²¿ÊğÄ¿Â¼...
 if exist "%DEPLOY_DIR%" rmdir /s /q "%DEPLOY_DIR%"
 git worktree add --detach "%DEPLOY_DIR%" origin/gh-pages
 if errorlevel 1 goto :error
@@ -37,20 +37,20 @@ robocopy "%SITE_DIR%\_site" . /E /R:1 /W:1 /NFL /NDL /NJH /NJS /NP >nul
 if errorlevel 8 goto :error
 git add -A
 
-echo [5/5] æäº¤å¹¶æ¨é€åˆ° gh-pages...
+echo [5/5] Ìá½»²¢ÍÆËÍµ½ gh-pages...
 git commit -m "Deploy pre-rendered static site (local build)"
 git push origin HEAD:gh-pages
 if errorlevel 1 goto :error
 
 echo.
 echo ============================================================
-echo  éƒ¨ç½²å®Œæˆï¼ç¨ç­‰ 1-2 åˆ†é’Ÿè®¿é—® https://zoush99.github.io
+echo  ²¿ÊğÍê³É£¡ÉÔµÈ 1-2 ·ÖÖÓ·ÃÎÊ https://zoush99.github.io
 echo ============================================================
 goto :cleanup
 
 :error
 echo.
-echo [é”™è¯¯] éƒ¨ç½²å¤±è´¥ï¼Œè¯·æŸ¥çœ‹ä¸Šæ–¹æ—¥å¿—ã€‚
+echo [´íÎó] ²¿ÊğÊ§°Ü£¬Çë²é¿´ÉÏ·½ÈÕÖ¾¡£
 exit /b 1
 
 :cleanup
