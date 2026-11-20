@@ -26,4 +26,4 @@ redirect_from:
 
 ## 联系方式
 
-见左侧信息栏，或直接到 [GitHub](https://github.com/zoush99) 找我。
+直接到 [GitHub](https://github.com/zoush99) 找我。
