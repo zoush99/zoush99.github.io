@@ -8,7 +8,13 @@ author_profile: true
 {% include base_path %}
 
 {% if site.posts.size > 0 %}
+  {% assign last_year = "" %}
   {% for post in site.posts %}
+    {% assign post_year = post.date | date: "%Y" %}
+    {% if post_year != last_year %}
+      <h2 class="archive__item-year">{{ post_year }}</h2>
+      {% assign last_year = post_year %}
+    {% endif %}
     {% include archive-single.html %}
   {% endfor %}
 {% else %}

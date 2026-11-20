@@ -12,6 +12,7 @@ author_profile: true
 {% if site.publication_category %}
   {% assign pubs = site.publications | sort: "date" %}
   {% for category in site.publication_category %}
+    {% assign last_year = "" %}
     {% assign title_shown = false %}
     {% for post in pubs reversed %}
       {% if post.category != category[0] %}
@@ -21,12 +22,23 @@ author_profile: true
         <h2>{{ category[1].title }}</h2><hr />
         {% assign title_shown = true %}
       {% endunless %}
+      {% assign post_year = post.date | date: "%Y" %}
+      {% if post_year != last_year %}
+        <h2 class="archive__item-year">{{ post_year }}</h2>
+        {% assign last_year = post_year %}
+      {% endif %}
       {% include archive-single.html %}
     {% endfor %}
   {% endfor %}
 {% else %}
   {% assign pubs = site.publications | sort: "date" %}
+  {% assign last_year = "" %}
   {% for post in pubs reversed %}
+    {% assign post_year = post.date | date: "%Y" %}
+    {% if post_year != last_year %}
+      <h2 class="archive__item-year">{{ post_year }}</h2>
+      {% assign last_year = post_year %}
+    {% endif %}
     {% include archive-single.html %}
   {% endfor %}
 {% endif %}

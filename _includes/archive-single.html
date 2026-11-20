@@ -35,13 +35,9 @@
     </h2>
     
         {% if post.collection == 'teaching' %}
-          <p> {{ post.type }}, <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p>
+          <p> {{ post.type }}, <i>{{ post.venue }}</i></p>
         {% elsif post.collection == 'publications' %}
-          <p>发表于 <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p>
-        {% elsif post.collection == 'posts' and post.date %}
-         <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ post.date | default: "1900-01-01" | date: "%Y" }}</strong></p>
-        {% elsif post.collection == 'portfolio' and post.date %}
-         <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ post.date | date: "%Y" }}</strong></p>
+          <p>发表于 <i>{{ post.venue }}</i></p>
         {% endif %}
 
 

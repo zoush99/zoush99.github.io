@@ -12,13 +12,25 @@ redirect_from:
 <h2>研究项目</h2>
 
 {% assign research_items = site.portfolio | where: "category", "research" | sort: "date" %}
+{% assign last_year = "" %}
 {% for post in research_items reversed %}
+  {% assign post_year = post.date | date: "%Y" %}
+  {% if post_year != last_year %}
+    <h2 class="archive__item-year">{{ post_year }}</h2>
+    {% assign last_year = post_year %}
+  {% endif %}
   {% include archive-single.html %}
 {% endfor %}
 
 <h2>工程项目</h2>
 
 {% assign engineering_items = site.portfolio | where: "category", "engineering" | sort: "date" %}
+{% assign last_year = "" %}
 {% for post in engineering_items reversed %}
+  {% assign post_year = post.date | date: "%Y" %}
+  {% if post_year != last_year %}
+    <h2 class="archive__item-year">{{ post_year }}</h2>
+    {% assign last_year = post_year %}
+  {% endif %}
   {% include archive-single.html %}
 {% endfor %}

@@ -43,7 +43,12 @@ redirect_from:
 
 论文
 ======
-<ul>{% assign pubs = site.publications | sort: "date" %}{% for post in pubs reversed %}
+<ul>{% assign pubs = site.publications | sort: "date" %}{% assign last_year = "" %}{% for post in pubs reversed %}
+  {% assign post_year = post.date | date: "%Y" %}
+  {% if post_year != last_year %}
+    <h2 class="archive__item-year">{{ post_year }}</h2>
+    {% assign last_year = post_year %}
+  {% endif %}
   {% include archive-single-cv.html %}
 {% endfor %}</ul>
 

@@ -48,6 +48,15 @@
   }
 }
 
+.archive__item-year {
+  margin: 1.2em 0 0.25em;
+  color: var(--global-text-color-light);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
 /* remove border*/
 .page__content {
 
