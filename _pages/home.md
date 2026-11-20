@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "你好，我是 Sheng"
+title: "邹胜"
 author_profile: false
 ---
 
