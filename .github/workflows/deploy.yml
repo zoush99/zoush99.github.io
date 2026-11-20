@@ -36,6 +36,14 @@ jobs:
         with:
           ruby-version: "3.3"
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install npm dependencies and build theme JS
+        run: npm install --no-audit --no-fund && npm run build:js
+
       - name: Install dependencies
         run: bundle install --jobs 4 --retry 3
 
