@@ -2,7 +2,7 @@
 layout: archive
 title: "站点地图"
 permalink: /sitemap/
-author_profile: true
+author_profile: false
 ---
 
 {% include base_path %}

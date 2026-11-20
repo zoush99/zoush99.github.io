@@ -10,8 +10,8 @@
   }
 
   @include breakpoint($large) {
-    // Center the main column on the screen; the sidebar stays on the left.
-    width: 60%;
+    // No sidebar anymore: fill the centered #main container.
+    width: 100%;
     float: none;
     margin-left: auto;
     margin-right: auto;

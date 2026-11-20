@@ -2,7 +2,7 @@
 layout: archive
 title: "总结"
 permalink: /summary/
-author_profile: true
+author_profile: false
 ---
 
 {% include base_path %}

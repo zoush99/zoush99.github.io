@@ -2,7 +2,7 @@
 layout: archive
 title: "经历"
 permalink: /cv/
-author_profile: true
+author_profile: false
 redirect_from:
   - /resume
 ---

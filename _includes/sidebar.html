@@ -1,9 +1,11 @@
 {% include base_path %}
 
-{% if page.author_profile or layout.author_profile or page.sidebar %}
+{% comment %}
+  作者资料（头像 / 姓名 / 简介 / 联系方式）模块已全局移除。
+  这里只保留自定义 sidebar 内容的渲染能力（页面 front matter 中的 sidebar 字段）。
+{% endcomment %}
+{% if page.sidebar %}
   <div class="sidebar sticky">
-  {% if (page.author_profile or layout.author_profile) and (page.url == '/' or page.url == '/about/') %}{% include author-profile.html %}{% endif %}
-  {% if page.sidebar %}
     {% for s in page.sidebar %}
       {% if s.image %}
         <img src=
@@ -20,6 +22,5 @@
     {% if page.sidebar.nav %}
       {% include nav_list nav=page.sidebar.nav %}
     {% endif %}
-  {% endif %}
   </div>
 {% endif %}

@@ -1,7 +1,7 @@
 ---
 permalink: /about/
 title: "关于"
-author_profile: true
+author_profile: false
 redirect_from:
   - /about.html
 ---

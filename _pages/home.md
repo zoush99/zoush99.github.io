@@ -1,7 +1,7 @@
 ---
 permalink: /
 title: "你好，我是 Sheng"
-author_profile: true
+author_profile: false
 ---
 
 我在工业软件与人工智能视觉方向做研发，关注怎么把深度学习与数据处理方法真正落到工业现场的检测和分析流程里。
