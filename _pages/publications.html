@@ -10,9 +10,10 @@ author_profile: true
 论文列表按类型分组（期刊论文 / 会议论文），数据来自 `_publications/` 目录下的 Markdown 文件。
 
 {% if site.publication_category %}
+  {% assign pubs = site.publications | sort: "date" %}
   {% for category in site.publication_category %}
     {% assign title_shown = false %}
-    {% for post in site.publications reversed %}
+    {% for post in pubs reversed %}
       {% if post.category != category[0] %}
         {% continue %}
       {% endif %}
@@ -24,7 +25,8 @@ author_profile: true
     {% endfor %}
   {% endfor %}
 {% else %}
-  {% for post in site.publications reversed %}
+  {% assign pubs = site.publications | sort: "date" %}
+  {% for post in pubs reversed %}
     {% include archive-single.html %}
   {% endfor %}
 {% endif %}

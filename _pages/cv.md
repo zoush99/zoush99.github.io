@@ -43,7 +43,7 @@ redirect_from:
 
 论文
 ======
-<ul>{% for post in site.publications reversed %}
+<ul>{% assign pubs = site.publications | sort: "date" %}{% for post in pubs reversed %}
   {% include archive-single-cv.html %}
 {% endfor %}</ul>
 

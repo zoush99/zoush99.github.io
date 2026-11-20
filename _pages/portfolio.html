@@ -11,14 +11,14 @@ redirect_from:
 
 <h2>研究项目</h2>
 
-{% assign research_items = site.portfolio | where: "category", "research" | sort: "importance" %}
-{% for post in research_items %}
+{% assign research_items = site.portfolio | where: "category", "research" | sort: "date" %}
+{% for post in research_items reversed %}
   {% include archive-single.html %}
 {% endfor %}
 
 <h2>工程项目</h2>
 
-{% assign engineering_items = site.portfolio | where: "category", "engineering" | sort: "importance" %}
-{% for post in engineering_items %}
+{% assign engineering_items = site.portfolio | where: "category", "engineering" | sort: "date" %}
+{% for post in engineering_items reversed %}
   {% include archive-single.html %}
 {% endfor %}
